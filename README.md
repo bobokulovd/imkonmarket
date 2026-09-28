@@ -40,11 +40,11 @@ data/      Excel'dan tozalangan manba (products.txt, sellers.tsv, names_i18n.tsv
 
 1. Dokploy → **Create Service → Compose**. Provider: GitHub, repo `bobokulovd/imkonmarket`, branch `main`, Compose path `./docker-compose.yml`.
 2. **Environment** bo'limiga `.env.example` dagi qiymatlarni kiriting. Kamida `SITE_URL`, `POSTGRES_PASSWORD` va `DJANGO_SECRET_KEY` kerak. `SEED_PASSWORDS` qatori `loginlar.xlsx` dagi parollarni beradi (u alohida yuboriladi, repoga qo'yilmaydi).
-3. **Domains**: service `web`, port `3000`, masalan `imkonmarket.uz`, HTTPS (Let's Encrypt). Bitta domen yetadi: `/api`, `/admin`, `/media` va shartnoma PDF'lari Next.js orqali backendga o'tadi.
+3. **Domains**: service `web`, port `3000`, masalan `imkon-market.uz`, HTTPS (Let's Encrypt). Bitta domen yetadi: `/api`, `/admin`, `/media` va shartnoma PDF'lari Next.js orqali backendga o'tadi.
 4. **Deploy.** Birinchi ishga tushishda migratsiya o'tadi, 357 mahsulot va 40 ta muassasa logini yaratiladi. Keyingi deploylarda baza o'zgarmaydi.
 
-Mobil ilova: `flutter run --dart-define=API_URL=https://imkonmarket.uz`.
-Payme webhook: `https://imkonmarket.uz/api/payments/payme/`. Click: `.../api/payments/click/prepare/` va `.../complete/`.
+Mobil ilova: `flutter run --dart-define=API_URL=https://imkon-market.uz`.
+Payme webhook: `https://imkon-market.uz/api/payments/payme/`. Click: `.../api/payments/click/prepare/` va `.../complete/`.
 
 ## Ishga tushirish (lokal)
 

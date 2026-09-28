@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Backend manzili: flutter run --dart-define=API_URL=https://api.example.uz
 /// Android emulyatorda localhost -> 10.0.2.2
-const String apiUrl = String.fromEnvironment('API_URL', defaultValue: 'http://10.0.2.2:8000');
+const String apiUrl = String.fromEnvironment('API_URL', defaultValue: 'https://imkon-market.uz');
 
 class ApiException implements Exception {
   final int status;
