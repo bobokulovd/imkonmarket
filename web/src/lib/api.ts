@@ -1,4 +1,5 @@
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
+// Bo'sh bo'lsa — shu domen (Next.js /api ni backendga proksi qiladi)
+export const API_URL = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
 
 export class ApiError extends Error {
   constructor(public status: number, public data: any) {

@@ -107,6 +107,12 @@ SIMPLE_JWT = {
 BRAND_NAME = env("BRAND_NAME", "ImkonMarket")
 SITE_URL = env("SITE_URL", "http://localhost:3000")  # sayt manzili (shartnomadagi QR, to'lov qaytish)
 API_URL = env("API_URL", "http://localhost:8000")
+# Rasm/PDF havolalari uchun tashqi manzil (masalan https://imkonmarket.uz). Bo'sh bo'lsa — so'rov hostidan.
+PUBLIC_URL = env("PUBLIC_URL", "")
+
+# Reverse-proxy (Traefik / Next.js rewrite) ortida
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
 
 # To'lov tizimlari. Kalitlar bo'lmasa — DEMO rejim (sayt/ilovada "Demo" belgisi bilan).
 PAYME_MERCHANT_ID = env("PAYME_MERCHANT_ID", "")

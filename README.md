@@ -36,6 +36,16 @@ mobile/    Flutter (xaridor + sotuvchi kabineti)
 data/      Excel'dan tozalangan manba (products.txt, sellers.tsv, names_i18n.tsv) + build_catalog.py
 ```
 
+## Dokploy'ga deploy
+
+1. Dokploy → **Create Service → Compose**. Provider: GitHub, repo `bobokulovd/imkonmarket`, branch `main`, Compose path `./docker-compose.yml`.
+2. **Environment** bo'limiga `.env.example` dagi qiymatlarni kiriting. Kamida `SITE_URL`, `POSTGRES_PASSWORD` va `DJANGO_SECRET_KEY` kerak. `SEED_PASSWORDS` qatori `loginlar.xlsx` dagi parollarni beradi (u alohida yuboriladi, repoga qo'yilmaydi).
+3. **Domains**: service `web`, port `3000`, masalan `imkonmarket.uz`, HTTPS (Let's Encrypt). Bitta domen yetadi: `/api`, `/admin`, `/media` va shartnoma PDF'lari Next.js orqali backendga o'tadi.
+4. **Deploy.** Birinchi ishga tushishda migratsiya o'tadi, 357 mahsulot va 40 ta muassasa logini yaratiladi. Keyingi deploylarda baza o'zgarmaydi.
+
+Mobil ilova: `flutter run --dart-define=API_URL=https://imkonmarket.uz`.
+Payme webhook: `https://imkonmarket.uz/api/payments/payme/`. Click: `.../api/payments/click/prepare/` va `.../complete/`.
+
 ## Ishga tushirish (lokal)
 
 ```bash
@@ -59,8 +69,7 @@ bash setup.sh                       # flutter create + ruxsatlar + pub get
 flutter run --dart-define=API_URL=http://10.0.2.2:8000
 ```
 
-Docker bilan: `cp .env.example .env && docker compose up -d --build`, so'ng
-`docker compose exec backend python manage.py seed --passwords-from /data/loginlar.xlsx`.
+Docker bilan (lokal): `cp .env.example .env && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build`.
 
 `--passwords-from` berilmasa, har bir muassasa uchun yangi parol yaratiladi va `backend/credentials.xlsx` fayliga yoziladi.
 

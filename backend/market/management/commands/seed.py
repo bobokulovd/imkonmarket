@@ -30,10 +30,14 @@ class Command(BaseCommand):
         parser.add_argument("--reset-passwords", action="store_true")
         parser.add_argument("--credentials", default=str(Path(settings.BASE_DIR) / "credentials.xlsx"))
         parser.add_argument("--no-products", action="store_true")
+        parser.add_argument("--if-empty", action="store_true", help="Baza bo'sh bo'lsagina ishlaydi (konteyner start uchun)")
         parser.add_argument("--passwords-from", help="Loginlar Excel faylidan parollarni o'rnatish (Login/Parol ustunlari)")
 
     @transaction.atomic
     def handle(self, *args, **opts):
+        if opts.get("if_empty") and Seller.objects.exists():
+            self.stdout.write("Baza to'ldirilgan — seed o'tkazib yuborildi")
+            return
         data = catalog()
         User = get_user_model()
         for i, c in enumerate(data["categories"]):
@@ -41,6 +45,10 @@ class Command(BaseCommand):
         cats = {c.slug: c for c in Category.objects.all()}
 
         preset = {}
+        import json
+        import os
+        if os.environ.get("SEED_PASSWORDS"):  # {"jiek14": "parol", ...} — Dokploy environment orqali
+            preset.update(json.loads(os.environ["SEED_PASSWORDS"]))
         if opts.get("passwords_from"):
             from openpyxl import load_workbook
             ws = load_workbook(opts["passwords_from"], read_only=True)["Loginlar"]

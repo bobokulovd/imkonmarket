@@ -1,38 +1,67 @@
-# Ishga tushirish: cp .env.example .env && docker compose up -d --build
-# Keyin: docker compose exec backend python manage.py seed --passwords-from /data/loginlar.xlsx
+# ImkonMarket — Dokploy (Compose) uchun.
+# Dokploy'da: Compose → Git provider (shu repo) → Compose path: ./docker-compose.yml
+# Domains: "web" servisi, port 3000 (bitta domen yetadi: /api, /admin, /media — Next.js orqali backendga).
+# Environment: .env.example dagi o'zgaruvchilar.
+# Lokal ishga tushirish: docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+
 services:
   db:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_DB: imkonmarket
       POSTGRES_USER: imkonmarket
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-imkonmarket}
-    volumes: [pgdata:/var/lib/postgresql/data]
-    restart: unless-stopped
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD kerak}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U imkonmarket -d imkonmarket"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   backend:
     build: ./backend
-    env_file: .env
+    restart: unless-stopped
     environment:
       POSTGRES_DB: imkonmarket
       POSTGRES_USER: imkonmarket
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-imkonmarket}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_HOST: db
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?DJANGO_SECRET_KEY kerak}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-0}
+      DJANGO_ALLOWED_HOSTS: "*"
+      CSRF_TRUSTED_ORIGINS: ${SITE_URL}
+      BRAND_NAME: ${BRAND_NAME:-ImkonMarket}
+      SITE_URL: ${SITE_URL}
+      PUBLIC_URL: ${SITE_URL}
+      API_URL: ${SITE_URL}
+      SEED_PASSWORDS: ${SEED_PASSWORDS:-}
+      PAYME_MERCHANT_ID: ${PAYME_MERCHANT_ID:-}
+      PAYME_KEY: ${PAYME_KEY:-}
+      PAYME_TEST: ${PAYME_TEST:-1}
+      CLICK_SERVICE_ID: ${CLICK_SERVICE_ID:-}
+      CLICK_MERCHANT_ID: ${CLICK_MERCHANT_ID:-}
+      CLICK_SECRET_KEY: ${CLICK_SECRET_KEY:-}
+      CLICK_MERCHANT_USER_ID: ${CLICK_MERCHANT_USER_ID:-}
     volumes:
       - media:/app/media
-      - ./data:/data
-    depends_on: [db]
-    ports: ["8000:8000"]
-    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "8000"
 
   web:
     build:
       context: ./web
       args:
-        NEXT_PUBLIC_API_URL: ${API_URL:-http://localhost:8000}
-    depends_on: [backend]
-    ports: ["3000:3000"]
+        BACKEND_URL: http://backend:8000
     restart: unless-stopped
+    depends_on:
+      - backend
+    expose:
+      - "3000"
 
 volumes:
   pgdata:

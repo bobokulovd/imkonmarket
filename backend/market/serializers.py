@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework import serializers
 
 from .models import Application, ApplicationItem, Category, Contract, Payment, Product, Seller, StatusLog
@@ -11,7 +12,14 @@ def abs_url(request, f):
         url = f.url
     except ValueError:
         return None
-    return request.build_absolute_uri(url) if request else url
+    return public_url(request, url)
+
+
+def public_url(request, path):
+    """Tashqi (brauzer/ilova) uchun to'liq URL. PUBLIC_URL berilsa — o'sha (reverse-proxy ortida ham to'g'ri)."""
+    if settings.PUBLIC_URL:
+        return settings.PUBLIC_URL.rstrip("/") + path
+    return request.build_absolute_uri(path) if request else path
 
 
 class I18nField(serializers.JSONField):
@@ -145,7 +153,7 @@ class ContractShortSerializer(serializers.ModelSerializer):
     def get_pdf_url(self, o):
         req = self.context.get("request")
         path = f"/api/contracts/{o.token}/pdf/"
-        return req.build_absolute_uri(path) if req else path
+        return public_url(req, path)
 
 
 class PublicOrderSerializer(serializers.ModelSerializer):
