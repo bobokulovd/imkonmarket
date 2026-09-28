@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django_filters",
     "corsheaders",
     "market",
+    "integrations",
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,27 @@ CLICK_SERVICE_ID = env("CLICK_SERVICE_ID", "")
 CLICK_MERCHANT_ID = env("CLICK_MERCHANT_ID", "")
 CLICK_SECRET_KEY = env("CLICK_SECRET_KEY", "")
 CLICK_MERCHANT_USER_ID = env("CLICK_MERCHANT_USER_ID", "")
+
+# --- Marketplace integratsiyasi (Uzum / Ozon / Yandex Market / Wildberries) ---
+# Muassasalarning API kalitlarini shifrlash uchun Fernet kalit(lar)i, vergul bilan.
+# Birinchisi bilan shifrlanadi, qolganlari — eski kalitlarni o'qish uchun (rotatsiya).
+# Yaratish: python -c "from cryptography.fernet import Fernet;print(Fernet.generate_key().decode())"
+MARKETPLACE_ENC_KEYS = env("MARKETPLACE_ENC_KEYS", "")
+MP_ORDERS_INTERVAL = int(env("MP_ORDERS_INTERVAL", "300"))      # buyurtmalarni tortish, soniya
+MP_STOCK_INTERVAL = int(env("MP_STOCK_INTERVAL", "600"))        # qoldiq/narx solishtirish, soniya
+MP_STATUS_INTERVAL = int(env("MP_STATUS_INTERVAL", "180"))      # kartochka statusini tekshirish, soniya
+MP_CHECK_INTERVAL = int(env("MP_CHECK_INTERVAL", "43200"))      # kalitni qayta tekshirish, soniya
+MP_HTTP_TIMEOUT = int(env("MP_HTTP_TIMEOUT", "40"))
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {"redact": {"()": "integrations.redact.RedactFilter"}},
+    "handlers": {"console": {"class": "logging.StreamHandler", "filters": ["redact"]}},
+    "root": {"handlers": ["console"], "level": env("LOG_LEVEL", "INFO")},
+    "loggers": {
+        # urllib3 DEBUG loglarida sarlavhalar chiqishi mumkin — faqat WARNING
+        "urllib3": {"level": "WARNING"},
+        "django.db.backends": {"level": "WARNING"},
+    },
+}

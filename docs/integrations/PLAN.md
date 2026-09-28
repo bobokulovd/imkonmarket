@@ -1,6 +1,6 @@
 # Marketplace integratsiyasi — reja (tasdiqlash uchun)
 
-Holat: **reja, kod yozilmagan.** Konspektlar: [uzum](uzum.md), [ozon](ozon.md), [yandex](yandex.md), [wb](wb.md).
+Holat: **amalga oshirildi (2026-09-28).** Quyida — tasdiqlangan reja va qabul qilingan qarorlar. Konspektlar: [uzum](uzum.md), [ozon](ozon.md), [yandex](yandex.md), [wb](wb.md).
 
 ## Tamoyil
 Har bir muassasa marketplace'da o'z STIR'i bilan, o'z kabineti orqali sotadi va pul to'g'ridan-to'g'ri muassasaga tushadi.
@@ -88,7 +88,13 @@ Operatorda qo'shimcha: kategoriya va atribut moslash hamda barcha muassasalar bo
 3. Ozon.
 4. Wildberries (servis tokeni masalasi hal bo'lgach).
 
-## Ochiq savollar
+## Qarorlar (foydalanuvchi bilan kelishildi)
+- Har bir muassasa uchun alohida kabinet(lar) va alohida mahsulotlar ulanadi.
+- Marketplace buyurtmasi (FBS/DBS) bizdagi qoldiqni band qiladi; jo'natilganda yechiladi; bekor bo'lsa qaytariladi. Qoldiq o'zgarishi boshqa barcha kanallarga ham yuboriladi.
+- Valyuta: kabinetda UZS (standart — Ozon/WB O'zbekistonda so'mda sotadi) yoki RUB; RUB bo'lsa kurs manbai tanlanadi: Markaziy bank (cbu.uz) yoki qo'lda.
+- «Buyurtma asosida» mahsulot: kabinet sozlamasi `mto_stock` (standart 0 — sotilmaydi).
+
+## Ochiq savollar (avvalgi)
 1. Xabar «Har bir account uchun …» joyida uzilgan — davomi kerak.
 2. Marketplace buyurtmasi bizning qoldiqni band qilsinmi (ya'ni `reserved`, jo'natilganda yechish)? Taklif: ha, aks holda bir mahsulot ikki joyda sotilib ketadi.
 3. Ozon/WB narxi RUB bo'lsa: account bo'yicha qo'lda kurs yoki koeffitsient kiritilsinmi?

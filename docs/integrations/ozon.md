@@ -98,3 +98,16 @@ Amaliy eslatmalar:
 - Rasm URL'lari ommaviy, to'g'ridan-to'g'ri (CDN) bo'lishi kerak.
 - Pul oqimi Ozon ↔ sotuvchi o'rtasida; bizga moliya metodlari kerak emas.
 - Davlat muassasasi (UZ) sotuvchi sifatida ro'yxatdan o'ta olishi va valyuta (`UZS`/`RUB`) — **hujjatda topilmadi / tekshirilmadi**; birinchi real kabinetda `currency_code` ni sinash kerak.
+
+## 10. Qo'shimcha (2026-09-28): v4/v3 sxemalari amaliy manbadan
+
+Rasmiy sahifalar yopiq bo'lgani uchun Ozon'ning yangi metodlari shakli ochiq loyiha kodidan olindi:
+github.com/feelfreeze-png/ozon-mcp-server (`ozon_mcp/client.py`). Muallif v3 va v4 natijalarini o'z kabinetida solishtirgan.
+
+- `POST /v4/posting/fbs/list`: body `{dir, filter: {since, to, status?}, limit (≤100), cursor?, with: {...}}`.
+  Javobda `postings` **yuqori darajada** (`result` ichida emas), pagination kursorli: `has_next` + `cursor`. `offset` yo'q.
+  `/v3/posting/fbs/unfulfilled/list` o'rnini bosuvchi alohida metod yo'q — v4 list + `status` filtri.
+- `POST /v3/posting/fbo/list`: so'rov shakli v2 bilan bir xil (`dir, filter{since,to}, limit, offset, with`).
+- `POST /v2/warehouse/list`: javobda `warehouses[]` (`warehouse_id, name, status, is_rfbs, ...`).
+- `POST /v2/posting/fbs/cancel`: `{posting_number, cancel_reason_id, cancel_reason_message}`; sabablar — `POST /v2/posting/fbs/cancel-reason/list`.
+- rFBS `POST /v2/fbs/posting/delivering|delivered` body shakli (`posting_number` massiv) — **tekshirilmadi**.

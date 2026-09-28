@@ -98,3 +98,20 @@ FBO buyurtmalari: alohida FBO order endpointi yo'q. Moliya bo'limida barcha sotu
 Oqim oqibati: muassasa kartochkalarni o'zi kabinetda yaratadi (yoki biz operator sifatida qo'lda), platforma esa SKU mapping + narx/qoldiq sinxron + FBS/DBS buyurtmalarni boshqaradi.
 
 Ochiq savollar (real token bilan tekshirish): `SendPriceData`, `SkuStockUpdateApiRequestDto`, `SellerOrderCancelRq`, `AllProducts`, `SellerOrderDto` maydonlari; `Authorization` prefiksi; token ruxsatlari; aniq rate limit raqamlari.
+
+## 10. Amaliyotda tekshirilgan body shakllari (norasmiy manba, 2026-09-28)
+
+Swagger `components/schemas` o'qilmagani uchun body maydonlari amalda ishlayotgan ochiq mijoz kodidan olindi:
+github.com/sardorbektursunov037-sketch/uzumsklad (`src/api/endpoints.js`, `client.js`). Kodda
+"Amalda tekshirildi" izohlari bor, lekin bu **rasmiy hujjat emas**. Birinchi real token bilan tekshirib chiqish kerak.
+
+- Auth: `Authorization: <token>` — **Bearer prefiksisiz** (`vite.config.js`: "Bearer prefiksisiz").
+- Javob konverti: ba'zi javoblar `{payload, errors}`, ba'zilari to'g'ridan-to'g'ri. `errors` bo'sh bo'lmasa (HTTP 200 bo'lsa ham) — xato.
+- `GET /v1/shops` → `[{id, name}]`.
+- `GET /v1/product/shop/{shopId}` → `{productList: [{productId, title, skuList: [{skuId, skuTitle, skuFullTitle, sellerItemCode, barcode, ...}]}]}`.
+- `POST /v1/product/{shopId}/sendPriceData` body: `{productId, skuList: [{skuId, skuTitle, sellPrice, fullPrice}]}`.
+- `POST /v2/fbs/sku/stocks` body: `{skuAmountList: [{barcode, amount}]}` — `barcode` majburiy.
+- `GET /v2/fbs/orders`: `status` amalda majburiy (bo'lmasa bo'sh ro'yxat) → har bir status alohida so'raladi; `dateFrom` — soniyada. Javob: `{orders: [{id, status, scheme, dateCreated(ms), price, orderItems: [{skuId, productId, skuTitle, sellerSkuCode, amount, sellerPrice}]}], totalAmount}`.
+- `POST /v1/fbs/order/{id}/cancel` body: `{reason, comment}`; `reason`: `OUT_OF_STOCK, OUT_OF_PACKAGE, OUT_OF_TIME, OTHER, ...`.
+
+ImkonMarket adapteri (`backend/integrations/clients/uzum.py`) shu shakllarga yozilgan.

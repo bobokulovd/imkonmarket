@@ -1,4 +1,5 @@
 Django==5.2.17
+cryptography==46.0.7
 django-cors-headers==4.9.0
 django-filter==26.1
 djangorestframework==3.18.1
@@ -9,4 +10,5 @@ pillow==12.3.0
 psycopg==3.3.6
 psycopg-binary==3.3.6
 reportlab==5.0.1
+requests==2.33.1
 whitenoise==6.12.0

@@ -104,6 +104,16 @@ def create_applications(data, user=None, agent: Seller | None = None):
 
 
 @transaction.atomic
+def _notify_marketplaces(product_ids):
+    """Band qilingan qoldiq marketplace'larga ham yetib borsin (integrations ilovasi, worker orqali)."""
+    ids = list(product_ids)
+
+    def go():
+        from integrations.services import notify_products_changed
+        notify_products_changed(ids)
+    transaction.on_commit(go)
+
+
 def confirm_application(app: Application, payload: dict, user=None) -> Contract:
     """Sotuvchi arizani tasdiqlaydi: narx/miqdorni aniqlashtiradi, shartnoma yaratiladi, qoldiq band qilinadi."""
     app = Application.objects.select_for_update().get(pk=app.pk)
@@ -128,6 +138,8 @@ def confirm_application(app: Application, payload: dict, user=None) -> Contract:
             if it.qty > p.available:
                 raise ValidationError({"items": f"{p.sku}: available {p.available}"})
             Product.objects.filter(pk=p.pk).update(reserved=F("reserved") + it.qty)
+    _notify_marketplaces([it.product_id for it in app.items.all()])
+
     def _int(key, default, lo, hi):
         try:
             v = int(payload.get(key) if payload.get(key) not in (None, "") else default)

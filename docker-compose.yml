@@ -4,6 +4,32 @@
 # Environment: .env.example dagi o'zgaruvchilar.
 # Lokal ishga tushirish: docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
 
+x-backend-env: &backend-env
+  POSTGRES_DB: imkonmarket
+  POSTGRES_USER: imkonmarket
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  POSTGRES_HOST: db
+  DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?DJANGO_SECRET_KEY kerak}
+  DJANGO_DEBUG: ${DJANGO_DEBUG:-0}
+  DJANGO_ALLOWED_HOSTS: "*"
+  CSRF_TRUSTED_ORIGINS: ${SITE_URL}
+  BRAND_NAME: ${BRAND_NAME:-ImkonMarket}
+  SITE_URL: ${SITE_URL}
+  PUBLIC_URL: ${SITE_URL}
+  API_URL: ${SITE_URL}
+  SEED_PASSWORDS: ${SEED_PASSWORDS:-}
+  PAYME_MERCHANT_ID: ${PAYME_MERCHANT_ID:-}
+  PAYME_KEY: ${PAYME_KEY:-}
+  PAYME_TEST: ${PAYME_TEST:-1}
+  CLICK_SERVICE_ID: ${CLICK_SERVICE_ID:-}
+  CLICK_MERCHANT_ID: ${CLICK_MERCHANT_ID:-}
+  CLICK_SECRET_KEY: ${CLICK_SECRET_KEY:-}
+  CLICK_MERCHANT_USER_ID: ${CLICK_MERCHANT_USER_ID:-}
+  # Marketplace integratsiyasi: muassasa API kalitlarini shifrlash (Fernet). Yo'qolsa — kalitlarni qayta kiritish kerak!
+  MARKETPLACE_ENC_KEYS: ${MARKETPLACE_ENC_KEYS:-}
+  MP_ORDERS_INTERVAL: ${MP_ORDERS_INTERVAL:-300}
+  MP_STOCK_INTERVAL: ${MP_STOCK_INTERVAL:-600}
+
 services:
   db:
     image: postgres:16-alpine
@@ -24,26 +50,7 @@ services:
     build: ./backend
     restart: unless-stopped
     environment:
-      POSTGRES_DB: imkonmarket
-      POSTGRES_USER: imkonmarket
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_HOST: db
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?DJANGO_SECRET_KEY kerak}
-      DJANGO_DEBUG: ${DJANGO_DEBUG:-0}
-      DJANGO_ALLOWED_HOSTS: "*"
-      CSRF_TRUSTED_ORIGINS: ${SITE_URL}
-      BRAND_NAME: ${BRAND_NAME:-ImkonMarket}
-      SITE_URL: ${SITE_URL}
-      PUBLIC_URL: ${SITE_URL}
-      API_URL: ${SITE_URL}
-      SEED_PASSWORDS: ${SEED_PASSWORDS:-}
-      PAYME_MERCHANT_ID: ${PAYME_MERCHANT_ID:-}
-      PAYME_KEY: ${PAYME_KEY:-}
-      PAYME_TEST: ${PAYME_TEST:-1}
-      CLICK_SERVICE_ID: ${CLICK_SERVICE_ID:-}
-      CLICK_MERCHANT_ID: ${CLICK_MERCHANT_ID:-}
-      CLICK_SECRET_KEY: ${CLICK_SECRET_KEY:-}
-      CLICK_MERCHANT_USER_ID: ${CLICK_MERCHANT_USER_ID:-}
+      <<: *backend-env
     volumes:
       - media:/app/media
     depends_on:
@@ -51,6 +58,21 @@ services:
         condition: service_healthy
     expose:
       - "8000"
+
+  # Marketplace fon vazifalari: kartochka joylash, narx/qoldiq sinxroni, buyurtmalarni tortish (Celery o'rniga — baza navbati)
+  worker:
+    build: ./backend
+    restart: unless-stopped
+    command: ["python", "manage.py", "run_worker"]
+    environment:
+      <<: *backend-env
+    volumes:
+      - media:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
 
   web:
     build:

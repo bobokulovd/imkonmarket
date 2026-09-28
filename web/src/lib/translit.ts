@@ -41,7 +41,7 @@ function newChunk(src: string): string {
 }
 
 // {placeholder}, brendlar va texnik so'zlar o'girilmaydi
-const KEEP = /(\{[a-zA-Z_]+\}|Click|Payme|E-IMZO|QR|B2B|B2C|PDF|ImkonMarket|SMS|ID)/;
+const KEEP = /(\{[a-zA-Z_]+\}|Click|Payme|E-IMZO|QR|B2B|B2C|PDF|ImkonMarket|SMS|Market Yandex Go|Yandex Market|Wildberries|Uzum Market|Uzum|Ozon|seller\.uzum\.uz|cbu\.uz|MARKETPLACE_ENC_KEYS|Client-Id|Business ID|API|SKU|FBS|FBO|DBS|UZS|RUB|\.net|ID)/;
 
 function convert(s: string, fn: (x: string) => string) {
   return s.split(KEEP).map((p) => (KEEP.test(p) ? p : fn(p))).join("");

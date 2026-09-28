@@ -97,3 +97,16 @@ Tanlov kabinetda **sklad guruhlari** bor-yo'qligiga bog'liq:
 | update_order_status | `PUT /v2/campaigns/{campaignId}/orders/{orderId}/status` / `POST /v2/campaigns/{campaignId}/orders/status-update`; FBY — yo'q |
 
 Ochiq savollar: O'zbekiston sotuvchisida FBS/DBS/FBY qaysi biri mavjudligi — hujjatda topilmadi; `.net` domen va `.ru` kalitlari o'zaro ishlashi — tekshirilmadi; Api-Key yaratish UI qadamlari — tekshirilmadi.
+
+## 10. Adapterda ishlatilgan sxemalar (rasmiy OpenAPI'dan tekshirildi, 2026-09-28)
+
+- `GET /v2/campaigns` → `{campaigns: [{id, domain, business{id,name}, placementType, apiAvailability}], pager{pagesCount}}`.
+- `POST /v3/businesses/{businessId}/warehouses` → `{result: {warehouses: [{id, name, models, address}]}}`.
+- `POST /v3/businesses/{businessId}/offers/stocks/update` body `{skuItems: [{sku, partnerWarehouseId, count, updatedAt}]}` (≤2000).
+- `POST /v2/businesses/{businessId}/offer-mappings/update` → `{results: [{offerId, errors[], warnings[]}]}`.
+  `UpdateOfferDTO`: `offerId, name, marketCategoryId, pictures, vendor, barcodes, description, manufacturerCountries, weightDimensions{length,width,height,weight}, parameterValues[{parameterId, valueId|value, unitId}], basicPrice{value,currencyId}`.
+- `POST /v2/businesses/{businessId}/offer-cards` → `{result: {offerCards: [{offerId, cardStatus, errors, mapping{marketSku}}]}}`.
+- `POST /v1/businesses/{businessId}/orders?limit=50&pageToken=` body `{dates: {updateDateFrom (date-time)}, campaignIds?}` →
+  `{orders: [{orderId, campaignId, programType, status, substatus, creationDate, fake, items: [{id, offerId, offerName, count, prices{payment, cashback}}], prices{payment}}], paging{nextPageToken}}`.
+  Diqqat: `items[].prices.payment` — **barcha birliklar uchun jami** (bitta dona narxi emas).
+- `PUT /v2/campaigns/{campaignId}/orders/{orderId}/status` body `{order: {status, substatus}}`.

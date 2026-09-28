@@ -7,6 +7,7 @@ import '../../ui/widgets.dart';
 import 'agent_catalog_screen.dart';
 import 'applications_screen.dart';
 import 'contracts_screen.dart';
+import 'marketplace_orders_screen.dart';
 import 'seller_products_screen.dart';
 
 /// Sotuvchi (muassasa) kabineti: kirish yoki boshqaruv paneli.
@@ -104,6 +105,7 @@ class _DashboardState extends State<_Dashboard> {
       [Icons.description_outlined, app.t('contracts'), '${d?['contracts_active'] ?? '…'} ${app.t('active_contracts').toLowerCase()}', () => open(const ContractsScreen())],
       [Icons.inventory_2_outlined, app.t('my_products'), '${d?['products'] ?? '…'}', () => open(const SellerProductsScreen())],
       [Icons.warehouse_outlined, app.t('general_catalog'), app.t('create_deal'), () => open(const AgentCatalogScreen())],
+      [Icons.storefront_outlined, app.t('marketplaces'), 'Uzum · Ozon · Yandex · WB', () => open(const MarketplaceOrdersScreen())],
     ];
     return Scaffold(
       appBar: AppBar(

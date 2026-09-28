@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import { ClipboardList, ExternalLink, FileSignature, LayoutDashboard, LogOut, Package, Settings, Warehouse } from "lucide-react";
+import { ClipboardList, ExternalLink, FileSignature, LayoutDashboard, LogOut, Package, Settings, Store, Warehouse } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
@@ -37,6 +37,7 @@ export default function CabinetShell({ children }: { children: React.ReactNode }
     { href: "/cabinet/contracts", icon: FileSignature, label: t("contracts") },
     { href: "/cabinet/products", icon: Package, label: t("my_products") },
     { href: "/cabinet/catalog", icon: Warehouse, label: t("general_catalog") },
+    { href: "/cabinet/marketplaces", icon: Store, label: t("marketplaces") },
     { href: "/cabinet/profile", icon: Settings, label: t("profile") },
   ];
   const logout = () => { auth.clear(); router.replace("/cabinet/login"); };
@@ -75,7 +76,7 @@ export default function CabinetShell({ children }: { children: React.ReactNode }
           </header>
           <main className="p-4 lg:p-8 max-w-[1400px]">{children}</main>
         </div>
-        <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-ink-100 grid grid-cols-6 pb-[env(safe-area-inset-bottom)]">
+        <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-ink-100 grid grid-cols-7 pb-[env(safe-area-inset-bottom)]">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} className={clsx("flex flex-col items-center py-2 text-[10px] font-medium", active(n.href) ? "text-brand-600" : "text-ink-500")}>
               <n.icon className="w-5 h-5 mb-0.5" /><span className="truncate max-w-full px-0.5">{n.label}</span>
