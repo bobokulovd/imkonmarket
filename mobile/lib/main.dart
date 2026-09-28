@@ -13,17 +13,17 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final app = AppState();
   await app.init();
-  runApp(ChangeNotifierProvider.value(value: app, child: const UstaBozorApp()));
+  runApp(ChangeNotifierProvider.value(value: app, child: const ImkonMarketApp()));
 }
 
-class UstaBozorApp extends StatelessWidget {
-  const UstaBozorApp({super.key});
+class ImkonMarketApp extends StatelessWidget {
+  const ImkonMarketApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     final app = context.watch<AppState>();
     return MaterialApp(
-      title: (app.meta?['brand'] as String?) ?? 'UstaBozor',
+      title: (app.meta?['brand'] as String?) ?? 'ImkonMarket',
       debugShowCheckedModeBanner: false,
       theme: buildTheme(),
       home: const RootScreen(),

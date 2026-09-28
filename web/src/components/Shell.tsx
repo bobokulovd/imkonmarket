@@ -7,17 +7,31 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { LANGS, useApp, useCart } from "@/lib/store";
 import { CatIcon } from "./ui";
 
-export function Logo({ light }: { light?: boolean }) {
-  const { meta } = useApp();
+export function LogoMark({ className = "w-9 h-9" }: { className?: string }) {
   return (
-    <Link href="/" className="flex items-center gap-2 shrink-0">
-      <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-800 grid place-items-center shadow-sm">
-        <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 21V10l5 3V10l5 3V7l8 4v10z" /><path d="M7 17h2M12 17h2M17 17h1" />
-        </svg>
-      </span>
+    <svg viewBox="0 0 40 40" className={className} aria-hidden="true">
+      <defs>
+        <linearGradient id="im-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#3372fb" />
+          <stop offset="1" stopColor="#1936ad" />
+        </linearGradient>
+      </defs>
+      <rect width="40" height="40" rx="11" fill="url(#im-g)" />
+      {/* sumka + o'sish strelkasi (imkon) */}
+      <path d="M9.5 15h21l-1.6 15.2a2.4 2.4 0 0 1-2.4 2.1H13.5a2.4 2.4 0 0 1-2.4-2.1z" fill="#fff" />
+      <path d="M15 15v-1.2a5 5 0 0 1 10 0V15" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+      <path d="M14.5 27.5l4-4 2.6 2.6 4.4-4.6" fill="none" stroke="#ff9a1f" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M22.6 21.3h3.1v3.1" fill="none" stroke="#ff9a1f" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function Logo({ light }: { light?: boolean }) {
+  return (
+    <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="ImkonMarket">
+      <LogoMark />
       <span className={clsx("font-extrabold text-xl tracking-tight", light ? "text-white" : "text-ink-900")}>
-        {meta?.brand || "UstaBozor"}
+        Imkon<span className={light ? "text-accent-400" : "text-brand-600"}>Market</span>
       </span>
     </Link>
   );
@@ -190,7 +204,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 text-xs text-ink-500">
-        <div className="max-w-7xl mx-auto px-4 py-4">© {new Date().getFullYear()} {meta?.brand || "UstaBozor"}</div>
+        <div className="max-w-7xl mx-auto px-4 py-4">© {new Date().getFullYear()} {meta?.brand || "ImkonMarket"}</div>
       </div>
     </footer>
   );

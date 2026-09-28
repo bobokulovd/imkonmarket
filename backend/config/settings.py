@@ -104,7 +104,7 @@ SIMPLE_JWT = {
 }
 
 # --- Platforma sozlamalari ---
-BRAND_NAME = env("BRAND_NAME", "UstaBozor")
+BRAND_NAME = env("BRAND_NAME", "ImkonMarket")
 SITE_URL = env("SITE_URL", "http://localhost:3000")  # sayt manzili (shartnomadagi QR, to'lov qaytish)
 API_URL = env("API_URL", "http://localhost:8000")
 

@@ -54,8 +54,10 @@ class _LoginState extends State<_Login> {
     return Scaffold(
       appBar: AppBar(title: Text(app.t('cabinet')), actions: const [LangButton()]),
       body: ListView(padding: const EdgeInsets.all(20), children: [
-        const Icon(Icons.storefront, size: 56, color: brand),
+        const Center(child: LogoMark(size: 64)),
         const SizedBox(height: 12),
+        const Center(child: BrandTitle()),
+        const SizedBox(height: 8),
         Text(app.t('sign_in'), textAlign: TextAlign.center, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
         Text(app.t('cabinet_login_sub'), textAlign: TextAlign.center, style: const TextStyle(color: ink500)),
         const SizedBox(height: 24),

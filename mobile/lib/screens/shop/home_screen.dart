@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
             pinned: true,
             backgroundColor: brandDark,
             foregroundColor: Colors.white,
-            title: Text((app.meta?['brand'] as String?) ?? 'UstaBozor', style: const TextStyle(fontWeight: FontWeight.w800)),
+            title: const BrandTitle(light: true),
             actions: const [LangButton()],
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(64),

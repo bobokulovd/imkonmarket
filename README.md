@@ -1,4 +1,4 @@
-# UstaBozor — muassasalar mahsulotlari savdo platformasi
+# ImkonMarket — muassasalar mahsulotlari savdo platformasi
 
 Sayt (Next.js), mobil ilova (Flutter) va backend (Django REST). 6 tilda ishlaydi: o'zbek (lotin), o'zbek (kirill), o'zbek (yangi alifbo: Ó, Ǵ, Ş, Ç), rus, qoraqalpoq, ingliz.
 Nom (`BRAND_NAME`) vaqtinchalik, `.env` orqali o'zgartiriladi.

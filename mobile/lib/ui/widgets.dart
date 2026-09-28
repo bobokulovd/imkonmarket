@@ -271,3 +271,66 @@ class SectionTitle extends StatelessWidget {
         ]),
       );
 }
+
+/// ImkonMarket belgisi (saytdagi SVG logotip bilan bir xil).
+class LogoMark extends StatelessWidget {
+  final double size;
+  const LogoMark({super.key, this.size = 36});
+  @override
+  Widget build(BuildContext context) => SizedBox(width: size, height: size, child: CustomPaint(painter: _LogoPainter()));
+}
+
+class _LogoPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final k = size.width / 40;
+    canvas.scale(k);
+    final bgRect = RRect.fromRectAndRadius(const Rect.fromLTWH(0, 0, 40, 40), const Radius.circular(11));
+    canvas.drawRRect(
+        bgRect,
+        Paint()
+          ..shader = const LinearGradient(colors: [Color(0xFF3372FB), Color(0xFF1936AD)], begin: Alignment.topLeft, end: Alignment.bottomRight)
+              .createShader(const Rect.fromLTWH(0, 0, 40, 40)));
+    final white = Paint()..color = Colors.white;
+    final bag = Path()
+      ..moveTo(9.5, 15)
+      ..lineTo(30.5, 15)
+      ..lineTo(28.9, 30.2)
+      ..quadraticBezierTo(28.6, 32.3, 26.5, 32.3)
+      ..lineTo(13.5, 32.3)
+      ..quadraticBezierTo(11.4, 32.3, 11.1, 30.2)
+      ..close();
+    canvas.drawPath(bag, white);
+    final handle = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2
+      ..strokeCap = StrokeCap.round;
+    canvas.drawArc(const Rect.fromLTWH(15, 8.8, 10, 10), 3.1416, 3.1416, false, handle);
+    final arrow = Paint()
+      ..color = accent
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.4
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+    canvas.drawPath(Path()..moveTo(14.5, 27.5)..lineTo(18.5, 23.5)..lineTo(21.1, 26.1)..lineTo(25.5, 21.5), arrow);
+    canvas.drawPath(Path()..moveTo(22.6, 21.3)..lineTo(25.7, 21.3)..lineTo(25.7, 24.4), arrow);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class BrandTitle extends StatelessWidget {
+  final bool light;
+  const BrandTitle({super.key, this.light = false});
+  @override
+  Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
+        const LogoMark(size: 30),
+        const SizedBox(width: 8),
+        Text.rich(TextSpan(children: [
+          TextSpan(text: 'Imkon', style: TextStyle(color: light ? Colors.white : ink)),
+          TextSpan(text: 'Market', style: TextStyle(color: light ? accent : brand)),
+        ]), style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 20)),
+      ]);
+}

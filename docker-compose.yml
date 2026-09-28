@@ -4,9 +4,9 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: ustabozor
-      POSTGRES_USER: ustabozor
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ustabozor}
+      POSTGRES_DB: imkonmarket
+      POSTGRES_USER: imkonmarket
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-imkonmarket}
     volumes: [pgdata:/var/lib/postgresql/data]
     restart: unless-stopped
 
@@ -14,9 +14,9 @@ services:
     build: ./backend
     env_file: .env
     environment:
-      POSTGRES_DB: ustabozor
-      POSTGRES_USER: ustabozor
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ustabozor}
+      POSTGRES_DB: imkonmarket
+      POSTGRES_USER: imkonmarket
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-imkonmarket}
       POSTGRES_HOST: db
     volumes:
       - media:/app/media

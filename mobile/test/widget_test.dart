@@ -1,7 +1,7 @@
 // `flutter create .` (setup.sh) mavjud faylni qayta yozmaydi — aks holda u `MyApp`ga
 // murojaat qiluvchi shablon test yaratib, `flutter analyze` xato beradi.
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ustabozor/core/state.dart';
+import 'package:imkonmarket/core/state.dart';
 
 void main() {
   test('fmtDate', () {
