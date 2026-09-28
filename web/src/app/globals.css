@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { -webkit-text-size-adjust: 100%; }
+body { @apply bg-[#f5f7fb] text-ink-900 antialiased; font-feature-settings: "cv11", "ss01"; }
+.container-x { @apply max-w-7xl mx-auto px-4; }
+.card { @apply bg-white rounded-2xl border border-ink-100 shadow-card; }
+.h-section { @apply text-xl md:text-2xl font-extrabold tracking-tight text-ink-900; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }

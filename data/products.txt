@@ -1,0 +1,352 @@
+# Format: nomi | xususiyati | o'lchov | narx (bo'sh = kelishiladi) | mavjud/kunlik quvvat (bo'sh = buyurtma asosida) | kategoriya | izoh
+# "@seller-code | ishlab chiqarish manzili | yetkazib berish (1/0)" — sotuvchi bo'limi boshi
+
+@mk-49 | Toshkent viloyati, Olmaliq shahri | 1
+Choyshablar to'plami | choyshab 130×200 sm, ko'rpa jildi 130×200 sm, yostiq jildi 60×60 sm | dona | 135000 | 250 | toqimachilik |
+Paxtali to'shak (matras) | 180×71×5 sm | dona | 270000 | 50 | toqimachilik |
+Paxtali yostiq | 58×58 sm | dona | 62000 | 100 | toqimachilik |
+Yarim junli odeyalo | 205×140 sm | dona | 283992 | 500 | toqimachilik |
+Choyshab | 214×120 sm | dona | 48587 | 500 | toqimachilik |
+Yostiq jildi | 60×60 sm | dona | 27000 | 800 | toqimachilik |
+Alyumin rom, eshik, fortochka | alyumin profil, 1 m² narxi | m² | 1100000 | 25 | rom-eshik |
+PVX rom, eshik, fortochka | PVX profil, 1 m² narxi | m² | 1210000 | 25 | rom-eshik |
+
+@mk-44 | Toshkent viloyati, Zangiota tumani | 1
+Matras yarim ortopedik | 2100×900 mm | dona | 850000 | 22 | mebel |
+Matras porolonli | 2100×900 mm | dona | 890000 | 30 | mebel |
+Matras yarim ortopedik (ikki kishilik) | 2100×1800 mm | dona | 1400000 | 18 | mebel |
+Matras porolonli (ikki kishilik) | 2100×1800 mm | dona | 1450000 | 18 | mebel |
+Divan standart | 2000×800 mm | dona | 2600000 | 5 | mebel |
+Burchak divan | 4500×800×400 mm | dona | 3540000 | 5 | mebel |
+Kreslo-krovat | turli o'lchamda | dona | 1450000 | 12 | mebel |
+Yog'och krovat | 2100×900 mm | dona | 120000 | 17 | mebel |
+Metall krovat | 2100×900 mm | dona | 130000 | 18 | mebel |
+Kiyim shkafi | 2000×800×400 mm | dona | 2200000 | 20 | mebel |
+Shkaf-kupe | 2500×1200×560 mm | dona | 4500000 | 15 | mebel |
+Kombinatsiyalangan shkaf | 2500×1200×600 mm | dona | 3450000 | 11 | mebel |
+Shkaf-stenka | 3000×2000×500 mm | dona | 4600000 | 8 | mebel |
+Ish stoli | 1200×750×750 mm | dona | 1400000 | 32 | mebel |
+Pristavka stol | 1000×750×750 mm | dona | 1000000 | 32 | mebel |
+Jurnal stoli | 1200×700×600 mm | dona | 1200000 | 40 | mebel |
+Tumba | 450×500×430 mm | dona | 450000 | 50 | mebel |
+Telefon uchun tumba | 600×500×430 mm | dona | 700000 | 50 | mebel |
+Televizor tagligi | 2000×600×400 mm | dona | 1350000 | 35 | mebel |
+Taburetka | 400×400×500 mm | dona | 510000 | 60 | mebel |
+Choy tumbasi | 1200×600×450 mm | dona | 1200000 | 40 | mebel |
+G'ildirakli tumba | 500×450×450 mm | dona | 750000 | 50 | mebel |
+Oshxona mebeli to'plami | 2500×1200×560 mm | to'plam | 6000000 | 5 | mebel |
+Dahliz shkafi (prixojka) | 1400×1600×400 mm | dona | 2780000 | 18 | mebel |
+Metall shkaf | 2000×800×400 mm | dona | 3100000 | 18 | metall |
+MDF eshik | 2100×900 mm | dona | 2450000 | 6 | rom-eshik |
+Eshik (alyumin profil, PVX) | 2100×900 mm | dona | 2140000 | 6 | rom-eshik |
+Rom (alyumin profil, PVX) | 1500×1200 mm | dona | 1760000 | 8 | rom-eshik |
+Fortochka (alyumin profil, PVX) | 600×400 mm | dona | 450000 | 20 | rom-eshik |
+Vitraj (alyumin, PVX) | 5000×2000 mm | dona | 9540000 | 1 | rom-eshik |
+Peregorodka — to'siq devor (alyumin, PVX) | 7000×1500 mm | dona | 10500000 | 1 | rom-eshik |
+Granit bruschatka | 10×20×3 sm | m² | 280000 | 300 | temir-beton |
+Granit plita | 60×40×3 sm | m² | 275000 | 300 | temir-beton |
+Granit bordyur | 10×15×600 | p/m | 210000 | 300 | temir-beton |
+
+@jiek-03 | Qashqadaryo viloyati, Qarshi shahri | 1
+Pishgan g'isht | 250×120×65 mm | dona | 850 | 35000 | qurilish |
+Pishgan g'isht (poltara) | 250×120×88 mm | dona | 1250 | 35000 | qurilish |
+Narda | 60×30 sm | dona | 500000 | 3 | suvenir |
+Shkatulka | 15×15 sm | dona | 200000 | 10 | suvenir |
+Shaxmat | 60×30 sm | dona | 500000 | 3 | suvenir |
+Ish kostyumi | s/k | dona | 217530 | 10 | kiyim |
+Ish botinkasi | s/k | juft | 243800 | 10 | kiyim |
+Tufli | s/k | juft | 250000 | 10 | kiyim |
+Ish polubotinkasi | s/k | juft | 336000 | 10 | kiyim |
+Kema (suvenir) | 70 sm | dona | 1000000 | 2 | suvenir |
+Polietilen truba | d 110 mm | p/m | 69952 | 1200 | qurilish |
+
+@jiek-05 | Navoiy viloyati, Qiziltepa tumani | 1
+Pishgan g'isht (poltara) | 250×120×88 mm | dona | 1100 | 25000 | qurilish |
+Ohak | 20×40 fraksiya | kg | 1100 | 50000 | qurilish | O'lchov birligi aniqlashtirilsin (Excelda: kunlik 50 tonna)
+Keramzit | 20×40 fraksiya | kg | 3500 | | qurilish | O'lchov birligi aniqlashtirilsin (Excelda: kunlik 60 kub)
+Gips | | tonna | 395000 | 30 | qurilish |
+Gipsoblok | 20×30×60 | dona | 8800 | 200 | qurilish |
+Gipsoblok | 12×30×60 | dona | 8800 | 200 | qurilish |
+So'ndirilgan ohak (pushonka) | | tonna | 100000 | 60 | qurilish |
+Rodban | | tonna | 870000 | 10 | qurilish |
+Shlakoblok | 20×20×40 sm | dona | 4100 | 1000 | qurilish |
+Obi g'isht | 250×250×50 mm | dona | 3500 | 1000 | qurilish |
+Qop | 50 kg lik | dona | 1700 | 500 | xojalik |
+Fasad g'isht | 250×120×90 mm | dona | 5000 | 8000 | qurilish |
+Rotang stol-stul to'plami | 8 kishilik | to'plam | 2740000 | | mebel |
+Mebel — buyurtma asosida | buyurtmachi o'lchami va eskizi bo'yicha | dona | | | xizmatlar |
+Tikuvchilik — buyurtma asosida | buyurtmachi talabi bo'yicha | dona | | | xizmatlar |
+Duradgorlik — buyurtma asosida | buyurtmachi talabi bo'yicha | dona | | | xizmatlar |
+Narda | yog'och | dona | 1000000 | | suvenir |
+Shaxmat | yog'och | dona | 1000000 | | suvenir |
+Shaxmat-narda | yog'och | dona | 1000000 | | suvenir |
+Laminat narda yoki shaxmat | laminat | dona | 400000 | | suvenir |
+Laminat shaxmat | laminat | dona | 500000 | | suvenir |
+Mini narda yoki mini shaxmat | | dona | 500000 | | suvenir |
+Shaxmat donalari | to'plam | to'plam | 130000 | | suvenir |
+Kemacha | yog'och | dona | 1000000 | | suvenir |
+Mini kemacha (suvenir) | | dona | 500000 | | suvenir |
+Shkatulka (bittalik) | | dona | 175000 | | suvenir |
+Shkatulka (ikkitalik) | | dona | 350000 | | suvenir |
+Shkatulka (uchtalik) | | dona | 525000 | | suvenir |
+Shkatulka — kitob qo'ygich | | dona | 525000 | | suvenir |
+Ramka | | dona | 175000 | | suvenir |
+Hassa | | dona | 100000 | | suvenir |
+Laminat lavh | | dona | 175000 | | suvenir |
+Yumshoq o'rindiq (pufik) | 0,45×0,45×0,45 m | dona | 500000 | | mebel |
+Bir tumbali ofis stoli | 0,6×0,75×1,6 m | dona | 2000000 | | mebel |
+Ofis stoli | 0,6×0,75×1,6 m | dona | 2400000 | | mebel |
+Yumshoq stul | 0,45×0,5×0,9 m | dona | 700000 | | mebel |
+Ikki tumbali ofis stoli | 0,6×0,75×1,6 m | dona | 2500000 | | mebel |
+Kompyuter stoli va stuli | 0,6×0,75×0,8 m | to'plam | 2000000 | | mebel |
+Kompyuter stoli va stuli (katta) | 0,7×1,6×2,4 m | to'plam | 4235000 | | mebel |
+Kiyim javoni | 0,8×0,4×1,8 m | dona | 1100000 | | mebel |
+Kitob javoni | | dona | 1100000 | | talim-mebeli |
+O'quvchi stoli №6 (1 stol, 2 stul) | 0,5×1,3×0,75 m | to'plam | 1180000 | | talim-mebeli |
+Metall karkasli stul | | dona | 350000 | | talim-mebeli |
+O'qituvchi stoli va stuli | 0,75×1,3×0,7 m | to'plam | 1297500 | | talim-mebeli |
+Majlis stoli | 0,7×0,75×2,2 m | dona | 1500000 | | mebel |
+Minbar | 0,3×0,4×1,6 m | dona | 1150000 | | talim-mebeli |
+Garderob | 0,5×1,35×1,8 m | dona | 2000000 | | mebel |
+
+@mk-29 | Jizzax viloyati, Jizzax shahri | 1
+Qolipli non | 600 g | dona | | 1500 | xojalik | Excelda narx 190 so'm — aniqlashtirilsin
+Tumbochka | turli o'lchamda, buyurtma asosida | dona | | 10 | mebel |
+Shkaf | turli o'lchamda, buyurtma asosida | dona | | 10 | mebel |
+Stol | 1,30×0,80×0,79 m | dona | | 10 | mebel |
+Stol | 0,80×0,60×0,79 m | dona | | 10 | mebel |
+Aylana stol | 1,80×1,40×0,80 m | dona | | 10 | mebel |
+Jurnal stoli | 1,30×0,60×0,50 m | dona | | 10 | mebel |
+Tumbochka | 0,47×0,40×0,60 m | dona | | 10 | mebel |
+Burchak mebel | 2,30×1,80×0,90 m | dona | | 10 | mebel |
+Pristavka stol | 1,00×0,60×0,72 m | dona | | 10 | mebel |
+Stol | 1,80×0,80×0,75 m | dona | | 10 | mebel |
+Yumshoq krovat | 1,80×0,75×0,53 m | dona | | 10 | mebel |
+Tumba | 0,80×0,45×0,76 m | dona | | 10 | mebel |
+Shkaf ustki qismi | 1,60×0,70×0,50 m | dona | | 10 | mebel |
+Tumbochka | 1,00×0,45×0,65 m | dona | | 10 | mebel |
+Podstavka | 1,40×0,70×0,40 m | dona | | 10 | mebel |
+Podstavka | 1,40×0,70×0,43 m | dona | | 10 | mebel |
+Shkaf | 2,00×1,60×0,45 m | dona | | 10 | mebel |
+Shkaf | 2,10×2,00×0,50 m | dona | | 10 | mebel |
+Krovat | 2,10×0,90×0,45 m | dona | | 10 | mebel |
+Yumshoq burchak mebel | 2,30×1,65×0,45 m | dona | | 10 | mebel |
+Shkaf | 2,40×2,20×0,40 m | dona | | 10 | mebel |
+Shkaf | 2,00×1,80×0,50 m | dona | | 10 | mebel |
+O'qituvchi hujjatlari va kiyimi uchun javon | 1,80×0,90×0,50 m, LDSP | dona | | 10 | talim-mebeli |
+O'qituvchi stoli | 1,30×0,67×0,78 m | dona | | 10 | talim-mebeli |
+O'qituvchi stuli (Turon stul) | | dona | | 10 | talim-mebeli |
+O'quvchi stoli №3 (1 stol, 1 stul) | | to'plam | | 10 | talim-mebeli |
+O'quvchi stoli №4 (1 stol, 1 stul) | | to'plam | | 10 | talim-mebeli |
+O'quvchi stoli №5 (1 stol, 1 stul) | | to'plam | | 10 | talim-mebeli |
+O'quvchi stoli №5 (1 stol, 2 stul, karkasli) | | to'plam | | 10 | talim-mebeli |
+Kitoblar va o'quv qurollari uchun javon | 1,80×0,90×0,40 m | dona | | 10 | talim-mebeli |
+Kiyim javoni | 1,80×0,90×0,50 m, LDSP | dona | | 10 | talim-mebeli |
+O'quvchi stoli №6 (1 stol, 2 stul, karkasli) | | to'plam | | 10 | talim-mebeli |
+Eshik (Akfa profil) | 2,03×0,80 m | dona | | 10 | rom-eshik |
+Deraza (Akfa profil) | 1,10×1,40 m | dona | | 10 | rom-eshik |
+Fortochka (Akfa profil) | 0,80×0,60 m | dona | | 10 | rom-eshik |
+Vitraj (Akfa profil) | 2,95×2,37 m | dona | | 10 | rom-eshik |
+Deko stol karkasi (4 kishilik) | metall | dona | | 10 | metall |
+Deko stol karkasi (6 kishilik) | metall | dona | | 10 | metall |
+Deko stol karkasi (8 kishilik) | metall | dona | | 10 | metall |
+Temir seyf | 2,85×0,80×0,31 m | dona | | 10 | metall |
+Deraza panjarasi (metall) | 1,60×1,80 m | dona | | 10 | metall |
+Oq yostiq jildi | 60×60 sm | dona | | 10 | toqimachilik |
+Osma narvon (polatuk) | | dona | | 10 | obodonlashtirish |
+Vernek (sport jihozi) | | dona | | 10 | obodonlashtirish |
+Alert (sport jihozi) | | dona | | 10 | obodonlashtirish |
+Uchburchak (sport jihozi) | | dona | | 10 | obodonlashtirish |
+Skameyka | | dona | | 10 | obodonlashtirish |
+Press uchun brus | | dona | | 10 | obodonlashtirish |
+Gimnastika eshagi va brus (tayanchli lavka) | | dona | | 10 | obodonlashtirish |
+
+@jiek-22 | Toshkent viloyati, Zangiota tumani | 1
+Qolipli non | 600 g | dona | 3100 | 7500 | xojalik |
+Egoza (spiral to'siq) | diametri 50, 60, 90 sm | dona | 29000 | 1000 | xavfsizlik |
+Metall eshik (qora metall) | 2000×900 mm | dona | 4500000 | 10 | metall |
+Eshik panjarasi (qora metall) | 2000×900 mm | dona | 2500000 | 10 | metall |
+Yong'in shiti | 1200×1400 mm | dona | 3000000 | 5 | xavfsizlik |
+Metall seyf | 1200×400 mm | dona | 2550000 | 10 | metall |
+Tikanli sim | po'lat, 2,8 mm | p/m | 18000 | 500 | xavfsizlik |
+Maxsus eshik qulfi | 180×110 mm | dona | 310000 | 30 | xavfsizlik |
+
+@jiek-14 | Toshkent viloyati, Olmaliq shahri | 1
+Pishgan g'isht | 250×120×88 mm | dona | 950 | 20000 | qurilish |
+Xom g'isht | 250×120×88 mm | dona | 400 | 20000 | qurilish |
+Pustotali plita | PK 23-12-8 | dona | 842000 | 20 | temir-beton |
+Pustotali plita | PK 26-10-8 | dona | 785000 | 20 | temir-beton |
+Pustotali plita | PK 26-12-8 | dona | 815000 | 20 | temir-beton |
+Pustotali plita | PK 29-10-8 | dona | 820000 | 20 | temir-beton |
+Pustotali plita | PK 29-12-8 | dona | 840000 | 20 | temir-beton |
+Pustotali plita | PK 31-10-8 | dona | 812000 | 20 | temir-beton |
+Pustotali plita | PK 31-12-8 | dona | 933900 | 20 | temir-beton |
+Pustotali plita | PK 41-10-8 | dona | 1050000 | 10 | temir-beton |
+Pustotali plita | PK 41-12-8 | dona | 1141000 | 10 | temir-beton |
+Pustotali plita | PK 59-10-8 | dona | 1180000 | 10 | temir-beton |
+Pustotali plita | PK 59-12-8 | dona | 1350000 | 10 | temir-beton |
+Pustotali plita | PK 63-10-6 | dona | 1300800 | 10 | temir-beton |
+Pustotali plita | PK 63-12-6 | dona | 1439700 | 10 | temir-beton |
+Beton stolb | 11 m | dona | 1300000 | 10 | temir-beton |
+Beton stolb | 9,5 m | dona | 1100000 | 10 | temir-beton |
+Lotok | 3×0,4 m | dona | 319000 | 10 | temir-beton |
+Yo'l bordyuri | 1000×200×100 mm | dona | 45000 | 140 | temir-beton |
+Yo'l bordyuri (rangli) | 1000×200×100 mm | dona | 55000 | 140 | temir-beton |
+Yo'l bordyuri (rangli) | 1000×300×150 mm | dona | 6500 | 140 | temir-beton | Excelda 6 500 so'm — xato bo'lishi mumkin, aniqlashtirilsin
+Yo'l bordyuri | 1000×300×100 mm | dona | 55000 | 140 | temir-beton |
+Quduq halqasi | KTs 07-9 | dona | 273000 | 16 | temir-beton |
+Quduq halqasi | KTs 10-3 | dona | 220000 | 16 | temir-beton |
+Quduq halqasi | KTs 10-6 | dona | 327300 | 16 | temir-beton |
+Quduq halqasi | KTs 10-9 | dona | 418635 | 16 | temir-beton |
+Quduq halqasi | KTs 15-3 | dona | 320300 | 16 | temir-beton |
+Quduq halqasi | KTs 15-6 | dona | 460000 | 16 | temir-beton |
+Quduq halqasi | KTs 15-9 | dona | 610700 | 16 | temir-beton |
+Quduq yopqich plitasi | KTsD 1-10-1 | dona | 443400 | 8 | temir-beton |
+Quduq yopqich plitasi | KTsD 1-15-1 | dona | 622000 | 8 | temir-beton |
+Quduq yopqich plitasi | KTsD 1-20-1 | dona | 693100 | 8 | temir-beton |
+Quduq tubi (dnishe) | KTsD 10 | dona | 400000 | 8 | temir-beton |
+Quduq tubi (dnishe) | KTsD 15 | dona | 543200 | 8 | temir-beton |
+Quduq tubi (dnishe) | KTsD 20 | dona | 636000 | 8 | temir-beton |
+Quduq bo'g'zi (gorlovina) | | dona | 92000 | 12 | temir-beton |
+Arg'imchoq | metall | dona | 2800000 | 1 | obodonlashtirish |
+Pech uchun filtr | | dona | 13598660 | 1 | metall |
+Taran | metall konstruksiya | dona | 6130651 | 1 | metall |
+Mangal | metall | dona | 600000 | 10 | metall |
+Panelli yoritgich | | dona | 1833000 | 1 | metall |
+Chilangar stoli | | dona | 3051700 | 1 | metall |
+Bekat karkasi | metall | dona | 14044650 | 1 | obodonlashtirish |
+Profilli skameyka | | dona | 1320538 | 1 | obodonlashtirish |
+Guldon tagligi | kichik | dona | 100000 | 1 | obodonlashtirish |
+Guldon tagligi | katta | dona | 300000 | 1 | obodonlashtirish |
+Pechka-qozon (kotel) | | dona | 2007720 | 1 | metall |
+Temir eshik | | dona | 3784700 | 1 | metall |
+Narda-shaxmat | yog'och | dona | 800000 | 1 | suvenir |
+Narda | yog'och | dona | 400000 | 1 | suvenir |
+Shaxmat | yog'och | dona | 600000 | 1 | suvenir |
+Lavh | yog'och | dona | 250000 | 1 | suvenir |
+Kema (suvenir) | 30 sm | dona | 300000 | 1 | suvenir |
+Kema (suvenir) | 40 sm | dona | 450000 | 1 | suvenir |
+Kema (suvenir) | 60 sm | dona | 600000 | 1 | suvenir |
+Kema (suvenir) | 80 sm | dona | 800000 | 1 | suvenir |
+Kema (suvenir), oddiy | 80 sm | dona | 250000 | 1 | suvenir | Excelda 80 sm kema ikki xil narxda — aniqlashtirilsin
+Shkatulka | 20×15 sm | dona | 250000 | 1 | suvenir |
+Shkatulka | 20×13 sm | dona | 150000 | 1 | suvenir |
+Yog'och mushtuk | | dona | 85000 | 1 | suvenir |
+Hassa | yog'och | dona | 250000 | 1 | suvenir |
+Ramka | 20×15 sm | dona | 150000 | 1 | suvenir |
+Kitob g'ilofi | | dona | 350000 | 1 | suvenir |
+Suvenir gul | 30 sm | dona | 250000 | 1 | suvenir |
+Krossovka | | juft | 180000 | 1 | kiyim |
+Yozgi ichki kiyim | | dona | 85000 | 1 | kiyim |
+Mayka | | dona | 35000 | 1 | kiyim |
+
+@jiek-02 | Qashqadaryo viloyati, Qarshi shahri | 1
+Pishgan g'isht (poltara) | 250×120×88 mm | dona | 1200 | 15000 | qurilish |
+Pishgan g'isht | 250×120×65 mm | dona | 850 | 25000 | qurilish |
+Narda (katta) | 940×760×10 mm | dona | 1000000 | 2 | suvenir |
+Shaxmat (katta) | 940×760×10 mm | dona | 1250000 | 2 | suvenir |
+Shkatulka | 300×400×100 mm | dona | 550000 | 4 | suvenir |
+Gips | G5 | kg | 380 | 25000 | qurilish |
+Izvestnyak tosh | 250×250×50 mm | m² | 145000 | 100 | qurilish |
+Izvestnyak tosh | 300×300×50 mm | m² | 185000 | 100 | qurilish |
+Trikotaj mato | 200 g, paxta | kg | 89000 | 250 | toqimachilik |
+Maxsus kiyimlar | turli materialdan, o'lchamga qarab (350 000 – 750 000 so'm) | dona | 350000 | 50 | kiyim |
+@@shared-edu-list
+
+@jiek-04 | Navoiy viloyati, Navoiy shahri | 1
+Pishgan g'isht (poltara) | 250×120×88 mm | dona | 1200 | 15000 | qurilish |
+Shlakoblok | 400×200×200 mm | dona | 3500 | 2000 | qurilish |
+Temir-beton plita | 3,8–7,2 metr | dona | 210000 | 30 | temir-beton |
+Tayyor beton qorishmasi | M-100 | m³ | 450000 | 100 | qurilish |
+Tayyor beton qorishmasi | M-150 | m³ | 500000 | 70 | qurilish |
+Tayyor beton qorishmasi | M-200 | m³ | 550000 | 60 | qurilish |
+Tayyor beton qorishmasi | M-250 | m³ | 600000 | 55 | qurilish |
+Tayyor beton qorishmasi | M-300 | m³ | 650000 | 50 | qurilish |
+Tayyor beton qorishmasi | M-400 | m³ | 700000 | 50 | qurilish |
+Sheben | 5×20 mm | m³ | 75000 | 120 | qurilish |
+Sheben | 20×40 mm | m³ | 85000 | 120 | qurilish |
+Sheben | 30×30 mm | m³ | 80000 | 120 | qurilish |
+@@shared-edu-list
+
+@shared-edu-list
+Parta (1 kishilik) | | dona | 500000 | 150 | talim-mebeli |
+Parta (2 kishilik) | | dona | 980000 | 100 | talim-mebeli |
+LMDF yozuv stoli (stol va stul) | | to'plam | 940000 | 50 | talim-mebeli |
+Yog'och stul | | dona | 850000 | 70 | mebel |
+Ikki qavatli krovat | | dona | 1450000 | 20 | mebel |
+Metall seyf | 600×400×300 mm | dona | 855000 | 10 | metall |
+Oshxona mebel to'plami | javon, stol, idish yuvish burchagi | to'plam | 3200000 | 5 | mebel |
+Kiyim va hujjatlar uchun kombinatsiyalangan javon | 1800×1500×500 mm | dona | 2400000 | 7 | mebel |
+Ikki o'rindiqli o'quvchilar stoli (metall karkas) | 1800×1000×700 mm | dona | 1200000 | 12 | talim-mebeli |
+O'quvchi stuli (metall karkas) | | dona | 325000 | 8 | talim-mebeli |
+Ustki qismi yig'iladigan stol | 900×900×850 mm | dona | 685000 | 5 | mebel |
+Kitob tarqatish uchun kafedra stoli | 1800×800×750 mm | dona | 1450000 | 9 | talim-mebeli |
+Kompyuter stoli | 800×800×750 mm | dona | 800000 | 15 | mebel |
+Kiyim javoni | 1800×1500×500 mm | dona | 2400000 | 12 | mebel |
+Kutubxona stellaji | 800×800×750 mm | dona | 880000 | 6 | talim-mebeli |
+Kitob javoni (yog'och karkas) | | dona | 2100000 | 4 | talim-mebeli |
+Yumshoq o'rindiq — pufik (yog'och karkas) | | dona | 315000 | 20 | mebel |
+Sport poyabzali — krossovka (erkak va ayollar) | | juft | 185000 | 175 | kiyim |
+Erkaklar maxsus poyabzali (botinka) | | juft | 198500 | 175 | kiyim |
+Kalashnikov o'quv avtomati maketi | | dona | 195000 | 45 | oquv-jihozlar |
+Tir mashqlari uchun nishon | | dona | 11000 | 100 | oquv-jihozlar |
+Avtomat nayza-pichog'i maketi | | dona | 50000 | 150 | oquv-jihozlar |
+Granata sumkachasi | | dona | 35000 | 200 | oquv-jihozlar |
+Kichik piyoda (sapyor) belkuragi, g'ilofi bilan | | dona | 95000 | 75 | oquv-jihozlar |
+G'ilofli bayroqchalar to'plami (oq/sariq va qizil) | | to'plam | 45000 | 120 | oquv-jihozlar |
+Ofitser chizg'ichi | | dona | 4000 | 200 | oquv-jihozlar |
+Mina ko'rsatkich maketi | | dona | 100000 | 60 | oquv-jihozlar |
+Ekipirovkali askar manekeni | kaska, niqob, forma, qo'lqop, etik, bronejilet, himoyalagichlar | dona | 2350000 | 25 | oquv-jihozlar |
+Tankka qarshi mina maketi | | dona | 90000 | 45 | oquv-jihozlar |
+Sanitar zambili | | dona | 350000 | 18 | oquv-jihozlar |
+Sanitar sumkasi to'plami | | to'plam | 350000 | 150 | oquv-jihozlar |
+Umumqo'shin himoya to'plami | | to'plam | 700000 | 15 | oquv-jihozlar |
+Tibbiy ro'molcha | | dona | 5000 | 200 | oquv-jihozlar |
+O'quv qo'l granatasi (maket) | | dona | 75000 | 55 | oquv-jihozlar |
+Tibbiy shina | | dona | 96000 | 100 | oquv-jihozlar |
+
+@mk-34 | Qashqadaryo viloyati, Qamashi tumani | 1
+Xom g'isht | 250×120×90 mm | dona | 450 | 20000 | qurilish | Yetkazib berish yo'q
+Metall prujina | 14 sm × 1,8 mm | dona | 5300 | 3000 | metall |
+
+@mk-35 | Qashqadaryo viloyati, Qarshi shahri, Shayxali qo'rg'oni | 1
+Xo'jalik sovuni | 70%, og'irligi 200 g | dona | 4250 | 1500 | xojalik |
+Xo'jalik sovuni xomashyosi | | kg | 13000 | 500 | xojalik |
+Deraza panjarasi (temir) | 1,66×1,36 m | dona | 670000 | 6 | metall |
+Eshik panjarasi (temir) | 2,23×1,68 m | dona | 1137000 | 4 | metall |
+Temir eshik (profil) | 2,28×0,92 m | dona | 5620000 | 2 | metall |
+Prostin | 100% paxta, gulsiz, oqartirilgan, 214×120 sm | dona | 48587 | 200 | toqimachilik |
+Narda (sosna) | taxtadan, 72×38 sm | dona | 365000 | 1 | suvenir |
+
+@jiek-11 | Navoiy viloyati, Karmana tumani | 1
+Narda donalari bilan (yong'oqdan) | suvenir | dona | 1000000 | 1 | suvenir |
+Kazerok yasash xizmati (o'z xomashyosi) | 1,9×1,45×1,45 m | dona | 100000 | 1 | xizmatlar |
+Jurnallar uchun javon | | dona | 600000 | 1 | mebel |
+Javon | | dona | 600000 | 1 | mebel |
+Kitoblar, o'quv qurollari va anjomlari uchun javon | | dona | 1000000 | 3 | talim-mebeli |
+Kiyim javoni | | dona | 1000000 | 5 | mebel |
+Ishchilar maxsus kiyimini tikish xizmati | buyurtmachi materialidan | dona | 40000 | 40 | xizmatlar |
+MDF eshik yasash xizmati | 2×0,8 m | dona | 65000 | 20 | xizmatlar |
+Pishgan g'isht (poltara) | 250×120×88 mm | dona | 1150 | 2000 | qurilish |
+Sheben | | m³ | 90000 | 200 | qurilish |
+Temir panjara yasash xizmati (o'z xomashyosi) | | m² | 50000 | 256 | xizmatlar |
+Shlakoblok | | dona | 3500 | 1000 | qurilish |
+O'qituvchi uchun kompyuter stoli | | dona | 600000 | 2 | talim-mebeli |
+Jurnal stoli | | dona | 400000 | 1 | mebel |
+O'qituvchi stoli va tajriba stoli | | to'plam | 1000000 | 1 | talim-mebeli |
+So'ndirilgan ohak | | tonna | 950000 | 10 | qurilish |
+Granit shar tayyorlash xizmati (o'z xomashyosi) | | dona | 25000 | 200 | xizmatlar |
+Shaxmat-narda donalari bilan (yong'oqdan) | | dona | 600000 | 2 | suvenir |
+Shaxmat-narda (yong'oqdan) | 0,30×0,30 m | dona | 600000 | 1 | suvenir |
+Metall panjara ta'mirlash xizmati | 4,5×3 m (12 m²) | xizmat | 150000 | 1 | xizmatlar |
+Kronshteyn | juft | juft | 50000 | 20 | metall |
+Axlat urnasi yasash xizmati (o'z xomashyosi) | | dona | 30000 | 42 | xizmatlar |
+Ohak | | tonna | 840000 | 80 | qurilish |
+Zakladnoy detallar yasash xizmati (o'z xomashyosi) | | dona | 1000 | 600 | xizmatlar |
+Besedka | 2,5×2×3 m | dona | 6000000 | 1 | obodonlashtirish |
+Besedka | 2×2×2,5 m | dona | 4000000 | 1 | obodonlashtirish |
+Jurnal stoli | 110×70×50 sm | dona | 1200000 | 1 | mebel |
+Balyasina ishlab chiqarish xizmati (o'z xomashyosi) | | dona | 25000 | 305 | xizmatlar |
+Kema suvenir (yong'oqdan) | 40 sm | dona | 600000 | 1 | suvenir |
+Futbolka tikish xizmati | buyurtmachi materialidan | dona | 4000 | 2000 | xizmatlar |
+Kitoblar uchun javon | | dona | 900000 | 5 | talim-mebeli |

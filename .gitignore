@@ -1,0 +1,8 @@
+.env
+backend/.venv
+backend/db.sqlite3
+backend/media
+backend/staticfiles
+backend/credentials.xlsx
+**/__pycache__
+data/loginlar.xlsx
