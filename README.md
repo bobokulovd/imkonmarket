@@ -74,7 +74,7 @@ data/      Excel'dan tozalangan manba (products.txt, sellers.tsv, names_i18n.tsv
 ## Dokploy'ga deploy
 
 1. Dokploy → **Create Service → Compose**. Provider: GitHub, repo `bobokulovd/imkonmarket`, branch `main`, Compose path `./docker-compose.yml`.
-2. **Environment** bo'limiga `.env.example` dagi qiymatlarni kiriting. Kamida `SITE_URL`, `POSTGRES_PASSWORD` va `DJANGO_SECRET_KEY` kerak. Marketplace integratsiyasi uchun `MARKETPLACE_ENC_KEYS` ham kerak. Compose'da 4 ta servis ishlaydi: `db`, `backend`, `worker`, `web`. `SEED_PASSWORDS` qatori `loginlar.xlsx` dagi parollarni beradi (u alohida yuboriladi, repoga qo'yilmaydi).
+2. **Environment** bo'limiga `.env.example` dagi qiymatlarni kiriting. Kamida `SITE_URL`, `POSTGRES_PASSWORD` va `DJANGO_SECRET_KEY` kerak. Marketplace integratsiyasi uchun `MARKETPLACE_ENC_KEYS` ham kerak. Compose'da 4 ta servis ishlaydi: `db`, `imkon-backend`, `imkon-worker`, `web`. `SEED_PASSWORDS` qatori `loginlar.xlsx` dagi parollarni beradi (u alohida yuboriladi, repoga qo'yilmaydi).
 3. **Domains**: service `web`, port `3000`, masalan `imkon-market.uz`, HTTPS (Let's Encrypt). Bitta domen yetadi: `/api`, `/admin`, `/media` va shartnoma PDF'lari Next.js orqali backendga o'tadi.
 4. **Deploy.** Birinchi ishga tushishda migratsiya o'tadi, 357 mahsulot va 40 ta muassasa logini yaratiladi. Keyingi deploylarda baza o'zgarmaydi.
 

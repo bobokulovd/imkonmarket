@@ -30,6 +30,8 @@ x-backend-env: &backend-env
   MP_ORDERS_INTERVAL: ${MP_ORDERS_INTERVAL:-300}
   MP_STOCK_INTERVAL: ${MP_STOCK_INTERVAL:-600}
 
+# Servis nomlari noyob (imkon-*): Dokploy'da boshqa loyihalar ham umumiy dokploy-network'da,
+# "backend" kabi umumiy nom boshqa loyiha konteyneriga ulanib qolishi mumkin.
 services:
   db:
     image: postgres:16-alpine
@@ -46,7 +48,7 @@ services:
       timeout: 5s
       retries: 20
 
-  backend:
+  imkon-backend:
     build: ./backend
     restart: unless-stopped
     environment:
@@ -60,7 +62,7 @@ services:
       - "8000"
 
   # Marketplace fon vazifalari: kartochka joylash, narx/qoldiq sinxroni, buyurtmalarni tortish (Celery o'rniga — baza navbati)
-  worker:
+  imkon-worker:
     build: ./backend
     restart: unless-stopped
     command: ["python", "manage.py", "run_worker"]
@@ -71,17 +73,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      backend:
+      imkon-backend:
         condition: service_started
 
   web:
     build:
       context: ./web
       args:
-        BACKEND_URL: http://backend:8000
+        BACKEND_URL: http://imkon-backend:8000
     restart: unless-stopped
     depends_on:
-      - backend
+      - imkon-backend
     expose:
       - "3000"
 

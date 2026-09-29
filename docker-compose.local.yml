@@ -1,6 +1,6 @@
 # Lokal sinov uchun portlar: docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
 services:
-  backend:
+  imkon-backend:
     ports: ["8000:8000"]
   web:
     ports: ["3000:3000"]
