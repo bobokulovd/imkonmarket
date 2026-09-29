@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import {
   Bed, Blocks, BrickWall, DoorOpen, Gift, Hammer, Loader2, Minus, Package, Plus, School, Shield, Shirt, Sofa,
-  ShoppingBasket, Target, Trees, Wrench, X,
+  ShoppingBasket, Sparkles, Target, Trees, Wrench, X,
 } from "lucide-react";
 import { useEffect } from "react";
 
@@ -145,6 +145,15 @@ export function Modal({ open, onClose, title, children, wide }: { open: boolean;
         <div className="overflow-y-auto p-5">{children}</div>
       </div>
     </div>
+  );
+}
+
+/** AI yaratgan namunaviy rasm belgisi — haqiqiy surat yuklanguncha ko'rinadi. */
+export function SampleBadge({ label, hint, className }: { label: string; hint?: string; className?: string }) {
+  return (
+    <span title={hint} className={clsx("inline-flex items-center gap-1 rounded-md bg-ink-900/60 backdrop-blur px-1.5 py-0.5 text-[10px] font-semibold text-white pointer-events-auto", className)}>
+      <Sparkles className="w-3 h-3" />{label}
+    </span>
   );
 }
 

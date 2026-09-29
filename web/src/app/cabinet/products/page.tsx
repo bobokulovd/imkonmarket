@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { Eye, EyeOff, ImagePlus, Pencil, Plus, Search } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useMe } from "@/components/CabinetShell";
+import BulkImages from "@/components/BulkImages";
 import { Badge, Button, Empty, Field, Input, Modal, ProductImage, Select, Spinner, Textarea, Toast } from "@/components/ui";
 import { api, auth, API_URL, errText, qs, ApiError } from "@/lib/api";
 import { LANGS, useApp } from "@/lib/store";
@@ -139,13 +140,15 @@ export default function ProductsPage() {
   const [data, setData] = useState<Paged<SellerProduct> | null>(null);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("");
+  const [img, setImg] = useState("");
+  const [bulk, setBulk] = useState(false);
   const [page, setPage] = useState(1);
   const [edit, setEdit] = useState<(Form & { image_url?: string | null }) | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
   const load = useCallback(() => {
-    api<Paged<SellerProduct>>(`/seller/products/${qs({ q, category: cat, page, page_size: 50 })}`, { authed: true }).then(setData).catch(() => {});
-  }, [q, cat, page]);
+    api<Paged<SellerProduct>>(`/seller/products/${qs({ q, category: cat, image: img, page, page_size: 50 })}`, { authed: true }).then(setData).catch(() => {});
+  }, [q, cat, img, page]);
   useEffect(() => { const id = setTimeout(load, 250); return () => clearTimeout(id); }, [load]);
 
   const openEdit = (pr: SellerProduct) => setEdit({
@@ -163,7 +166,10 @@ export default function ProductsPage() {
     <div>
       <div className="flex flex-wrap gap-3 items-center justify-between">
         <h1 className="text-2xl font-extrabold">{t("my_products")} {data && <span className="text-ink-500 text-lg">· {data.count}</span>}</h1>
-        <Button onClick={() => setEdit(emptyForm(meta?.categories[0]?.slug || "mebel"))}><Plus className="w-4 h-4" /> {t("add_product")}</Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => setBulk(true)}><ImagePlus className="w-4 h-4" /> {t("bulk_images")}</Button>
+          <Button onClick={() => setEdit(emptyForm(meta?.categories[0]?.slug || "mebel"))}><Plus className="w-4 h-4" /> {t("add_product")}</Button>
+        </div>
       </div>
       <div className="flex flex-wrap gap-2 mt-4">
         <div className="relative flex-1 min-w-[220px]">
@@ -173,6 +179,10 @@ export default function ProductsPage() {
         <Select value={cat} onChange={(e) => { setCat(e.target.value); setPage(1); }} className="w-auto">
           <option value="">{t("all_categories")}</option>
           {meta?.categories.map((c) => <option key={c.slug} value={c.slug}>{p(c.name)}</option>)}
+        </Select>
+        <Select value={img} onChange={(e) => { setImg(e.target.value); setPage(1); }} className="!w-auto">
+          <option value="">{t("img_filter")}: {t("all")}</option>
+          <option value="none">{t("img_none")}</option><option value="sample">{t("img_sample")}</option><option value="real">{t("img_real")}</option>
         </Select>
       </div>
       <div className="card mt-4 overflow-hidden">
@@ -187,7 +197,8 @@ export default function ProductsPage() {
                   <tr key={pr.id} className={clsx(!pr.is_active && "opacity-50")}>
                     <td className="px-4 py-2.5">
                       <div className="flex items-center gap-3">
-                        <div className="w-11 h-11 rounded-lg overflow-hidden shrink-0"><ProductImage src={pr.image_url} category={pr.category} icon={meta?.categories.find((c) => c.slug === pr.category)?.icon} /></div>
+                        <div className="w-11 h-11 rounded-lg overflow-hidden shrink-0 relative"><ProductImage src={pr.image_url} category={pr.category} icon={meta?.categories.find((c) => c.slug === pr.category)?.icon} />
+                          {pr.image_url && pr.image_is_sample && <span title={t("sample_image_hint")} className="absolute bottom-0 inset-x-0 bg-ink-900/60 text-white text-[8px] text-center font-bold">AI</span>}</div>
                         <div className="min-w-0">
                           <div className="font-medium truncate max-w-[280px]">{p(pr.name)}</div>
                           <div className="text-xs text-ink-500 truncate max-w-[280px]">{p(pr.spec)} · {pr.sku}{me.seller.role === "operator" ? ` · ${p(pr.seller.name)}` : ""}</div>
@@ -220,6 +231,9 @@ export default function ProductsPage() {
       )}
       <Modal open={!!edit} onClose={() => setEdit(null)} wide title={edit?.id ? t("edit") : t("add_product")}>
         {edit && <Editor initial={edit} onClose={() => setEdit(null)} onSaved={() => { setEdit(null); load(); setToast(t("saved")); }} />}
+      </Modal>
+      <Modal open={bulk} onClose={() => setBulk(false)} title={t("bulk_images")}>
+        <BulkImages onDone={() => load()} />
       </Modal>
       <Toast text={toast} onDone={() => setToast(null)} />
     </div>

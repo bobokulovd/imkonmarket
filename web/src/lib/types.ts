@@ -8,7 +8,7 @@ export interface Seller extends SellerShort {
 }
 export interface Product {
   id: number; sku: string; name: I18n; spec: I18n; unit: string; price: string | null; available: number | null;
-  category: string; seller: SellerShort; delivery: boolean; image: string | null; min_order: number;
+  category: string; seller: SellerShort; delivery: boolean; image: string | null; image_is_sample?: boolean; min_order: number;
   lead_days: number; sold: number; address: I18n;
   description?: I18n; daily_capacity?: number | null; views?: number;
   stock?: number | null; reserved?: number;

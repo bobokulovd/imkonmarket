@@ -57,6 +57,11 @@ API: `/api/mp/meta|accounts|listings|orders|logs|jobs|product-info|categories|ma
 
 Kalitni almashtirish tartibi: `MARKETPLACE_ENC_KEYS=<yangi>,<eski>` → `python manage.py mp_rotate_keys` → eski kalitni olib tashlang. **Kalit yo'qolsa, barcha muassasalar API kalitlarini qayta kiritishi kerak bo'ladi.**
 
+## Mahsulot rasmlari
+
+- **Namunaviy (AI) rasmlar.** `backend/market/seed/images/manifest.json` da 242 ta noyob mahsulot uchun prompt bor; bir xil nomli mahsulotlar bitta rasmni ulashadi. Rasmlar `data/gen_images.py` (OpenAI API) yoki `data/split_grid.py` bilan yaratiladi (bitta AI rasmda 3×3 to'r → 9 ta rasm) va `<key>.webp` nomi bilan saqlanadi. Konteyner har safar ishga tushganda `load_sample_images` rasmsiz mahsulotlarga shu rasmlarni qo'yadi. Saytda va ilovada bunday rasmda «Namunaviy rasm» belgisi chiqadi. Marketplace'larga namunaviy rasm **yuborilmaydi**.
+- **Haqiqiy suratlar.** Muassasa kabinetida «Mahsulotlarim → Rasmlarni ommaviy yuklash» bo'limi bor, u yerga bir nechta fayl yoki ZIP yuklanadi. Fayl nomi mahsulot SKU'si bo'lishi kerak, masalan `MK-49-001.jpg`. Haqiqiy surat namunaviy rasmni almashtiradi va belgi yo'qoladi. Serverdan ham yuklash mumkin: `python manage.py import_images photos.zip`.
+
 ## Tuzilma
 
 ```

@@ -147,7 +147,10 @@ class ProductCard extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductScreen(id: p['id'] as int))),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          AspectRatio(aspectRatio: 4 / 3, child: ProductImage(src: p['image'], category: p['category'])),
+          AspectRatio(aspectRatio: 4 / 3, child: Stack(fit: StackFit.expand, children: [
+            ProductImage(src: p['image'], category: p['category']),
+            if (p['image'] != null && p['image_is_sample'] == true) const Positioned(right: 6, bottom: 6, child: SampleBadge()),
+          ])),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -333,4 +336,26 @@ class BrandTitle extends StatelessWidget {
           TextSpan(text: 'Market', style: TextStyle(color: light ? accent : brand)),
         ]), style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 20)),
       ]);
+}
+
+
+/// AI yaratgan namunaviy rasm belgisi (haqiqiy surat yuklanguncha).
+class SampleBadge extends StatelessWidget {
+  const SampleBadge({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final app = context.watch<AppState>();
+    return Tooltip(
+      message: app.t('sample_image_hint'),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+        decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.55), borderRadius: BorderRadius.circular(6)),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          const Icon(Icons.auto_awesome, size: 11, color: Colors.white),
+          const SizedBox(width: 3),
+          Text(app.t('sample_image'), style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)),
+        ]),
+      ),
+    );
+  }
 }

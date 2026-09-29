@@ -368,5 +368,18 @@
  "mp_rate_now": "Ámeldegi kurs",
  "mp_remove_listing": "ImkonMarket'ten ajıratıw",
  "mp_settings": "Sazlawlar",
- "mp_wb_token": "Wildberries: bult platforma ushın «Servis tokeni» kerek — WB qaǵıydası boyınsha jeke (Personal) tokendi úshinshi tárep xızmetine beriwge bolmaydı."
+ "mp_wb_token": "Wildberries: bult platforma ushın «Servis tokeni» kerek — WB qaǵıydası boyınsha jeke (Personal) tokendi úshinshi tárep xızmetine beriwge bolmaydı.",
+ "sample_image": "Úlgi súwret",
+ "sample_image_hint": "Bul súwret jasalma intellekt járdeminde jaratılǵan úlgi. Haqıyqıy ónim basqasha bolıwı múmkin.",
+ "bulk_images": "Súwretlerdi kóplep júklew",
+ "bulk_images_hint": "Fayl atı ónim artikulı (SKU) bolsın, mısalı MK-49-001.jpg. Bir neshe súwretti yamasa ZIP arxivti tańlań — hár biri óz ónimine baylanadı.",
+ "bulk_images_drop": "Súwretlerdi usı jerge taslań yamasa tańlań",
+ "bulk_matched": "Baylandı",
+ "bulk_unmatched": "SKU tabılmadı",
+ "clear": "Tazalaw",
+ "upload": "Júklew",
+ "img_filter": "Súwret",
+ "img_none": "Súwretsiz",
+ "img_sample": "Úlgi (AI)",
+ "img_real": "Haqıyqıy súwret"
 }

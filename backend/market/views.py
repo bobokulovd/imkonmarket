@@ -344,6 +344,13 @@ class SellerProductViewSet(viewsets.ModelViewSet):
         qs = product_queryset(params, base=base)
         if params.get("active") == "0":
             qs = qs.filter(is_active=False)
+        img = params.get("image")
+        if img == "none":
+            qs = qs.filter(Q(image="") | Q(image__isnull=True))
+        elif img == "sample":
+            qs = qs.filter(image_is_sample=True).exclude(image="")
+        elif img == "real":
+            qs = qs.filter(image_is_sample=False).exclude(image="").exclude(image__isnull=True)
         return qs if params.get("ordering") else qs.order_by("-updated_at")
 
     def perform_create(self, ser):
@@ -352,6 +359,18 @@ class SellerProductViewSet(viewsets.ModelViewSet):
             s = get_object_or_404(Seller, code=self.request.data["seller"])
         addr = ser.validated_data.get("address") or s.district_i18n
         ser.save(seller=s, address=addr)
+
+    @action(detail=False, methods=["post"], url_path="bulk-images", parser_classes=[MultiPartParser])
+    def bulk_images(self, request):
+        """Ko'p rasmni bir yo'la yuklash (yoki ZIP). Fayl nomi = SKU, masalan MK-49-001.jpg."""
+        from .images import import_files
+        s = seller_of(request.user)
+        qs = Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)
+        files = request.FILES.getlist("files")
+        if not files:
+            return Response({"files": "required"}, status=400)
+        res = import_files(((f.name, f.read()) for f in files), qs)
+        return Response(res)
 
     @action(detail=True, methods=["post"])
     def stock(self, request, pk=None):

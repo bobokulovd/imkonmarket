@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Price, ProductGrid, StockLine } from "@/components/ProductCard";
-import { Button, Empty, ProductImage, Qty, Spinner } from "@/components/ui";
+import { Button, Empty, ProductImage, Qty, SampleBadge, Spinner } from "@/components/ui";
 import { api } from "@/lib/api";
 import { useApp, useCart } from "@/lib/store";
 import type { ProductDetail } from "@/lib/types";
@@ -44,8 +44,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <Link href={`/catalog?category=${d.category}`} className="hover:text-ink-900">{p(cat?.name)}</Link>
       </nav>
       <div className="grid lg:grid-cols-[1.1fr_1fr] gap-6 lg:gap-10">
-        <div className="card overflow-hidden aspect-[4/3] lg:aspect-square">
+        <div className="card overflow-hidden aspect-[4/3] lg:aspect-square relative">
           <ProductImage src={d.image} category={d.category} icon={cat?.icon} alt={p(d.name)} />
+          {d.image && d.image_is_sample && <SampleBadge label={t("sample_image")} hint={t("sample_image_hint")} className="absolute right-3 bottom-3 text-xs" />}
         </div>
         <div>
           <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight">{p(d.name)}</h1>

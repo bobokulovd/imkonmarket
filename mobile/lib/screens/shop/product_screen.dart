@@ -62,7 +62,10 @@ class _ProductScreenState extends State<ProductScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(app.p(p['name']), maxLines: 1, overflow: TextOverflow.ellipsis)),
       body: ListView(padding: EdgeInsets.zero, children: [
-        AspectRatio(aspectRatio: 4 / 3, child: ProductImage(src: p['image'], category: p['category'], iconSize: 72)),
+        AspectRatio(aspectRatio: 4 / 3, child: Stack(fit: StackFit.expand, children: [
+          ProductImage(src: p['image'], category: p['category'], iconSize: 72),
+          if (p['image'] != null && p['image_is_sample'] == true) const Positioned(right: 10, bottom: 10, child: SampleBadge()),
+        ])),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

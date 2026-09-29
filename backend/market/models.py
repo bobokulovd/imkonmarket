@@ -110,6 +110,8 @@ class Product(models.Model):
     delivery = models.BooleanField("Yetkazib berish bor", default=True)
     address = models.JSONField("Ishlab chiqarilgan manzil", default=i18n_default, blank=True)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
+    image_is_sample = models.BooleanField("Namunaviy (AI) rasm", default=False,
+                                          help_text="Haqiqiy surat yuklanganda avtomatik o'chadi")
     note = models.CharField("Ichki izoh", max_length=255, blank=True)
     is_active = models.BooleanField(default=True)
     search = models.TextField(blank=True, editable=False)

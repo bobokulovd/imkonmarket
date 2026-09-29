@@ -4,7 +4,7 @@ import { Check, MapPin, ShoppingCart, Truck } from "lucide-react";
 import Link from "next/link";
 import { useApp, useCart } from "@/lib/store";
 import type { Product } from "@/lib/types";
-import { ProductImage } from "./ui";
+import { ProductImage, SampleBadge } from "./ui";
 
 export function StockLine({ p, className }: { p: Product; className?: string }) {
   const { t, unit } = useApp();
@@ -40,6 +40,7 @@ export default function ProductCard({ p }: { p: Product }) {
     <div className="group bg-white rounded-2xl border border-ink-100 shadow-card hover:shadow-pop hover:-translate-y-0.5 transition flex flex-col overflow-hidden">
       <Link href={`/product/${p.id}`} className="block aspect-[4/3] relative">
         <ProductImage src={p.image} category={p.category} icon={icon} alt={pick(p.name)} />
+        {p.image && p.image_is_sample && <SampleBadge label={t("sample_image")} hint={t("sample_image_hint")} className="absolute right-2 bottom-2" />}
         {p.delivery && (
           <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-lg bg-white/90 backdrop-blur px-2 py-1 text-[11px] font-semibold text-ink-700">
             <Truck className="w-3.5 h-3.5" /> {t("delivery")}

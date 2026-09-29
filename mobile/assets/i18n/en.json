@@ -368,5 +368,18 @@
  "mp_rate_now": "Current rate",
  "mp_remove_listing": "Unlink from ImkonMarket",
  "mp_settings": "Settings",
- "mp_wb_token": "Wildberries: a cloud platform needs a Service token — WB rules forbid sharing a Personal token with third-party services."
+ "mp_wb_token": "Wildberries: a cloud platform needs a Service token — WB rules forbid sharing a Personal token with third-party services.",
+ "sample_image": "Sample image",
+ "sample_image_hint": "AI-generated sample image. The actual product may look different.",
+ "bulk_images": "Bulk photo upload",
+ "bulk_images_hint": "Name each file by the product SKU, e.g. MK-49-001.jpg. Select several photos or a ZIP — each is matched to its product and replaces the sample image.",
+ "bulk_images_drop": "Drop photos here or browse",
+ "bulk_matched": "Matched",
+ "bulk_unmatched": "SKU not found",
+ "clear": "Clear",
+ "upload": "Upload",
+ "img_filter": "Photo",
+ "img_none": "No photo",
+ "img_sample": "Sample (AI)",
+ "img_real": "Real photo"
 }

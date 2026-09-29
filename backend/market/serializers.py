@@ -69,7 +69,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ["id", "sku", "name", "spec", "unit", "price", "available", "category", "seller", "delivery",
-                  "image", "min_order", "lead_days", "sold", "address"]
+                  "image", "image_is_sample", "min_order", "lead_days", "sold", "address"]
 
     def get_image(self, o):
         return abs_url(self.context.get("request"), o.image)
@@ -96,8 +96,13 @@ class SellerProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ["id", "sku", "name", "spec", "description", "category", "unit", "price", "min_order", "stock",
                   "reserved", "available", "daily_capacity", "lead_days", "delivery", "address", "image",
-                  "image_url", "note", "is_active", "sold", "views", "seller", "updated_at"]
-        read_only_fields = ["sku", "reserved", "sold", "views", "updated_at"]
+                  "image_url", "image_is_sample", "note", "is_active", "sold", "views", "seller", "updated_at"]
+        read_only_fields = ["sku", "reserved", "sold", "views", "updated_at", "image_is_sample"]
+
+    def update(self, instance, data):
+        if data.get("image"):  # muassasa haqiqiy surat yukladi
+            instance.image_is_sample = False
+        return super().update(instance, data)
         extra_kwargs = {"image": {"write_only": True, "required": False}}
 
     def get_image_url(self, o):

@@ -95,9 +95,11 @@ def build_payload(listing: L):
         price = price_for(acc, p)
     except currency.RateUnavailable as e:
         errors.append(str(e))
-    images = [public_media(p.image.url)] if p.image else []
-    if not images:
+    images = [public_media(p.image.url)] if p.image and not p.image_is_sample else []
+    if not p.image:
         errors.append("Mahsulot rasmi yo'q")
+    elif p.image_is_sample:
+        errors.append("Namunaviy (AI) rasm marketpleysga yuborilmaydi — mahsulotning haqiqiy suratini yuklang")
     mapping = CategoryMapping.objects.filter(category=p.category, marketplace=acc.marketplace).first()
     if not mapping:
         errors.append(f"«{pick(p.category.name, 'uz')}» kategoriyasi {acc.get_marketplace_display()} kategoriyasiga moslanmagan")
@@ -370,7 +372,7 @@ def h_poll_status(job):
                 activated.append(li.pk)
             # WB: rasm kartochka yaratilgandan keyin (nmID bilan) yuklanadi
             if acc.marketplace == "wb" and li.external_id and not (li.external_meta or {}).get("photos") \
-                    and not (li.external_meta or {}).get("media_sent") and li.product.image:
+                    and not (li.external_meta or {}).get("media_sent") and li.product.image and not li.product.image_is_sample:
                 try:
                     client.upload_media(li.external_id, [public_media(li.product.image.url)])
                     li.external_meta = {**li.external_meta, "media_sent": True}

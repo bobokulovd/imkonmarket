@@ -174,3 +174,53 @@ class FlowTest(TestCase):
         contract.refresh_from_db()
         self.assertEqual(contract.status, "paid")
         self.assertEqual(rpc("CheckTransaction", {"id": "abc"})["result"]["state"], 2)
+
+    # ---- Namunaviy (AI) rasmlar va ommaviy yuklash
+
+    def _png(self, color="red"):
+        import io
+
+        from PIL import Image
+        b = io.BytesIO()
+        Image.new("RGB", (40, 30), color).save(b, "PNG")
+        return b.getvalue()
+
+    def test_samples_bulk_upload_and_badge(self):
+        import io
+        import json
+        import tempfile
+        import zipfile
+        from pathlib import Path
+        from unittest import mock
+
+        from django.core.files.uploadedfile import SimpleUploadedFile
+
+        from market import images
+        tmp = Path(tempfile.mkdtemp())
+        (tmp / "manifest.json").write_text(json.dumps({"items": [{"key": "choyshab", "skus": ["MK-49-001", "MK-49-005"]}]}))
+        (tmp / "choyshab.png").write_bytes(self._png())
+        with mock.patch.object(images, "SEED_DIR", tmp):
+            self.assertEqual(images.load_samples(), 2)
+            self.assertEqual(images.load_samples(), 0)  # qayta ishga tushirilsa tegmaydi
+        p = Product.objects.get(sku="MK-49-001")
+        self.assertTrue(p.image_is_sample and p.image.name.endswith(".webp"))
+        r = APIClient().get(f"/api/products/{p.id}/").json()
+        self.assertTrue(r["image_is_sample"])
+        # muassasa haqiqiy suratlarni ommaviy yuklaydi (ZIP + oddiy fayl); boshqa muassasa SKU'si — bog'lanmaydi
+        z = io.BytesIO()
+        with zipfile.ZipFile(z, "w") as zf:
+            zf.writestr("photos/MK-49-005.jpg", self._png("blue"))
+            zf.writestr("__MACOSX/._x.jpg", b"x")
+        c = self.login("mk49")
+        r = c.post("/api/seller/products/bulk-images/", {"files": [
+            SimpleUploadedFile("mk-49-001 (2).PNG", self._png("green")),
+            SimpleUploadedFile("arxiv.zip", z.getvalue()),
+            SimpleUploadedFile("MK-44-005.jpg", self._png()),
+        ]}, format="multipart")
+        self.assertEqual(r.status_code, 200, r.content)
+        self.assertEqual(sorted(m["sku"] for m in r.json()["matched"]), ["MK-49-001", "MK-49-005"])
+        self.assertEqual(r.json()["unmatched"], ["MK-44-005.jpg"])
+        p.refresh_from_db()
+        self.assertFalse(p.image_is_sample)
+        self.assertEqual(c.get("/api/seller/products/?image=sample").json()["count"], 0)
+        self.assertGreater(c.get("/api/seller/products/?image=none").json()["count"], 0)

@@ -1,0 +1,2540 @@
+{
+ "style": "Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+ "items": [
+  {
+   "key": "erkaklar-maxsus-poyabzali-botinka-50e749",
+   "name_uz": "Erkaklar maxsus poyabzali (botinka)",
+   "name_en": "Men's work boots",
+   "category": "kiyim",
+   "prompt": "Men's work boots (Мужская специальная обувь (ботинки)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-029",
+    "JIEK-04-031"
+   ]
+  },
+  {
+   "key": "ish-botinkasi-7f4d36",
+   "name_uz": "Ish botinkasi",
+   "name_en": "Work boots",
+   "category": "kiyim",
+   "prompt": "Work boots (Ботинки рабочие), s/k. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-007"
+   ]
+  },
+  {
+   "key": "ish-kostyumi-0ba3a7",
+   "name_uz": "Ish kostyumi",
+   "name_en": "Work suit",
+   "category": "kiyim",
+   "prompt": "Work suit (Костюм рабочий), s/k. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-006"
+   ]
+  },
+  {
+   "key": "ish-polubotinkasi-35cda8",
+   "name_uz": "Ish polubotinkasi",
+   "name_en": "Work shoes",
+   "category": "kiyim",
+   "prompt": "Work shoes (Полуботинки рабочие), s/k. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-009"
+   ]
+  },
+  {
+   "key": "krossovka-13a67c",
+   "name_uz": "Krossovka",
+   "name_en": "Sneakers",
+   "category": "kiyim",
+   "prompt": "Sneakers (Кроссовки). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-065"
+   ]
+  },
+  {
+   "key": "maxsus-kiyimlar-625492",
+   "name_uz": "Maxsus kiyimlar",
+   "name_en": "Workwear",
+   "category": "kiyim",
+   "prompt": "Workwear (Спецодежда), various materials, by size (UZS 350,000 – 750,000). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-010"
+   ]
+  },
+  {
+   "key": "mayka-79cd4f",
+   "name_uz": "Mayka",
+   "name_en": "Tank top",
+   "category": "kiyim",
+   "prompt": "Tank top (Майка). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-067"
+   ]
+  },
+  {
+   "key": "sport-poyabzali-krossovka-erkak-va-ayoll-96c4c9",
+   "name_uz": "Sport poyabzali — krossovka (erkak va ayollar)",
+   "name_en": "Sports shoes — sneakers (men's and women's)",
+   "category": "kiyim",
+   "prompt": "Sports shoes — sneakers (men's and women's) (Спортивная обувь — кроссовки (мужские и женские)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-028",
+    "JIEK-04-030"
+   ]
+  },
+  {
+   "key": "tufli-7b7dfc",
+   "name_uz": "Tufli",
+   "name_en": "Shoes",
+   "category": "kiyim",
+   "prompt": "Shoes (Туфли), s/k. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-008"
+   ]
+  },
+  {
+   "key": "yozgi-ichki-kiyim-f46a4a",
+   "name_uz": "Yozgi ichki kiyim",
+   "name_en": "Summer underwear",
+   "category": "kiyim",
+   "prompt": "Summer underwear (Бельё летнее нательное). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-066"
+   ]
+  },
+  {
+   "key": "aylana-stol-f122c7",
+   "name_uz": "Aylana stol",
+   "name_en": "Round table",
+   "category": "mebel",
+   "prompt": "Round table (Круглый стол), 1.80×1.40×0.80 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-006"
+   ]
+  },
+  {
+   "key": "bir-tumbali-ofis-stoli-788234",
+   "name_uz": "Bir tumbali ofis stoli",
+   "name_en": "Office desk with one pedestal",
+   "category": "mebel",
+   "prompt": "Office desk with one pedestal (Офисный стол с одной тумбой), 0.6×0.75×1.6 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-034"
+   ]
+  },
+  {
+   "key": "burchak-divan-56fff7",
+   "name_uz": "Burchak divan",
+   "name_en": "Corner sofa",
+   "category": "mebel",
+   "prompt": "Corner sofa (Угловой диван), 4500×800×400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-006"
+   ]
+  },
+  {
+   "key": "burchak-mebel-af2f97",
+   "name_uz": "Burchak mebel",
+   "name_en": "Corner furniture set",
+   "category": "mebel",
+   "prompt": "Corner furniture set (Угловая мебель), 2.30×1.80×0.90 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-009"
+   ]
+  },
+  {
+   "key": "choy-tumbasi-17924f",
+   "name_uz": "Choy tumbasi",
+   "name_en": "Tea cabinet",
+   "category": "mebel",
+   "prompt": "Tea cabinet (Чайная тумба), 1200×600×450 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-021"
+   ]
+  },
+  {
+   "key": "dahliz-shkafi-prixojka-9e988e",
+   "name_uz": "Dahliz shkafi (prixojka)",
+   "name_en": "Hallway wardrobe",
+   "category": "mebel",
+   "prompt": "Hallway wardrobe (Шкаф для прихожей), 1400×1600×400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-024"
+   ]
+  },
+  {
+   "key": "divan-standart-ac0093",
+   "name_uz": "Divan standart",
+   "name_en": "Standard sofa",
+   "category": "mebel",
+   "prompt": "Standard sofa (Диван стандартный), 2000×800 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-005"
+   ]
+  },
+  {
+   "key": "garderob-d53e73",
+   "name_uz": "Garderob",
+   "name_en": "Wardrobe",
+   "category": "mebel",
+   "prompt": "Wardrobe (Гардероб), 0.5×1.35×1.8 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-047"
+   ]
+  },
+  {
+   "key": "gildirakli-tumba-ebc445",
+   "name_uz": "G'ildirakli tumba",
+   "name_en": "Mobile pedestal (on wheels)",
+   "category": "mebel",
+   "prompt": "Mobile pedestal (on wheels) (Тумба выкатная), 500×450×450 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-022"
+   ]
+  },
+  {
+   "key": "ikki-qavatli-krovat-a8ce64",
+   "name_uz": "Ikki qavatli krovat",
+   "name_en": "Bunk bed",
+   "category": "mebel",
+   "prompt": "Bunk bed (Двухъярусная кровать). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-015",
+    "JIEK-04-017"
+   ]
+  },
+  {
+   "key": "ikki-tumbali-ofis-stoli-e43c4a",
+   "name_uz": "Ikki tumbali ofis stoli",
+   "name_en": "Office desk with two pedestals",
+   "category": "mebel",
+   "prompt": "Office desk with two pedestals (Офисный стол с двумя тумбами), 0.6×0.75×1.6 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-037"
+   ]
+  },
+  {
+   "key": "ish-stoli-c7a706",
+   "name_uz": "Ish stoli",
+   "name_en": "Work desk",
+   "category": "mebel",
+   "prompt": "Work desk (Стол рабочий), 1200×750×750 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-014"
+   ]
+  },
+  {
+   "key": "javon-45f08b",
+   "name_uz": "Javon",
+   "name_en": "Shelving unit",
+   "category": "mebel",
+   "prompt": "Shelving unit (Стеллаж). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-004"
+   ]
+  },
+  {
+   "key": "jurnal-stoli-97818f",
+   "name_uz": "Jurnal stoli",
+   "name_en": "Coffee table",
+   "category": "mebel",
+   "prompt": "Coffee table (Журнальный стол), 1200×700×600 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-016",
+    "MK-29-007",
+    "JIEK-11-014",
+    "JIEK-11-027"
+   ]
+  },
+  {
+   "key": "jurnallar-uchun-javon-02ac6d",
+   "name_uz": "Jurnallar uchun javon",
+   "name_en": "Magazine shelf",
+   "category": "mebel",
+   "prompt": "Magazine shelf (Стеллаж для журналов). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-003"
+   ]
+  },
+  {
+   "key": "kiyim-javoni-434fbf",
+   "name_uz": "Kiyim javoni",
+   "name_en": "Clothes wardrobe",
+   "category": "mebel",
+   "prompt": "Clothes wardrobe (Шкаф для одежды), 0.8×0.4×1.8 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-040",
+    "MK-29-032",
+    "JIEK-02-024",
+    "JIEK-04-026",
+    "JIEK-11-006"
+   ]
+  },
+  {
+   "key": "kiyim-shkafi-58ccd3",
+   "name_uz": "Kiyim shkafi",
+   "name_en": "Clothes wardrobe",
+   "category": "mebel",
+   "prompt": "Clothes wardrobe (Шкаф вещевой), 2000×800×400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-010"
+   ]
+  },
+  {
+   "key": "kiyim-va-hujjatlar-uchun-kombinatsiyalan-d6c48b",
+   "name_uz": "Kiyim va hujjatlar uchun kombinatsiyalangan javon",
+   "name_en": "Combined wardrobe for clothes and documents",
+   "category": "mebel",
+   "prompt": "Combined wardrobe for clothes and documents (Комбинированный шкаф для одежды и документов), 1800×1500×500 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-018",
+    "JIEK-04-020"
+   ]
+  },
+  {
+   "key": "kombinatsiyalangan-shkaf-071ff5",
+   "name_uz": "Kombinatsiyalangan shkaf",
+   "name_en": "Combined wardrobe",
+   "category": "mebel",
+   "prompt": "Combined wardrobe (Шкаф комбинированный), 2500×1200×600 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-012"
+   ]
+  },
+  {
+   "key": "kompyuter-stoli-32d13d",
+   "name_uz": "Kompyuter stoli",
+   "name_en": "Computer desk",
+   "category": "mebel",
+   "prompt": "Computer desk (Компьютерный стол), 800×800×750 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-023",
+    "JIEK-04-025"
+   ]
+  },
+  {
+   "key": "kompyuter-stoli-va-stuli-0bfbea",
+   "name_uz": "Kompyuter stoli va stuli",
+   "name_en": "Computer desk and chair",
+   "category": "mebel",
+   "prompt": "Computer desk and chair (Компьютерный стол и стул), 0.6×0.75×0.8 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-038"
+   ]
+  },
+  {
+   "key": "kompyuter-stoli-va-stuli-katta-d4ca91",
+   "name_uz": "Kompyuter stoli va stuli (katta)",
+   "name_en": "Computer desk and chair (large)",
+   "category": "mebel",
+   "prompt": "Computer desk and chair (large) (Компьютерный стол и стул (большой)), 0.7×1.6×2.4 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-039"
+   ]
+  },
+  {
+   "key": "kreslo-krovat-fd37d4",
+   "name_uz": "Kreslo-krovat",
+   "name_en": "Armchair bed",
+   "category": "mebel",
+   "prompt": "Armchair bed (Кресло-кровать), various sizes. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-007"
+   ]
+  },
+  {
+   "key": "krovat-2b13b0",
+   "name_uz": "Krovat",
+   "name_en": "Bed",
+   "category": "mebel",
+   "prompt": "Bed (Кровать), 2.10×0.90×0.45 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-020"
+   ]
+  },
+  {
+   "key": "majlis-stoli-b9860e",
+   "name_uz": "Majlis stoli",
+   "name_en": "Conference table",
+   "category": "mebel",
+   "prompt": "Conference table (Стол для заседаний), 0.7×0.75×2.2 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-045"
+   ]
+  },
+  {
+   "key": "matras-porolonli-92d928",
+   "name_uz": "Matras porolonli",
+   "name_en": "Foam mattress",
+   "category": "mebel",
+   "prompt": "Foam mattress (Матрас поролоновый), 2100×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-002"
+   ]
+  },
+  {
+   "key": "matras-porolonli-ikki-kishilik-99af44",
+   "name_uz": "Matras porolonli (ikki kishilik)",
+   "name_en": "Foam mattress (double)",
+   "category": "mebel",
+   "prompt": "Foam mattress (double) (Матрас поролоновый (двуспальный)), 2100×1800 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-004"
+   ]
+  },
+  {
+   "key": "matras-yarim-ortopedik-b6ef2d",
+   "name_uz": "Matras yarim ortopedik",
+   "name_en": "Semi-orthopedic mattress",
+   "category": "mebel",
+   "prompt": "Semi-orthopedic mattress (Матрас полуортопедический), 2100×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-001"
+   ]
+  },
+  {
+   "key": "matras-yarim-ortopedik-ikki-kishilik-591b5a",
+   "name_uz": "Matras yarim ortopedik (ikki kishilik)",
+   "name_en": "Semi-orthopedic mattress (double)",
+   "category": "mebel",
+   "prompt": "Semi-orthopedic mattress (double) (Матрас полуортопедический (двуспальный)), 2100×1800 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-003"
+   ]
+  },
+  {
+   "key": "metall-krovat-941fca",
+   "name_uz": "Metall krovat",
+   "name_en": "Metal bed",
+   "category": "mebel",
+   "prompt": "Metal bed (Кровать металлическая), 2100×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-009"
+   ]
+  },
+  {
+   "key": "ofis-stoli-27270c",
+   "name_uz": "Ofis stoli",
+   "name_en": "Office desk",
+   "category": "mebel",
+   "prompt": "Office desk (Офисный стол), 0.6×0.75×1.6 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-035"
+   ]
+  },
+  {
+   "key": "oshxona-mebel-toplami-7bce47",
+   "name_uz": "Oshxona mebel to'plami",
+   "name_en": "Kitchen furniture set",
+   "category": "mebel",
+   "prompt": "Kitchen furniture set (Кухонный гарнитур), cabinet, table, sink unit. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-017",
+    "JIEK-04-019"
+   ]
+  },
+  {
+   "key": "oshxona-mebeli-toplami-a3555e",
+   "name_uz": "Oshxona mebeli to'plami",
+   "name_en": "Kitchen furniture set",
+   "category": "mebel",
+   "prompt": "Kitchen furniture set (Кухонный набор мебели), 2500×1200×560 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-023"
+   ]
+  },
+  {
+   "key": "podstavka-da03e8",
+   "name_uz": "Podstavka",
+   "name_en": "Stand",
+   "category": "mebel",
+   "prompt": "Stand (Подставка), 1.40×0.70×0.40 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-016",
+    "MK-29-017"
+   ]
+  },
+  {
+   "key": "pristavka-stol-53ad34",
+   "name_uz": "Pristavka stol",
+   "name_en": "Side extension table",
+   "category": "mebel",
+   "prompt": "Side extension table (Стол приставной), 1000×750×750 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-015",
+    "MK-29-010"
+   ]
+  },
+  {
+   "key": "rotang-stol-stul-toplami-5ed8e1",
+   "name_uz": "Rotang stol-stul to'plami",
+   "name_en": "Rattan table and chairs set",
+   "category": "mebel",
+   "prompt": "Rattan table and chairs set (Комплект стол-стулья из ротанга), for 8 people. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-013"
+   ]
+  },
+  {
+   "key": "shkaf-b3177e",
+   "name_uz": "Shkaf",
+   "name_en": "Cabinet",
+   "category": "mebel",
+   "prompt": "Cabinet (Шкаф), various sizes, made to order. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-003",
+    "MK-29-018",
+    "MK-29-019",
+    "MK-29-022",
+    "MK-29-023"
+   ]
+  },
+  {
+   "key": "shkaf-kupe-091cfe",
+   "name_uz": "Shkaf-kupe",
+   "name_en": "Sliding wardrobe",
+   "category": "mebel",
+   "prompt": "Sliding wardrobe (Шкаф-купе), 2500×1200×560 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-011"
+   ]
+  },
+  {
+   "key": "shkaf-stenka-6b7dfe",
+   "name_uz": "Shkaf-stenka",
+   "name_en": "Wall unit",
+   "category": "mebel",
+   "prompt": "Wall unit (Шкаф-стенка), 3000×2000×500 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-013"
+   ]
+  },
+  {
+   "key": "shkaf-ustki-qismi-4455bf",
+   "name_uz": "Shkaf ustki qismi",
+   "name_en": "Cabinet top section",
+   "category": "mebel",
+   "prompt": "Cabinet top section (Антресоль шкафа), 1.60×0.70×0.50 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-014"
+   ]
+  },
+  {
+   "key": "stol-38bb58",
+   "name_uz": "Stol",
+   "name_en": "Table",
+   "category": "mebel",
+   "prompt": "Table (Стол), 1.30×0.80×0.79 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-004",
+    "MK-29-005",
+    "MK-29-011"
+   ]
+  },
+  {
+   "key": "taburetka-7c29cb",
+   "name_uz": "Taburetka",
+   "name_en": "Stool",
+   "category": "mebel",
+   "prompt": "Stool (Табуретка), 400×400×500 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-020"
+   ]
+  },
+  {
+   "key": "telefon-uchun-tumba-fa026d",
+   "name_uz": "Telefon uchun tumba",
+   "name_en": "Telephone stand",
+   "category": "mebel",
+   "prompt": "Telephone stand (Тумба под телефон), 600×500×430 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-018"
+   ]
+  },
+  {
+   "key": "televizor-tagligi-15712c",
+   "name_uz": "Televizor tagligi",
+   "name_en": "TV stand",
+   "category": "mebel",
+   "prompt": "TV stand (Подставка под телевизор), 2000×600×400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-019"
+   ]
+  },
+  {
+   "key": "tumba-1579ce",
+   "name_uz": "Tumba",
+   "name_en": "Pedestal cabinet",
+   "category": "mebel",
+   "prompt": "Pedestal cabinet (Тумба), 450×500×430 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-017",
+    "MK-29-013"
+   ]
+  },
+  {
+   "key": "tumbochka-016d16",
+   "name_uz": "Tumbochka",
+   "name_en": "Bedside cabinet",
+   "category": "mebel",
+   "prompt": "Bedside cabinet (Тумбочка), various sizes, made to order. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-002",
+    "MK-29-008",
+    "MK-29-015"
+   ]
+  },
+  {
+   "key": "ustki-qismi-yigiladigan-stol-ea579e",
+   "name_uz": "Ustki qismi yig'iladigan stol",
+   "name_en": "Table with folding top",
+   "category": "mebel",
+   "prompt": "Table with folding top (Стол со складной столешницей), 900×900×850 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-021",
+    "JIEK-04-023"
+   ]
+  },
+  {
+   "key": "yogoch-krovat-9a9cf4",
+   "name_uz": "Yog'och krovat",
+   "name_en": "Wooden bed",
+   "category": "mebel",
+   "prompt": "Wooden bed (Кровать деревянная), 2100×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-008"
+   ]
+  },
+  {
+   "key": "yogoch-stul-1b80f1",
+   "name_uz": "Yog'och stul",
+   "name_en": "Wooden chair",
+   "category": "mebel",
+   "prompt": "Wooden chair (Деревянный стул). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-014",
+    "JIEK-04-016"
+   ]
+  },
+  {
+   "key": "yumshoq-burchak-mebel-1e464c",
+   "name_uz": "Yumshoq burchak mebel",
+   "name_en": "Soft corner sofa",
+   "category": "mebel",
+   "prompt": "Soft corner sofa (Мягкий угловой диван), 2.30×1.65×0.45 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-021"
+   ]
+  },
+  {
+   "key": "yumshoq-krovat-0dd1b7",
+   "name_uz": "Yumshoq krovat",
+   "name_en": "Upholstered bed",
+   "category": "mebel",
+   "prompt": "Upholstered bed (Мягкая кровать), 1.80×0.75×0.53 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-012"
+   ]
+  },
+  {
+   "key": "yumshoq-orindiq-pufik-1185cf",
+   "name_uz": "Yumshoq o'rindiq (pufik)",
+   "name_en": "Soft pouffe",
+   "category": "mebel",
+   "prompt": "Soft pouffe (Мягкий пуф), 0.45×0.45×0.45 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-033"
+   ]
+  },
+  {
+   "key": "yumshoq-orindiq-pufik-yogoch-karkas-2106d0",
+   "name_uz": "Yumshoq o'rindiq — pufik (yog'och karkas)",
+   "name_en": "Soft pouffe (wooden frame)",
+   "category": "mebel",
+   "prompt": "Soft pouffe (wooden frame) (Мягкий пуф (деревянный каркас)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-027",
+    "JIEK-04-029"
+   ]
+  },
+  {
+   "key": "yumshoq-stul-3e4feb",
+   "name_uz": "Yumshoq stul",
+   "name_en": "Upholstered chair",
+   "category": "mebel",
+   "prompt": "Upholstered chair (Мягкий стул), 0.45×0.5×0.9 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-036"
+   ]
+  },
+  {
+   "key": "chilangar-stoli-37b7b3",
+   "name_uz": "Chilangar stoli",
+   "name_en": "Workbench",
+   "category": "metall",
+   "prompt": "Workbench (Слесарный стол). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-042"
+   ]
+  },
+  {
+   "key": "deko-stol-karkasi-4-kishilik-db777e",
+   "name_uz": "Deko stol karkasi (4 kishilik)",
+   "name_en": "Deco table frame (4-person)",
+   "category": "metall",
+   "prompt": "Deco table frame (4-person) (Каркас стола «Деко» (на 4 персоны)), metal. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-038"
+   ]
+  },
+  {
+   "key": "deko-stol-karkasi-6-kishilik-492696",
+   "name_uz": "Deko stol karkasi (6 kishilik)",
+   "name_en": "Deco table frame (6-person)",
+   "category": "metall",
+   "prompt": "Deco table frame (6-person) (Каркас стола «Деко» (на 6 персон)), metal. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-039"
+   ]
+  },
+  {
+   "key": "deko-stol-karkasi-8-kishilik-472f4b",
+   "name_uz": "Deko stol karkasi (8 kishilik)",
+   "name_en": "Deco table frame (8-person)",
+   "category": "metall",
+   "prompt": "Deco table frame (8-person) (Каркас стола «Деко» (на 8 персон)), metal. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-040"
+   ]
+  },
+  {
+   "key": "deraza-panjarasi-metall-216c5b",
+   "name_uz": "Deraza panjarasi (metall)",
+   "name_en": "Window grille (metal)",
+   "category": "metall",
+   "prompt": "Window grille (metal) (Оконная решётка (металл)), 1.60×1.80 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-042"
+   ]
+  },
+  {
+   "key": "deraza-panjarasi-temir-7bf007",
+   "name_uz": "Deraza panjarasi (temir)",
+   "name_en": "Window grille (iron)",
+   "category": "metall",
+   "prompt": "Window grille (iron) (Оконная решётка (железная)), 1.66×1.36 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-35-003"
+   ]
+  },
+  {
+   "key": "eshik-panjarasi-qora-metall-c31e1e",
+   "name_uz": "Eshik panjarasi (qora metall)",
+   "name_en": "Door grille (ferrous metal)",
+   "category": "metall",
+   "prompt": "Door grille (ferrous metal) (Дверная решётка (чёрный металл)), 2000×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-22-004"
+   ]
+  },
+  {
+   "key": "eshik-panjarasi-temir-d6feb9",
+   "name_uz": "Eshik panjarasi (temir)",
+   "name_en": "Door grille (iron)",
+   "category": "metall",
+   "prompt": "Door grille (iron) (Дверная решётка (железная)), 2.23×1.68 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-35-004"
+   ]
+  },
+  {
+   "key": "kronshteyn-b6505d",
+   "name_uz": "Kronshteyn",
+   "name_en": "Bracket",
+   "category": "metall",
+   "prompt": "Bracket (Кронштейн), pair. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-021"
+   ]
+  },
+  {
+   "key": "mangal-581484",
+   "name_uz": "Mangal",
+   "name_en": "Barbecue grill",
+   "category": "metall",
+   "prompt": "Barbecue grill (Мангал), metal. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-040"
+   ]
+  },
+  {
+   "key": "metall-eshik-qora-metall-89de91",
+   "name_uz": "Metall eshik (qora metall)",
+   "name_en": "Metal door (ferrous metal)",
+   "category": "metall",
+   "prompt": "Metal door (ferrous metal) (Металлическая дверь (чёрный металл)), 2000×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-22-003"
+   ]
+  },
+  {
+   "key": "metall-prujina-b29632",
+   "name_uz": "Metall prujina",
+   "name_en": "Metal spring",
+   "category": "metall",
+   "prompt": "Metal spring (Металлическая пружина), 14 cm × 1.8 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-34-002"
+   ]
+  },
+  {
+   "key": "metall-seyf-ada61c",
+   "name_uz": "Metall seyf",
+   "name_en": "Metal safe",
+   "category": "metall",
+   "prompt": "Metal safe (Металлический сейф), 1200×400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-22-006",
+    "JIEK-02-016",
+    "JIEK-04-018"
+   ]
+  },
+  {
+   "key": "metall-shkaf-895c89",
+   "name_uz": "Metall shkaf",
+   "name_en": "Metal cabinet",
+   "category": "metall",
+   "prompt": "Metal cabinet (Шкаф металлический), 2000×800×400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-025"
+   ]
+  },
+  {
+   "key": "panelli-yoritgich-2f8a14",
+   "name_uz": "Panelli yoritgich",
+   "name_en": "Panel light fixture",
+   "category": "metall",
+   "prompt": "Panel light fixture (Светильник с панелью). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-041"
+   ]
+  },
+  {
+   "key": "pech-uchun-filtr-9fd41d",
+   "name_uz": "Pech uchun filtr",
+   "name_en": "Furnace filter",
+   "category": "metall",
+   "prompt": "Furnace filter (Фильтр для печи). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-038"
+   ]
+  },
+  {
+   "key": "pechka-qozon-kotel-cf705f",
+   "name_uz": "Pechka-qozon (kotel)",
+   "name_en": "Stove boiler",
+   "category": "metall",
+   "prompt": "Stove boiler (Котёл-печка). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-047"
+   ]
+  },
+  {
+   "key": "taran-bda133",
+   "name_uz": "Taran",
+   "name_en": "Ram (metal structure)",
+   "category": "metall",
+   "prompt": "Ram (metal structure) (Таран), metal structure. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-039"
+   ]
+  },
+  {
+   "key": "temir-eshik-da30b8",
+   "name_uz": "Temir eshik",
+   "name_en": "Iron door",
+   "category": "metall",
+   "prompt": "Iron door (Железная дверь). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-048"
+   ]
+  },
+  {
+   "key": "temir-eshik-profil-31b954",
+   "name_uz": "Temir eshik (profil)",
+   "name_en": "Iron door (profile)",
+   "category": "metall",
+   "prompt": "Iron door (profile) (Железная дверь (из профиля)), 2.28×0.92 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-35-005"
+   ]
+  },
+  {
+   "key": "temir-seyf-6bb725",
+   "name_uz": "Temir seyf",
+   "name_en": "Iron safe",
+   "category": "metall",
+   "prompt": "Iron safe (Железный сейф), 2.85×0.80×0.31 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-041"
+   ]
+  },
+  {
+   "key": "alert-sport-jihozi-c35975",
+   "name_uz": "Alert (sport jihozi)",
+   "name_en": "Alert (sports equipment)",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Alert (sports equipment) (Алерт (спортивный снаряд)), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-29-046"
+   ]
+  },
+  {
+   "key": "argimchoq-d9f7f6",
+   "name_uz": "Arg'imchoq",
+   "name_en": "Swing",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Swing (Качели), metal, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-037"
+   ]
+  },
+  {
+   "key": "bekat-karkasi-772cf3",
+   "name_uz": "Bekat karkasi",
+   "name_en": "Bus stop frame",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Bus stop frame (Каркас остановки), metal, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-043"
+   ]
+  },
+  {
+   "key": "besedka-10e47b",
+   "name_uz": "Besedka",
+   "name_en": "Gazebo",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Gazebo (Беседка), 2.5×2×3 m, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-11-025",
+    "JIEK-11-026"
+   ]
+  },
+  {
+   "key": "gimnastika-eshagi-va-brus-tayanchli-lavk-5df7b3",
+   "name_uz": "Gimnastika eshagi va brus (tayanchli lavka)",
+   "name_en": "Gymnastics horse and bars (bench with supports)",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Gymnastics horse and bars (bench with supports) (Гимнастический конь и брусья (лавка с упорами)), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-29-050"
+   ]
+  },
+  {
+   "key": "guldon-tagligi-a2cbb3",
+   "name_uz": "Guldon tagligi",
+   "name_en": "Flower stand",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Flower stand (Подставка для цветов), small, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-045",
+    "JIEK-14-046"
+   ]
+  },
+  {
+   "key": "osma-narvon-polatuk-02adc4",
+   "name_uz": "Osma narvon (polatuk)",
+   "name_en": "Hanging ladder",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Hanging ladder (Подвесная лестница (полатук)), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-29-044"
+   ]
+  },
+  {
+   "key": "press-uchun-brus-084aaa",
+   "name_uz": "Press uchun brus",
+   "name_en": "Ab bench bars",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Ab bench bars (Брусья для пресса), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-29-049"
+   ]
+  },
+  {
+   "key": "profilli-skameyka-bf3d97",
+   "name_uz": "Profilli skameyka",
+   "name_en": "Profile bench",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Profile bench (Скамейка профильная), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-044"
+   ]
+  },
+  {
+   "key": "skameyka-1d3c65",
+   "name_uz": "Skameyka",
+   "name_en": "Bench",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Bench (Скамейка), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-29-048"
+   ]
+  },
+  {
+   "key": "uchburchak-sport-jihozi-2d862b",
+   "name_uz": "Uchburchak (sport jihozi)",
+   "name_en": "Triangle (sports equipment)",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Triangle (sports equipment) (Треугольник (спортивный снаряд)), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-29-047"
+   ]
+  },
+  {
+   "key": "vernek-sport-jihozi-90978d",
+   "name_uz": "Vernek (sport jihozi)",
+   "name_en": "Vernek (sports equipment)",
+   "category": "obodonlashtirish",
+   "prompt": "Realistic catalog photo of Vernek (sports equipment) (Вернек (спортивный снаряд)), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-29-045"
+   ]
+  },
+  {
+   "key": "avtomat-nayza-pichogi-maketi-6055cf",
+   "name_uz": "Avtomat nayza-pichog'i maketi",
+   "name_en": "Rifle bayonet training mock-up",
+   "category": "oquv-jihozlar",
+   "prompt": "Rifle bayonet training mock-up (Макет штык-ножа к автомату). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-032",
+    "JIEK-04-034"
+   ]
+  },
+  {
+   "key": "ekipirovkali-askar-manekeni-a79415",
+   "name_uz": "Ekipirovkali askar manekeni",
+   "name_en": "Equipped soldier mannequin",
+   "category": "oquv-jihozlar",
+   "prompt": "Equipped soldier mannequin (Манекен солдата с экипировкой), helmet, mask, uniform, gloves, boots, body armour, limb protectors. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-038",
+    "JIEK-04-040"
+   ]
+  },
+  {
+   "key": "gilofli-bayroqchalar-toplami-oq-sariq-va-ccd592",
+   "name_uz": "G'ilofli bayroqchalar to'plami (oq/sariq va qizil)",
+   "name_en": "Flag set in case (white/yellow and red)",
+   "category": "oquv-jihozlar",
+   "prompt": "Flag set in case (white/yellow and red) (Комплект флажков в чехле (белый/жёлтый и красный)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-035",
+    "JIEK-04-037"
+   ]
+  },
+  {
+   "key": "granata-sumkachasi-7b5070",
+   "name_uz": "Granata sumkachasi",
+   "name_en": "Grenade pouch",
+   "category": "oquv-jihozlar",
+   "prompt": "Grenade pouch (Сумка для гранат). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-033",
+    "JIEK-04-035"
+   ]
+  },
+  {
+   "key": "kalashnikov-oquv-avtomati-maketi-f6912c",
+   "name_uz": "Kalashnikov o'quv avtomati maketi",
+   "name_en": "Kalashnikov training rifle mock-up",
+   "category": "oquv-jihozlar",
+   "prompt": "Kalashnikov training rifle mock-up (Учебный макет автомата Калашникова). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-030",
+    "JIEK-04-032"
+   ]
+  },
+  {
+   "key": "kichik-piyoda-sapyor-belkuragi-gilofi-bi-5aa4bc",
+   "name_uz": "Kichik piyoda (sapyor) belkuragi, g'ilofi bilan",
+   "name_en": "Small infantry (sapper) shovel with case",
+   "category": "oquv-jihozlar",
+   "prompt": "Small infantry (sapper) shovel with case (Малая пехотная (сапёрная) лопатка с чехлом). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-034",
+    "JIEK-04-036"
+   ]
+  },
+  {
+   "key": "mina-korsatkich-maketi-333bc2",
+   "name_uz": "Mina ko'rsatkich maketi",
+   "name_en": "Mine marker mock-up",
+   "category": "oquv-jihozlar",
+   "prompt": "Mine marker mock-up (Макет указателя мин). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-037",
+    "JIEK-04-039"
+   ]
+  },
+  {
+   "key": "ofitser-chizgichi-a5e443",
+   "name_uz": "Ofitser chizg'ichi",
+   "name_en": "Officer's ruler",
+   "category": "oquv-jihozlar",
+   "prompt": "Officer's ruler (Линейка офицерская). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-036",
+    "JIEK-04-038"
+   ]
+  },
+  {
+   "key": "oquv-qol-granatasi-maket-e24955",
+   "name_uz": "O'quv qo'l granatasi (maket)",
+   "name_en": "Training hand grenade (mock-up)",
+   "category": "oquv-jihozlar",
+   "prompt": "Training hand grenade (mock-up) (Учебная ручная граната (макет)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-044",
+    "JIEK-04-046"
+   ]
+  },
+  {
+   "key": "sanitar-sumkasi-toplami-3fc8fb",
+   "name_uz": "Sanitar sumkasi to'plami",
+   "name_en": "First-aid bag kit",
+   "category": "oquv-jihozlar",
+   "prompt": "First-aid bag kit (Комплект санитарной сумки). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-041",
+    "JIEK-04-043"
+   ]
+  },
+  {
+   "key": "sanitar-zambili-aa7a2d",
+   "name_uz": "Sanitar zambili",
+   "name_en": "Stretcher",
+   "category": "oquv-jihozlar",
+   "prompt": "Stretcher (Санитарные носилки). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-040",
+    "JIEK-04-042"
+   ]
+  },
+  {
+   "key": "tankka-qarshi-mina-maketi-5f72f5",
+   "name_uz": "Tankka qarshi mina maketi",
+   "name_en": "Anti-tank mine mock-up",
+   "category": "oquv-jihozlar",
+   "prompt": "Anti-tank mine mock-up (Макет противотанковой мины). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-039",
+    "JIEK-04-041"
+   ]
+  },
+  {
+   "key": "tibbiy-romolcha-a749e7",
+   "name_uz": "Tibbiy ro'molcha",
+   "name_en": "Medical triangular bandage",
+   "category": "oquv-jihozlar",
+   "prompt": "Medical triangular bandage (Медицинская косынка). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-043",
+    "JIEK-04-045"
+   ]
+  },
+  {
+   "key": "tibbiy-shina-46ad55",
+   "name_uz": "Tibbiy shina",
+   "name_en": "Medical splint",
+   "category": "oquv-jihozlar",
+   "prompt": "Medical splint (Медицинская шина). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-045",
+    "JIEK-04-047"
+   ]
+  },
+  {
+   "key": "tir-mashqlari-uchun-nishon-2c108c",
+   "name_uz": "Tir mashqlari uchun nishon",
+   "name_en": "Shooting range target",
+   "category": "oquv-jihozlar",
+   "prompt": "Shooting range target (Мишень для стрелковых упражнений). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-031",
+    "JIEK-04-033"
+   ]
+  },
+  {
+   "key": "umumqoshin-himoya-toplami-7e8e39",
+   "name_uz": "Umumqo'shin himoya to'plami",
+   "name_en": "Combined-arms protective kit",
+   "category": "oquv-jihozlar",
+   "prompt": "Combined-arms protective kit (Общевойсковой защитный комплект). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-042",
+    "JIEK-04-044"
+   ]
+  },
+  {
+   "key": "fasad-gisht-5bbfec",
+   "name_uz": "Fasad g'isht",
+   "name_en": "Facing brick",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Facing brick (Фасадный кирпич), 250×120×90 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-012"
+   ]
+  },
+  {
+   "key": "gips-74f94d",
+   "name_uz": "Gips",
+   "name_en": "Gypsum",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Gypsum (Гипс), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-004",
+    "JIEK-02-006"
+   ]
+  },
+  {
+   "key": "gipsoblok-9d9062",
+   "name_uz": "Gipsoblok",
+   "name_en": "Gypsum block",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Gypsum block (Гипсоблок), 20×30×60, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-005",
+    "JIEK-05-006"
+   ]
+  },
+  {
+   "key": "izvestnyak-tosh-0307e8",
+   "name_uz": "Izvestnyak tosh",
+   "name_en": "Limestone tile",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Limestone tile (Известняковый камень), 250×250×50 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-02-007",
+    "JIEK-02-008"
+   ]
+  },
+  {
+   "key": "keramzit-b78d2e",
+   "name_uz": "Keramzit",
+   "name_en": "Expanded clay",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Expanded clay (Керамзит), 20×40 fraction, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-003"
+   ]
+  },
+  {
+   "key": "obi-gisht-fd7c33",
+   "name_uz": "Obi g'isht",
+   "name_en": "Clay floor brick (obi gisht)",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Clay floor brick (obi gisht) (Жжёный кирпич-плитка (оби гишт)), 250×250×50 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-010"
+   ]
+  },
+  {
+   "key": "ohak-da34fc",
+   "name_uz": "Ohak",
+   "name_en": "Lime",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Lime (Известь), 20×40 fraction, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-002",
+    "JIEK-11-023"
+   ]
+  },
+  {
+   "key": "pishgan-gisht-5e44a7",
+   "name_uz": "Pishgan g'isht",
+   "name_en": "Fired brick",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Fired brick (Кирпич жжёный), 250×120×65 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-03-001",
+    "JIEK-14-001",
+    "JIEK-02-002"
+   ]
+  },
+  {
+   "key": "pishgan-gisht-poltara-f58ca4",
+   "name_uz": "Pishgan g'isht (poltara)",
+   "name_en": "Fired brick (one-and-a-half)",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Fired brick (one-and-a-half) (Кирпич жжёный (полуторный)), 250×120×88 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-03-002",
+    "JIEK-05-001",
+    "JIEK-02-001",
+    "JIEK-04-001",
+    "JIEK-11-009"
+   ]
+  },
+  {
+   "key": "polietilen-truba-e8c11f",
+   "name_uz": "Polietilen truba",
+   "name_en": "Polyethylene pipe",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Polyethylene pipe (Полиэтиленовая труба), Ø 110 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-03-011"
+   ]
+  },
+  {
+   "key": "rodban-b7ebb7",
+   "name_uz": "Rodban",
+   "name_en": "Rodban (anhydrite)",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Rodban (anhydrite) (Родбан (ангидрит)), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-008"
+   ]
+  },
+  {
+   "key": "sheben-5ef658",
+   "name_uz": "Sheben",
+   "name_en": "Crushed stone",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Crushed stone (Щебень), 5×20 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-04-010",
+    "JIEK-04-011",
+    "JIEK-04-012",
+    "JIEK-11-010"
+   ]
+  },
+  {
+   "key": "shlakoblok-4204eb",
+   "name_uz": "Shlakoblok",
+   "name_en": "Cinder block",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Cinder block (Шлакоблок), 20×20×40 cm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-009",
+    "JIEK-04-002",
+    "JIEK-11-012"
+   ]
+  },
+  {
+   "key": "sondirilgan-ohak-3dc2bf",
+   "name_uz": "So'ndirilgan ohak",
+   "name_en": "Slaked lime",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Slaked lime (Гашёная известь), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-11-016"
+   ]
+  },
+  {
+   "key": "sondirilgan-ohak-pushonka-7966bf",
+   "name_uz": "So'ndirilgan ohak (pushonka)",
+   "name_en": "Slaked lime (hydrated powder)",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Slaked lime (hydrated powder) (Гашёная известь (пушонка)), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-05-007"
+   ]
+  },
+  {
+   "key": "tayyor-beton-qorishmasi-727fe4",
+   "name_uz": "Tayyor beton qorishmasi",
+   "name_en": "Ready-mix concrete",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Ready-mix concrete (Готовая бетонная смесь), M-100, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-04-004",
+    "JIEK-04-005",
+    "JIEK-04-006",
+    "JIEK-04-007",
+    "JIEK-04-008",
+    "JIEK-04-009"
+   ]
+  },
+  {
+   "key": "xom-gisht-637266",
+   "name_uz": "Xom g'isht",
+   "name_en": "Unfired (raw) brick",
+   "category": "qurilish",
+   "prompt": "Realistic catalog photo of Unfired (raw) brick (Кирпич-сырец), 250×120×88 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-002",
+    "MK-34-001"
+   ]
+  },
+  {
+   "key": "alyumin-rom-eshik-fortochka-98cb3f",
+   "name_uz": "Alyumin rom, eshik, fortochka",
+   "name_en": "Aluminium windows, doors, vents",
+   "category": "rom-eshik",
+   "prompt": "Aluminium windows, doors, vents (Алюминиевые окна, двери, форточки), aluminium profile, price per 1 m². Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-007"
+   ]
+  },
+  {
+   "key": "deraza-akfa-profil-3bf78f",
+   "name_uz": "Deraza (Akfa profil)",
+   "name_en": "Window (Akfa profile)",
+   "category": "rom-eshik",
+   "prompt": "Window (Akfa profile) (Окно (профиль Akfa)), 1.10×1.40 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-035"
+   ]
+  },
+  {
+   "key": "eshik-akfa-profil-2ec638",
+   "name_uz": "Eshik (Akfa profil)",
+   "name_en": "Door (Akfa profile)",
+   "category": "rom-eshik",
+   "prompt": "Door (Akfa profile) (Дверь (профиль Akfa)), 2.03×0.80 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-034"
+   ]
+  },
+  {
+   "key": "eshik-alyumin-profil-pvx-33da91",
+   "name_uz": "Eshik (alyumin profil, PVX)",
+   "name_en": "Door (aluminium profile, PVC)",
+   "category": "rom-eshik",
+   "prompt": "Door (aluminium profile, PVC) (Дверь (алюминиевый профиль, ПВХ)), 2100×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-027"
+   ]
+  },
+  {
+   "key": "fortochka-akfa-profil-2b22ae",
+   "name_uz": "Fortochka (Akfa profil)",
+   "name_en": "Vent window (Akfa profile)",
+   "category": "rom-eshik",
+   "prompt": "Vent window (Akfa profile) (Форточка (профиль Akfa)), 0.80×0.60 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-036"
+   ]
+  },
+  {
+   "key": "fortochka-alyumin-profil-pvx-6daef1",
+   "name_uz": "Fortochka (alyumin profil, PVX)",
+   "name_en": "Vent window (aluminium profile, PVC)",
+   "category": "rom-eshik",
+   "prompt": "Vent window (aluminium profile, PVC) (Форточка (алюминиевый профиль, ПВХ)), 600×400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-029"
+   ]
+  },
+  {
+   "key": "mdf-eshik-112504",
+   "name_uz": "MDF eshik",
+   "name_en": "MDF door",
+   "category": "rom-eshik",
+   "prompt": "MDF door (Дверь МДФ), 2100×900 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-026"
+   ]
+  },
+  {
+   "key": "peregorodka-tosiq-devor-alyumin-pvx-c7ce0c",
+   "name_uz": "Peregorodka — to'siq devor (alyumin, PVX)",
+   "name_en": "Partition wall (aluminium, PVC)",
+   "category": "rom-eshik",
+   "prompt": "Partition wall (aluminium, PVC) (Перегородка (алюминий, ПВХ)), 7000×1500 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-031"
+   ]
+  },
+  {
+   "key": "pvx-rom-eshik-fortochka-d6457d",
+   "name_uz": "PVX rom, eshik, fortochka",
+   "name_en": "PVC windows, doors, vents",
+   "category": "rom-eshik",
+   "prompt": "PVC windows, doors, vents (ПВХ окна, двери, форточки), PVC profile, price per 1 m². Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-008"
+   ]
+  },
+  {
+   "key": "rom-alyumin-profil-pvx-63a6b9",
+   "name_uz": "Rom (alyumin profil, PVX)",
+   "name_en": "Window (aluminium profile, PVC)",
+   "category": "rom-eshik",
+   "prompt": "Window (aluminium profile, PVC) (Окно (алюминиевый профиль, ПВХ)), 1500×1200 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-028"
+   ]
+  },
+  {
+   "key": "vitraj-akfa-profil-31abb4",
+   "name_uz": "Vitraj (Akfa profil)",
+   "name_en": "Glazed partition (Akfa profile)",
+   "category": "rom-eshik",
+   "prompt": "Glazed partition (Akfa profile) (Витраж (профиль Akfa)), 2.95×2.37 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-037"
+   ]
+  },
+  {
+   "key": "vitraj-alyumin-pvx-ca7490",
+   "name_uz": "Vitraj (alyumin, PVX)",
+   "name_en": "Glazed partition (aluminium, PVC)",
+   "category": "rom-eshik",
+   "prompt": "Glazed partition (aluminium, PVC) (Витраж (алюминий, ПВХ)), 5000×2000 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-44-030"
+   ]
+  },
+  {
+   "key": "hassa-94e7d9",
+   "name_uz": "Hassa",
+   "name_en": "Walking cane",
+   "category": "suvenir",
+   "prompt": "Walking cane (Трость). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-031",
+    "JIEK-14-061"
+   ]
+  },
+  {
+   "key": "kema-suvenir-df4692",
+   "name_uz": "Kema (suvenir)",
+   "name_en": "Ship (souvenir)",
+   "category": "suvenir",
+   "prompt": "Ship (souvenir) (Корабль (сувенир)), 70 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-010",
+    "JIEK-14-053",
+    "JIEK-14-054",
+    "JIEK-14-055",
+    "JIEK-14-056"
+   ]
+  },
+  {
+   "key": "kema-suvenir-oddiy-da42d1",
+   "name_uz": "Kema (suvenir), oddiy",
+   "name_en": "Ship (souvenir), simple",
+   "category": "suvenir",
+   "prompt": "Ship (souvenir), simple (Корабль (сувенир), простой), 80 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-057"
+   ]
+  },
+  {
+   "key": "kema-suvenir-yongoqdan-82554d",
+   "name_uz": "Kema suvenir (yong'oqdan)",
+   "name_en": "Souvenir ship (walnut)",
+   "category": "suvenir",
+   "prompt": "Souvenir ship (walnut) (Корабль-сувенир (из ореха)), 40 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-029"
+   ]
+  },
+  {
+   "key": "kemacha-da2dbf",
+   "name_uz": "Kemacha",
+   "name_en": "Small ship",
+   "category": "suvenir",
+   "prompt": "Small ship (Кораблик), wood. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-024"
+   ]
+  },
+  {
+   "key": "kitob-gilofi-8e773f",
+   "name_uz": "Kitob g'ilofi",
+   "name_en": "Book cover",
+   "category": "suvenir",
+   "prompt": "Book cover (Обложка для книги). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-063"
+   ]
+  },
+  {
+   "key": "laminat-lavh-caf76b",
+   "name_uz": "Laminat lavh",
+   "name_en": "Laminated plaque",
+   "category": "suvenir",
+   "prompt": "Laminated plaque (Ламинированное панно). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-032"
+   ]
+  },
+  {
+   "key": "laminat-narda-yoki-shaxmat-d4ef8e",
+   "name_uz": "Laminat narda yoki shaxmat",
+   "name_en": "Laminated backgammon or chess",
+   "category": "suvenir",
+   "prompt": "Laminated backgammon or chess (Ламинированные нарды или шахматы), laminate. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-020"
+   ]
+  },
+  {
+   "key": "laminat-shaxmat-0a35ea",
+   "name_uz": "Laminat shaxmat",
+   "name_en": "Laminated chess",
+   "category": "suvenir",
+   "prompt": "Laminated chess (Ламинированные шахматы), laminate. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-021"
+   ]
+  },
+  {
+   "key": "lavh-f21a9b",
+   "name_uz": "Lavh",
+   "name_en": "Wooden plaque",
+   "category": "suvenir",
+   "prompt": "Wooden plaque (Панно (лавх)), wood. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-052"
+   ]
+  },
+  {
+   "key": "mini-kemacha-suvenir-36a75a",
+   "name_uz": "Mini kemacha (suvenir)",
+   "name_en": "Mini ship (souvenir)",
+   "category": "suvenir",
+   "prompt": "Mini ship (souvenir) (Мини-кораблик (сувенир)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-025"
+   ]
+  },
+  {
+   "key": "mini-narda-yoki-mini-shaxmat-88ff01",
+   "name_uz": "Mini narda yoki mini shaxmat",
+   "name_en": "Mini backgammon or mini chess",
+   "category": "suvenir",
+   "prompt": "Mini backgammon or mini chess (Мини-нарды или мини-шахматы). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-022"
+   ]
+  },
+  {
+   "key": "narda-a8553e",
+   "name_uz": "Narda",
+   "name_en": "Backgammon",
+   "category": "suvenir",
+   "prompt": "Backgammon (Нарды), 60×30 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-003",
+    "JIEK-05-017",
+    "JIEK-14-050"
+   ]
+  },
+  {
+   "key": "narda-donalari-bilan-yongoqdan-3576e9",
+   "name_uz": "Narda donalari bilan (yong'oqdan)",
+   "name_en": "Backgammon with pieces (walnut)",
+   "category": "suvenir",
+   "prompt": "Backgammon with pieces (walnut) (Нарды с фишками (из ореха)), souvenir. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-001"
+   ]
+  },
+  {
+   "key": "narda-katta-d0daaa",
+   "name_uz": "Narda (katta)",
+   "name_en": "Backgammon (large)",
+   "category": "suvenir",
+   "prompt": "Backgammon (large) (Нарды (большие)), 940×760×10 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-003"
+   ]
+  },
+  {
+   "key": "narda-shaxmat-862616",
+   "name_uz": "Narda-shaxmat",
+   "name_en": "Backgammon & chess set",
+   "category": "suvenir",
+   "prompt": "Backgammon & chess set (Нарды-шахматы), wood. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-049"
+   ]
+  },
+  {
+   "key": "narda-sosna-4b8881",
+   "name_uz": "Narda (sosna)",
+   "name_en": "Backgammon (pine)",
+   "category": "suvenir",
+   "prompt": "Backgammon (pine) (Нарды (сосна)), wooden, 72×38 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-35-007"
+   ]
+  },
+  {
+   "key": "ramka-9fd4e0",
+   "name_uz": "Ramka",
+   "name_en": "Picture frame",
+   "category": "suvenir",
+   "prompt": "Picture frame (Рамка). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-030",
+    "JIEK-14-062"
+   ]
+  },
+  {
+   "key": "shaxmat-dd28b4",
+   "name_uz": "Shaxmat",
+   "name_en": "Chess",
+   "category": "suvenir",
+   "prompt": "Chess (Шахматы), 60×30 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-005",
+    "JIEK-05-018",
+    "JIEK-14-051"
+   ]
+  },
+  {
+   "key": "shaxmat-donalari-5c5a35",
+   "name_uz": "Shaxmat donalari",
+   "name_en": "Chess pieces",
+   "category": "suvenir",
+   "prompt": "Chess pieces (Шахматные фигуры), set. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-023"
+   ]
+  },
+  {
+   "key": "shaxmat-katta-536bc5",
+   "name_uz": "Shaxmat (katta)",
+   "name_en": "Chess (large)",
+   "category": "suvenir",
+   "prompt": "Chess (large) (Шахматы (большие)), 940×760×10 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-004"
+   ]
+  },
+  {
+   "key": "shaxmat-narda-642ffa",
+   "name_uz": "Shaxmat-narda",
+   "name_en": "Chess & backgammon set",
+   "category": "suvenir",
+   "prompt": "Chess & backgammon set (Шахматы-нарды), wood. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-019"
+   ]
+  },
+  {
+   "key": "shaxmat-narda-donalari-bilan-yongoqdan-265832",
+   "name_uz": "Shaxmat-narda donalari bilan (yong'oqdan)",
+   "name_en": "Chess & backgammon with pieces (walnut)",
+   "category": "suvenir",
+   "prompt": "Chess & backgammon with pieces (walnut) (Шахматы-нарды с фигурами (из ореха)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-018"
+   ]
+  },
+  {
+   "key": "shaxmat-narda-yongoqdan-507f49",
+   "name_uz": "Shaxmat-narda (yong'oqdan)",
+   "name_en": "Chess & backgammon (walnut)",
+   "category": "suvenir",
+   "prompt": "Chess & backgammon (walnut) (Шахматы-нарды (из ореха)), 0.30×0.30 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-019"
+   ]
+  },
+  {
+   "key": "shkatulka-b0f433",
+   "name_uz": "Shkatulka",
+   "name_en": "Jewellery box",
+   "category": "suvenir",
+   "prompt": "Jewellery box (Шкатулка), 15×15 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-03-004",
+    "JIEK-14-058",
+    "JIEK-14-059",
+    "JIEK-02-005"
+   ]
+  },
+  {
+   "key": "shkatulka-bittalik-76d3d9",
+   "name_uz": "Shkatulka (bittalik)",
+   "name_en": "Jewellery box (single)",
+   "category": "suvenir",
+   "prompt": "Jewellery box (single) (Шкатулка (одинарная)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-026"
+   ]
+  },
+  {
+   "key": "shkatulka-ikkitalik-13ccb1",
+   "name_uz": "Shkatulka (ikkitalik)",
+   "name_en": "Jewellery box (double)",
+   "category": "suvenir",
+   "prompt": "Jewellery box (double) (Шкатулка (двойная)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-027"
+   ]
+  },
+  {
+   "key": "shkatulka-kitob-qoygich-7690d2",
+   "name_uz": "Shkatulka — kitob qo'ygich",
+   "name_en": "Box with book stand",
+   "category": "suvenir",
+   "prompt": "Box with book stand (Шкатулка-подставка для книг). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-029"
+   ]
+  },
+  {
+   "key": "shkatulka-uchtalik-a554f8",
+   "name_uz": "Shkatulka (uchtalik)",
+   "name_en": "Jewellery box (triple)",
+   "category": "suvenir",
+   "prompt": "Jewellery box (triple) (Шкатулка (тройная)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-028"
+   ]
+  },
+  {
+   "key": "suvenir-gul-e68ec7",
+   "name_uz": "Suvenir gul",
+   "name_en": "Souvenir flower",
+   "category": "suvenir",
+   "prompt": "Souvenir flower (Сувенирный цветок), 30 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-064"
+   ]
+  },
+  {
+   "key": "yogoch-mushtuk-ace524",
+   "name_uz": "Yog'och mushtuk",
+   "name_en": "Wooden cigarette holder",
+   "category": "suvenir",
+   "prompt": "Wooden cigarette holder (Деревянный мундштук). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-14-060"
+   ]
+  },
+  {
+   "key": "ikki-orindiqli-oquvchilar-stoli-metall-k-30c403",
+   "name_uz": "Ikki o'rindiqli o'quvchilar stoli (metall karkas)",
+   "name_en": "Two-seat student desk (metal frame)",
+   "category": "talim-mebeli",
+   "prompt": "Two-seat student desk (metal frame) (Двухместный ученический стол (металлокаркас)), 1800×1000×700 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-019",
+    "JIEK-04-021"
+   ]
+  },
+  {
+   "key": "kitob-javoni-ae605d",
+   "name_uz": "Kitob javoni",
+   "name_en": "Bookcase",
+   "category": "talim-mebeli",
+   "prompt": "Bookcase (Книжный шкаф). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-041"
+   ]
+  },
+  {
+   "key": "kitob-javoni-yogoch-karkas-d7b3aa",
+   "name_uz": "Kitob javoni (yog'och karkas)",
+   "name_en": "Bookcase (wooden frame)",
+   "category": "talim-mebeli",
+   "prompt": "Bookcase (wooden frame) (Книжный шкаф (деревянный каркас)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-026",
+    "JIEK-04-028"
+   ]
+  },
+  {
+   "key": "kitob-tarqatish-uchun-kafedra-stoli-606b6a",
+   "name_uz": "Kitob tarqatish uchun kafedra stoli",
+   "name_en": "Library issue desk",
+   "category": "talim-mebeli",
+   "prompt": "Library issue desk (Кафедра для выдачи книг), 1800×800×750 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-022",
+    "JIEK-04-024"
+   ]
+  },
+  {
+   "key": "kitoblar-oquv-qurollari-va-anjomlari-uch-78bd3c",
+   "name_uz": "Kitoblar, o'quv qurollari va anjomlari uchun javon",
+   "name_en": "Cabinet for books, teaching aids and supplies",
+   "category": "talim-mebeli",
+   "prompt": "Cabinet for books, teaching aids and supplies (Шкаф для книг, учебных пособий и принадлежностей). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-005"
+   ]
+  },
+  {
+   "key": "kitoblar-uchun-javon-210308",
+   "name_uz": "Kitoblar uchun javon",
+   "name_en": "Book shelving",
+   "category": "talim-mebeli",
+   "prompt": "Book shelving (Стеллаж для книг). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-031"
+   ]
+  },
+  {
+   "key": "kitoblar-va-oquv-qurollari-uchun-javon-2a73c4",
+   "name_uz": "Kitoblar va o'quv qurollari uchun javon",
+   "name_en": "Cabinet for books and teaching aids",
+   "category": "talim-mebeli",
+   "prompt": "Cabinet for books and teaching aids (Шкаф для книг и учебных пособий), 1.80×0.90×0.40 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-031"
+   ]
+  },
+  {
+   "key": "kutubxona-stellaji-642316",
+   "name_uz": "Kutubxona stellaji",
+   "name_en": "Library shelving",
+   "category": "talim-mebeli",
+   "prompt": "Library shelving (Библиотечный стеллаж), 800×800×750 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-025",
+    "JIEK-04-027"
+   ]
+  },
+  {
+   "key": "lmdf-yozuv-stoli-stol-va-stul-75adc0",
+   "name_uz": "LMDF yozuv stoli (stol va stul)",
+   "name_en": "LMDF writing desk (desk and chair)",
+   "category": "talim-mebeli",
+   "prompt": "LMDF writing desk (desk and chair) (Письменный стол из ЛМДФ (стол и стул)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-013",
+    "JIEK-04-015"
+   ]
+  },
+  {
+   "key": "metall-karkasli-stul-363968",
+   "name_uz": "Metall karkasli stul",
+   "name_en": "Metal-frame chair",
+   "category": "talim-mebeli",
+   "prompt": "Metal-frame chair (Стул на металлокаркасе). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-043"
+   ]
+  },
+  {
+   "key": "minbar-4f0d83",
+   "name_uz": "Minbar",
+   "name_en": "Lectern",
+   "category": "talim-mebeli",
+   "prompt": "Lectern (Трибуна), 0.3×0.4×1.6 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-046"
+   ]
+  },
+  {
+   "key": "oqituvchi-hujjatlari-va-kiyimi-uchun-jav-ca4575",
+   "name_uz": "O'qituvchi hujjatlari va kiyimi uchun javon",
+   "name_en": "Teacher's cabinet for documents and clothes",
+   "category": "talim-mebeli",
+   "prompt": "Teacher's cabinet for documents and clothes (Шкаф для документов и одежды учителя), 1.80×0.90×0.50 m, chipboard. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-024"
+   ]
+  },
+  {
+   "key": "oqituvchi-stoli-99c896",
+   "name_uz": "O'qituvchi stoli",
+   "name_en": "Teacher's desk",
+   "category": "talim-mebeli",
+   "prompt": "Teacher's desk (Стол учителя), 1.30×0.67×0.78 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-025"
+   ]
+  },
+  {
+   "key": "oqituvchi-stoli-va-stuli-460c4e",
+   "name_uz": "O'qituvchi stoli va stuli",
+   "name_en": "Teacher's desk and chair",
+   "category": "talim-mebeli",
+   "prompt": "Teacher's desk and chair (Стол и стул учителя), 0.75×1.3×0.7 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-044"
+   ]
+  },
+  {
+   "key": "oqituvchi-stoli-va-tajriba-stoli-4b7f19",
+   "name_uz": "O'qituvchi stoli va tajriba stoli",
+   "name_en": "Teacher's desk and lab table",
+   "category": "talim-mebeli",
+   "prompt": "Teacher's desk and lab table (Стол учителя и лабораторный стол). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-015"
+   ]
+  },
+  {
+   "key": "oqituvchi-stuli-turon-stul-5b1ec2",
+   "name_uz": "O'qituvchi stuli (Turon stul)",
+   "name_en": "Teacher's chair (Turon)",
+   "category": "talim-mebeli",
+   "prompt": "Teacher's chair (Turon) (Стул учителя («Турон»)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-026"
+   ]
+  },
+  {
+   "key": "oqituvchi-uchun-kompyuter-stoli-a3aff8",
+   "name_uz": "O'qituvchi uchun kompyuter stoli",
+   "name_en": "Teacher's computer desk",
+   "category": "talim-mebeli",
+   "prompt": "Teacher's computer desk (Компьютерный стол для учителя). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-11-013"
+   ]
+  },
+  {
+   "key": "oquvchi-stoli-3-1-stol-1-stul-2ee74d",
+   "name_uz": "O'quvchi stoli №3 (1 stol, 1 stul)",
+   "name_en": "Student desk No.3 (1 desk, 1 chair)",
+   "category": "talim-mebeli",
+   "prompt": "Student desk No.3 (1 desk, 1 chair) (Ученический стол №3 (1 стол, 1 стул)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-027"
+   ]
+  },
+  {
+   "key": "oquvchi-stoli-4-1-stol-1-stul-7b9bbe",
+   "name_uz": "O'quvchi stoli №4 (1 stol, 1 stul)",
+   "name_en": "Student desk No.4 (1 desk, 1 chair)",
+   "category": "talim-mebeli",
+   "prompt": "Student desk No.4 (1 desk, 1 chair) (Ученический стол №4 (1 стол, 1 стул)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-028"
+   ]
+  },
+  {
+   "key": "oquvchi-stoli-5-1-stol-1-stul-f2c2f5",
+   "name_uz": "O'quvchi stoli №5 (1 stol, 1 stul)",
+   "name_en": "Student desk No.5 (1 desk, 1 chair)",
+   "category": "talim-mebeli",
+   "prompt": "Student desk No.5 (1 desk, 1 chair) (Ученический стол №5 (1 стол, 1 стул)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-029"
+   ]
+  },
+  {
+   "key": "oquvchi-stoli-5-1-stol-2-stul-karkasli-222c97",
+   "name_uz": "O'quvchi stoli №5 (1 stol, 2 stul, karkasli)",
+   "name_en": "Student desk No.5 (1 desk, 2 chairs, framed)",
+   "category": "talim-mebeli",
+   "prompt": "Student desk No.5 (1 desk, 2 chairs, framed) (Ученический стол №5 (1 стол, 2 стула, на каркасе)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-030"
+   ]
+  },
+  {
+   "key": "oquvchi-stoli-6-1-stol-2-stul-1de672",
+   "name_uz": "O'quvchi stoli №6 (1 stol, 2 stul)",
+   "name_en": "Student desk No.6 (1 desk, 2 chairs)",
+   "category": "talim-mebeli",
+   "prompt": "Student desk No.6 (1 desk, 2 chairs) (Ученический стол №6 (1 стол, 2 стула)), 0.5×1.3×0.75 m. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-042"
+   ]
+  },
+  {
+   "key": "oquvchi-stoli-6-1-stol-2-stul-karkasli-51081d",
+   "name_uz": "O'quvchi stoli №6 (1 stol, 2 stul, karkasli)",
+   "name_en": "Student desk No.6 (1 desk, 2 chairs, framed)",
+   "category": "talim-mebeli",
+   "prompt": "Student desk No.6 (1 desk, 2 chairs, framed) (Ученический стол №6 (1 стол, 2 стула, на каркасе)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-033"
+   ]
+  },
+  {
+   "key": "oquvchi-stuli-metall-karkas-68c81f",
+   "name_uz": "O'quvchi stuli (metall karkas)",
+   "name_en": "Student chair (metal frame)",
+   "category": "talim-mebeli",
+   "prompt": "Student chair (metal frame) (Ученический стул (металлокаркас)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-020",
+    "JIEK-04-022"
+   ]
+  },
+  {
+   "key": "parta-1-kishilik-a3189d",
+   "name_uz": "Parta (1 kishilik)",
+   "name_en": "School desk (single)",
+   "category": "talim-mebeli",
+   "prompt": "School desk (single) (Парта (одноместная)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-011",
+    "JIEK-04-013"
+   ]
+  },
+  {
+   "key": "parta-2-kishilik-5b549c",
+   "name_uz": "Parta (2 kishilik)",
+   "name_en": "School desk (double)",
+   "category": "talim-mebeli",
+   "prompt": "School desk (double) (Парта (двухместная)). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-012",
+    "JIEK-04-014"
+   ]
+  },
+  {
+   "key": "beton-stolb-089b41",
+   "name_uz": "Beton stolb",
+   "name_en": "Concrete pole",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Concrete pole (Бетонный столб), 11 m, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-016",
+    "JIEK-14-017"
+   ]
+  },
+  {
+   "key": "granit-bordyur-fd43f7",
+   "name_uz": "Granit bordyur",
+   "name_en": "Granite kerb",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Granite kerb (Гранитный бордюр), 10×15×600, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-44-034"
+   ]
+  },
+  {
+   "key": "granit-bruschatka-9be13e",
+   "name_uz": "Granit bruschatka",
+   "name_en": "Granite paving stone",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Granite paving stone (Гранитная брусчатка), 10×20×3 cm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-44-032"
+   ]
+  },
+  {
+   "key": "granit-plita-988074",
+   "name_uz": "Granit plita",
+   "name_en": "Granite slab",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Granite slab (Гранитная плита), 60×40×3 cm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "MK-44-033"
+   ]
+  },
+  {
+   "key": "lotok-4f26ee",
+   "name_uz": "Lotok",
+   "name_en": "Concrete channel",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Concrete channel (Лоток), 3×0.4 m, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-018"
+   ]
+  },
+  {
+   "key": "pustotali-plita-61879c",
+   "name_uz": "Pustotali plita",
+   "name_en": "Hollow-core slab",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Hollow-core slab (Плита пустотная), PK 23-12-8, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-003",
+    "JIEK-14-004",
+    "JIEK-14-005",
+    "JIEK-14-006",
+    "JIEK-14-007",
+    "JIEK-14-008",
+    "JIEK-14-009",
+    "JIEK-14-010",
+    "JIEK-14-011",
+    "JIEK-14-012",
+    "JIEK-14-013",
+    "JIEK-14-014",
+    "JIEK-14-015"
+   ]
+  },
+  {
+   "key": "quduq-bogzi-gorlovina-4becf9",
+   "name_uz": "Quduq bo'g'zi (gorlovina)",
+   "name_en": "Manhole neck",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Manhole neck (Горловина колодца), neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-036"
+   ]
+  },
+  {
+   "key": "quduq-halqasi-afa7ba",
+   "name_uz": "Quduq halqasi",
+   "name_en": "Well ring",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Well ring (Кольцо колодезное стеновое), KTs 07-9, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-023",
+    "JIEK-14-024",
+    "JIEK-14-025",
+    "JIEK-14-026",
+    "JIEK-14-027",
+    "JIEK-14-028",
+    "JIEK-14-029"
+   ]
+  },
+  {
+   "key": "quduq-tubi-dnishe-eebd1e",
+   "name_uz": "Quduq tubi (dnishe)",
+   "name_en": "Well bottom slab",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Well bottom slab (Днище колодца), KTsD 10, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-033",
+    "JIEK-14-034",
+    "JIEK-14-035"
+   ]
+  },
+  {
+   "key": "quduq-yopqich-plitasi-8b1a11",
+   "name_uz": "Quduq yopqich plitasi",
+   "name_en": "Well cover slab",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Well cover slab (Плита перекрытия колодца), KTsD 1-10-1, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-030",
+    "JIEK-14-031",
+    "JIEK-14-032"
+   ]
+  },
+  {
+   "key": "temir-beton-plita-17adfb",
+   "name_uz": "Temir-beton plita",
+   "name_en": "Reinforced concrete slab",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Reinforced concrete slab (Железобетонная плита), 3.8–7.2 m, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-04-003"
+   ]
+  },
+  {
+   "key": "yol-bordyuri-0bb18f",
+   "name_uz": "Yo'l bordyuri",
+   "name_en": "Road kerb",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Road kerb (Бордюр дорожный), 1000×200×100 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-019",
+    "JIEK-14-022"
+   ]
+  },
+  {
+   "key": "yol-bordyuri-rangli-5eb518",
+   "name_uz": "Yo'l bordyuri (rangli)",
+   "name_en": "Road kerb (coloured)",
+   "category": "temir-beton",
+   "prompt": "Realistic catalog photo of Road kerb (coloured) (Бордюр дорожный (цветной)), 1000×200×100 mm, neatly stacked or placed at a clean production yard, overcast soft daylight, product in sharp focus, simple background. No text, no letters, no logos, no watermark, no people.",
+   "skus": [
+    "JIEK-14-020",
+    "JIEK-14-021"
+   ]
+  },
+  {
+   "key": "choyshab-7cd954",
+   "name_uz": "Choyshab",
+   "name_en": "Bed sheet",
+   "category": "toqimachilik",
+   "prompt": "Bed sheet (Простыня), 214×120 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-005"
+   ]
+  },
+  {
+   "key": "choyshablar-toplami-f5c1dd",
+   "name_uz": "Choyshablar to'plami",
+   "name_en": "Bed linen set",
+   "category": "toqimachilik",
+   "prompt": "Bed linen set (Комплект постельного белья), sheet 130×200 cm, duvet cover 130×200 cm, pillowcase 60×60 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-001"
+   ]
+  },
+  {
+   "key": "oq-yostiq-jildi-3a7e1f",
+   "name_uz": "Oq yostiq jildi",
+   "name_en": "White pillowcase",
+   "category": "toqimachilik",
+   "prompt": "White pillowcase (Белая наволочка), 60×60 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-043"
+   ]
+  },
+  {
+   "key": "paxtali-toshak-matras-81930b",
+   "name_uz": "Paxtali to'shak (matras)",
+   "name_en": "Cotton mattress",
+   "category": "toqimachilik",
+   "prompt": "Cotton mattress (Хлопковый матрас), 180×71×5 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-002"
+   ]
+  },
+  {
+   "key": "paxtali-yostiq-6ce6fc",
+   "name_uz": "Paxtali yostiq",
+   "name_en": "Cotton pillow",
+   "category": "toqimachilik",
+   "prompt": "Cotton pillow (Хлопковая подушка), 58×58 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-003"
+   ]
+  },
+  {
+   "key": "prostin-cd8ca0",
+   "name_uz": "Prostin",
+   "name_en": "Bed sheet",
+   "category": "toqimachilik",
+   "prompt": "Bed sheet (Простыня), 100% cotton, plain, bleached, 214×120 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-35-006"
+   ]
+  },
+  {
+   "key": "trikotaj-mato-ff1727",
+   "name_uz": "Trikotaj mato",
+   "name_en": "Knitted fabric",
+   "category": "toqimachilik",
+   "prompt": "Knitted fabric (Трикотажное полотно), 200 g, cotton. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-02-009"
+   ]
+  },
+  {
+   "key": "yarim-junli-odeyalo-110a63",
+   "name_uz": "Yarim junli odeyalo",
+   "name_en": "Half-wool blanket",
+   "category": "toqimachilik",
+   "prompt": "Half-wool blanket (Одеяло полушерстяное), 205×140 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-004"
+   ]
+  },
+  {
+   "key": "yostiq-jildi-3bdb0e",
+   "name_uz": "Yostiq jildi",
+   "name_en": "Pillowcase",
+   "category": "toqimachilik",
+   "prompt": "Pillowcase (Наволочка), 60×60 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-49-006"
+   ]
+  },
+  {
+   "key": "egoza-spiral-tosiq-184203",
+   "name_uz": "Egoza (spiral to'siq)",
+   "name_en": "Razor wire coil (spiral barrier)",
+   "category": "xavfsizlik",
+   "prompt": "Razor wire coil (spiral barrier) (Егоза (спиральное ограждение)), diameter 50, 60, 90 cm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-22-002"
+   ]
+  },
+  {
+   "key": "maxsus-eshik-qulfi-a4b9e2",
+   "name_uz": "Maxsus eshik qulfi",
+   "name_en": "Heavy-duty door lock",
+   "category": "xavfsizlik",
+   "prompt": "Heavy-duty door lock (Специальный дверной замок), 180×110 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-22-008"
+   ]
+  },
+  {
+   "key": "tikanli-sim-98ede7",
+   "name_uz": "Tikanli sim",
+   "name_en": "Barbed wire",
+   "category": "xavfsizlik",
+   "prompt": "Barbed wire (Колючая проволока), steel, 2.8 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-22-007"
+   ]
+  },
+  {
+   "key": "yongin-shiti-948860",
+   "name_uz": "Yong'in shiti",
+   "name_en": "Fire equipment board",
+   "category": "xavfsizlik",
+   "prompt": "Fire equipment board (Пожарный щит), 1200×1400 mm. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-22-005"
+   ]
+  },
+  {
+   "key": "axlat-urnasi-yasash-xizmati-oz-xomashyos-230fd6",
+   "name_uz": "Axlat urnasi yasash xizmati (o'z xomashyosi)",
+   "name_en": "Waste bin manufacturing (own raw materials)",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Waste bin manufacturing (own raw materials) (Изготовление урн для мусора (из своего сырья)). Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-022"
+   ]
+  },
+  {
+   "key": "balyasina-ishlab-chiqarish-xizmati-oz-xo-d211ff",
+   "name_uz": "Balyasina ishlab chiqarish xizmati (o'z xomashyosi)",
+   "name_en": "Baluster manufacturing (own raw materials)",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Baluster manufacturing (own raw materials) (Изготовление балясин (из своего сырья)). Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-028"
+   ]
+  },
+  {
+   "key": "duradgorlik-buyurtma-asosida-128b77",
+   "name_uz": "Duradgorlik — buyurtma asosida",
+   "name_en": "Carpentry — made to order",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Carpentry — made to order (Столярные работы — на заказ), per customer's requirements. Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-05-016"
+   ]
+  },
+  {
+   "key": "futbolka-tikish-xizmati-df8c00",
+   "name_uz": "Futbolka tikish xizmati",
+   "name_en": "T-shirt sewing service",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: T-shirt sewing service (Пошив футболок), from customer's material. Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-030"
+   ]
+  },
+  {
+   "key": "granit-shar-tayyorlash-xizmati-oz-xomash-201df3",
+   "name_uz": "Granit shar tayyorlash xizmati (o'z xomashyosi)",
+   "name_en": "Granite ball manufacturing (own raw materials)",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Granite ball manufacturing (own raw materials) (Изготовление гранитных шаров (из своего сырья)). Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-017"
+   ]
+  },
+  {
+   "key": "ishchilar-maxsus-kiyimini-tikish-xizmati-b484b6",
+   "name_uz": "Ishchilar maxsus kiyimini tikish xizmati",
+   "name_en": "Workwear sewing service",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Workwear sewing service (Пошив спецодежды для рабочих), from customer's material. Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-007"
+   ]
+  },
+  {
+   "key": "kazerok-yasash-xizmati-oz-xomashyosi-adf4f7",
+   "name_uz": "Kazerok yasash xizmati (o'z xomashyosi)",
+   "name_en": "Canopy manufacturing (own raw materials)",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Canopy manufacturing (own raw materials) (Изготовление козырька (из своего сырья)), 1.9×1.45×1.45 m. Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-002"
+   ]
+  },
+  {
+   "key": "mdf-eshik-yasash-xizmati-9d8ffb",
+   "name_uz": "MDF eshik yasash xizmati",
+   "name_en": "MDF door manufacturing service",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: MDF door manufacturing service (Изготовление дверей МДФ), 2×0.8 m. Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-008"
+   ]
+  },
+  {
+   "key": "mebel-buyurtma-asosida-03f3cf",
+   "name_uz": "Mebel — buyurtma asosida",
+   "name_en": "Furniture — made to order",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Furniture — made to order (Мебель — на заказ), to customer's size and sketch. Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-05-014"
+   ]
+  },
+  {
+   "key": "metall-panjara-tamirlash-xizmati-7cfb7d",
+   "name_uz": "Metall panjara ta'mirlash xizmati",
+   "name_en": "Metal grille repair service",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Metal grille repair service (Ремонт металлических решёток), 4.5×3 m (12 m²). Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-020"
+   ]
+  },
+  {
+   "key": "temir-panjara-yasash-xizmati-oz-xomashyo-7f2086",
+   "name_uz": "Temir panjara yasash xizmati (o'z xomashyosi)",
+   "name_en": "Iron grille manufacturing (own raw materials)",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Iron grille manufacturing (own raw materials) (Изготовление железных решёток (из своего сырья)). Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-011"
+   ]
+  },
+  {
+   "key": "tikuvchilik-buyurtma-asosida-1945e4",
+   "name_uz": "Tikuvchilik — buyurtma asosida",
+   "name_en": "Sewing — made to order",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Sewing — made to order (Швейные изделия — на заказ), per customer's requirements. Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-05-015"
+   ]
+  },
+  {
+   "key": "zakladnoy-detallar-yasash-xizmati-oz-xom-d60aac",
+   "name_uz": "Zakladnoy detallar yasash xizmati (o'z xomashyosi)",
+   "name_en": "Embedded parts manufacturing (own raw materials)",
+   "category": "xizmatlar",
+   "prompt": "Realistic photo illustrating the service: Embedded parts manufacturing (own raw materials) (Изготовление закладных деталей (из своего сырья)). Clean tidy workshop or work site, tools and result of the work in focus, soft daylight. No text, no logos, no faces.",
+   "skus": [
+    "JIEK-11-024"
+   ]
+  },
+  {
+   "key": "qolipli-non-577ba4",
+   "name_uz": "Qolipli non",
+   "name_en": "Tin loaf bread",
+   "category": "xojalik",
+   "prompt": "Tin loaf bread (Хлеб формовой), 600 g. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-29-001",
+    "JIEK-22-001"
+   ]
+  },
+  {
+   "key": "qop-d9d251",
+   "name_uz": "Qop",
+   "name_en": "Sack",
+   "category": "xojalik",
+   "prompt": "Sack (Мешок), 50 kg capacity. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "JIEK-05-011"
+   ]
+  },
+  {
+   "key": "xojalik-sovuni-25e3b6",
+   "name_uz": "Xo'jalik sovuni",
+   "name_en": "Laundry soap",
+   "category": "xojalik",
+   "prompt": "Laundry soap (Хозяйственное мыло), 70%, weight 200 g. Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-35-001"
+   ]
+  },
+  {
+   "key": "xojalik-sovuni-xomashyosi-30f12a",
+   "name_uz": "Xo'jalik sovuni xomashyosi",
+   "name_en": "Laundry soap base",
+   "category": "xojalik",
+   "prompt": "Laundry soap base (Сырьё для хозяйственного мыла). Realistic e-commerce catalog product photo. Single product centered, 3/4 view, on a clean seamless light-gray studio background, soft diffused daylight, gentle shadow, sharp focus, natural materials and colors, simple honest factory-made product from Uzbekistan. No text, no letters, no logos, no watermark, no people, no hands.",
+   "skus": [
+    "MK-35-002"
+   ]
+  }
+ ]
+}

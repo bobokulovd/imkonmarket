@@ -368,5 +368,18 @@
  "mp_rate_now": "Joriy kurs",
  "mp_remove_listing": "ImkonMarket’dan uziş",
  "mp_settings": "Sozlamalar",
- "mp_wb_token": "Wildberries: bulut platforma uçun «Servis tokeni» kerak — WB qoidasiga kóra şaxsiy (Personal) tokenni uçinçi tomon xizmatiga beriş mumkin emas."
+ "mp_wb_token": "Wildberries: bulut platforma uçun «Servis tokeni» kerak — WB qoidasiga kóra şaxsiy (Personal) tokenni uçinçi tomon xizmatiga beriş mumkin emas.",
+ "sample_image": "Namunaviy rasm",
+ "sample_image_hint": "Bu rasm sun’iy intellekt yordamida yaratilgan namuna. Haqiqiy mahsulot kórinişi farq qilişi mumkin.",
+ "bulk_images": "Rasmlarni ommaviy yuklaş",
+ "bulk_images_hint": "Fayl nomi mahsulot artikuli (SKU) bólsin, masalan MK-49-001.jpg. Bir neçta rasmni yoki ZIP arxivni tanlang — har biri óz mahsulotiga boǵlanadi va namunaviy rasm almaştiriladi.",
+ "bulk_images_drop": "Rasmlarni şu yerga taşlang yoki tanlang",
+ "bulk_matched": "Boǵlandi",
+ "bulk_unmatched": "SKU topilmadi",
+ "clear": "Tozalaş",
+ "upload": "Yuklaş",
+ "img_filter": "Rasm",
+ "img_none": "Rasmsiz",
+ "img_sample": "Namunaviy (AI)",
+ "img_real": "Haqiqiy surat"
 }
