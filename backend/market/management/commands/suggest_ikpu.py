@@ -12,7 +12,7 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from market.ikpu import suggest
+from market.ikpu import Unreachable, suggest
 from market.models import Product
 from market.translit import pick
 
@@ -32,10 +32,18 @@ class Command(BaseCommand):
         if o["limit"]:
             qs = qs[:o["limit"]]
         memo, found, fallback, miss = {}, 0, 0, 0
+        offline = False
         for p in qs:
             key = (pick(p.name, "ru"), pick(p.name, "uz"))
             if key not in memo:
-                memo[key] = suggest(*key)
+                try:
+                    memo[key] = suggest(*key) if not offline else None
+                except Unreachable as e:
+                    # server tasnif.soliq.uz ga ulana olmaydi (masalan, xorijdagi server) — tavsiya brauzer orqali
+                    # (kabinet → Xususiyatlar → «IKPU tavsiya») qilinadi; bu yerda faqat kategoriya kodi qo'yiladi
+                    self.stdout.write(f"tasnif.soliq.uz ga ulanib bo'lmadi: {e}"[:200])
+                    offline = True
+                    memo[key] = None
             s = memo[key]
             if s:
                 code, name = s["code"], s["name"]
@@ -49,7 +57,7 @@ class Command(BaseCommand):
             self.stdout.write(f"{p.sku}: {key[0]} → {code} {name[:60]}")
             if not o["dry_run"]:
                 Product.objects.filter(pk=p.pk, ikpu="").update(ikpu=code, ikpu_name=name[:255], ikpu_confirmed=False)
-        if o["once"] and not o["dry_run"]:
+        if o["once"] and not o["dry_run"] and not offline:
             mark.parent.mkdir(parents=True, exist_ok=True)
             mark.write_text("ok")
         self.stdout.write(f"IKPU: topildi {found}, kategoriya bo'yicha {fallback}, topilmadi {miss}")

@@ -23,12 +23,25 @@ export default function BulkImages({ onDone }: { onDone: () => void }) {
     setBusy(true); setErr(""); setDone(0);
     const total: Res = { matched: [], unmatched: [], errors: [] };
     try {
-      for (let i = 0; i < files.length; i += 10) {
+      // so'rov hajmi ~40 MB dan oshmasin: fayllar paketlarga bo'linadi; juda katta fayllar yuborilmaydi
+      const MAX_FILE = 15 * 1024 * 1024, MAX_ZIP = 200 * 1024 * 1024, MAX_BATCH = 40 * 1024 * 1024;
+      const batches: File[][] = [];
+      let cur: File[] = [], size = 0;
+      for (const f of files) {
+        const isZip = /\.zip$/i.test(f.name);
+        if (f.size > (isZip ? MAX_ZIP : MAX_FILE)) { total.errors.push(`${f.name}: ${t("im_too_big", { mb: (f.size / 1048576).toFixed(1), max: isZip ? 200 : 15 })}`); continue; }
+        if (cur.length && (size + f.size > MAX_BATCH || cur.length >= 10)) { batches.push(cur); cur = []; size = 0; }
+        cur.push(f); size += f.size;
+      }
+      if (cur.length) batches.push(cur);
+      let sent = 0;
+      for (const b of batches) {
         const fd = new FormData();
-        files.slice(i, i + 10).forEach((f) => fd.append("files", f, f.name));
+        b.forEach((f) => fd.append("files", f, f.name));
         const r = await api<Res>("/seller/products/bulk-images/", { method: "POST", body: fd, authed: true });
         total.matched.push(...r.matched); total.unmatched.push(...r.unmatched); total.errors.push(...r.errors);
-        setDone(Math.min(i + 10, files.length));
+        sent += b.length;
+        setDone(sent);
       }
       setRes(total); setFiles([]); onDone();
     } catch (e) { setErr(errText(e)); } finally { setBusy(false); }
@@ -37,6 +50,7 @@ export default function BulkImages({ onDone }: { onDone: () => void }) {
   return (
     <div className="space-y-4">
       <p className="text-sm text-ink-500">{t("bulk_images_hint")}</p>
+      <p className="text-xs text-ink-500">{t("im_bulk_rules")}</p>
       <label
         onDragOver={(e) => { e.preventDefault(); setDrag(true); }} onDragLeave={() => setDrag(false)}
         onDrop={(e) => { e.preventDefault(); setDrag(false); add(e.dataTransfer.files); }}

@@ -3,6 +3,7 @@ import { CheckCircle2, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Badge, Button, Input, Spinner } from "@/components/ui";
 import { api, ApiError } from "@/lib/api";
+import { searchIkpu } from "@/lib/ikpu";
 import { useApp } from "@/lib/store";
 import type { IkpuItem, SellerProduct } from "@/lib/types";
 import { digitsOnly, ErrorBox, type ProductChange, errMsg } from "./shared";
@@ -27,7 +28,7 @@ export default function IkpuPicker({ product, onChange }: { product: SellerProdu
       setSearching(true); setSearchErr("");
       // so'rov kirillchada bo'lsa — ruscha tasnif, lotinchada — o'zbekcha
       const l = /[а-яё]/i.test(s) || lang === "ru" ? "ru" : "uz";
-      api<{ items: IkpuItem[]; error?: string }>(`/seller/ikpu/search/?q=${encodeURIComponent(s)}&lang=${l}`, { authed: true })
+      searchIkpu(s, l)
         .then((d) => { if (alive) { setItems(d.items || []); if (d.error) setSearchErr(d.error); } })
         .catch((e) => {
           if (!alive) return;

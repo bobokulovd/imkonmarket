@@ -11,7 +11,7 @@ import requests
 from django.core.cache import cache
 
 API = "https://tasnif.soliq.uz/api/cls-api/elasticsearch/search"
-TIMEOUT = 15
+TIMEOUT = (5, 15)  # ulanish, javob
 STOP = {"и", "для", "из", "с", "в", "на", "по", "до", "от", "мм", "см", "м", "кг", "шт", "x", "х", "uchun", "va"}
 
 
@@ -62,6 +62,22 @@ def score(query: str, item: dict) -> float:
     return s / (len(q) * 2)
 
 
+def best(query: str, items: list, threshold=0.34) -> dict | None:
+    """Tayyor qidiruv natijalaridan (masalan, brauzer tasnif.soliq.uz dan olgan) eng mosini tanlash."""
+    top = None
+    for it in items or []:
+        if not isinstance(it, dict) or len(str(it.get("code") or "")) != 17 or not str(it["code"]).isdigit():
+            continue
+        sc = score(query, it)
+        if top is None or sc > top["score"]:
+            top = {"code": str(it["code"]), "name": str(it.get("name") or "")[:255], "score": round(sc, 3)}
+    return top if top and top["score"] >= threshold else None
+
+
+class Unreachable(Exception):
+    pass
+
+
 def suggest(name_ru: str, name_uz: str = "") -> dict | None:
     """Eng mos kod: {"code", "name", "score"} yoki None (ishonchsiz bo'lsa)."""
     best = None
@@ -75,6 +91,8 @@ def suggest(name_ru: str, name_uz: str = "") -> dict | None:
                 continue
             try:
                 items = search(query, lang=lang)
+            except (requests.ConnectionError, requests.Timeout) as e:
+                raise Unreachable(str(e)) from e
             except requests.RequestException:
                 continue
             for it in items:

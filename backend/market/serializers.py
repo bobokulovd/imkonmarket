@@ -262,6 +262,18 @@ class SellerProductSerializer(serializers.ModelSerializer):
             attrs["ikpu_confirmed"] = bool(attrs["ikpu"])  # muassasa o'zi kiritdi — tasdiqlangan
         return attrs
 
+    def validate_image(self, f):
+        if f:
+            from .images import ImageRejected, MAX_BYTES, check
+            try:
+                if f.size > MAX_BYTES:
+                    raise ImageRejected(f"Fayl juda katta: {f.size / 1024 / 1024:.1f} MB (ko'pi bilan 15 MB)")
+                check(f.read(), f.name)
+            except ImageRejected as e:
+                raise serializers.ValidationError(str(e))
+            f.seek(0)
+        return f
+
     def _save_image(self, p, f):
         if f:
             from .images import add_image

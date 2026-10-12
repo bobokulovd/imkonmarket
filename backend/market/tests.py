@@ -182,7 +182,7 @@ class FlowTest(TestCase):
 
         from PIL import Image
         b = io.BytesIO()
-        Image.new("RGB", (40, 30), color).save(b, "PNG")
+        Image.new("RGB", (800, 800), color).save(b, "PNG")
         return b.getvalue()
 
     def test_samples_bulk_upload_and_badge(self):
@@ -203,7 +203,7 @@ class FlowTest(TestCase):
             self.assertEqual(images.load_samples(), 2)
             self.assertEqual(images.load_samples(), 0)  # qayta ishga tushirilsa tegmaydi
         p = Product.objects.get(sku="MK-49-001")
-        self.assertTrue(p.image_is_sample and p.image.name.endswith(".webp"))
+        self.assertTrue(p.image_is_sample and p.image.name.endswith(".jpg"))
         r = APIClient().get(f"/api/products/{p.id}/").json()
         self.assertTrue(r["image_is_sample"])
         # muassasa haqiqiy suratlarni ommaviy yuklaydi (ZIP + oddiy fayl); boshqa muassasa SKU'si — bog'lanmaydi

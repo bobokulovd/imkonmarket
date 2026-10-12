@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUp, Check, ListTree, Pencil, Plus, Receipt, Search, Tra
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useMe } from "@/components/CabinetShell";
 import { Badge, Button, CatIcon, Empty, Field, Input, Modal, Select, Spinner, Toast } from "@/components/ui";
+import { searchIkpu } from "@/lib/ikpu";
 import { ApiError, api, errText, qs } from "@/lib/api";
 import { useApp } from "@/lib/store";
 import type { AttrType, AttributeDef, I18n, IkpuItem } from "@/lib/types";
@@ -185,7 +186,7 @@ function IkpuBox({ slug, code, name, onSaved }: { slug: string; code: string; na
     if (q.trim().length < 2) return;
     setBusy(true); setErr("");
     try {
-      const r = await api<{ items: IkpuItem[]; error?: string }>(`/seller/ikpu/search/${qs({ q: q.trim(), lang: "ru" })}`, { authed: true });
+      const r = await searchIkpu(q.trim(), /[а-яё]/i.test(q) ? "ru" : "uz");
       setItems(r.items); if (r.error) setErr(r.error);
     } catch (e) {
       setItems([]);

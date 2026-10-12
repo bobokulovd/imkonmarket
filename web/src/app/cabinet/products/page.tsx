@@ -1,9 +1,10 @@
 "use client";
 import clsx from "clsx";
-import { Eye, EyeOff, ImagePlus, Pencil, Plus, Search } from "lucide-react";
+import { Eye, EyeOff, ImagePlus, Pencil, Plus, Search, Receipt } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useMe } from "@/components/CabinetShell";
 import BulkImages from "@/components/BulkImages";
+import IkpuBulk from "@/components/product/IkpuBulk";
 import ProductEditor from "@/components/product/ProductEditor";
 import { Badge, Button, Empty, Input, Modal, ProductImage, Select, Spinner, Toast } from "@/components/ui";
 import { api, qs } from "@/lib/api";
@@ -42,6 +43,7 @@ export default function ProductsPage() {
   const [cat, setCat] = useState("");
   const [img, setImg] = useState("");
   const [bulk, setBulk] = useState(false);
+  const [ikpu, setIkpu] = useState(false);
   const [page, setPage] = useState(1);
   const [edit, setEdit] = useState<EditState | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -62,6 +64,7 @@ export default function ProductsPage() {
       <div className="flex flex-wrap gap-3 items-center justify-between">
         <h1 className="text-2xl font-extrabold">{t("my_products")} {data && <span className="text-ink-500 text-lg">· {data.count}</span>}</h1>
         <div className="flex gap-2">
+          <Button variant="outline" onClick={() => setIkpu(true)}><Receipt className="w-4 h-4" /> {t("ik_bulk")}</Button>
           <Button variant="outline" onClick={() => setBulk(true)}><ImagePlus className="w-4 h-4" /> {t("bulk_images")}</Button>
           <Button onClick={() => setEdit({ category: meta?.categories[0]?.slug || "mebel" })}><Plus className="w-4 h-4" /> {t("add_product")}</Button>
         </div>
@@ -130,6 +133,9 @@ export default function ProductsPage() {
       <Modal open={!!edit} onClose={() => setEdit(null)} wide title={edit?.id ? t("edit") : t("add_product")}>
         {edit && <Editor edit={edit} onClose={() => setEdit(null)} onSaved={() => { load(); setToast(t("saved")); }}
           onCreated={(id) => setEdit((e) => (e ? { ...e, id } : e))} />}
+      </Modal>
+      <Modal open={ikpu} onClose={() => setIkpu(false)} title={t("ik_bulk")}>
+        <IkpuBulk onDone={() => load()} />
       </Modal>
       <Modal open={bulk} onClose={() => setBulk(false)} title={t("bulk_images")}>
         <BulkImages onDone={() => load()} />

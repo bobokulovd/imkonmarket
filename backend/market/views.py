@@ -383,14 +383,24 @@ class SellerProductViewSet(viewsets.ModelViewSet):
                 raise ValidationError({"files": "required"})
             if p.images.filter(is_sample=False).count() + len(files) > 15:
                 raise ValidationError({"files": "Ko'pi bilan 15 ta rasm"})
+            from .images import ImageRejected, MAX_BYTES, check
             errors = []
             for f in files:
                 try:
-                    add_image(p, f.read(), sample=False, first=request.data.get("first") in ("1", "true"))
+                    if f.size > MAX_BYTES:
+                        raise ImageRejected(f"Fayl juda katta: {f.size / 1024 / 1024:.1f} MB (ko'pi bilan 15 MB)")
+                    raw = f.read()
+                    check(raw, f.name)
+                    add_image(p, raw, sample=False, first=request.data.get("first") in ("1", "true"))
+                except ImageRejected as e:
+                    errors.append(f"{f.name}: {e}")
                 except Exception as e:  # noqa: BLE001 — buzilgan fayl
                     errors.append(f"{f.name}: {e}")
             if errors and len(errors) == len(files):
                 raise ValidationError({"files": errors})
+            data = ProductImageSerializer(p.images.all(), many=True, context={"request": request}).data
+            if errors:  # bir qismi qabul qilindi
+                return Response(data, headers={"X-Image-Errors": str(len(errors))})
         return Response(ProductImageSerializer(p.images.all(), many=True, context={"request": request}).data)
 
     @action(detail=True, methods=["delete"], url_path=r"images/(?P<image_id>\d+)")
@@ -638,6 +648,38 @@ def ikpu_search(request):
         return Response({"items": search(q, lang=request.query_params.get("lang") or "ru")})
     except Exception as e:  # noqa: BLE001 — tashqi xizmat ishlamasa
         return Response({"items": [], "error": f"tasnif.soliq.uz javob bermadi: {e}"[:300]}, status=502)
+
+
+def _seller_products(request):
+    if not (request.user and request.user.is_authenticated and hasattr(request.user, "profile")):
+        raise PermissionDenied("seller account required")
+    s = seller_of(request.user)
+    return Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)
+
+
+@api_view(["GET"])
+def ikpu_missing(request):
+    """IKPU kodi yo'q mahsulotlar — nomi bo'yicha guruhlangan (brauzer har bir nom uchun tasnif.soliq.uz dan qidiradi)."""
+    from .translit import pick
+    groups = {}
+    for p in _seller_products(request).filter(ikpu="").only("id", "name"):
+        key = (pick(p.name, "ru"), pick(p.name, "uz"))
+        groups.setdefault(key, []).append(p.id)
+    return Response({"groups": [{"name_ru": k[0], "name_uz": k[1], "ids": v} for k, v in groups.items()],
+                     "products": sum(len(v) for v in groups.values())})
+
+
+@api_view(["POST"])
+def ikpu_apply(request):
+    """{ids, query, items:[{code,name,...}]} — natijalardan eng mosini tanlab, kodsiz mahsulotlarga TAVSIYA sifatida yozadi."""
+    from .ikpu import best
+    ids = [int(i) for i in request.data.get("ids") or [] if str(i).isdigit()]
+    pick_ = best(str(request.data.get("query") or ""), request.data.get("items") or [])
+    if not pick_ or not ids:
+        return Response({"picked": None, "updated": 0})
+    n = _seller_products(request).filter(pk__in=ids, ikpu="").update(
+        ikpu=pick_["code"], ikpu_name=pick_["name"], ikpu_confirmed=False)
+    return Response({"picked": pick_, "updated": n})
 
 
 @api_view(["PATCH"])

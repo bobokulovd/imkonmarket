@@ -18,9 +18,9 @@ from .models import AttributeDef, Product, ProductVariant
 MEDIA = tempfile.mkdtemp()
 
 
-def png(color=(200, 50, 50)):
+def png(color=(200, 50, 50), size=(800, 900)):
     buf = io.BytesIO()
-    Image.new("RGB", (60, 40), color).save(buf, "PNG")
+    Image.new("RGB", size, color).save(buf, "PNG")
     return buf.getvalue()
 
 
@@ -95,6 +95,12 @@ class CatalogTest(TestCase):
         self.assertEqual(r.status_code, 200, r.content)
         imgs = r.json()
         self.assertEqual(len(imgs), 2)  # namunaviy o'chdi
+        # cheklovlar: kichik, cho'zinchoq, rasm emas
+        for bad, word in ((png(size=(500, 500)), "kichik"), (png(size=(800, 3000)), "cho'zinchoq"), (b"not an image", "ochilmadi")):
+            r = c.post(f"/api/seller/products/{p.id}/images/", {"files": [SimpleUploadedFile("x.png", bad)]}, format="multipart")
+            self.assertEqual(r.status_code, 400)
+            self.assertIn(word, str(r.json()))
+        self.assertEqual(p.images.count(), 2)
         self.assertFalse(any(i["is_sample"] for i in imgs))
         p.refresh_from_db()
         self.assertFalse(p.image_is_sample)
@@ -180,6 +186,20 @@ class CatalogTest(TestCase):
         keys = {x["key"] for x in data["checks"]}
         self.assertTrue({"images", "ikpu", "barcode", "dims", "attributes"} <= keys)
         self.assertEqual(data["marketplaces"], [])
+
+    def test_ikpu_browser_assisted(self):
+        p, c = self.mebel()
+        Product.objects.filter(pk=p.pk).update(ikpu="")
+        miss = c.get("/api/seller/ikpu/missing/").json()
+        g = next(x for x in miss["groups"] if p.id in x["ids"])
+        items = [{"code": "09403001001000000", "name": g["name_ru"]}, {"code": "123", "name": "bad"}]
+        r = c.post("/api/seller/ikpu/apply/", {"ids": g["ids"], "query": g["name_ru"], "items": items}, format="json").json()
+        self.assertEqual(r["picked"]["code"], "09403001001000000")
+        p.refresh_from_db()
+        self.assertEqual((p.ikpu, p.ikpu_confirmed), ("09403001001000000", False))
+        other = Product.objects.exclude(seller=p.seller).first()
+        r = c.post("/api/seller/ikpu/apply/", {"ids": [other.id], "query": g["name_ru"], "items": items}, format="json").json()
+        self.assertEqual(r["updated"], 0)  # boshqa muassasa mahsuloti
 
     def test_ikpu_scoring_and_suggest(self):
         self.assertTrue(ean_ok("4780000000007"))

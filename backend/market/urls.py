@@ -29,6 +29,8 @@ urlpatterns = [
     path("seller/catalog/", views.AgentCatalogView.as_view()),
     path("seller/agent-order/", views.AgentOrderView.as_view()),
     path("seller/ikpu/search/", views.ikpu_search),
+    path("seller/ikpu/missing/", views.ikpu_missing),
+    path("seller/ikpu/apply/", views.ikpu_apply),
     path("seller/categories/<slug:slug>/ikpu/", views.category_ikpu),
     path("pay/demo/<int:payment_id>/", payments.demo_info),
     path("pay/demo/<int:payment_id>/confirm/", payments.demo_confirm),
