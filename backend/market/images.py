@@ -2,14 +2,16 @@
 import io
 import json
 import re
+import uuid
 import zipfile
 from pathlib import Path
 
 from django.conf import settings
 from django.core.files.base import ContentFile
+from django.utils import timezone
 from PIL import Image, ImageOps
 
-from .models import Product
+from .models import Product, ProductImage, sync_cover
 
 EXTS = (".jpg", ".jpeg", ".png", ".webp", ".heic", ".bmp", ".gif")
 SEED_DIR = Path(settings.BASE_DIR) / "market" / "seed" / "images"
@@ -31,13 +33,54 @@ def sku_from_filename(name: str) -> str:
     return m.group(1) if m else stem.strip()
 
 
-def set_image(product: Product, raw: bytes, sample=False):
+def add_image(product: Product, raw: bytes, sample=False, first=False) -> ProductImage | None:
+    """Galereyaga rasm qo'shadi. Haqiqiy surat qo'shilganda namunaviy (AI) rasmlar o'chiriladi.
+    Namunaviy rasm faqat galereya bo'sh bo'lsa qo'yiladi. first=True — asosiy (muqova) rasm qilib qo'yadi."""
+    if sample and product.images.exists():
+        return None
     data = normalize(raw)
-    if product.image:
-        product.image.delete(save=False)
-    product.image.save(f"{product.sku.lower()}.webp", ContentFile(data), save=False)
-    product.image_is_sample = sample
-    product.save(update_fields=["image", "image_is_sample", "updated_at"])
+    if not sample:
+        for old in product.images.filter(is_sample=True):
+            old.image.delete(save=False)
+            old.delete()
+    w = h = 0
+    try:
+        w, h = Image.open(io.BytesIO(data)).size
+    except Exception:  # noqa: BLE001
+        pass
+    n = product.images.count()
+    if first and n:
+        for i, im in enumerate(product.images.order_by("order", "id"), start=1):
+            ProductImage.objects.filter(pk=im.pk).update(order=i)
+    img = ProductImage(product=product, order=0 if first else n, is_sample=sample, width=w, height=h)
+    img.image.save(f"{product.sku.lower()}-{uuid.uuid4().hex[:6]}.webp", ContentFile(data), save=False)
+    img.save()
+    sync_cover(product)
+    Product.objects.filter(pk=product.pk).update(updated_at=timezone.now())
+    return img
+
+
+def delete_image(img: ProductImage):
+    product = img.product
+    img.image.delete(save=False)
+    img.delete()
+    for i, im in enumerate(product.images.order_by("order", "id")):
+        ProductImage.objects.filter(pk=im.pk).update(order=i)
+    sync_cover(product)
+
+
+def reorder_images(product: Product, ids):
+    order = {int(i): n for n, i in enumerate(ids)}
+    rest = len(order)
+    for im in product.images.order_by("order", "id"):
+        ProductImage.objects.filter(pk=im.pk).update(order=order.get(im.pk, rest))
+        rest += im.pk not in order
+    sync_cover(product)
+
+
+def set_image(product: Product, raw: bytes, sample=False):
+    """Eski interfeys: asosiy rasmni o'rnatish (galereya boshiga qo'shadi)."""
+    return add_image(product, raw, sample=sample, first=True)
 
 
 def iter_files(files):
@@ -56,7 +99,8 @@ def iter_files(files):
 
 
 def import_files(files, products_qs):
-    """Fayl nomi = SKU. -> {"matched": [...], "unmatched": [...], "errors": [...]}"""
+    """Fayl nomi = SKU (bir mahsulotga bir nechta rasm: MK-49-001.jpg, MK-49-001_2.jpg, MK-49-001 (3).jpg).
+    -> {"matched": [...], "unmatched": [...], "errors": [...]}"""
     by_sku = {p.sku.upper(): p for p in products_qs}
     res = {"matched": [], "unmatched": [], "errors": []}
     for name, raw in iter_files(files):
@@ -65,7 +109,7 @@ def import_files(files, products_qs):
             res["unmatched"].append(name)
             continue
         try:
-            set_image(p, raw, sample=False)
+            add_image(p, raw, sample=False)
             res["matched"].append({"file": name, "sku": p.sku, "id": p.id})
         except Exception as e:  # noqa: BLE001 — buzilgan fayl
             res["errors"].append(f"{name}: {e}")
@@ -84,9 +128,12 @@ def load_samples(overwrite_samples=False) -> int:
             continue
         raw = None
         for p in Product.objects.filter(sku__in=it["skus"]):
-            if p.image and not (overwrite_samples and p.image_is_sample):
+            imgs = list(p.images.all())
+            if imgs and not (overwrite_samples and all(i.is_sample for i in imgs)):
                 continue
+            for old in imgs:
+                delete_image(old)
             raw = raw or f.read_bytes()
-            set_image(p, raw, sample=True)
-            n += 1
+            if add_image(p, raw, sample=True):
+                n += 1
     return n

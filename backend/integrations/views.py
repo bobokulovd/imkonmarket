@@ -159,8 +159,7 @@ class ListingViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.De
         created = []
         with transaction.atomic():
             for p in products:
-                li, _ = MarketplaceListing.objects.get_or_create(product=p, account=acc, defaults={"offer_id": p.sku})
-                created.append(li)
+                created += services.ensure_listings(p, acc)
         jobs = []
         if request.data.get("publish", True):
             jobs = services.request_publish([li for li in created if li.status != MarketplaceListing.ST_ACTIVE
@@ -201,7 +200,7 @@ class ListingViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.De
         return Response({"ok": not errors, "errors": errors,
                          "preview": None if not payload else {"name": payload.name, "price": payload.price,
                                                               "currency": payload.currency,
-                                                              "stock": services.stock_for(li.account, li.product),
+                                                              "stock": services.listing_stock(li, {}),
                                                               "attributes": len(payload.attributes)}})
 
     def perform_destroy(self, li):
@@ -276,34 +275,75 @@ class JobViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.Gene
         return qs
 
 
+CARD_FIELDS = ["brand", "barcode", "country", "weight_kg", "length_cm", "width_cm", "height_cm"]
+
+
 class ProductInfoView(viewsets.ViewSet):
-    """GET/PUT /api/mp/product-info/<product_id>/ — og'irlik, o'lcham, brend, shtrix-kod, xususiyatlar."""
+    """GET/PUT /api/mp/product-info/<product_id>/ — marketplace ma'lumotlari.
+
+    Brend, shtrix-kod, og'irlik/o'lcham endi mahsulot kartochkasida (Product) saqlanadi; bu yerda faqat
+    «har bir mahsulotda kiritiladi» turidagi marketplace'ga xos xususiyatlar (attributes) qoladi.
+    """
 
     permission_classes = [IsSellerUser]
 
     def _product(self, request, pk):
         s = seller_of(request.user)
         qs = Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)
-        return get_object_or_404(qs, pk=pk)
+        return get_object_or_404(qs.prefetch_related("images"), pk=pk)
 
-    def retrieve(self, request, pk=None):
-        p = self._product(request, pk)
-        info = ProductMarketInfo.objects.filter(product=p).first() or ProductMarketInfo(product=p)
+    def _data(self, request, p, info):
         mappings = CategoryMapping.objects.filter(category=p.category).prefetch_related("attributes")
         need = [{"marketplace": m.marketplace, "key": f"{m.marketplace}:{a.external_id}", "name": a.name,
                  "required": a.required, "values": a.values[:200] if a.values else []}
                 for m in mappings for a in m.attributes.all() if a.source == AttributeMapping.SRC_PRODUCT]
-        return Response({**ProductInfoSerializer(info).data, "product_attributes": need,
-                         "listings": ListingSerializer(p.mp_listings.select_related("account__seller", "product__category"),
-                                                       many=True, context={"request": request}).data})
+        return {**{f: getattr(p, f) for f in CARD_FIELDS}, "attributes": info.attributes or {},
+                "product_attributes": need,
+                "listings": ListingSerializer(p.mp_listings.select_related("account__seller", "product__category", "variant"),
+                                              many=True, context={"request": request}).data}
+
+    def retrieve(self, request, pk=None):
+        p = self._product(request, pk)
+        info = ProductMarketInfo.objects.filter(product=p).first() or ProductMarketInfo(product=p)
+        return Response(self._data(request, p, info))
 
     def update(self, request, pk=None):
         p = self._product(request, pk)
         info, _ = ProductMarketInfo.objects.get_or_create(product=p)
         ser = ProductInfoSerializer(info, data=request.data, partial=True)
         ser.is_valid(raise_exception=True)
-        ser.save()
-        return Response(ser.data)
+        upd = {f: ser.validated_data[f] for f in CARD_FIELDS if f in ser.validated_data}
+        if upd:
+            Product.objects.filter(pk=p.pk).update(**upd)
+            for k, v in upd.items():
+                setattr(p, k, v)
+        if "attributes" in ser.validated_data:
+            info.attributes = ser.validated_data["attributes"]
+            info.save(update_fields=["attributes", "updated_at"])
+        return Response(self._data(request, p, info))
+
+    @action(detail=True, methods=["get"])
+    def readiness(self, request, pk=None):
+        """Kartochka to'liqligi (%) va har bir kabinet bo'yicha nima yetishmaydi."""
+        return Response(services.readiness(self._product(request, pk)))
+
+    @action(detail=True, methods=["post"], url_path="publish-all")
+    def publish_all(self, request, pk=None):
+        """Bir tugma: muassasaning barcha faol kabinetlariga joylash. {accounts: [id..]} — ixtiyoriy filtr."""
+        p = self._product(request, pk)
+        accs = MarketplaceAccount.objects.filter(seller_id=p.seller_id, is_enabled=True, status=MarketplaceAccount.ST_ACTIVE)
+        if request.data.get("accounts"):
+            accs = accs.filter(pk__in=[int(x) for x in request.data["accounts"] if str(x).isdigit()])
+        if not accs:
+            raise ValidationError({"detail": "Faol marketplace kabineti yo'q"})
+        listings = []
+        with transaction.atomic():
+            for acc in accs:
+                listings += services.ensure_listings(p, acc)
+        todo = [li for li in listings if li.status != MarketplaceListing.ST_ACTIVE or not li.external_sku]
+        jobs = services.request_publish(todo) if todo else []
+        return Response({"listings": ListingSerializer(listings, many=True, context={"request": request}).data,
+                         "jobs": JobSerializer(jobs, many=True).data}, status=status.HTTP_202_ACCEPTED)
 
 
 # ------------------------------------------------------------ operator only
@@ -368,6 +408,15 @@ class MappingViewSet(viewsets.ModelViewSet):
         if acc:
             return enqueue("fetch_attributes", account=acc, payload={"mapping_id": m.pk}, dedupe=f"attrs:{m.pk}")
         return None
+
+    @action(detail=True, methods=["post"], url_path="auto-map")
+    def auto_map(self, request, pk=None):
+        """Xususiyatlarni ImkonMarket lug'atiga nomi bo'yicha qayta moslash (sozlanganlarga tegmaydi)."""
+        from .automap import auto_map
+        m = self.get_object()
+        res = auto_map(m)
+        return Response({**res, "mapping": MappingSerializer(CategoryMapping.objects.prefetch_related(
+            "attributes__value_map").get(pk=m.pk)).data})
 
     @action(detail=True, methods=["post"], url_path="fetch-attributes")
     def fetch_attributes(self, request, pk=None):

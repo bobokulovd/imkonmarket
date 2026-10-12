@@ -152,9 +152,12 @@ class CategoryMapping(models.Model):
 
 
 class AttributeMapping(models.Model):
-    SRC_CONST, SRC_FIELD, SRC_PRODUCT = "const", "field", "product"
-    SOURCES = [(SRC_CONST, "Doimiy qiymat"), (SRC_FIELD, "Mahsulot maydoni"), (SRC_PRODUCT, "Har bir mahsulotda kiritiladi")]
-    FIELDS = ["name", "spec", "description", "unit", "sku", "brand", "country", "barcode", "weight_kg"]
+    SRC_CONST, SRC_FIELD, SRC_PRODUCT, SRC_ATTR = "const", "field", "product", "attr"
+    SOURCES = [(SRC_CONST, "Doimiy qiymat"), (SRC_FIELD, "Mahsulot maydoni"), (SRC_PRODUCT, "Har bir mahsulotda kiritiladi"),
+               (SRC_ATTR, "ImkonMarket xususiyati")]
+    # group — variantlarni bitta kartochkaga birlashtiruvchi kalit (asosiy mahsulot SKU'si)
+    FIELDS = ["name", "spec", "description", "unit", "sku", "group", "brand", "country", "barcode", "weight_kg",
+              "length_cm", "width_cm", "height_cm", "ikpu"]
 
     mapping = models.ForeignKey(CategoryMapping, on_delete=models.CASCADE, related_name="attributes")
     external_id = models.CharField(max_length=64)
@@ -209,6 +212,9 @@ class MarketplaceListing(models.Model):
                 (ST_REJECTED, "Rad etilgan"), (ST_ERROR, "Xato")]
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="mp_listings")
+    # variantli mahsulotda har bir variant — alohida taklif (offer_id = variant SKU)
+    variant = models.ForeignKey("market.ProductVariant", on_delete=models.CASCADE, null=True, blank=True,
+                                related_name="mp_listings")
     account = models.ForeignKey(MarketplaceAccount, on_delete=models.CASCADE, related_name="listings")
     offer_id = models.CharField("Sotuvchi artikuli (offer_id / vendorCode)", max_length=64)
     external_id = models.CharField("Marketplace ID (product_id / nmID / productId)", max_length=64, blank=True)
@@ -227,8 +233,19 @@ class MarketplaceListing(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = [("product", "account"), ("account", "offer_id")]
+        unique_together = [("account", "offer_id")]
+        constraints = [
+            models.UniqueConstraint(fields=["product", "account"], condition=models.Q(variant__isnull=True),
+                                    name="mp_listing_product_account"),
+            models.UniqueConstraint(fields=["variant", "account"], condition=models.Q(variant__isnull=False),
+                                    name="mp_listing_variant_account"),
+        ]
         ordering = ["-id"]
+
+    @property
+    def holder(self):
+        """Narx/qoldiq manbai: variant yoki mahsulot."""
+        return self.variant if self.variant_id else self.product
 
     def clean(self):
         if self.product_id and self.account_id and self.product.seller_id != self.account.seller_id:

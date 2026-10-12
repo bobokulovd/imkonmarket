@@ -93,13 +93,21 @@ class ListingSerializer(serializers.ModelSerializer):
     product = serializers.SerializerMethodField()
     account_name = serializers.CharField(source="account.__str__", read_only=True)
     marketplace = serializers.CharField(source="account.marketplace", read_only=True)
+    variant = serializers.SerializerMethodField()
 
     class Meta:
         model = MarketplaceListing
-        fields = ["id", "product", "account", "account_name", "marketplace", "offer_id", "external_id", "external_sku",
+        fields = ["id", "product", "variant", "account", "account_name", "marketplace", "offer_id", "external_id", "external_sku",
                   "status", "last_error", "pushed_price", "pushed_currency", "pushed_stock", "price_synced_at",
                   "stock_synced_at", "last_synced_at", "created_at"]
         read_only_fields = fields
+
+    def get_variant(self, o):
+        v = o.variant
+        if v is None:
+            return None
+        return {"id": v.id, "sku": v.sku, "attributes": v.attributes, "price": v.effective_price, "stock": v.stock,
+                "reserved": v.reserved, "available": v.available}
 
     def get_product(self, o):
         p = o.product
@@ -164,8 +172,15 @@ class AttributeSerializer(serializers.ModelSerializer):
         read_only_fields = ["external_id", "name", "required", "is_dictionary", "multi", "value_type", "unit", "values"]
 
     def validate(self, attrs):
-        if attrs.get("source") == AttributeMapping.SRC_FIELD and attrs.get("field") not in AttributeMapping.FIELDS:
+        src = attrs.get("source", getattr(self.instance, "source", None))
+        fld = attrs.get("field", getattr(self.instance, "field", ""))
+        if src == AttributeMapping.SRC_FIELD and fld not in AttributeMapping.FIELDS:
             raise serializers.ValidationError({"field": f"one of {AttributeMapping.FIELDS}"})
+        if src == AttributeMapping.SRC_ATTR:
+            from market.models import AttributeDef
+            cat = self.instance.mapping.category_id if self.instance else None
+            if not AttributeDef.objects.filter(category_id=cat, code=fld).exists():
+                raise serializers.ValidationError({"field": "Kategoriyada bunday xususiyat yo'q"})
         return attrs
 
 

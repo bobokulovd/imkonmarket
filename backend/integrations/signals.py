@@ -3,7 +3,7 @@ from django.db import transaction
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
-from market.models import Product
+from market.models import Product, ProductVariant
 
 from .models import MarketplaceAccount
 
@@ -24,3 +24,10 @@ def product_saved(sender, instance, created, **kwargs):
     from .services import notify_products_changed
     pk = instance.pk
     transaction.on_commit(lambda: notify_products_changed([pk]))
+
+
+@receiver(post_save, sender=ProductVariant)
+def variant_saved(sender, instance, created, **kwargs):
+    from .services import notify_products_changed
+    pid = instance.product_id
+    transaction.on_commit(lambda: notify_products_changed([pid]))

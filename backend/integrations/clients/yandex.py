@@ -140,17 +140,18 @@ class YandexClient(MarketplaceClient):
             offer["barcodes"] = [it.barcode]
         if it.country:
             offer["manufacturerCountries"] = [it.country]
+        if it.ikpu and len(it.ikpu) == 17 and it.ikpu.isdigit():
+            offer["commodityCodes"] = [{"code": it.ikpu, "type": "IKPU_CODE"}]
         if all(x is not None for x in (it.length_cm, it.width_cm, it.height_cm, it.weight_kg)):
             offer["weightDimensions"] = {"length": num(it.length_cm), "width": num(it.width_cm),
                                          "height": num(it.height_cm), "weight": num(it.weight_kg)}
         params = []
         for a in it.attributes:
-            pv = {"parameterId": int(a["id"])}
-            if a.get("value_id"):
-                pv["valueId"] = int(a["value_id"])
+            ids, vals = a.get("value_id"), a.get("value")
+            if ids:
+                params += [{"parameterId": int(a["id"]), "valueId": int(x)} for x in (ids if isinstance(ids, list) else [ids])]
             else:
-                pv["value"] = str(a.get("value"))
-            params.append(pv)
+                params += [{"parameterId": int(a["id"]), "value": str(x)} for x in (vals if isinstance(vals, list) else [vals])]
         m = {"offer": offer}
         if params:
             m["offer"]["parameterValues"] = params

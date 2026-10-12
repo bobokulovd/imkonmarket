@@ -10,6 +10,7 @@ router.register("sellers", views.SellerViewSet, basename="seller")
 router.register("seller/products", views.SellerProductViewSet, basename="seller-product")
 router.register("seller/applications", views.SellerApplicationViewSet, basename="seller-application")
 router.register("seller/contracts", views.SellerContractViewSet, basename="seller-contract")
+router.register("attributes", views.AttributeDefViewSet, basename="attribute-def")
 
 urlpatterns = [
     path("meta/", views.meta),
@@ -27,6 +28,8 @@ urlpatterns = [
     path("seller/dashboard/", views.DashboardView.as_view()),
     path("seller/catalog/", views.AgentCatalogView.as_view()),
     path("seller/agent-order/", views.AgentOrderView.as_view()),
+    path("seller/ikpu/search/", views.ikpu_search),
+    path("seller/categories/<slug:slug>/ikpu/", views.category_ikpu),
     path("pay/demo/<int:payment_id>/", payments.demo_info),
     path("pay/demo/<int:payment_id>/confirm/", payments.demo_confirm),
     path("payments/payme/", payments.payme_endpoint),

@@ -8,7 +8,7 @@ from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 
 from .contract_pdf import render_contract
-from .models import Application, ApplicationItem, Contract, Payment, Product, Seller, StatusLog
+from .models import Application, ApplicationItem, Contract, Payment, Product, ProductVariant, Seller, StatusLog
 
 
 def _next_app_number():
@@ -51,6 +51,31 @@ def validate_buyer(data):
         raise ValidationError(errors)
 
 
+def _item_name(p, v):
+    """Variantli pozitsiya nomi: "Kreslo — Qora, 48" (har bir tilda)."""
+    if not v or not v.attributes:
+        return p.name
+    from .models import AttributeDef
+    defs = {d.code: d for d in AttributeDef.objects.filter(category_id=p.category_id, code__in=list(v.attributes))}
+    out = {}
+    for lang, base in (p.name or {}).items():
+        parts = [defs[k].display(val, lang) if k in defs else str(val) for k, val in v.attributes.items()]
+        out[lang] = f"{base} — {', '.join(x for x in parts if x)}"
+    return out
+
+
+def _holder(it):
+    """Qoldiq egasi: variant bo'lsa — variant, aks holda mahsulot (qulflangan holda)."""
+    if it.variant_id:
+        return ProductVariant.objects.select_for_update().get(pk=it.variant_id)
+    return Product.objects.select_for_update().get(pk=it.product_id)
+
+
+def _after_stock_change(holder):
+    if isinstance(holder, ProductVariant):
+        holder.product.sync_from_variants()
+
+
 @transaction.atomic
 def create_applications(data, user=None, agent: Seller | None = None):
     """Savatni sotuvchilar bo'yicha bo'lib arizalar yaratadi.
@@ -64,19 +89,30 @@ def create_applications(data, user=None, agent: Seller | None = None):
         raise ValidationError({"items": "empty"})
     ids = [int(i["product"]) for i in items]
     products = {p.id: p for p in Product.objects.select_for_update().select_related("seller").filter(id__in=ids, is_active=True)}
+    vids = [int(i["variant"]) for i in items if i.get("variant")]
+    variants = {v.id: v for v in ProductVariant.objects.select_for_update().filter(id__in=vids, is_active=True)}
     by_seller = defaultdict(list)
     for it in items:
         p = products.get(int(it["product"]))
         if not p:
             raise ValidationError({"items": f"product {it['product']} not found"})
+        v = None
+        if it.get("variant"):
+            v = variants.get(int(it["variant"]))
+            if not v or v.product_id != p.id:
+                raise ValidationError({"items": f"variant {it['variant']} not found"})
+        elif p.has_variants:
+            raise ValidationError({"items": f"{p.sku}: variant required", "code": "variant", "sku": p.sku})
         qty = int(it.get("qty") or 0)
         if qty < max(p.min_order, 1):
             raise ValidationError({"items": f"{p.sku}: min {p.min_order}"})
-        if p.available is not None and qty > p.available:
-            raise ValidationError({"items": f"{p.sku}: available {p.available}", "code": "stock", "sku": p.sku, "available": p.available})
+        h = v or p
+        if h.available is not None and qty > h.available:
+            raise ValidationError({"items": f"{h.sku}: available {h.available}", "code": "stock", "sku": h.sku, "available": h.available})
+        base = v.effective_price if v else p.price
         # narxi kelishiladigan mahsulotda vositachi narxni kiritadi; narxi belgilangan mahsulot narxi o'zgarmaydi
-        price = it.get("price") if (agent and p.price is None and it.get("price") not in (None, "")) else p.price
-        by_seller[p.seller_id].append((p, qty, Decimal(str(price)) if price is not None else None))
+        price = it.get("price") if (agent and base is None and it.get("price") not in (None, "")) else base
+        by_seller[p.seller_id].append((p, v, qty, Decimal(str(price)) if price is not None else None))
 
     created = []
     for seller_id, rows in by_seller.items():
@@ -88,9 +124,9 @@ def create_applications(data, user=None, agent: Seller | None = None):
         )
         app.lang = data.get("lang") or "uz"
         app.save()
-        for p, qty, price in rows:
+        for p, v, qty, price in rows:
             ApplicationItem.objects.create(
-                application=app, product=p, name=p.name, spec=p.spec, unit=p.unit, qty=qty, price=price,
+                application=app, product=p, variant=v, name=_item_name(p, v), spec=p.spec, unit=p.unit, qty=qty, price=price,
             )
         app.recalc()
         app.save()
@@ -103,7 +139,6 @@ def create_applications(data, user=None, agent: Seller | None = None):
     return created
 
 
-@transaction.atomic
 def _notify_marketplaces(product_ids):
     """Band qilingan qoldiq marketplace'larga ham yetib borsin (integrations ilovasi, worker orqali)."""
     ids = list(product_ids)
@@ -114,6 +149,7 @@ def _notify_marketplaces(product_ids):
     transaction.on_commit(go)
 
 
+@transaction.atomic
 def confirm_application(app: Application, payload: dict, user=None) -> Contract:
     """Sotuvchi arizani tasdiqlaydi: narx/miqdorni aniqlashtiradi, shartnoma yaratiladi, qoldiq band qilinadi."""
     app = Application.objects.select_for_update().get(pk=app.pk)
@@ -133,11 +169,12 @@ def confirm_application(app: Application, payload: dict, user=None) -> Contract:
         raise ValidationError({"items": "set price for all items"})
     # qoldiqni band qilish
     for it in app.items.select_related("product"):
-        p = Product.objects.select_for_update().get(pk=it.product_id)
-        if p.available is not None:
-            if it.qty > p.available:
-                raise ValidationError({"items": f"{p.sku}: available {p.available}"})
-            Product.objects.filter(pk=p.pk).update(reserved=F("reserved") + it.qty)
+        h = _holder(it)
+        if h.available is not None:
+            if it.qty > h.available:
+                raise ValidationError({"items": f"{h.sku}: available {h.available}"})
+            type(h).objects.filter(pk=h.pk).update(reserved=F("reserved") + it.qty)
+            _after_stock_change(h)
     _notify_marketplaces([it.product_id for it in app.items.all()])
 
     def _int(key, default, lo, hi):
@@ -225,12 +262,13 @@ def ship_contract(contract: Contract, user=None):
     if c.buyer_type == "b2c" and c.status != Contract.ST_PAID:
         raise ValidationError({"status": "b2c requires payment before shipping"})
     for it in c.application.items.all():
-        p = Product.objects.select_for_update().get(pk=it.product_id)
-        if p.stock is not None:
-            p.stock = max(p.stock - it.qty, 0)
-            p.reserved = max(p.reserved - it.qty, 0)
-        p.sold += it.qty
-        p.save(update_fields=["stock", "reserved", "sold"])
+        h = _holder(it)
+        if h.stock is not None:
+            h.stock = max(h.stock - it.qty, 0)
+            h.reserved = max(h.reserved - it.qty, 0)
+        h.sold += it.qty
+        h.save(update_fields=["stock", "reserved", "sold"])
+        _after_stock_change(h)
     c.status = Contract.ST_SHIPPED
     c.shipped_at = timezone.now()
     c.save()
@@ -253,10 +291,11 @@ def cancel_contract(contract: Contract, reason="", user=None):
     if c.status in (Contract.ST_SHIPPED, Contract.ST_DONE, Contract.ST_CANCELLED):
         raise ValidationError({"status": f"contract is {c.status}"})
     for it in c.application.items.all():
-        p = Product.objects.select_for_update().get(pk=it.product_id)
-        if p.stock is not None:
-            p.reserved = max(p.reserved - it.qty, 0)
-            p.save(update_fields=["reserved"])
+        h = _holder(it)
+        if h.stock is not None:
+            h.reserved = max(h.reserved - it.qty, 0)
+            h.save(update_fields=["reserved"])
+            _after_stock_change(h)
     c.status = Contract.ST_CANCELLED
     c.save()
     app = c.application

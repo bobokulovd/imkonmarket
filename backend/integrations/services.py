@@ -11,7 +11,7 @@ from django.db import transaction
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 
-from market.models import Product
+from market.models import AttributeDef, Product, ProductVariant
 from market.translit import pick
 
 from . import currency
@@ -47,27 +47,41 @@ def public_media(path):
     return base + path
 
 
-def stock_for(account: MarketplaceAccount, product: Product, own_reserved: int = 0) -> int:
-    if not product.is_active or not product.seller.is_active:
+def stock_key(product_id, variant_id=None) -> str:
+    """Qoldiq snapshot kaliti: mahsulot — "12", variant — "v34"."""
+    return f"v{variant_id}" if variant_id else str(product_id)
+
+
+def stock_for(account: MarketplaceAccount, product: Product, own_reserved: int = 0, variant=None) -> int:
+    if not product.is_active or not product.seller.is_active or (variant is not None and not variant.is_active):
         return 0
-    if product.stock is None:
+    h = variant or product
+    if h.stock is None:
         return int(account.mto_stock or 0)
-    return max((product.stock or 0) - (product.reserved or 0) + own_reserved - (account.stock_buffer or 0), 0)
+    return max((h.stock or 0) - (h.reserved or 0) + own_reserved - (account.stock_buffer or 0), 0)
 
 
 def own_reserved(account: MarketplaceAccount) -> dict:
-    """Shu kabinetning o'z band buyurtmalari {product_id: qty} (faqat OWN_RESERVE_INCLUDED marketplace'lar uchun)."""
+    """Shu kabinetning o'z band buyurtmalari {stock_key: qty} (faqat OWN_RESERVE_INCLUDED marketplace'lar uchun)."""
     if account.marketplace not in OWN_RESERVE_INCLUDED and not (account.options or {}).get("stock_add_own_reserved"):
         return {}
     out = {}
     for items in O.objects.filter(account=account, stock_state=O.STOCK_RESERVED).values_list("stock_items", flat=True):
-        for pid, q in (items or {}).items():
-            out[int(pid)] = out.get(int(pid), 0) + int(q)
+        for k, q in (items or {}).items():
+            out[str(k)] = out.get(str(k), 0) + int(q)
     return out
 
 
-def price_for(account, product):
-    return currency.convert(account, product.price)
+def listing_price(li):
+    return li.variant.effective_price if li.variant_id else li.product.price
+
+
+def price_for(account, product, variant=None):
+    return currency.convert(account, variant.effective_price if variant is not None else product.price)
+
+
+def listing_stock(li, own: dict) -> int:
+    return stock_for(li.account, li.product, own.get(stock_key(li.product_id, li.variant_id), 0), variant=li.variant)
 
 
 def ref(listing: L, price=None, stock=None) -> ListingRef:
@@ -76,50 +90,88 @@ def ref(listing: L, price=None, stock=None) -> ListingRef:
                       task_id=listing.task_id, price=price, currency=listing.account.currency, stock=stock)
 
 
+def product_images(p, variant=None) -> list:
+    """Marketplace'ga yuboriladigan rasmlar: faqat haqiqiy suratlar (namunaviy AI rasmlar yuborilmaydi).
+    Variant rasmi bo'lsa — birinchi o'rinda."""
+    imgs = [im for im in p.images.all() if not im.is_sample]
+    if variant is not None and variant.image_id and not variant.image.is_sample:
+        imgs = [variant.image] + [im for im in imgs if im.pk != variant.image_id]
+    urls = [public_media(im.image.url) for im in imgs if im.image]
+    if not urls and p.image and not p.image_is_sample:
+        urls = [public_media(p.image.url)]
+    return urls
+
+
+def merged_attributes(p, variant=None) -> dict:
+    return {**(p.attributes or {}), **((variant.attributes or {}) if variant is not None else {})}
+
+
 def build_payload(listing: L):
     """-> (ProductPayload | None, [xatolar]). Xatolar muassasaga tushunarli tilda."""
-    acc, p = listing.account, listing.product
+    acc, p, v = listing.account, listing.product, listing.variant
     errors = []
     info = ProductMarketInfo.objects.filter(product=p).first() or ProductMarketInfo(product=p)
     lang = MP_LANG[acc.marketplace]
     if acc.marketplace == "yandex" and (acc.options or {}).get("language") == "UZ":
         lang = "uz"
+    defs = {d.code: d for d in AttributeDef.objects.filter(category_id=p.category_id)}
+    attrs_all = merged_attributes(p, v)
     name = pick(p.name, lang)
     spec = pick(p.spec, lang)
     title = f"{name} {spec}".strip() if spec and spec not in name else name
+    if v is not None and v.attributes:
+        suffix = ", ".join(x for x in (defs[k].display(val, lang) if k in defs else str(val)
+                                       for k, val in v.attributes.items()) if x)
+        title = f"{title}, {suffix}" if suffix else title
     description = pick(p.description, lang) or title
-    if p.price is None:
+    if listing_price(listing) is None:
         errors.append("Narx kiritilmagan (narx «kelishiladi»)")
     price = None
     try:
-        price = price_for(acc, p)
+        price = price_for(acc, p, v)
     except currency.RateUnavailable as e:
         errors.append(str(e))
-    images = [public_media(p.image.url)] if p.image and not p.image_is_sample else []
-    if not p.image:
-        errors.append("Mahsulot rasmi yo'q")
-    elif p.image_is_sample:
-        errors.append("Namunaviy (AI) rasm marketpleysga yuborilmaydi — mahsulotning haqiqiy suratini yuklang")
+    images = product_images(p, v)
+    if not images:
+        if p.image_is_sample or any(im.is_sample for im in p.images.all()):
+            errors.append("Namunaviy (AI) rasm marketpleysga yuborilmaydi — mahsulotning haqiqiy suratini yuklang")
+        else:
+            errors.append("Mahsulot rasmi yo'q")
     mapping = CategoryMapping.objects.filter(category=p.category, marketplace=acc.marketplace).first()
     if not mapping:
         errors.append(f"«{pick(p.category.name, 'uz')}» kategoriyasi {acc.get_marketplace_display()} kategoriyasiga moslanmagan")
-    if acc.marketplace in NEEDS_DIMS and None in (info.weight_kg, info.length_cm, info.width_cm, info.height_cm):
-        errors.append("Og'irlik va o'lchamlar (uzunlik, kenglik, balandlik) kiritilmagan")
+    if acc.marketplace in NEEDS_DIMS and None in (p.weight_kg, p.length_cm, p.width_cm, p.height_cm):
+        errors.append("Qadoq og'irligi va o'lchamlari (uzunlik, kenglik, balandlik) kiritilmagan")
+    barcode = (v.barcode if v is not None and v.barcode else "") or (p.barcode if v is None else "") \
+        or (listing.external_meta or {}).get("barcode", "")
+    ctx = {"lang": lang, "name": name, "spec": spec, "description": description, "barcode": barcode,
+           "attrs": attrs_all, "defs": defs, "info": info}
     attrs = []
     if mapping:
         for am in mapping.attributes.all():
-            val, val_id = attribute_value(am, p, info, name, spec, description)
-            if val in (None, "") and not val_id:
+            val, val_id = attribute_value(am, p, ctx, v)
+            if val in (None, "", []) and not val_id:
                 if am.required:
                     errors.append(f"Majburiy xususiyat to'ldirilmagan: {am.name}")
                 continue
             if am.is_dictionary and not val_id:
-                vm = am.value_map.filter(our_value__iexact=str(val)).first()
-                if vm:
-                    val_id, val = vm.external_value_id, vm.external_value or val
-                elif am.required:
-                    errors.append(f"«{am.name}» uchun «{val}» qiymati lug'atda moslanmagan")
+                vals = val if isinstance(val, list) else [val]
+                ids, names, missing = [], [], []
+                for one in vals:
+                    vm = _value_lookup(am, one, ctx)
+                    if vm:
+                        ids.append(vm.external_value_id)
+                        names.append(vm.external_value or str(one))
+                    else:
+                        missing.append(str(one))
+                if missing and am.required:
+                    errors.append(f"«{am.name}» uchun «{', '.join(missing)}» qiymati lug'atda moslanmagan")
                     continue
+                if not ids:
+                    continue
+                val, val_id = (names, ids) if am.multi and len(ids) > 1 else (names[0], ids[0])
+            elif isinstance(val, list):
+                val = val if am.multi else ", ".join(str(x) for x in val)
             attrs.append({"id": am.external_id, "value": val, "value_id": val_id, "multi": am.multi,
                           "type": "number" if (am.value_type or "").lower() in ("number", "numeric", "decimal", "integer") else "string"})
     if errors:
@@ -127,27 +179,144 @@ def build_payload(listing: L):
     return ProductPayload(
         listing_id=listing.pk, offer_id=listing.offer_id, name=title, description=description, price=price,
         currency=acc.currency, images=images, category_id=mapping.external_id, type_id=mapping.external_type_id,
-        attributes=attrs, barcode=info.barcode or (listing.external_meta or {}).get("barcode", ""), brand=info.brand,
-        country=info.country, weight_kg=info.weight_kg, length_cm=info.length_cm, width_cm=info.width_cm,
-        height_cm=info.height_cm, vat=(acc.options or {}).get("vat", ""), external_id=listing.external_id,
+        attributes=attrs, barcode=barcode, brand=p.brand,
+        country=p.country, weight_kg=p.weight_kg, length_cm=p.length_cm, width_cm=p.width_cm,
+        height_cm=p.height_cm, vat=(acc.options or {}).get("vat", ""), external_id=listing.external_id,
         external_sku=listing.external_sku, external_meta=listing.external_meta or {},
+        group_id=p.sku if v is not None else "", ikpu=p.ikpu,
     ), []
 
 
-def attribute_value(am: AttributeMapping, p, info, name, spec, description):
+def _value_lookup(am, one, ctx):
+    """Qiymat moslamasi: avval kod bo'yicha ("qora"), keyin nomi bo'yicha ("Черный" / "Qora")."""
+    vm = am.value_map.filter(our_value__iexact=str(one)).first()
+    d = ctx["defs"].get(am.field) if am.source == AttributeMapping.SRC_ATTR else None
+    if vm is None and d is not None and d.type == AttributeDef.T_ENUM:
+        for lang in ("ru", "uz"):
+            vm = am.value_map.filter(our_value__iexact=d.option_name(one, lang)).first()
+            if vm:
+                break
+    return vm
+
+
+def attribute_value(am: AttributeMapping, p, ctx, variant=None):
+    """-> (qiymat, lug'at_id). attr manbasida enum qiymati — AttributeValueMap'dagi our_value (variant kodi)."""
     if am.source == AttributeMapping.SRC_CONST:
         return am.value, am.value_id
     if am.source == AttributeMapping.SRC_PRODUCT:
-        return (info.attributes or {}).get(f"{am.mapping.marketplace}:{am.external_id}"), ""
+        return (ctx["info"].attributes or {}).get(f"{am.mapping.marketplace}:{am.external_id}"), ""
+    if am.source == AttributeMapping.SRC_ATTR:
+        d = ctx["defs"].get(am.field)
+        val = ctx["attrs"].get(am.field)
+        if val in (None, "", []):
+            return None, ""
+        if d is None:
+            return val, ""
+        if d.type == AttributeDef.T_ENUM:
+            vals = val if isinstance(val, list) else [val]
+            if am.is_dictionary:
+                return (vals if len(vals) > 1 else vals[0]), ""
+            names = [d.option_name(x, ctx["lang"]) for x in vals]
+            return (names if am.multi else ", ".join(names)), ""
+        if d.type == AttributeDef.T_BOOL:
+            yes = val in (True, "true", "1", 1)
+            if am.is_dictionary:
+                return ("true" if yes else "false"), ""
+            return ({"ru": "Да", "uz": "Ha"}.get(ctx["lang"], "Да") if yes else {"ru": "Нет", "uz": "Yo'q"}.get(ctx["lang"], "Нет")), ""
+        return (val if not isinstance(val, list) else ", ".join(str(x) for x in val)), ""
     f = am.field
+    num = lambda x: str(x) if x is not None else None  # noqa: E731
     return {
-        "name": name, "spec": spec, "description": description, "unit": p.unit, "sku": p.sku,
-        "brand": info.brand, "country": info.country, "barcode": info.barcode,
-        "weight_kg": str(info.weight_kg) if info.weight_kg is not None else None,
+        "name": ctx["name"], "spec": ctx["spec"], "description": ctx["description"], "unit": p.unit,
+        "sku": variant.sku if variant is not None else p.sku, "group": p.sku,
+        "brand": p.brand, "country": p.country, "barcode": ctx["barcode"], "ikpu": p.ikpu,
+        "weight_kg": num(p.weight_kg), "length_cm": num(p.length_cm), "width_cm": num(p.width_cm),
+        "height_cm": num(p.height_cm),
     }.get(f), ""
 
 
 # ---------------------------------------------------------- public actions
+def ensure_listings(product, account) -> list:
+    """Mahsulot uchun kabinetdagi listinglar: variantli bo'lsa — har bir faol variantga bittadan (offer_id = variant SKU)."""
+    out = []
+    variants = list(product.variants.filter(is_active=True)) if product.has_variants else []
+    if variants:
+        for v in variants:
+            li, _ = L.objects.get_or_create(product=product, variant=v, account=account, defaults={"offer_id": v.sku})
+            out.append(li)
+    else:
+        li, _ = L.objects.get_or_create(product=product, variant=None, account=account, defaults={"offer_id": product.sku})
+        out.append(li)
+    return out
+
+
+def card_checks(p) -> list:
+    """Marketplace'dan qat'i nazar kartochka to'liqligi: [{key, ok, label, weight}]."""
+    from market.models import AttributeDef
+    defs = list(AttributeDef.objects.filter(category_id=p.category_id))
+    variants = list(p.variants.filter(is_active=True)) if p.has_variants else []
+    imgs = [im for im in p.images.all()]
+    real = [im for im in imgs if not im.is_sample]
+    attrs = p.attributes or {}
+    req_plain = [d for d in defs if d.required and not d.variant]
+    missing = [pick(d.name, "uz") for d in req_plain if attrs.get(d.code) in (None, "", [])]
+    axes = [d for d in defs if d.variant]
+    var_missing = [v.sku for v in variants for d in axes if d.required and (v.attributes or {}).get(d.code) in (None, "")]
+    if variants:
+        no_bc = [v.sku for v in variants if not v.barcode]
+    else:
+        no_bc = [] if p.barcode else [p.sku]
+    no_price = [v.sku for v in variants if v.effective_price is None] if variants else ([] if p.price is not None else [p.sku])
+    desc = pick(p.description, "ru") or pick(p.description, "uz")
+    return [
+        {"key": "images", "ok": len(real) >= 1, "weight": 3,
+         "label": f"Haqiqiy suratlar: {len(real)} ta" + (" (tavsiya: 3+)" if len(real) < 3 else "")
+         + (" — namunaviy (AI) rasm marketpleysga yuborilmaydi" if imgs and not real else "")},
+        {"key": "description", "ok": len(desc or "") >= 50, "weight": 1, "label": "Tavsif (kamida 50 belgi)"},
+        {"key": "price", "ok": not no_price, "weight": 2, "label": "Narx" + (f": yo'q — {', '.join(no_price[:5])}" if no_price else "")},
+        {"key": "brand", "ok": bool(p.brand), "weight": 1, "label": "Brend / ishlab chiqaruvchi"},
+        {"key": "ikpu", "ok": bool(p.ikpu) and p.ikpu_confirmed, "weight": 2,
+         "label": "IKPU (MXIK) kodi" + (" — tavsiya, tasdiqlang" if p.ikpu and not p.ikpu_confirmed else "")},
+        {"key": "barcode", "ok": not no_bc, "weight": 1,
+         "label": "Shtrix-kod (EAN-13)" + (f": yo'q — {', '.join(no_bc[:5])}" if no_bc else "")},
+        {"key": "dims", "ok": None not in (p.weight_kg, p.length_cm, p.width_cm, p.height_cm), "weight": 2,
+         "label": "Qadoq og'irligi va o'lchamlari"},
+        {"key": "attributes", "ok": not missing, "weight": 3,
+         "label": "Majburiy xususiyatlar" + (f": {', '.join(missing)}" if missing else "")},
+        {"key": "variants", "ok": not var_missing, "weight": 1,
+         "label": "Variantlar" + (f": o'q qiymati yo'q — {', '.join(var_missing[:5])}" if var_missing else "")},
+    ]
+
+
+def readiness(p) -> dict:
+    """Mahsulot kartochkasining to'liqligi va har bir kabinet bo'yicha joylashga tayyorligi (tashqi so'rovsiz)."""
+    checks = card_checks(p)
+    total = sum(c["weight"] for c in checks)
+    score = round(100 * sum(c["weight"] for c in checks if c["ok"]) / total) if total else 0
+    mps = []
+    accounts = MarketplaceAccount.objects.filter(seller_id=p.seller_id, is_enabled=True)
+    variants = list(p.variants.filter(is_active=True)) if p.has_variants else [None]
+    existing = {(li.account_id, li.variant_id): li for li in p.mp_listings.select_related("variant")}
+    for acc in accounts:
+        caps = capabilities(acc)
+        errors, listings = [], []
+        for v in variants:
+            li = existing.get((acc.pk, v.pk if v else None)) or L(product=p, variant=v, account=acc,
+                                                                    offer_id=v.sku if v else p.sku)
+            if li.pk:
+                listings.append({"id": li.pk, "offer_id": li.offer_id, "status": li.status, "error": li.last_error})
+            if CAP_CREATE in caps:
+                _, errs = build_payload(li)
+                errors += [e for e in errs if e not in errors]
+            elif not li.external_sku:
+                msg = f"{acc.get_marketplace_display()}: kartochkani kabinetda yarating, keyin «Kabinetdan bog'lash»"
+                if msg not in errors:
+                    errors.append(msg)
+        mps.append({"account": acc.pk, "marketplace": acc.marketplace, "name": str(acc), "status": acc.status,
+                    "can_create": CAP_CREATE in caps, "ok": not errors, "errors": errors, "listings": listings})
+    return {"score": score, "checks": checks, "marketplaces": mps}
+
+
 def notify_products_changed(product_ids, delay=20):
     """Qoldiq/narx o'zgardi → barcha kabinetlardagi faol listinglar sinxronlanadi (debounce)."""
     ids = list(product_ids)
@@ -234,7 +403,9 @@ def h_fetch_attributes(job):
         am.values = a.get("values") or []
         am.save()
         n += 1
-    return {"count": n, "required": sum(1 for a in attrs if a.get("required"))}
+    from .automap import auto_map
+    auto = auto_map(mapping)
+    return {"count": n, "required": sum(1 for a in attrs if a.get("required")), "auto": auto}
 
 
 @handler("search_values")
@@ -252,17 +423,29 @@ def h_fetch_remote(job):
     items = get_client(acc, job=job).fetch_remote_products()
     acc.meta = {**(acc.meta or {}), "remote_products": items[:3000], "remote_fetched_at": timezone.now().isoformat()}
     acc.save(update_fields=["meta"])
-    products = {p.sku.lower(): p for p in Product.objects.filter(seller=acc.seller)}
-    barcodes = {i.barcode: i.product for i in ProductMarketInfo.objects.filter(product__seller=acc.seller).exclude(barcode="")}
+    # SKU yoki shtrix-kod bo'yicha: (mahsulot, variant | None)
+    products = {}
+    barcodes = {}
+    for p in Product.objects.filter(seller=acc.seller):
+        products[p.sku.lower()] = (p, None)
+        if p.barcode:
+            barcodes[p.barcode] = (p, None)
+    for v in ProductVariant.objects.filter(product__seller=acc.seller).select_related("product"):
+        products[v.sku.lower()] = (v.product, v)
+        if v.barcode:
+            barcodes[v.barcode] = (v.product, v)
     linked = 0
     for it in items:
-        p = products.get((it.get("offer_id") or "").lower()) or barcodes.get(it.get("barcode"))
-        if not p or L.objects.filter(account=acc, external_sku=it["external_sku"]).exclude(product=p).exists():
+        p, v = products.get((it.get("offer_id") or "").lower()) or barcodes.get(it.get("barcode")) or (None, None)
+        if not p:
             continue
-        offer = it.get("offer_id") or p.sku
-        if L.objects.filter(account=acc, offer_id=offer).exclude(product=p).exists():
+        same = {"product": p, "variant": v}
+        if L.objects.filter(account=acc, external_sku=it["external_sku"]).exclude(**same).exists():
             continue
-        li, _ = L.objects.get_or_create(product=p, account=acc, defaults={"offer_id": offer})
+        offer = it.get("offer_id") or (v.sku if v else p.sku)
+        if L.objects.filter(account=acc, offer_id=offer).exclude(**same).exists():
+            continue
+        li, _ = L.objects.get_or_create(product=p, variant=v, account=acc, defaults={"offer_id": offer})
         if li.external_sku and li.external_sku != it["external_sku"]:
             continue
         link_listing(li, it)
@@ -284,8 +467,9 @@ def link_listing(li: L, it: dict):
 def h_publish(job):
     acc = job.account
     caps = capabilities(acc)
-    listings = list(L.objects.filter(pk__in=job.payload.get("ids", []), account=acc).select_related("product__category",
-                                                                                                    "product__seller", "account"))
+    listings = list(L.objects.filter(pk__in=job.payload.get("ids", []), account=acc)
+                    .select_related("product__category", "product__seller", "account", "variant__image")
+                    .prefetch_related("product__images"))
     if CAP_CREATE not in caps:
         for li in listings:
             if not li.external_sku:
@@ -312,10 +496,9 @@ def h_publish(job):
             continue
         if r.get("barcode"):
             li.external_meta = {**(li.external_meta or {}), "barcode": r["barcode"]}
-            info, _ = ProductMarketInfo.objects.get_or_create(product=li.product)
-            if not info.barcode:
-                info.barcode = r["barcode"]
-                info.save(update_fields=["barcode"])
+            h = li.holder
+            if not h.barcode:
+                type(h).objects.filter(pk=h.pk).update(barcode=r["barcode"])
         if r.get("status") == "retry":
             retry.append(li.pk)
             li.last_error = r.get("error", "")
@@ -324,7 +507,7 @@ def h_publish(job):
         else:
             li.status, li.last_error = L.ST_PENDING, ""
             li.task_id = r.get("task_id") or res.get("task_id") or ""
-            li.pushed_price, li.pushed_currency = next((p.price for p in payloads if p.offer_id == offer_id), None), acc.currency
+            li.pushed_price, li.pushed_currency = next((pl.price for pl in payloads if pl.offer_id == offer_id), None), acc.currency
             sent += 1
         li.last_synced_at = timezone.now()
         li.save()
@@ -344,7 +527,7 @@ def h_poll_status(job):
     qs = L.objects.filter(account=acc, status=L.ST_PENDING)
     if job.payload.get("ids"):
         qs = L.objects.filter(account=acc, pk__in=job.payload["ids"])
-    listings = list(qs.select_related("product", "account"))
+    listings = list(qs.select_related("product", "account", "variant__image").prefetch_related("product__images"))
     acc.status_polled_at = timezone.now()
     acc.save(update_fields=["status_polled_at"])
     if not listings:
@@ -371,10 +554,11 @@ def h_poll_status(job):
             if was != L.ST_ACTIVE:
                 activated.append(li.pk)
             # WB: rasm kartochka yaratilgandan keyin (nmID bilan) yuklanadi
+            imgs = product_images(li.product, li.variant) if acc.marketplace == "wb" else []
             if acc.marketplace == "wb" and li.external_id and not (li.external_meta or {}).get("photos") \
-                    and not (li.external_meta or {}).get("media_sent") and li.product.image and not li.product.image_is_sample:
+                    and not (li.external_meta or {}).get("media_sent") and imgs:
                 try:
-                    client.upload_media(li.external_id, [public_media(li.product.image.url)])
+                    client.upload_media(li.external_id, imgs[:30])
                     li.external_meta = {**li.external_meta, "media_sent": True}
                 except MarketplaceError as e:
                     li.last_error = f"Rasm yuklanmadi: {e}"
@@ -396,7 +580,7 @@ def h_sync_listings(job):
     if not acc.is_usable:
         return {"skipped": "account not active"}
     caps = capabilities(acc)
-    qs = L.objects.filter(account=acc, status=L.ST_ACTIVE).select_related("product__seller", "account")
+    qs = L.objects.filter(account=acc, status=L.ST_ACTIVE).select_related("product__seller", "account", "variant")
     ids = job.payload.get("ids")
     if ids:
         qs = qs.filter(pk__in=ids)
@@ -406,16 +590,16 @@ def h_sync_listings(job):
     own = own_reserved(acc)
     price_refs, stock_refs = [], []
     for li in listings:
-        if CAP_PRICES in caps and li.product.price is not None:
+        if CAP_PRICES in caps and listing_price(li) is not None:
             try:
-                pr = price_for(acc, li.product)
+                pr = price_for(acc, li.product, li.variant)
                 if force or li.pushed_price != pr or li.pushed_currency != acc.currency:
                     price_refs.append(ref(li, price=pr))
             except currency.RateUnavailable as e:  # kurs bo'lmasa ham qoldiq yuborilaversin
                 li.last_error = str(e)
                 li.save(update_fields=["last_error"])
         if CAP_STOCKS in caps:
-            st = stock_for(acc, li.product, own.get(li.product_id, 0))
+            st = listing_stock(li, own)
             if force or li.pushed_stock != st:
                 stock_refs.append(ref(li, stock=st))
     by_id = {li.pk: li for li in listings}
@@ -498,13 +682,17 @@ def h_fetch_orders(job):
 
 
 def resolve_items(acc, items):
-    offers = {li.offer_id: li.product_id for li in L.objects.filter(account=acc)}
-    skus = {li.external_sku: li.product_id for li in L.objects.filter(account=acc).exclude(external_sku="")}
-    by_sku = {p.sku: p.pk for p in Product.objects.filter(seller=acc.seller).only("id", "sku")}
+    lis = list(L.objects.filter(account=acc).values_list("offer_id", "external_sku", "product_id", "variant_id"))
+    offers = {o: (pid, vid) for o, _, pid, vid in lis}
+    skus = {e: (pid, vid) for _, e, pid, vid in lis if e}
+    by_sku = {p.sku: (p.pk, None) for p in Product.objects.filter(seller=acc.seller).only("id", "sku")}
+    by_sku.update({v.sku: (v.product_id, v.pk) for v in ProductVariant.objects.filter(product__seller=acc.seller)
+                   .only("id", "sku", "product_id")})
     out = []
     for it in items:
-        pid = offers.get(it.get("offer_id")) or skus.get(it.get("external_sku")) or by_sku.get(it.get("offer_id"))
-        out.append({**it, "product_id": pid})
+        pid, vid = offers.get(it.get("offer_id")) or skus.get(it.get("external_sku")) or by_sku.get(it.get("offer_id")) \
+            or (None, None)
+        out.append({**it, "product_id": pid, "variant_id": vid})
     return out
 
 
@@ -512,7 +700,7 @@ def _qty_map(items) -> dict:
     out = {}
     for it in items or []:
         if it.get("product_id"):
-            k = str(it["product_id"])
+            k = stock_key(it["product_id"], it.get("variant_id"))
             out[k] = out.get(k, 0) + int(it.get("qty") or 0)
     return out
 
@@ -558,16 +746,23 @@ def apply_order_stock(order: O, historical=False) -> set:
     else:  # released
         d_reserved = {k: -v for k, v in snap.items()}
         new_snap = {}
-    ids = {int(k) for k in (*d_reserved, *d_stock, *d_sold)}
+    keys = {*d_reserved, *d_stock, *d_sold}
+    pids = {int(k) for k in keys if not k.startswith("v")}
+    vids = {int(k[1:]) for k in keys if k.startswith("v")}
     touched = set()
-    for p in Product.objects.select_for_update().filter(pk__in=ids):
-        k = str(p.pk)
-        if p.stock is not None:
-            p.reserved = max(p.reserved + d_reserved.get(k, 0), 0)
-            p.stock = max(p.stock + d_stock.get(k, 0), 0)
-        p.sold = max(p.sold + d_sold.get(k, 0), 0)
-        Product.objects.filter(pk=p.pk).update(reserved=p.reserved, stock=p.stock, sold=p.sold)
-        touched.add(p.pk)
+    holders = [(str(p.pk), p) for p in Product.objects.select_for_update().filter(pk__in=pids)] + \
+        [(f"v{v.pk}", v) for v in ProductVariant.objects.select_for_update().select_related("product").filter(pk__in=vids)]
+    for k, h in holders:
+        if h.stock is not None:
+            h.reserved = max(h.reserved + d_reserved.get(k, 0), 0)
+            h.stock = max(h.stock + d_stock.get(k, 0), 0)
+        h.sold = max(h.sold + d_sold.get(k, 0), 0)
+        type(h).objects.filter(pk=h.pk).update(reserved=h.reserved, stock=h.stock, sold=h.sold)
+        if isinstance(h, ProductVariant):
+            h.product.sync_from_variants()
+            touched.add(h.product_id)
+        else:
+            touched.add(h.pk)
     order.stock_state = target
     order.stock_items = new_snap
     return touched

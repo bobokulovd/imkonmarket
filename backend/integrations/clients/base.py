@@ -70,6 +70,8 @@ class ProductPayload:
     external_id: str = ""
     external_sku: str = ""
     external_meta: dict = field(default_factory=dict)
+    group_id: str = ""   # variantlar uchun: asosiy mahsulot SKU'si (bitta kartochkaga birlashtirish)
+    ikpu: str = ""
 
 
 @dataclass

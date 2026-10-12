@@ -100,7 +100,7 @@ class WBClient(MarketplaceClient):
                     pass
                 chars[int(a["id"])] = v
             else:
-                chars.setdefault(int(a["id"]), []).append(str(v))
+                chars.setdefault(int(a["id"]), []).extend(str(x) for x in (v if isinstance(v, list) else [v]))
         return [{"id": k, "value": v} for k, v in chars.items()]
 
     def _dims(self, it):

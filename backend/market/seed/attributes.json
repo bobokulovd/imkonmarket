@@ -1,0 +1,5645 @@
+{
+ "qurilish": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Material",
+    "ru": "Материал",
+    "en": "Material",
+    "kaa": "Material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "loy",
+     "name": {
+      "uz": "Pishgan loy",
+      "ru": "Керамика (обожжённая глина)",
+      "en": "Fired clay",
+      "kaa": "Pisken ılay"
+     }
+    },
+    {
+     "v": "xom-loy",
+     "name": {
+      "uz": "Xom loy",
+      "ru": "Сырцовая глина",
+      "en": "Raw clay",
+      "kaa": "Xom loy"
+     }
+    },
+    {
+     "v": "shlak",
+     "name": {
+      "uz": "Shlakobeton",
+      "ru": "Шлакобетон",
+      "en": "Slag concrete",
+      "kaa": "Shlakobeton"
+     }
+    },
+    {
+     "v": "beton",
+     "name": {
+      "uz": "Beton",
+      "ru": "Бетон",
+      "en": "Concrete",
+      "kaa": "Beton"
+     }
+    },
+    {
+     "v": "gips",
+     "name": {
+      "uz": "Gips",
+      "ru": "Гипс",
+      "en": "Gypsum",
+      "kaa": "Gips"
+     }
+    },
+    {
+     "v": "ohak",
+     "name": {
+      "uz": "Ohak",
+      "ru": "Известь",
+      "en": "Lime",
+      "kaa": "Ohak"
+     }
+    },
+    {
+     "v": "tosh",
+     "name": {
+      "uz": "Tabiiy tosh",
+      "ru": "Природный камень",
+      "en": "Natural stone",
+      "kaa": "Tabiiy tosh"
+     }
+    },
+    {
+     "v": "polietilen",
+     "name": {
+      "uz": "Polietilen",
+      "ru": "Полиэтилен",
+      "en": "Polyethylene",
+      "kaa": "Polietilen"
+     }
+    },
+    {
+     "v": "keramzit",
+     "name": {
+      "uz": "Keramzit",
+      "ru": "Керамзит",
+      "en": "Expanded clay",
+      "kaa": "Keramzit"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "olcham",
+   "name": {
+    "uz": "O'lchami",
+    "ru": "Размер",
+    "en": "Size",
+    "kaa": "Ólshemi"
+   },
+   "type": "text",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 250×120×65 mm",
+    "ru": "Например: 250×120×65 мм",
+    "en": "E.g. 250×120×65 mm",
+    "kaa": "Masalan: 250×120×65 mm"
+   },
+   "order": 1
+  },
+  {
+   "code": "marka",
+   "name": {
+    "uz": "Mustahkamlik markasi",
+    "ru": "Марка прочности",
+    "en": "Strength grade",
+    "kaa": "Bekkemlik markası"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: M100, M150",
+    "ru": "Например: M100, M150",
+    "en": "E.g. M100",
+    "kaa": "Masalan: M100, M150"
+   },
+   "order": 2
+  },
+  {
+   "code": "fraksiya",
+   "name": {
+    "uz": "Fraksiya",
+    "ru": "Фракция",
+    "en": "Fraction",
+    "kaa": "Fraksiya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 5–20 mm",
+    "ru": "Например: 5–20 мм",
+    "en": "E.g. 5–20 mm",
+    "kaa": "Masalan: 5–20 mm"
+   },
+   "order": 3
+  },
+  {
+   "code": "ichi_kovak",
+   "name": {
+    "uz": "Ichi kovak",
+    "ru": "Пустотелый",
+    "en": "Hollow",
+    "kaa": "Ishi qawıs"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 5
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 6
+  },
+  {
+   "code": "qadoq_soni",
+   "name": {
+    "uz": "Qadoqdagi soni",
+    "ru": "Количество в упаковке",
+    "en": "Quantity per pack",
+    "kaa": "Qaptamadaǵı sanı"
+   },
+   "type": "number",
+   "unit": "dona",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 7
+  }
+ ],
+ "temir-beton": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Material",
+    "ru": "Материал",
+    "en": "Material",
+    "kaa": "Material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "temir-beton",
+     "name": {
+      "uz": "Temir-beton",
+      "ru": "Железобетон",
+      "en": "Reinforced concrete",
+      "kaa": "Temir-beton"
+     }
+    },
+    {
+     "v": "beton",
+     "name": {
+      "uz": "Beton",
+      "ru": "Бетон",
+      "en": "Concrete",
+      "kaa": "Beton"
+     }
+    },
+    {
+     "v": "granit",
+     "name": {
+      "uz": "Granit",
+      "ru": "Гранит",
+      "en": "Granite",
+      "kaa": "Granit"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "marka",
+   "name": {
+    "uz": "Marka / seriya",
+    "ru": "Марка / серия",
+    "en": "Grade / series",
+    "kaa": "Marka / seriya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: PK 23-12-8, KTs 07-9",
+    "ru": "Например: ПК 23-12-8, КЦ 07-9",
+    "en": "E.g. PK 23-12-8",
+    "kaa": "Masalan: PK 23-12-8, KTs 07-9"
+   },
+   "order": 1
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 2
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 5
+  },
+  {
+   "code": "beton_markasi",
+   "name": {
+    "uz": "Beton markasi",
+    "ru": "Марка бетона",
+    "en": "Concrete grade",
+    "kaa": "Beton markasi"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "M200, M300",
+    "ru": "М200, М300",
+    "en": "M200",
+    "kaa": "M200, M300"
+   },
+   "order": 6
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 7
+  }
+ ],
+ "mebel": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Asosiy material",
+    "ru": "Материал корпуса",
+    "en": "Main material",
+    "kaa": "Tiykarǵı material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": true,
+   "variant": false,
+   "options": [
+    {
+     "v": "ldsp",
+     "name": {
+      "uz": "LDSP",
+      "ru": "ЛДСП",
+      "en": "Laminated chipboard",
+      "kaa": "LDSP"
+     }
+    },
+    {
+     "v": "mdf",
+     "name": {
+      "uz": "MDF",
+      "ru": "МДФ",
+      "en": "MDF",
+      "kaa": "MDF"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Massiv yog'och",
+      "ru": "Массив дерева",
+      "en": "Solid wood",
+      "kaa": "Massiv aǵash"
+     }
+    },
+    {
+     "v": "fanera",
+     "name": {
+      "uz": "Fanera",
+      "ru": "Фанера",
+      "en": "Plywood",
+      "kaa": "Fanera"
+     }
+    },
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metall",
+      "ru": "Металл",
+      "en": "Metal",
+      "kaa": "Metall"
+     }
+    },
+    {
+     "v": "plastik",
+     "name": {
+      "uz": "Plastik",
+      "ru": "Пластик",
+      "en": "Plastic",
+      "kaa": "Plastik"
+     }
+    },
+    {
+     "v": "rotang",
+     "name": {
+      "uz": "Rotang",
+      "ru": "Ротанг",
+      "en": "Rattan",
+      "kaa": "Rotang"
+     }
+    },
+    {
+     "v": "dsp",
+     "name": {
+      "uz": "DSP",
+      "ru": "ДСП",
+      "en": "Chipboard",
+      "kaa": "DSP"
+     }
+    },
+    {
+     "v": "shisha",
+     "name": {
+      "uz": "Shisha",
+      "ru": "Стекло",
+      "en": "Glass",
+      "kaa": "Áyne"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 1
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 2
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "qoplama",
+   "name": {
+    "uz": "Qoplama (yumshoq mebel)",
+    "ru": "Материал обивки",
+    "en": "Upholstery",
+    "kaa": "Qoplama (yumshoq mebel)"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "gazlama",
+     "name": {
+      "uz": "Gazlama",
+      "ru": "Ткань",
+      "en": "Fabric",
+      "kaa": "Gazlama"
+     }
+    },
+    {
+     "v": "ekokoja",
+     "name": {
+      "uz": "Eko-charm",
+      "ru": "Экокожа",
+      "en": "Eco leather",
+      "kaa": "Eko-charm"
+     }
+    },
+    {
+     "v": "charm",
+     "name": {
+      "uz": "Charm",
+      "ru": "Кожа",
+      "en": "Leather",
+      "kaa": "Charm"
+     }
+    },
+    {
+     "v": "velur",
+     "name": {
+      "uz": "Velur",
+      "ru": "Велюр",
+      "en": "Velour",
+      "kaa": "Velur"
+     }
+    }
+   ],
+   "order": 5
+  },
+  {
+   "code": "tolgich",
+   "name": {
+    "uz": "To'ldirgich",
+    "ru": "Наполнитель",
+    "en": "Filling",
+    "kaa": "Toltırǵısh"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "porolon",
+     "name": {
+      "uz": "Porolon",
+      "ru": "Поролон",
+      "en": "Foam",
+      "kaa": "Porolon"
+     }
+    },
+    {
+     "v": "prujina",
+     "name": {
+      "uz": "Prujinali blok",
+      "ru": "Пружинный блок",
+      "en": "Spring block",
+      "kaa": "Prujinali blok"
+     }
+    },
+    {
+     "v": "paxta",
+     "name": {
+      "uz": "Paxta",
+      "ru": "Хлопок (вата)",
+      "en": "Cotton wool",
+      "kaa": "Paxta"
+     }
+    }
+   ],
+   "order": 6
+  },
+  {
+   "code": "orinlar",
+   "name": {
+    "uz": "O'rinlar soni",
+    "ru": "Количество мест",
+    "en": "Seats",
+    "kaa": "Orınlar sanı"
+   },
+   "type": "number",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 7
+  },
+  {
+   "code": "eshiklar",
+   "name": {
+    "uz": "Eshiklar soni",
+    "ru": "Количество дверей",
+    "en": "Number of doors",
+    "kaa": "Esikler sanı"
+   },
+   "type": "number",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 8
+  },
+  {
+   "code": "tortmalar",
+   "name": {
+    "uz": "Tortmalar soni",
+    "ru": "Количество ящиков",
+    "en": "Number of drawers",
+    "kaa": "Tartpalar sanı"
+   },
+   "type": "number",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 9
+  },
+  {
+   "code": "max_yuk",
+   "name": {
+    "uz": "Maksimal yuklama",
+    "ru": "Максимальная нагрузка",
+    "en": "Max load",
+    "kaa": "Maksimal yuklama"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 10
+  },
+  {
+   "code": "yigilgan",
+   "name": {
+    "uz": "Yig'ilgan holda yetkaziladi",
+    "ru": "Поставляется в собранном виде",
+    "en": "Delivered assembled",
+    "kaa": "Jıynalǵan túrde jetkeriledi"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 11
+  },
+  {
+   "code": "komplekt",
+   "name": {
+    "uz": "Komplektatsiya",
+    "ru": "Комплектация",
+    "en": "Package contents",
+    "kaa": "Komplektaciya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 1 stol, 2 stul",
+    "ru": "Например: 1 стол, 2 стула",
+    "en": "E.g. 1 table, 2 chairs",
+    "kaa": "Masalan: 1 stol, 2 stul"
+   },
+   "order": 12
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 13
+  }
+ ],
+ "talim-mebeli": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Asosiy material",
+    "ru": "Материал",
+    "en": "Main material",
+    "kaa": "Tiykarǵı material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": true,
+   "variant": false,
+   "options": [
+    {
+     "v": "ldsp",
+     "name": {
+      "uz": "LDSP",
+      "ru": "ЛДСП",
+      "en": "Laminated chipboard",
+      "kaa": "LDSP"
+     }
+    },
+    {
+     "v": "mdf",
+     "name": {
+      "uz": "MDF",
+      "ru": "МДФ",
+      "en": "MDF",
+      "kaa": "MDF"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Massiv yog'och",
+      "ru": "Массив дерева",
+      "en": "Solid wood",
+      "kaa": "Massiv aǵash"
+     }
+    },
+    {
+     "v": "fanera",
+     "name": {
+      "uz": "Fanera",
+      "ru": "Фанера",
+      "en": "Plywood",
+      "kaa": "Fanera"
+     }
+    },
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metall",
+      "ru": "Металл",
+      "en": "Metal",
+      "kaa": "Metall"
+     }
+    },
+    {
+     "v": "plastik",
+     "name": {
+      "uz": "Plastik",
+      "ru": "Пластик",
+      "en": "Plastic",
+      "kaa": "Plastik"
+     }
+    },
+    {
+     "v": "rotang",
+     "name": {
+      "uz": "Rotang",
+      "ru": "Ротанг",
+      "en": "Rattan",
+      "kaa": "Rotang"
+     }
+    },
+    {
+     "v": "dsp",
+     "name": {
+      "uz": "DSP",
+      "ru": "ДСП",
+      "en": "Chipboard",
+      "kaa": "DSP"
+     }
+    },
+    {
+     "v": "shisha",
+     "name": {
+      "uz": "Shisha",
+      "ru": "Стекло",
+      "en": "Glass",
+      "kaa": "Áyne"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "karkas",
+   "name": {
+    "uz": "Karkas",
+    "ru": "Каркас",
+    "en": "Frame",
+    "kaa": "Karkas"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metall",
+      "ru": "Металл",
+      "en": "Metal",
+      "kaa": "Metall"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och",
+      "ru": "Дерево",
+      "en": "Wood",
+      "kaa": "Aǵash"
+     }
+    },
+    {
+     "v": "yoq",
+     "name": {
+      "uz": "Karkassiz",
+      "ru": "Без каркаса",
+      "en": "No frame",
+      "kaa": "Karkassız"
+     }
+    }
+   ],
+   "order": 1
+  },
+  {
+   "code": "guruh",
+   "name": {
+    "uz": "Bo'y guruhi (№)",
+    "ru": "Ростовая группа (№)",
+    "en": "Height group (No.)",
+    "kaa": "Boy toparı (№)"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "1",
+     "name": {
+      "uz": "№1",
+      "ru": "№1",
+      "en": "No.1",
+      "kaa": "№1"
+     }
+    },
+    {
+     "v": "2",
+     "name": {
+      "uz": "№2",
+      "ru": "№2",
+      "en": "No.2",
+      "kaa": "№2"
+     }
+    },
+    {
+     "v": "3",
+     "name": {
+      "uz": "№3",
+      "ru": "№3",
+      "en": "No.3",
+      "kaa": "№3"
+     }
+    },
+    {
+     "v": "4",
+     "name": {
+      "uz": "№4",
+      "ru": "№4",
+      "en": "No.4",
+      "kaa": "№4"
+     }
+    },
+    {
+     "v": "5",
+     "name": {
+      "uz": "№5",
+      "ru": "№5",
+      "en": "No.5",
+      "kaa": "№5"
+     }
+    },
+    {
+     "v": "6",
+     "name": {
+      "uz": "№6",
+      "ru": "№6",
+      "en": "No.6",
+      "kaa": "№6"
+     }
+    }
+   ],
+   "order": 2
+  },
+  {
+   "code": "orinlar",
+   "name": {
+    "uz": "O'rinlar soni",
+    "ru": "Количество мест",
+    "en": "Seats",
+    "kaa": "Orınlar sanı"
+   },
+   "type": "number",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 4
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 5
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 6
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 7
+  },
+  {
+   "code": "komplekt",
+   "name": {
+    "uz": "Komplektatsiya",
+    "ru": "Комплектация",
+    "en": "Package contents",
+    "kaa": "Komplektaciya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 1 stol, 2 stul",
+    "ru": "Например: 1 стол, 2 стула",
+    "en": "E.g. 1 table, 2 chairs",
+    "kaa": "Masalan: 1 stol, 2 stul"
+   },
+   "order": 8
+  },
+  {
+   "code": "yigilgan",
+   "name": {
+    "uz": "Yig'ilgan holda yetkaziladi",
+    "ru": "Поставляется в собранном виде",
+    "en": "Delivered assembled",
+    "kaa": "Jıynalǵan túrde jetkeriledi"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 9
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 10
+  }
+ ],
+ "rom-eshik": [
+  {
+   "code": "profil",
+   "name": {
+    "uz": "Profil materiali",
+    "ru": "Материал профиля",
+    "en": "Profile material",
+    "kaa": "Profil materialı"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "pvx",
+     "name": {
+      "uz": "PVX",
+      "ru": "ПВХ",
+      "en": "PVC",
+      "kaa": "PVX"
+     }
+    },
+    {
+     "v": "alyumin",
+     "name": {
+      "uz": "Alyumin",
+      "ru": "Алюминий",
+      "en": "Aluminium",
+      "kaa": "Alyuminiy"
+     }
+    },
+    {
+     "v": "mdf",
+     "name": {
+      "uz": "MDF",
+      "ru": "МДФ",
+      "en": "MDF",
+      "kaa": "MDF"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och",
+      "ru": "Дерево",
+      "en": "Wood",
+      "kaa": "Aǵash"
+     }
+    },
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metall",
+      "ru": "Металл",
+      "en": "Metal",
+      "kaa": "Metall"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "profil_brend",
+   "name": {
+    "uz": "Profil brendi",
+    "ru": "Бренд профиля",
+    "en": "Profile brand",
+    "kaa": "Profil brendi"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: Akfa",
+    "ru": "Например: Akfa",
+    "en": "E.g. Akfa",
+    "kaa": "Masalan: Akfa"
+   },
+   "order": 1
+  },
+  {
+   "code": "turi",
+   "name": {
+    "uz": "Turi",
+    "ru": "Тип изделия",
+    "en": "Type",
+    "kaa": "Túri"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "rom",
+     "name": {
+      "uz": "Rom (deraza)",
+      "ru": "Окно",
+      "en": "Window",
+      "kaa": "Ayna"
+     }
+    },
+    {
+     "v": "eshik",
+     "name": {
+      "uz": "Eshik",
+      "ru": "Дверь",
+      "en": "Door",
+      "kaa": "Esik"
+     }
+    },
+    {
+     "v": "fortochka",
+     "name": {
+      "uz": "Fortochka",
+      "ru": "Форточка",
+      "en": "Vent",
+      "kaa": "Fortochka"
+     }
+    },
+    {
+     "v": "vitraj",
+     "name": {
+      "uz": "Vitraj",
+      "ru": "Витраж",
+      "en": "Stained glass / curtain wall",
+      "kaa": "Vitraj"
+     }
+    },
+    {
+     "v": "peregorodka",
+     "name": {
+      "uz": "To'siq devor",
+      "ru": "Перегородка",
+      "en": "Partition",
+      "kaa": "To'siq devor"
+     }
+    }
+   ],
+   "order": 2
+  },
+  {
+   "code": "kamera",
+   "name": {
+    "uz": "Shisha paketi kameralari",
+    "ru": "Камер в стеклопакете",
+    "en": "Glazing chambers",
+    "kaa": "Shisha paketi kameralari"
+   },
+   "type": "number",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 4
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 5
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 6
+  },
+  {
+   "code": "narx_m2",
+   "name": {
+    "uz": "Narx 1 m² uchun",
+    "ru": "Цена за 1 м²",
+    "en": "Price per m²",
+    "kaa": "Narx 1 m² uchun"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 7
+  }
+ ],
+ "metall": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Material",
+    "ru": "Материал",
+    "en": "Material",
+    "kaa": "Material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "qora-metall",
+     "name": {
+      "uz": "Qora metall",
+      "ru": "Чёрный металл",
+      "en": "Mild steel",
+      "kaa": "Qara metall"
+     }
+    },
+    {
+     "v": "zanglamas",
+     "name": {
+      "uz": "Zanglamas po'lat",
+      "ru": "Нержавеющая сталь",
+      "en": "Stainless steel",
+      "kaa": "Zanglamas po'lat"
+     }
+    },
+    {
+     "v": "ocinkovka",
+     "name": {
+      "uz": "Ruxlangan po'lat",
+      "ru": "Оцинкованная сталь",
+      "en": "Galvanized steel",
+      "kaa": "Ruxlangan po'lat"
+     }
+    },
+    {
+     "v": "alyumin",
+     "name": {
+      "uz": "Alyumin",
+      "ru": "Алюминий",
+      "en": "Aluminium",
+      "kaa": "Alyumin"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "devor",
+   "name": {
+    "uz": "Metall qalinligi",
+    "ru": "Толщина металла",
+    "en": "Metal thickness",
+    "kaa": "Metall qalıńlıǵı"
+   },
+   "type": "number",
+   "unit": "mm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 1
+  },
+  {
+   "code": "qoplama",
+   "name": {
+    "uz": "Qoplama",
+    "ru": "Покрытие",
+    "en": "Coating",
+    "kaa": "Qaplama"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "boyoq",
+     "name": {
+      "uz": "Bo'yoq",
+      "ru": "Краска",
+      "en": "Paint",
+      "kaa": "Boyaw"
+     }
+    },
+    {
+     "v": "poroshok",
+     "name": {
+      "uz": "Kukunli bo'yoq",
+      "ru": "Порошковая краска",
+      "en": "Powder coat",
+      "kaa": "Kukunli bo'yoq"
+     }
+    },
+    {
+     "v": "yoq",
+     "name": {
+      "uz": "Qoplamasiz",
+      "ru": "Без покрытия",
+      "en": "None",
+      "kaa": "Qaplamasız"
+     }
+    }
+   ],
+   "order": 2
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 3
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 5
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 6
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 7
+  },
+  {
+   "code": "qulf",
+   "name": {
+    "uz": "Qulf bilan",
+    "ru": "С замком",
+    "en": "With lock",
+    "kaa": "Qulıp penen"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 8
+  }
+ ],
+ "toqimachilik": [
+  {
+   "code": "mato",
+   "name": {
+    "uz": "Mato tarkibi",
+    "ru": "Состав ткани",
+    "en": "Fabric composition",
+    "kaa": "Mata quramı"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "paxta100",
+     "name": {
+      "uz": "100% paxta",
+      "ru": "100% хлопок",
+      "en": "100% cotton",
+      "kaa": "100% paxta"
+     }
+    },
+    {
+     "v": "biz",
+     "name": {
+      "uz": "Bo'z (byaz)",
+      "ru": "Бязь",
+      "en": "Calico",
+      "kaa": "Bo'z (byaz)"
+     }
+    },
+    {
+     "v": "satin",
+     "name": {
+      "uz": "Satin",
+      "ru": "Сатин",
+      "en": "Sateen",
+      "kaa": "Satin"
+     }
+    },
+    {
+     "v": "poplin",
+     "name": {
+      "uz": "Poplin",
+      "ru": "Поплин",
+      "en": "Poplin",
+      "kaa": "Poplin"
+     }
+    },
+    {
+     "v": "yarimjun",
+     "name": {
+      "uz": "Yarim jun",
+      "ru": "Полушерсть",
+      "en": "Half wool",
+      "kaa": "Yarım jún"
+     }
+    },
+    {
+     "v": "trikotaj",
+     "name": {
+      "uz": "Trikotaj",
+      "ru": "Трикотаж",
+      "en": "Jersey",
+      "kaa": "Trikotaj"
+     }
+    },
+    {
+     "v": "aralash",
+     "name": {
+      "uz": "Aralash (paxta+sintetika)",
+      "ru": "Смесовая ткань",
+      "en": "Blend",
+      "kaa": "Aralash (paxta+sintetika)"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "olcham",
+   "name": {
+    "uz": "O'lchami",
+    "ru": "Размер",
+    "en": "Size",
+    "kaa": "Ólshemi"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "1",
+     "name": {
+      "uz": "1 kishilik",
+      "ru": "1-спальный",
+      "en": "Single",
+      "kaa": "1 adamlıq"
+     }
+    },
+    {
+     "v": "1.5",
+     "name": {
+      "uz": "1,5 kishilik",
+      "ru": "1,5-спальный",
+      "en": "1.5 bed",
+      "kaa": "1,5 kishilik"
+     }
+    },
+    {
+     "v": "2",
+     "name": {
+      "uz": "2 kishilik",
+      "ru": "2-спальный",
+      "en": "Double",
+      "kaa": "2 adamlıq"
+     }
+    },
+    {
+     "v": "evro",
+     "name": {
+      "uz": "Evro",
+      "ru": "Евро",
+      "en": "Euro",
+      "kaa": "Evro"
+     }
+    },
+    {
+     "v": "bolalar",
+     "name": {
+      "uz": "Bolalar uchun",
+      "ru": "Детский",
+      "en": "Kids",
+      "kaa": "Balalar ushın"
+     }
+    }
+   ],
+   "order": 1
+  },
+  {
+   "code": "olcham_sm",
+   "name": {
+    "uz": "Aniq o'lchami",
+    "ru": "Размеры, см",
+    "en": "Dimensions, cm",
+    "kaa": "Anıq ólshemi"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 214×120 sm",
+    "ru": "Например: 214×120 см",
+    "en": "E.g. 214×120 cm",
+    "kaa": "Masalan: 214×120 sm"
+   },
+   "order": 2
+  },
+  {
+   "code": "zichlik",
+   "name": {
+    "uz": "Zichlik",
+    "ru": "Плотность",
+    "en": "Density",
+    "kaa": "Zichlik"
+   },
+   "type": "number",
+   "unit": "g/m²",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 4
+  },
+  {
+   "code": "naqsh",
+   "name": {
+    "uz": "Naqsh",
+    "ru": "Рисунок",
+    "en": "Pattern",
+    "kaa": "Naǵıs"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "gulsiz",
+     "name": {
+      "uz": "Gulsiz",
+      "ru": "Однотонный",
+      "en": "Plain",
+      "kaa": "Gulsiz"
+     }
+    },
+    {
+     "v": "gulli",
+     "name": {
+      "uz": "Gulli",
+      "ru": "Цветочный",
+      "en": "Floral",
+      "kaa": "Gulli"
+     }
+    },
+    {
+     "v": "geometrik",
+     "name": {
+      "uz": "Geometrik",
+      "ru": "Геометрический",
+      "en": "Geometric",
+      "kaa": "Geometrik"
+     }
+    }
+   ],
+   "order": 5
+  },
+  {
+   "code": "komplekt",
+   "name": {
+    "uz": "Komplektatsiya",
+    "ru": "Комплектация",
+    "en": "Package contents",
+    "kaa": "Komplektaciya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 1 stol, 2 stul",
+    "ru": "Например: 1 стол, 2 стула",
+    "en": "E.g. 1 table, 2 chairs",
+    "kaa": "Masalan: 1 stol, 2 stul"
+   },
+   "order": 6
+  }
+ ],
+ "kiyim": [
+  {
+   "code": "turi",
+   "name": {
+    "uz": "Turi",
+    "ru": "Вид изделия",
+    "en": "Item type",
+    "kaa": "Túri"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "kostyum",
+     "name": {
+      "uz": "Kostyum",
+      "ru": "Костюм",
+      "en": "Suit",
+      "kaa": "Kostyum"
+     }
+    },
+    {
+     "v": "kombinezon",
+     "name": {
+      "uz": "Kombinezon",
+      "ru": "Комбинезон",
+      "en": "Overalls",
+      "kaa": "Kombinezon"
+     }
+    },
+    {
+     "v": "kurtka",
+     "name": {
+      "uz": "Kurtka",
+      "ru": "Куртка",
+      "en": "Jacket",
+      "kaa": "Kurtka"
+     }
+    },
+    {
+     "v": "shim",
+     "name": {
+      "uz": "Shim",
+      "ru": "Брюки",
+      "en": "Trousers",
+      "kaa": "Shim"
+     }
+    },
+    {
+     "v": "mayka",
+     "name": {
+      "uz": "Mayka / futbolka",
+      "ru": "Майка / футболка",
+      "en": "T-shirt / tank top",
+      "kaa": "Mayka / futbolka"
+     }
+    },
+    {
+     "v": "ichki",
+     "name": {
+      "uz": "Ichki kiyim",
+      "ru": "Нательное бельё",
+      "en": "Underwear",
+      "kaa": "Ichki kiyim"
+     }
+    },
+    {
+     "v": "botinka",
+     "name": {
+      "uz": "Botinka",
+      "ru": "Ботинки",
+      "en": "Boots",
+      "kaa": "Botinka"
+     }
+    },
+    {
+     "v": "polubotinka",
+     "name": {
+      "uz": "Polubotinka",
+      "ru": "Полуботинки",
+      "en": "Low shoes",
+      "kaa": "Polubotinka"
+     }
+    },
+    {
+     "v": "tufli",
+     "name": {
+      "uz": "Tufli",
+      "ru": "Туфли",
+      "en": "Shoes",
+      "kaa": "Tufli"
+     }
+    },
+    {
+     "v": "krossovka",
+     "name": {
+      "uz": "Krossovka",
+      "ru": "Кроссовки",
+      "en": "Sneakers",
+      "kaa": "Krossovka"
+     }
+    },
+    {
+     "v": "etik",
+     "name": {
+      "uz": "Etik",
+      "ru": "Сапоги",
+      "en": "High boots",
+      "kaa": "Etik"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "jins",
+   "name": {
+    "uz": "Jinsi",
+    "ru": "Пол",
+    "en": "Gender",
+    "kaa": "Jınısı"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "erkak",
+     "name": {
+      "uz": "Erkak",
+      "ru": "Мужской",
+      "en": "Men",
+      "kaa": "Er"
+     }
+    },
+    {
+     "v": "ayol",
+     "name": {
+      "uz": "Ayol",
+      "ru": "Женский",
+      "en": "Women",
+      "kaa": "Hayal"
+     }
+    },
+    {
+     "v": "uniseks",
+     "name": {
+      "uz": "Uniseks",
+      "ru": "Унисекс",
+      "en": "Unisex",
+      "kaa": "Uniseks"
+     }
+    }
+   ],
+   "order": 1
+  },
+  {
+   "code": "mavsum",
+   "name": {
+    "uz": "Mavsum",
+    "ru": "Сезон",
+    "en": "Season",
+    "kaa": "Máwsim"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "yoz",
+     "name": {
+      "uz": "Yoz",
+      "ru": "Лето",
+      "en": "Summer",
+      "kaa": "Jaz"
+     }
+    },
+    {
+     "v": "qish",
+     "name": {
+      "uz": "Qish",
+      "ru": "Зима",
+      "en": "Winter",
+      "kaa": "Qıs"
+     }
+    },
+    {
+     "v": "demi",
+     "name": {
+      "uz": "Bahor-kuz",
+      "ru": "Демисезон",
+      "en": "Mid-season",
+      "kaa": "Báhár-gúz"
+     }
+    },
+    {
+     "v": "yil",
+     "name": {
+      "uz": "Yil bo'yi",
+      "ru": "Всесезон",
+      "en": "All season",
+      "kaa": "Jıl boyı"
+     }
+    }
+   ],
+   "order": 2
+  },
+  {
+   "code": "olcham",
+   "name": {
+    "uz": "Kiyim o'lchami",
+    "ru": "Размер одежды",
+    "en": "Clothing size",
+    "kaa": "Kiyim ólshemi"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "44",
+     "name": {
+      "uz": "44",
+      "ru": "44",
+      "en": "44",
+      "kaa": "44"
+     }
+    },
+    {
+     "v": "46",
+     "name": {
+      "uz": "46",
+      "ru": "46",
+      "en": "46",
+      "kaa": "46"
+     }
+    },
+    {
+     "v": "48",
+     "name": {
+      "uz": "48",
+      "ru": "48",
+      "en": "48",
+      "kaa": "48"
+     }
+    },
+    {
+     "v": "50",
+     "name": {
+      "uz": "50",
+      "ru": "50",
+      "en": "50",
+      "kaa": "50"
+     }
+    },
+    {
+     "v": "52",
+     "name": {
+      "uz": "52",
+      "ru": "52",
+      "en": "52",
+      "kaa": "52"
+     }
+    },
+    {
+     "v": "54",
+     "name": {
+      "uz": "54",
+      "ru": "54",
+      "en": "54",
+      "kaa": "54"
+     }
+    },
+    {
+     "v": "56",
+     "name": {
+      "uz": "56",
+      "ru": "56",
+      "en": "56",
+      "kaa": "56"
+     }
+    },
+    {
+     "v": "58",
+     "name": {
+      "uz": "58",
+      "ru": "58",
+      "en": "58",
+      "kaa": "58"
+     }
+    },
+    {
+     "v": "60",
+     "name": {
+      "uz": "60",
+      "ru": "60",
+      "en": "60",
+      "kaa": "60"
+     }
+    },
+    {
+     "v": "62",
+     "name": {
+      "uz": "62",
+      "ru": "62",
+      "en": "62",
+      "kaa": "62"
+     }
+    }
+   ],
+   "hint": {
+    "uz": "Faqat kiyim uchun",
+    "ru": "Только для одежды",
+    "en": "Clothing only",
+    "kaa": "Faqat kiyim uchun"
+   },
+   "order": 3
+  },
+  {
+   "code": "poyabzal_olcham",
+   "name": {
+    "uz": "Poyabzal o'lchami",
+    "ru": "Размер обуви",
+    "en": "Shoe size",
+    "kaa": "Ayaq kiyim ólshemi"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "36",
+     "name": {
+      "uz": "36",
+      "ru": "36",
+      "en": "36",
+      "kaa": "36"
+     }
+    },
+    {
+     "v": "37",
+     "name": {
+      "uz": "37",
+      "ru": "37",
+      "en": "37",
+      "kaa": "37"
+     }
+    },
+    {
+     "v": "38",
+     "name": {
+      "uz": "38",
+      "ru": "38",
+      "en": "38",
+      "kaa": "38"
+     }
+    },
+    {
+     "v": "39",
+     "name": {
+      "uz": "39",
+      "ru": "39",
+      "en": "39",
+      "kaa": "39"
+     }
+    },
+    {
+     "v": "40",
+     "name": {
+      "uz": "40",
+      "ru": "40",
+      "en": "40",
+      "kaa": "40"
+     }
+    },
+    {
+     "v": "41",
+     "name": {
+      "uz": "41",
+      "ru": "41",
+      "en": "41",
+      "kaa": "41"
+     }
+    },
+    {
+     "v": "42",
+     "name": {
+      "uz": "42",
+      "ru": "42",
+      "en": "42",
+      "kaa": "42"
+     }
+    },
+    {
+     "v": "43",
+     "name": {
+      "uz": "43",
+      "ru": "43",
+      "en": "43",
+      "kaa": "43"
+     }
+    },
+    {
+     "v": "44",
+     "name": {
+      "uz": "44",
+      "ru": "44",
+      "en": "44",
+      "kaa": "44"
+     }
+    },
+    {
+     "v": "45",
+     "name": {
+      "uz": "45",
+      "ru": "45",
+      "en": "45",
+      "kaa": "45"
+     }
+    },
+    {
+     "v": "46",
+     "name": {
+      "uz": "46",
+      "ru": "46",
+      "en": "46",
+      "kaa": "46"
+     }
+    }
+   ],
+   "hint": {
+    "uz": "Faqat poyabzal uchun",
+    "ru": "Только для обуви",
+    "en": "Footwear only",
+    "kaa": "Faqat poyabzal uchun"
+   },
+   "order": 4
+  },
+  {
+   "code": "material",
+   "name": {
+    "uz": "Ust materiali",
+    "ru": "Материал верха",
+    "en": "Upper / outer material",
+    "kaa": "Ústingi materialı"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "paxta",
+     "name": {
+      "uz": "Paxta",
+      "ru": "Хлопок",
+      "en": "Cotton",
+      "kaa": "Paxta"
+     }
+    },
+    {
+     "v": "aralash",
+     "name": {
+      "uz": "Aralash mato",
+      "ru": "Смесовая ткань",
+      "en": "Blend",
+      "kaa": "Aralash mato"
+     }
+    },
+    {
+     "v": "charm",
+     "name": {
+      "uz": "Tabiiy charm",
+      "ru": "Натуральная кожа",
+      "en": "Genuine leather",
+      "kaa": "Tabiiy charm"
+     }
+    },
+    {
+     "v": "suniy-charm",
+     "name": {
+      "uz": "Sun'iy charm",
+      "ru": "Искусственная кожа",
+      "en": "Faux leather",
+      "kaa": "Sun'iy charm"
+     }
+    },
+    {
+     "v": "tekstil",
+     "name": {
+      "uz": "Tekstil",
+      "ru": "Текстиль",
+      "en": "Textile",
+      "kaa": "Tekstil"
+     }
+    },
+    {
+     "v": "trikotaj",
+     "name": {
+      "uz": "Trikotaj",
+      "ru": "Трикотаж",
+      "en": "Jersey",
+      "kaa": "Trikotaj"
+     }
+    }
+   ],
+   "order": 5
+  },
+  {
+   "code": "taglik",
+   "name": {
+    "uz": "Taglik materiali",
+    "ru": "Материал подошвы",
+    "en": "Sole material",
+    "kaa": "Taban materialı"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "rezina",
+     "name": {
+      "uz": "Rezina",
+      "ru": "Резина",
+      "en": "Rubber",
+      "kaa": "Rezina"
+     }
+    },
+    {
+     "v": "pu",
+     "name": {
+      "uz": "Poliuretan",
+      "ru": "Полиуретан",
+      "en": "Polyurethane",
+      "kaa": "Poliuretan"
+     }
+    },
+    {
+     "v": "eva",
+     "name": {
+      "uz": "EVA",
+      "ru": "ЭВА",
+      "en": "EVA",
+      "kaa": "EVA"
+     }
+    }
+   ],
+   "order": 6
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 7
+  }
+ ],
+ "suvenir": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Material",
+    "ru": "Материал",
+    "en": "Material",
+    "kaa": "Material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": true,
+   "variant": false,
+   "options": [
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq yog'ochi",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz aǵashı"
+     }
+    },
+    {
+     "v": "sosna",
+     "name": {
+      "uz": "Qarag'ay (sosna)",
+      "ru": "Сосна",
+      "en": "Pine",
+      "kaa": "Qarag'ay (sosna)"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och",
+      "ru": "Дерево",
+      "en": "Wood",
+      "kaa": "Aǵash"
+     }
+    },
+    {
+     "v": "laminat",
+     "name": {
+      "uz": "Laminat",
+      "ru": "Ламинат",
+      "en": "Laminate",
+      "kaa": "Laminat"
+     }
+    },
+    {
+     "v": "mdf",
+     "name": {
+      "uz": "MDF",
+      "ru": "МДФ",
+      "en": "MDF",
+      "kaa": "MDF"
+     }
+    },
+    {
+     "v": "charm",
+     "name": {
+      "uz": "Charm",
+      "ru": "Кожа",
+      "en": "Leather",
+      "kaa": "Charm"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "ishlov",
+   "name": {
+    "uz": "Ishlov berish",
+    "ru": "Техника исполнения",
+    "en": "Technique",
+    "kaa": "Islew beriw"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "oyma",
+     "name": {
+      "uz": "O'yma naqsh",
+      "ru": "Резьба по дереву",
+      "en": "Wood carving",
+      "kaa": "O'yma naqsh"
+     }
+    },
+    {
+     "v": "qolda",
+     "name": {
+      "uz": "Qo'lda yasalgan",
+      "ru": "Ручная работа",
+      "en": "Handmade",
+      "kaa": "Qo'lda yasalgan"
+     }
+    },
+    {
+     "v": "lak",
+     "name": {
+      "uz": "Lak bilan qoplangan",
+      "ru": "Лакированный",
+      "en": "Lacquered",
+      "kaa": "Lak bilan qoplangan"
+     }
+    }
+   ],
+   "order": 1
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 2
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 5
+  },
+  {
+   "code": "komplekt",
+   "name": {
+    "uz": "Komplektatsiya",
+    "ru": "Комплектация",
+    "en": "Package contents",
+    "kaa": "Komplektaciya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 1 stol, 2 stul",
+    "ru": "Например: 1 стол, 2 стула",
+    "en": "E.g. 1 table, 2 chairs",
+    "kaa": "Masalan: 1 stol, 2 stul"
+   },
+   "order": 6
+  },
+  {
+   "code": "sovga_qadoq",
+   "name": {
+    "uz": "Sovg'a qadog'ida",
+    "ru": "В подарочной упаковке",
+    "en": "Gift packaging",
+    "kaa": "Sawǵa qaptamasında"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 7
+  }
+ ],
+ "obodonlashtirish": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Material",
+    "ru": "Материал",
+    "en": "Material",
+    "kaa": "Material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": true,
+   "variant": false,
+   "options": [
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metall",
+      "ru": "Металл",
+      "en": "Metal",
+      "kaa": "Metall"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och",
+      "ru": "Дерево",
+      "en": "Wood",
+      "kaa": "Aǵash"
+     }
+    },
+    {
+     "v": "beton",
+     "name": {
+      "uz": "Beton",
+      "ru": "Бетон",
+      "en": "Concrete",
+      "kaa": "Beton"
+     }
+    },
+    {
+     "v": "plastik",
+     "name": {
+      "uz": "Plastik",
+      "ru": "Пластик",
+      "en": "Plastic",
+      "kaa": "Plastik"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "qoplama",
+   "name": {
+    "uz": "Qoplama",
+    "ru": "Покрытие",
+    "en": "Coating",
+    "kaa": "Qaplama"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "boyoq",
+     "name": {
+      "uz": "Bo'yoq",
+      "ru": "Краска",
+      "en": "Paint",
+      "kaa": "Boyaw"
+     }
+    },
+    {
+     "v": "poroshok",
+     "name": {
+      "uz": "Kukunli bo'yoq",
+      "ru": "Порошковая краска",
+      "en": "Powder coat",
+      "kaa": "Kukunli bo'yoq"
+     }
+    },
+    {
+     "v": "ocinkovka",
+     "name": {
+      "uz": "Ruxlangan",
+      "ru": "Оцинковка",
+      "en": "Galvanized",
+      "kaa": "Ruxlangan"
+     }
+    }
+   ],
+   "order": 1
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 2
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 5
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 6
+  },
+  {
+   "code": "max_yuk",
+   "name": {
+    "uz": "Maksimal yuklama",
+    "ru": "Максимальная нагрузка",
+    "en": "Max load",
+    "kaa": "Maksimal yuklama"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 7
+  },
+  {
+   "code": "yosh",
+   "name": {
+    "uz": "Foydalanuvchi yoshi",
+    "ru": "Возраст пользователя",
+    "en": "User age",
+    "kaa": "Paydalanıwshı jası"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 8
+  },
+  {
+   "code": "yigilgan",
+   "name": {
+    "uz": "Yig'ilgan holda yetkaziladi",
+    "ru": "Поставляется в собранном виде",
+    "en": "Delivered assembled",
+    "kaa": "Jıynalǵan túrde jetkeriledi"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 9
+  }
+ ],
+ "oquv-jihozlar": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Material",
+    "ru": "Материал",
+    "en": "Material",
+    "kaa": "Material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": true,
+   "variant": false,
+   "options": [
+    {
+     "v": "plastik",
+     "name": {
+      "uz": "Plastik",
+      "ru": "Пластик",
+      "en": "Plastic",
+      "kaa": "Plastik"
+     }
+    },
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metall",
+      "ru": "Металл",
+      "en": "Metal",
+      "kaa": "Metall"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och",
+      "ru": "Дерево",
+      "en": "Wood",
+      "kaa": "Aǵash"
+     }
+    },
+    {
+     "v": "mato",
+     "name": {
+      "uz": "Mato",
+      "ru": "Ткань",
+      "en": "Fabric",
+      "kaa": "Mata"
+     }
+    },
+    {
+     "v": "rezina",
+     "name": {
+      "uz": "Rezina",
+      "ru": "Резина",
+      "en": "Rubber",
+      "kaa": "Rezina"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "maket",
+   "name": {
+    "uz": "O'quv maketi (jangovar emas)",
+    "ru": "Учебный макет (небоевой)",
+    "en": "Training mock-up (non-functional)",
+    "kaa": "Oqıw maketi (urıs ushın emes)"
+   },
+   "type": "bool",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 1
+  },
+  {
+   "code": "maqsad",
+   "name": {
+    "uz": "Mo'ljal",
+    "ru": "Назначение",
+    "en": "Purpose",
+    "kaa": "Mólsher"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: CHQBT darslari, tibbiy tayyorgarlik",
+    "ru": "Например: уроки НВП, медподготовка",
+    "en": "E.g. pre-military training",
+    "kaa": "Masalan: CHQBT darslari, tibbiy tayyorgarlik"
+   },
+   "order": 2
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 5
+  },
+  {
+   "code": "rang",
+   "name": {
+    "uz": "Rang",
+    "ru": "Цвет",
+    "en": "Color",
+    "kaa": "Reń"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "oq",
+     "name": {
+      "uz": "Oq",
+      "ru": "Белый",
+      "en": "White",
+      "kaa": "Aq"
+     }
+    },
+    {
+     "v": "qora",
+     "name": {
+      "uz": "Qora",
+      "ru": "Чёрный",
+      "en": "Black",
+      "kaa": "Qara"
+     }
+    },
+    {
+     "v": "kulrang",
+     "name": {
+      "uz": "Kulrang",
+      "ru": "Серый",
+      "en": "Grey",
+      "kaa": "Sur"
+     }
+    },
+    {
+     "v": "jigarrang",
+     "name": {
+      "uz": "Jigarrang",
+      "ru": "Коричневый",
+      "en": "Brown",
+      "kaa": "Qońır"
+     }
+    },
+    {
+     "v": "bej",
+     "name": {
+      "uz": "Bej",
+      "ru": "Бежевый",
+      "en": "Beige",
+      "kaa": "Bej"
+     }
+    },
+    {
+     "v": "qizil",
+     "name": {
+      "uz": "Qizil",
+      "ru": "Красный",
+      "en": "Red",
+      "kaa": "Qızıl"
+     }
+    },
+    {
+     "v": "kok",
+     "name": {
+      "uz": "Ko'k",
+      "ru": "Синий",
+      "en": "Blue",
+      "kaa": "Kók"
+     }
+    },
+    {
+     "v": "havorang",
+     "name": {
+      "uz": "Havorang",
+      "ru": "Голубой",
+      "en": "Light blue",
+      "kaa": "Aspan reń"
+     }
+    },
+    {
+     "v": "yashil",
+     "name": {
+      "uz": "Yashil",
+      "ru": "Зелёный",
+      "en": "Green",
+      "kaa": "Jasıl"
+     }
+    },
+    {
+     "v": "sariq",
+     "name": {
+      "uz": "Sariq",
+      "ru": "Жёлтый",
+      "en": "Yellow",
+      "kaa": "Sarı"
+     }
+    },
+    {
+     "v": "toq-sariq",
+     "name": {
+      "uz": "To'q sariq",
+      "ru": "Оранжевый",
+      "en": "Orange",
+      "kaa": "Qızǵılt sarı"
+     }
+    },
+    {
+     "v": "binafsha",
+     "name": {
+      "uz": "Binafsha",
+      "ru": "Фиолетовый",
+      "en": "Purple",
+      "kaa": "Binafsha"
+     }
+    },
+    {
+     "v": "pushti",
+     "name": {
+      "uz": "Pushti",
+      "ru": "Розовый",
+      "en": "Pink",
+      "kaa": "Pushti"
+     }
+    },
+    {
+     "v": "haki",
+     "name": {
+      "uz": "Xaki",
+      "ru": "Хаки",
+      "en": "Khaki",
+      "kaa": "Xaki"
+     }
+    },
+    {
+     "v": "yogoch",
+     "name": {
+      "uz": "Yog'och rangi",
+      "ru": "Цвет дерева",
+      "en": "Wood",
+      "kaa": "Aǵash reńi"
+     }
+    },
+    {
+     "v": "venge",
+     "name": {
+      "uz": "Venge",
+      "ru": "Венге",
+      "en": "Wenge",
+      "kaa": "Venge"
+     }
+    },
+    {
+     "v": "yongoq",
+     "name": {
+      "uz": "Yong'oq",
+      "ru": "Орех",
+      "en": "Walnut",
+      "kaa": "Ǵoz"
+     }
+    },
+    {
+     "v": "dub",
+     "name": {
+      "uz": "Eman (dub)",
+      "ru": "Дуб",
+      "en": "Oak",
+      "kaa": "Eman (dub)"
+     }
+    },
+    {
+     "v": "kumush",
+     "name": {
+      "uz": "Kumushrang",
+      "ru": "Серебристый",
+      "en": "Silver",
+      "kaa": "Kumushrang"
+     }
+    },
+    {
+     "v": "tilla",
+     "name": {
+      "uz": "Tillarang",
+      "ru": "Золотистый",
+      "en": "Gold",
+      "kaa": "Tillarang"
+     }
+    },
+    {
+     "v": "rangbarang",
+     "name": {
+      "uz": "Rang-barang",
+      "ru": "Разноцветный",
+      "en": "Multicolor",
+      "kaa": "Rang-barang"
+     }
+    },
+    {
+     "v": "tabiiy",
+     "name": {
+      "uz": "Tabiiy (bo'yalmagan)",
+      "ru": "Натуральный",
+      "en": "Natural",
+      "kaa": "Tabiiy (bo'yalmagan)"
+     }
+    }
+   ],
+   "order": 6
+  },
+  {
+   "code": "komplekt",
+   "name": {
+    "uz": "Komplektatsiya",
+    "ru": "Комплектация",
+    "en": "Package contents",
+    "kaa": "Komplektaciya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 1 stol, 2 stul",
+    "ru": "Например: 1 стол, 2 стула",
+    "en": "E.g. 1 table, 2 chairs",
+    "kaa": "Masalan: 1 stol, 2 stul"
+   },
+   "order": 7
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 8
+  }
+ ],
+ "xavfsizlik": [
+  {
+   "code": "material",
+   "name": {
+    "uz": "Material",
+    "ru": "Материал",
+    "en": "Material",
+    "kaa": "Material"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "polat",
+     "name": {
+      "uz": "Po'lat",
+      "ru": "Сталь",
+      "en": "Steel",
+      "kaa": "Po'lat"
+     }
+    },
+    {
+     "v": "ocinkovka",
+     "name": {
+      "uz": "Ruxlangan po'lat",
+      "ru": "Оцинкованная сталь",
+      "en": "Galvanized steel",
+      "kaa": "Ruxlangan po'lat"
+     }
+    },
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metall",
+      "ru": "Металл",
+      "en": "Metal",
+      "kaa": "Metall"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "diametr",
+   "name": {
+    "uz": "Diametri",
+    "ru": "Диаметр",
+    "en": "Diameter",
+    "kaa": "Diametri"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": true,
+   "options": [],
+   "order": 1
+  },
+  {
+   "code": "sim_qalinligi",
+   "name": {
+    "uz": "Sim qalinligi",
+    "ru": "Толщина проволоки",
+    "en": "Wire thickness",
+    "kaa": "Sım qalıńlıǵı"
+   },
+   "type": "number",
+   "unit": "mm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 2
+  },
+  {
+   "code": "uzunlik",
+   "name": {
+    "uz": "Uzunligi",
+    "ru": "Длина",
+    "en": "Length",
+    "kaa": "Uzınlıǵı"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "kenglik",
+   "name": {
+    "uz": "Kengligi",
+    "ru": "Ширина",
+    "en": "Width",
+    "kaa": "Keńligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  },
+  {
+   "code": "balandlik",
+   "name": {
+    "uz": "Balandligi",
+    "ru": "Высота",
+    "en": "Height",
+    "kaa": "Biyikligi"
+   },
+   "type": "number",
+   "unit": "sm",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 5
+  },
+  {
+   "code": "vazn",
+   "name": {
+    "uz": "Mahsulot og'irligi",
+    "ru": "Вес товара",
+    "en": "Product weight",
+    "kaa": "Ónim salmaǵı"
+   },
+   "type": "number",
+   "unit": "kg",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 6
+  },
+  {
+   "code": "komplekt",
+   "name": {
+    "uz": "Komplektatsiya",
+    "ru": "Комплектация",
+    "en": "Package contents",
+    "kaa": "Komplektaciya"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 1 stol, 2 stul",
+    "ru": "Например: 1 стол, 2 стула",
+    "en": "E.g. 1 table, 2 chairs",
+    "kaa": "Masalan: 1 stol, 2 stul"
+   },
+   "order": 7
+  }
+ ],
+ "xojalik": [
+  {
+   "code": "turi",
+   "name": {
+    "uz": "Mahsulot turi",
+    "ru": "Вид товара",
+    "en": "Product type",
+    "kaa": "Ónim túri"
+   },
+   "type": "text",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 0
+  },
+  {
+   "code": "hajm",
+   "name": {
+    "uz": "Og'irligi / hajmi",
+    "ru": "Вес / объём",
+    "en": "Weight / volume",
+    "kaa": "Salmaǵı / kólemi"
+   },
+   "type": "text",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "hint": {
+    "uz": "Masalan: 200 g, 50 kg",
+    "ru": "Например: 200 г, 50 кг",
+    "en": "E.g. 200 g",
+    "kaa": "Masalan: 200 g, 50 kg"
+   },
+   "order": 1
+  },
+  {
+   "code": "tarkib",
+   "name": {
+    "uz": "Tarkibi",
+    "ru": "Состав",
+    "en": "Composition",
+    "kaa": "Quramı"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 2
+  },
+  {
+   "code": "yaroqlilik",
+   "name": {
+    "uz": "Yaroqlilik muddati",
+    "ru": "Срок годности",
+    "en": "Shelf life",
+    "kaa": "Jaramlılıq múddeti"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  },
+  {
+   "code": "qadoq_soni",
+   "name": {
+    "uz": "Qadoqdagi soni",
+    "ru": "Количество в упаковке",
+    "en": "Quantity per pack",
+    "kaa": "Qaptamadaǵı sanı"
+   },
+   "type": "number",
+   "unit": "dona",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 4
+  }
+ ],
+ "xizmatlar": [
+  {
+   "code": "xizmat_turi",
+   "name": {
+    "uz": "Xizmat turi",
+    "ru": "Вид услуги",
+    "en": "Service type",
+    "kaa": "Xızmet túri"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "mebel",
+     "name": {
+      "uz": "Mebel yasash",
+      "ru": "Изготовление мебели",
+      "en": "Furniture making",
+      "kaa": "Mebel jasaw"
+     }
+    },
+    {
+     "v": "tikuv",
+     "name": {
+      "uz": "Tikuvchilik",
+      "ru": "Пошив",
+      "en": "Tailoring",
+      "kaa": "Tigiwshilik"
+     }
+    },
+    {
+     "v": "duradgor",
+     "name": {
+      "uz": "Duradgorlik",
+      "ru": "Столярные работы",
+      "en": "Carpentry",
+      "kaa": "Duradgorlik"
+     }
+    },
+    {
+     "v": "metall",
+     "name": {
+      "uz": "Metallga ishlov berish",
+      "ru": "Металлообработка",
+      "en": "Metalwork",
+      "kaa": "Metallǵa islew beriw"
+     }
+    },
+    {
+     "v": "beton",
+     "name": {
+      "uz": "Beton/granit buyumlar",
+      "ru": "Изделия из бетона/гранита",
+      "en": "Concrete / granite products",
+      "kaa": "Beton/granit buyumlar"
+     }
+    },
+    {
+     "v": "tamir",
+     "name": {
+      "uz": "Ta'mirlash",
+      "ru": "Ремонт",
+      "en": "Repair",
+      "kaa": "Remont"
+     }
+    }
+   ],
+   "order": 0
+  },
+  {
+   "code": "xomashyo",
+   "name": {
+    "uz": "Xomashyo kimdan",
+    "ru": "Чьё сырьё",
+    "en": "Raw material provided by",
+    "kaa": "Shiyki zat kimnen"
+   },
+   "type": "enum",
+   "unit": "",
+   "required": true,
+   "multi": false,
+   "variant": false,
+   "options": [
+    {
+     "v": "bizdan",
+     "name": {
+      "uz": "Ijrochidan (bizdan)",
+      "ru": "Сырьё исполнителя",
+      "en": "Contractor's material",
+      "kaa": "Orınlawshıdan"
+     }
+    },
+    {
+     "v": "buyurtmachi",
+     "name": {
+      "uz": "Buyurtmachidan",
+      "ru": "Сырьё заказчика",
+      "en": "Customer's material",
+      "kaa": "Buyırtpashıdan"
+     }
+    }
+   ],
+   "order": 1
+  },
+  {
+   "code": "muddat",
+   "name": {
+    "uz": "Bajarish muddati",
+    "ru": "Срок выполнения",
+    "en": "Lead time",
+    "kaa": "Orınlaw múddeti"
+   },
+   "type": "number",
+   "unit": "kun",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 2
+  },
+  {
+   "code": "minimal",
+   "name": {
+    "uz": "Minimal buyurtma",
+    "ru": "Минимальный заказ",
+    "en": "Minimum order",
+    "kaa": "Minimal buyurtma"
+   },
+   "type": "text",
+   "unit": "",
+   "required": false,
+   "multi": false,
+   "variant": false,
+   "options": [],
+   "order": 3
+  }
+ ]
+}

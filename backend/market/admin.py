@@ -1,13 +1,14 @@
 from django.contrib import admin
 
-from .models import Application, ApplicationItem, Category, Contract, Payment, Product, Profile, Seller, StatusLog
+from .models import (Application, ApplicationItem, AttributeDef, Category, Contract, Payment, Product, ProductImage,
+                     ProductVariant, Profile, Seller, StatusLog)
 from .translit import pick
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ["slug", "title", "order"]
-    list_editable = ["order"]
+    list_display = ["slug", "title", "order", "ikpu_default"]
+    list_editable = ["order", "ikpu_default"]
 
     def title(self, o):
         return pick(o.name, "uz")
@@ -29,9 +30,34 @@ class SellerAdmin(admin.ModelAdmin):
         return pick(o.name, "uz")
 
 
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 0
+    fields = ["image", "order", "is_sample"]
+
+
+class ProductVariantInline(admin.TabularInline):
+    model = ProductVariant
+    extra = 0
+    fields = ["sku", "attributes", "barcode", "price", "stock", "reserved", "sold", "is_active"]
+    readonly_fields = ["reserved", "sold"]
+
+
+@admin.register(AttributeDef)
+class AttributeDefAdmin(admin.ModelAdmin):
+    list_display = ["category", "code", "title", "type", "unit", "required", "variant", "order"]
+    list_filter = ["category", "type", "required", "variant"]
+    list_editable = ["required", "order"]
+    search_fields = ["code"]
+
+    def title(self, o):
+        return pick(o.name, "uz")
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["sku", "title", "seller", "category", "price", "stock", "reserved", "unit", "is_active"]
+    inlines = [ProductImageInline, ProductVariantInline]
+    list_display = ["sku", "title", "seller", "category", "price", "stock", "reserved", "unit", "ikpu", "is_active"]
     list_filter = ["category", "seller", "is_active", "delivery"]
     search_fields = ["sku", "search"]
     list_editable = ["price", "stock", "is_active"]

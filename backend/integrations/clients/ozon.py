@@ -34,6 +34,9 @@ def _dim_mm(cm):
     return int(round(float(cm) * 10)) if cm is not None else None
 
 
+OZON_MODEL_ATTR = 9048
+
+
 class OzonClient(MarketplaceClient):
     code = "ozon"
     base_url = "https://api-seller.ozon.ru"
@@ -111,8 +114,16 @@ class OzonClient(MarketplaceClient):
     def _item(self, it: ProductPayload):
         attrs = {}
         for a in it.attributes:
-            v = {"dictionary_value_id": int(a["value_id"])} if a.get("value_id") else {"value": str(a.get("value"))}
-            attrs.setdefault(int(a["id"]), []).append(v)
+            ids, vals = a.get("value_id"), a.get("value")
+            if ids:
+                for x in (ids if isinstance(ids, list) else [ids]):
+                    attrs.setdefault(int(a["id"]), []).append({"dictionary_value_id": int(x)})
+            else:
+                for x in (vals if isinstance(vals, list) else [vals]):
+                    attrs.setdefault(int(a["id"]), []).append({"value": str(x)})
+        # 9048 «Название модели (для объединения в одну карточку)» — variantlar bitta kartochkada ko'rinsin
+        if it.group_id and OZON_MODEL_ATTR not in attrs:
+            attrs[OZON_MODEL_ATTR] = [{"value": it.group_id}]
         item = {
             "offer_id": it.offer_id, "name": it.name[:500], "description_category_id": int(it.category_id),
             "type_id": int(it.type_id), "price": str(num(it.price)), "old_price": "0",

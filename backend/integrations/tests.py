@@ -163,8 +163,8 @@ class IntegrationTest(TestCase):
     def test_yandex_publish_sync_flow(self):
         c = self.login("mk49")
         p = self.product(stock=20, reserved=3)
-        ProductMarketInfo.objects.create(product=p, brand="MK-49", weight_kg=Decimal("1.2"), length_cm=30, width_cm=20,
-                                         height_cm=5)
+        Product.objects.filter(pk=p.pk).update(brand="MK-49", weight_kg=Decimal("1.2"), length_cm=30, width_cm=20,
+                                               height_cm=5, ikpu="09401001001000000")
         # operator kategoriyani moslaydi
         op = self.login("jied")
         m = op.post("/api/mp/mappings/", {"category": p.category.slug, "marketplace": "yandex", "external_id": "15685",
@@ -194,6 +194,8 @@ class IntegrationTest(TestCase):
             offer = state["upsert"]["offerMappings"][0]["offer"]
             self.assertEqual(offer["offerId"], p.sku)
             self.assertEqual(offer["marketCategoryId"], 15685)
+            self.assertEqual(offer["vendor"], "MK-49")
+            self.assertEqual(offer["commodityCodes"], [{"code": "09401001001000000", "type": "IKPU_CODE"}])
             self.assertEqual(offer["pictures"][0][:26], "https://imkon-market.uz/me")
             self.assertEqual(offer["parameterValues"], [{"parameterId": 100, "value": "Paxta"}])
             self.assertEqual(offer["basicPrice"], {"value": 150000, "currencyId": "UZS"})
@@ -216,6 +218,68 @@ class IntegrationTest(TestCase):
             jobs.run_pending()
             self.assertEqual(state["stocks"]["skuItems"][0]["count"], 8)
             self.assertNotIn(SECRET, json.dumps(c.get(f"/api/mp/logs/?account={acc_id}").json()))
+
+    def test_variants_attr_automap_publish_all(self):
+        """Kartochka bir marta to'ldiriladi → xususiyatlar avtomatik moslanadi → variantlar alohida taklif bo'lib ketadi."""
+        call_command("load_attributes", verbosity=0)
+        from market.catalog import save_variants
+        p = self.product(sku="MK-44-005", stock=None, price=Decimal("900000"))
+        Product.objects.filter(pk=p.pk).update(brand="MK-44", weight_kg=30, length_cm=200, width_cm=90, height_cm=80,
+                                               attributes={"material": ["ldsp"]})
+        p.refresh_from_db()
+        save_variants(p, [{"attributes": {"rang": "qora"}, "stock": 4}, {"attributes": {"rang": "oq"}, "stock": 1}])
+        c = self.login("mk44")
+        op = self.login("jied")
+        m = op.post("/api/mp/mappings/", {"category": "mebel", "marketplace": "yandex", "external_id": "91",
+                                          "external_name": "Диваны"}, format="json").json()
+        mapping = CategoryMapping.objects.get(pk=m["id"])
+        AttributeMapping.objects.create(mapping=mapping, external_id="13", name="Цвет товара", required=True,
+                                        is_dictionary=True, values=[{"id": "201", "value": "черный"},
+                                                                    {"id": "202", "value": "белый"}])
+        AttributeMapping.objects.create(mapping=mapping, external_id="14", name="Бренд", required=True)
+        AttributeMapping.objects.create(mapping=mapping, external_id="15", name="Материал корпуса", required=False)
+        r = op.post(f"/api/mp/mappings/{mapping.pk}/auto-map/").json()
+        self.assertEqual((r["fields"], r["attrs"]), (1, 2), r)
+        rang = AttributeMapping.objects.get(mapping=mapping, external_id="13")
+        self.assertEqual((rang.source, rang.field), ("attr", "rang"))
+        self.assertEqual(dict(rang.value_map.values_list("our_value", "external_value_id")), {"qora": "201", "oq": "202"})
+        self.assertEqual(AttributeMapping.objects.get(mapping=mapping, external_id="14").field, "brand")
+        acc_id = c.post("/api/mp/accounts/", {"marketplace": "yandex", "api_key": SECRET}, format="json").json()["id"]
+        state = {}
+        with use_session(FakeSession(self.yandex_routes(state))):
+            jobs.run_pending()
+            ready = c.get(f"/api/mp/product-info/{p.id}/readiness/").json()
+            ym = ready["marketplaces"][0]
+            self.assertTrue(ym["ok"], ym)
+            r = c.post(f"/api/mp/product-info/{p.id}/publish-all/", {}, format="json")
+            self.assertEqual(r.status_code, 202, r.content)
+            self.assertEqual(len(r.json()["listings"]), 2)
+            jobs.run_pending()
+            offers = {o["offer"]["offerId"]: o["offer"] for o in state["upsert"]["offerMappings"]}
+            qora = p.variants.get(attributes__rang="qora")
+            self.assertEqual(set(offers), set(p.variants.values_list("sku", flat=True)))
+            o = offers[qora.sku]
+            self.assertIn({"parameterId": 13, "valueId": 201}, o["parameterValues"])
+            self.assertIn({"parameterId": 14, "value": "MK-44"}, o["parameterValues"])
+            self.assertTrue(o["name"].lower().endswith(", чёрный"), o["name"])
+            Job.objects.filter(status="queued").update(run_after=timezone.now())
+            jobs.run_pending()
+            counts = {x["sku"]: x["count"] for x in state["stocks"]["skuItems"]}
+            self.assertEqual(counts[qora.sku], 4)
+        # marketplace buyurtmasi variant qoldig'ini band qiladi
+        acc = MarketplaceAccount.objects.get(pk=acc_id)
+        order = MarketplaceOrder(account=acc, external_id="Y1", scheme="FBS", state="new",
+                                 items=services.resolve_items(acc, [{"offer_id": qora.sku, "qty": 3}]))
+        touched = services.apply_order_stock(order)
+        order.save()
+        qora.refresh_from_db()
+        p.refresh_from_db()
+        self.assertEqual((qora.reserved, p.reserved, touched), (3, 3, {p.pk}))
+        self.assertEqual(order.stock_items, {f"v{qora.pk}": 3})
+        order.state = "shipped"
+        services.apply_order_stock(order)
+        qora.refresh_from_db()
+        self.assertEqual((qora.stock, qora.reserved, qora.sold), (1, 0, 3))
 
     def test_listing_validation_errors(self):
         p = Product.objects.get(sku="MK-49-001")
@@ -502,8 +566,8 @@ class IntegrationTest(TestCase):
         o.save()
         p.refresh_from_db()
         self.assertEqual(p.reserved, 3)
-        self.assertEqual(services.stock_for(oz, p, services.own_reserved(oz).get(p.pk, 0)), 10)  # Ozon o'zi ayiradi
-        self.assertEqual(services.stock_for(ym, p, services.own_reserved(ym).get(p.pk, 0)), 7)
+        self.assertEqual(services.stock_for(oz, p, services.own_reserved(oz).get(str(p.pk), 0)), 10)  # Ozon o'zi ayiradi
+        self.assertEqual(services.stock_for(ym, p, services.own_reserved(ym).get(str(p.pk), 0)), 7)
 
     def test_dedupe_merge_and_disabled_account(self):
         acc = self._acc()

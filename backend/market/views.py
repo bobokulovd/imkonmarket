@@ -17,10 +17,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from . import services
 from .contract_pdf import render_contract
 from .i18n_meta import languages, regions, units
-from .models import Application, Category, Contract, Product, Seller
+from .models import Application, AttributeDef, Category, Contract, Product, ProductImage, Seller
 from .payments import checkout_url, click_enabled, payme_enabled
 from .serializers import (
-    AgentCatalogSerializer, CategorySerializer, ContractSerializer, ProductDetailSerializer, ProductListSerializer,
+    AgentCatalogSerializer, AttributeDefSerializer, CategorySerializer, ProductImageSerializer, VariantSerializer, ContractSerializer, ProductDetailSerializer, ProductListSerializer,
     PublicOrderSerializer, SellerApplicationSerializer, SellerProductSerializer, SellerProfileSerializer,
     SellerPublicSerializer,
 )
@@ -372,9 +372,64 @@ class SellerProductViewSet(viewsets.ModelViewSet):
         res = import_files(((f.name, f.read()) for f in files), qs)
         return Response(res)
 
+    @action(detail=True, methods=["get", "post"], parser_classes=[MultiPartParser, JSONParser])
+    def images(self, request, pk=None):
+        """GET — galereya; POST files[] — haqiqiy suratlar qo'shish (namunaviy AI rasm avtomatik o'chadi)."""
+        from .images import add_image
+        p = self.get_object()
+        if request.method == "POST":
+            files = request.FILES.getlist("files") or request.FILES.getlist("file")
+            if not files:
+                raise ValidationError({"files": "required"})
+            if p.images.filter(is_sample=False).count() + len(files) > 15:
+                raise ValidationError({"files": "Ko'pi bilan 15 ta rasm"})
+            errors = []
+            for f in files:
+                try:
+                    add_image(p, f.read(), sample=False, first=request.data.get("first") in ("1", "true"))
+                except Exception as e:  # noqa: BLE001 — buzilgan fayl
+                    errors.append(f"{f.name}: {e}")
+            if errors and len(errors) == len(files):
+                raise ValidationError({"files": errors})
+        return Response(ProductImageSerializer(p.images.all(), many=True, context={"request": request}).data)
+
+    @action(detail=True, methods=["delete"], url_path=r"images/(?P<image_id>\d+)")
+    def delete_image(self, request, pk=None, image_id=None):
+        from .images import delete_image
+        p = self.get_object()
+        delete_image(get_object_or_404(ProductImage, pk=image_id, product=p))
+        return Response(ProductImageSerializer(p.images.all(), many=True, context={"request": request}).data)
+
+    @action(detail=True, methods=["post"], url_path="images/reorder")
+    def reorder_images(self, request, pk=None):
+        from .images import reorder_images
+        p = self.get_object()
+        ids = request.data.get("ids") or []
+        if not isinstance(ids, list) or not all(str(i).isdigit() for i in ids):
+            raise ValidationError({"ids": "list of ids"})
+        reorder_images(p, ids)
+        return Response(ProductImageSerializer(p.images.all(), many=True, context={"request": request}).data)
+
+    @action(detail=True, methods=["get", "put"])
+    def variants(self, request, pk=None):
+        """PUT [{id?, sku?, attributes:{rang:"qora", olcham:"48"}, barcode, price, stock, image, is_active}] — to'liq ro'yxat."""
+        from .catalog import save_variants
+        p = self.get_object()
+        if request.method == "PUT":
+            rows = request.data if isinstance(request.data, list) else request.data.get("variants")
+            save_variants(p, rows)
+            from integrations.services import notify_products_changed
+            notify_products_changed([p.pk])
+        p.refresh_from_db()
+        return Response({"variants": VariantSerializer(p.variants.select_related("image"), many=True,
+                                                       context={"request": request}).data,
+                         "product": SellerProductSerializer(p, context={"request": request}).data})
+
     @action(detail=True, methods=["post"])
     def stock(self, request, pk=None):
         p = self.get_object()
+        if p.has_variants:
+            raise ValidationError({"stock": "Variantli mahsulot — qoldiq har bir variantda kiritiladi"})
         v = request.data.get("stock")
         p.stock = None if v in (None, "", "null") else max(int(v), 0)
         p.save()
@@ -536,3 +591,65 @@ class SellerContractViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, vi
     def pay_link(self, request, pk=None):
         c = self.get_object()
         return Response(checkout_url(c, request.data.get("method") or "payme", c.lang))
+
+
+# --------------------------------------------------------- attributes / IKPU
+class AttributeDefViewSet(viewsets.ModelViewSet):
+    """Xususiyatlar lug'ati. O'qish — hamma (vitrina filtrlari ham shundan), yozish — faqat operator (JIED)."""
+
+    serializer_class = AttributeDefSerializer
+    pagination_class = None
+
+    def get_queryset(self):
+        qs = AttributeDef.objects.select_related("category")
+        if self.request.query_params.get("category"):
+            qs = qs.filter(category__slug=self.request.query_params["category"])
+        return qs.order_by("category__order", "order", "id")
+
+    def get_permissions(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return [permissions.AllowAny()]
+        return [IsSellerUser()]
+
+    def check_permissions(self, request):
+        super().check_permissions(request)
+        if request.method not in permissions.SAFE_METHODS and not is_operator(request.user):
+            raise PermissionDenied("Faqat operator (JIED)")
+
+    def perform_destroy(self, obj):
+        # mahsulotlardagi qiymatlar ham tozalanadi
+        for p in Product.objects.filter(category=obj.category).only("id", "attributes"):
+            if obj.code in (p.attributes or {}):
+                p.attributes.pop(obj.code, None)
+                Product.objects.filter(pk=p.pk).update(attributes=p.attributes)
+        obj.delete()
+
+
+@api_view(["GET"])
+def ikpu_search(request):
+    """IKPU (MXIK) qidirish — tasnif.soliq.uz orqali (server tomonda). ?q=парта"""
+    from .ikpu import search
+    if not (request.user and request.user.is_authenticated and hasattr(request.user, "profile")):
+        raise PermissionDenied("seller account required")
+    q = (request.query_params.get("q") or "").strip()
+    if len(q) < 2:
+        return Response({"items": []})
+    try:
+        return Response({"items": search(q, lang=request.query_params.get("lang") or "ru")})
+    except Exception as e:  # noqa: BLE001 — tashqi xizmat ishlamasa
+        return Response({"items": [], "error": f"tasnif.soliq.uz javob bermadi: {e}"[:300]}, status=502)
+
+
+@api_view(["PATCH"])
+def category_ikpu(request, slug):
+    """Operator: kategoriya uchun tavsiya IKPU kodi (mahsulotda kod bo'lmasa taklif qilinadi)."""
+    if not (request.user and request.user.is_authenticated and hasattr(request.user, "profile")) \
+            or not is_operator(request.user):
+        raise PermissionDenied("Faqat operator (JIED)")
+    from .catalog import clean_ikpu
+    c = get_object_or_404(Category, slug=slug)
+    c.ikpu_default = clean_ikpu(request.data.get("ikpu_default"))
+    c.ikpu_name = str(request.data.get("ikpu_name") or "")[:255]
+    c.save(update_fields=["ikpu_default", "ikpu_name"])
+    return Response(CategorySerializer(c).data)
+
