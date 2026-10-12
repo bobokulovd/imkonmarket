@@ -6,7 +6,7 @@ import { Badge, Button, Empty, Input, Spinner } from "@/components/ui";
 import { api } from "@/lib/api";
 import { useApp } from "@/lib/store";
 import type { AttributeDef, GalleryImage, SellerProduct, SellerVariant } from "@/lib/types";
-import { decimalOnly, digitsOnly, eanCheck, ErrorBox, numStr, type ProductChange, errMsg } from "./shared";
+import { decimalOnly, digitsOnly, eanCheck, ErrorBox, numStr, type ProductChange, errMsg, StepBar } from "./shared";
 
 type Row = {
   key: string; id?: number; sku: string; attributes: Record<string, string | number>; barcode: string; price: string;
@@ -20,7 +20,7 @@ const rowOf = (v: SellerVariant): Row => ({
   stock: v.stock === null ? "" : String(v.stock), image: v.image, is_active: v.is_active, reserved: v.reserved, sold: v.sold,
 });
 
-export default function VariantsTab({ product, defs, onChange }: { product: SellerProduct; defs: AttributeDef[] | null; onChange: ProductChange }) {
+export default function VariantsTab({ product, defs, onChange, onNext }: { product: SellerProduct; defs: AttributeDef[] | null; onChange: ProductChange; onNext?: () => void }) {
   const { t, p, money } = useApp();
   const axes = useMemo(() => (defs || []).filter((d) => d.variant), [defs]);
   const [rows, setRows] = useState<Row[]>(() => (product.variants || []).map(rowOf));
@@ -34,7 +34,7 @@ export default function VariantsTab({ product, defs, onChange }: { product: Sell
 
   if (!defs) return <div className="py-12 grid place-items-center"><Spinner /></div>;
   if (!axes.length) {
-    return <Empty icon={<Layers className="w-7 h-7" />} title={t("pe_var_none_title")} sub={t("pe_var_none_sub")} />;
+    return <div className="space-y-4"><Empty icon={<Layers className="w-7 h-7" />} title={t("pe_var_none_title")} sub={t("pe_var_none_sub")} /><StepBar onNext={onNext} /></div>;
   }
 
   const edit = (fn: (rs: Row[]) => Row[]) => { setRows(fn); setDirty(true); setOk(false); };
@@ -73,7 +73,7 @@ export default function VariantsTab({ product, defs, onChange }: { product: Sell
 
   const images = product.images || [];
   const badEan = rows.find((r) => eanCheck(r.barcode) !== "ok");
-  const save = async () => {
+  const save = async (): Promise<boolean> => {
     setBusy(true); setErr(""); setOk(false);
     const body = rows.map((r) => ({
       ...(r.id ? { id: r.id } : {}), sku: r.sku, attributes: r.attributes, barcode: r.barcode, price: r.price === "" ? null : r.price,
@@ -84,7 +84,8 @@ export default function VariantsTab({ product, defs, onChange }: { product: Sell
       const res = await api<{ variants: SellerVariant[]; product: SellerProduct }>(`/seller/products/${product.id}/variants/`, { method: "PUT", json: body, authed: true });
       setRows(res.variants.map(rowOf)); setDirty(false); setOk(true);
       onChange(res.product);
-    } catch (e) { setErr(errMsg(e)); } finally { setBusy(false); }
+      return true;
+    } catch (e) { setErr(errMsg(e)); return false; } finally { setBusy(false); }
   };
 
   return (
@@ -189,11 +190,10 @@ export default function VariantsTab({ product, defs, onChange }: { product: Sell
       )}
       {badEan && <p className="text-xs text-red-600">{t("pe_var_bad_ean", { v: label(badEan) })}</p>}
       <ErrorBox text={err} />
-      <div className="flex items-center gap-3 justify-end">
-        {ok && <span className="text-sm text-emerald-700 flex items-center gap-1"><Check className="w-4 h-4" />{t("saved")}</span>}
-        {dirty && <span className="text-xs text-amber-700">{t("pe_unsaved")}</span>}
-        <Button loading={busy} disabled={!dirty || !!badEan} onClick={save}>{t("save")}</Button>
-      </div>
+      <StepBar onSave={dirty ? save : undefined} onNext={onNext} busy={busy} saveDisabled={!!badEan}>
+        {ok && <span className="text-sm text-emerald-700 flex items-center gap-1 mr-auto"><Check className="w-4 h-4" />{t("saved")}</span>}
+        {dirty && <span className="text-xs text-amber-700 mr-auto">{t("pe_unsaved")}</span>}
+      </StepBar>
     </div>
   );
 }

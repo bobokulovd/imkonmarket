@@ -7,7 +7,7 @@ import { api } from "@/lib/api";
 import { useApp } from "@/lib/store";
 import type { AttributeDef, AttrValue, SellerProduct } from "@/lib/types";
 import IkpuPicker from "./IkpuPicker";
-import { decimalOnly, digitsOnly, eanCheck, ErrorBox, fieldErrors, numStr, type ProductChange, errMsg } from "./shared";
+import { decimalOnly, digitsOnly, eanCheck, ErrorBox, fieldErrors, numStr, type ProductChange, errMsg, StepBar } from "./shared";
 
 type Val = string | string[];
 type Card = { barcode: string; weight_kg: string; length_cm: string; width_cm: string; height_cm: string };
@@ -29,7 +29,7 @@ const cardOf = (pr: SellerProduct): Card => ({
   barcode: pr.barcode || "", weight_kg: numStr(pr.weight_kg), length_cm: numStr(pr.length_cm), width_cm: numStr(pr.width_cm), height_cm: numStr(pr.height_cm),
 });
 
-export default function AttributesTab({ product, defs, onChange }: { product: SellerProduct; defs: AttributeDef[] | null; onChange: ProductChange }) {
+export default function AttributesTab({ product, defs, onChange, onNext }: { product: SellerProduct; defs: AttributeDef[] | null; onChange: ProductChange; onNext?: () => void }) {
   const { t, p } = useApp();
   const list = (defs || []).filter((d) => !d.variant);
   const [vals, setVals] = useState<Record<string, Val>>({});
@@ -51,7 +51,7 @@ export default function AttributesTab({ product, defs, onChange }: { product: Se
   const ean = eanCheck(card.barcode);
   const missing = list.filter((d) => d.required && (Array.isArray(vals[d.code]) ? !vals[d.code].length : !vals[d.code]));
 
-  const save = async () => {
+  const save = async (): Promise<boolean> => {
     setBusy(true); setErr(""); setFe({}); setOk(false);
     const attributes: Record<string, AttrValue> = {};
     for (const d of list) {
@@ -68,7 +68,8 @@ export default function AttributesTab({ product, defs, onChange }: { product: Se
       setVals(Object.fromEntries(list.map((d) => [d.code, toVal(d, saved.attributes?.[d.code])])));
       setCard(cardOf(saved));
       setOk(true);
-    } catch (e) { setErr(errMsg(e)); setFe(fieldErrors(e)); } finally { setBusy(false); }
+      return true;
+    } catch (e) { setErr(errMsg(e)); setFe(fieldErrors(e)); return false; } finally { setBusy(false); }
   };
 
   return (
@@ -117,10 +118,9 @@ export default function AttributesTab({ product, defs, onChange }: { product: Se
       </section>
 
       <ErrorBox text={err} />
-      <div className="flex items-center gap-3 justify-end">
-        {ok && <span className="text-sm text-emerald-700 flex items-center gap-1"><Check className="w-4 h-4" />{t("saved")}</span>}
-        <Button loading={busy} disabled={!defs || (ean !== "ok")} onClick={save}>{t("save")}</Button>
-      </div>
+      <StepBar onSave={save} onNext={onNext} busy={busy} saveDisabled={!defs || (ean !== "ok")}>
+        {ok && <span className="text-sm text-emerald-700 flex items-center gap-1 mr-auto"><Check className="w-4 h-4" />{t("saved")}</span>}
+      </StepBar>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import { Badge, Button, Field, Input, Select, Spinner } from "@/components/ui";
 import { api } from "@/lib/api";
 import { useApp } from "@/lib/store";
 import type { Readiness, SellerProduct } from "@/lib/types";
-import { ErrorBox, errMsg } from "./shared";
+import { ErrorBox, errMsg, StepBar } from "./shared";
 
 const L_KEY: Record<string, TKey> = { draft: "mp_l_draft", pending: "mp_l_pending", active: "mp_l_active", rejected: "mp_l_rejected", error: "mp_l_error" };
 
@@ -29,7 +29,7 @@ function ScoreRing({ score }: { score: number }) {
   );
 }
 
-export default function MarketTab({ product, active, version }: { product: SellerProduct; active: boolean; version: number }) {
+export default function MarketTab({ product, active, version, onFinish }: { product: SellerProduct; active: boolean; version: number; onFinish?: () => void }) {
   const { t } = useApp();
   const [r, setR] = useState<Readiness | null>(null);
   const [err, setErr] = useState("");
@@ -171,6 +171,7 @@ export default function MarketTab({ product, active, version }: { product: Selle
           </div>
         </section>
       )}
+      {onFinish && <StepBar onNext={onFinish} nextLabel={t("pe_finish")} />}
     </div>
   );
 }

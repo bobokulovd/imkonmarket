@@ -8,7 +8,7 @@ import { api } from "@/lib/api";
 import { LANGS, useApp } from "@/lib/store";
 import { toCyrl, toNew } from "@/lib/translit";
 import type { I18n, Lang, SellerProduct } from "@/lib/types";
-import { decimalOnly, digitsOnly, ErrorBox, fieldErrors, numStr, errMsg } from "./shared";
+import { decimalOnly, digitsOnly, ErrorBox, fieldErrors, numStr, errMsg, StepBar } from "./shared";
 
 export const UNITS = ["dona", "juft", "kg", "m²", "m³", "p/m", "to'plam", "tonna", "xizmat"];
 export const DEFAULT_COUNTRY = "O'zbekiston";
@@ -30,8 +30,8 @@ const fromProduct = (pr: SellerProduct | null, cat: string): Form => pr ? {
   min_order: "1", delivery: true, is_active: true, note: "", seller: "", brand: "", country: DEFAULT_COUNTRY,
 };
 
-export default function MainTab({ product, defaultCategory, onSaved, onClose }: {
-  product: SellerProduct | null; defaultCategory: string; onSaved: (p: SellerProduct, created: boolean) => void; onClose: () => void;
+export default function MainTab({ product, defaultCategory, onSaved, onClose, onNext }: {
+  product: SellerProduct | null; defaultCategory: string; onSaved: (p: SellerProduct, created: boolean) => void; onClose: () => void; onNext?: () => void;
 }) {
   const { t, p, meta, unit, money } = useApp();
   const { me } = useMe();
@@ -56,7 +56,7 @@ export default function MainTab({ product, defaultCategory, onSaved, onClose }: 
     setF({ ...f, [k]: cur });
   };
 
-  const save = async () => {
+  const save = async (): Promise<boolean> => {
     setBusy(true); setErr(""); setFe({});
     const json: Record<string, unknown> = {
       name: f.name, spec: f.spec, description: f.description, category: f.category, unit: f.unit,
@@ -71,7 +71,8 @@ export default function MainTab({ product, defaultCategory, onSaved, onClose }: 
         : await api<SellerProduct>("/seller/products/", { method: "POST", json, authed: true });
       setF(fromProduct(saved, saved.category));
       onSaved(saved, !product);
-    } catch (e) { setErr(errMsg(e)); setFe(fieldErrors(e)); } finally { setBusy(false); }
+      return true;
+    } catch (e) { setErr(errMsg(e)); setFe(fieldErrors(e)); return false; } finally { setBusy(false); }
   };
 
   const catChanged = !!product && f.category !== product.category;
@@ -129,10 +130,15 @@ export default function MainTab({ product, defaultCategory, onSaved, onClose }: 
       </div>
       {!product && <p className="text-xs text-ink-500 flex gap-1.5"><Info className="w-4 h-4 shrink-0" />{t("pe_new_hint")}</p>}
       <ErrorBox text={err} />
-      <div className="flex gap-2 justify-end">
-        <Button variant="ghost" onClick={onClose}>{t("close")}</Button>
-        <Button loading={busy} disabled={!f.name.uz?.trim()} onClick={save}>{product ? t("save") : t("pe_create_continue")}</Button>
-      </div>
+      {product ? (
+        <StepBar onSave={save} onNext={onNext} busy={busy} saveDisabled={!f.name.uz?.trim()}>
+          <Button variant="ghost" onClick={onClose} className="mr-auto">{t("close")}</Button>
+        </StepBar>
+      ) : (
+        <StepBar onNext={() => { save(); }} busy={busy} nextLabel={t("pe_create_continue")}>
+          <Button variant="ghost" onClick={onClose} className="mr-auto">{t("close")}</Button>
+        </StepBar>
+      )}
     </div>
   );
 }

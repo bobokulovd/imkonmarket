@@ -1,5 +1,8 @@
 "use client";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui";
+import { useApp } from "@/lib/store";
 import { api, ApiError, errText } from "@/lib/api";
 import type { AttributeDef, SellerProduct } from "@/lib/types";
 
@@ -61,4 +64,22 @@ export const numStr = (v: string | number | null | undefined) => (v === null || 
 export function ErrorBox({ text }: { text?: string }) {
   if (!text) return null;
   return <div className="text-sm text-red-700 bg-red-50 rounded-lg p-3 whitespace-pre-line">{text}</div>;
+}
+
+/** Har bir tab pastidagi qadamlar paneli: «Saqlash» + «Saqlash va davom etish →» (yoki faqat «Davom etish →»). */
+export function StepBar({ onSave, onNext, busy, saveDisabled, nextLabel, children }: {
+  onSave?: () => Promise<boolean>; onNext?: () => void; busy?: boolean; saveDisabled?: boolean; nextLabel?: string; children?: React.ReactNode;
+}) {
+  const { t } = useApp();
+  return (
+    <div className="flex flex-wrap items-center gap-2 justify-end border-t border-ink-100 pt-4">
+      {children}
+      {onSave && <Button variant={onNext ? "outline" : "primary"} loading={busy} disabled={saveDisabled} onClick={() => onSave()}>{t("save")}</Button>}
+      {onNext && (
+        <Button loading={busy} disabled={!!onSave && saveDisabled} onClick={async () => { if (!onSave || (await onSave())) onNext(); }}>
+          {nextLabel || (onSave ? t("pe_save_next") : t("pe_next"))} <ArrowRight className="w-4 h-4" />
+        </Button>
+      )}
+    </div>
+  );
 }

@@ -102,6 +102,10 @@ class CatalogTest(TestCase):
             self.assertIn(word, str(r.json()))
         self.assertEqual(p.images.count(), 2)
         self.assertFalse(any(i["is_sample"] for i in imgs))
+        self.assertIs(imgs[0]["bg_ok"], False)  # bir xil, lekin oq emas (yashil) fon
+        self.assertTrue(imgs[0]["quality"]["warnings"])
+        ready = c.get(f"/api/mp/product-info/{p.id}/readiness/").json()
+        self.assertFalse(next(x for x in ready["checks"] if x["key"] == "cover_bg")["ok"])
         p.refresh_from_db()
         self.assertFalse(p.image_is_sample)
         first = p.images.first()

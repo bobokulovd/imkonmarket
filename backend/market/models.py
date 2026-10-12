@@ -193,6 +193,9 @@ class ProductImage(models.Model):
     is_sample = models.BooleanField(default=False)
     width = models.PositiveIntegerField(default=0)
     height = models.PositiveIntegerField(default=0)
+    # fon tekshiruvi (images.analyze): oq/och bir xil fon — True; None — tahlil qilinmagan
+    bg_ok = models.BooleanField(null=True, blank=True)
+    quality = models.JSONField(default=dict, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

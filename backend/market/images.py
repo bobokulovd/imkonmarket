@@ -61,6 +61,56 @@ def check(raw: bytes, name: str = "") -> tuple[int, int]:
 SEED_DIR = Path(settings.BASE_DIR) / "market" / "seed" / "images"
 
 
+def analyze(raw: bytes) -> dict:
+    """Fon va kompozitsiya tekshiruvi (marketplace talablari: asosiy rasm oq/och, bir xil fonda, mahsulot kadrni to'ldirsin).
+
+    -> {"bg_ok": bool, "bg": "white"|"light"|"color"|"busy", "fill": 0..1, "warnings": [matn, ...]}
+    Rad etmaydi — faqat ogohlantiradi (tayyorlik foizida hisobga olinadi).
+    """
+    from PIL import ImageFilter
+    im = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
+    if im.mode in ("RGBA", "LA", "P"):
+        im = im.convert("RGBA")
+        bg = Image.new("RGB", im.size, (255, 255, 255))
+        bg.paste(im, mask=im.split()[-1])
+        im = bg
+    im = im.convert("RGB")
+    im.thumbnail((256, 256))
+    w, h = im.size
+    b = max(2, int(min(w, h) * 0.04))
+    px = im.load()
+    border = [px[x, y] for y in range(h) for x in range(w) if x < b or y < b or x >= w - b or y >= h - b]
+    med = tuple(sorted(c[i] for c in border)[len(border) // 2] for i in range(3))
+    near = sum(1 for c in border if max(abs(c[i] - med[i]) for i in range(3)) <= 30) / len(border)
+    uniform = near >= 0.85
+    light = min(med) >= 215 and max(med) - min(med) <= 25
+    white = min(med) >= 240 and max(med) - min(med) <= 12
+    # mahsulot chegarasi: fondan sezilarli farq qiladigan piksellar
+    mask = Image.new("L", (w, h))
+    mp = mask.load()
+    for y in range(h):
+        for x in range(w):
+            c = px[x, y]
+            if max(abs(c[i] - med[i]) for i in range(3)) > 40:
+                mp[x, y] = 255
+    mask = mask.filter(ImageFilter.MinFilter(3))  # mayda shovqin
+    box = mask.getbbox()
+    fill = ((box[2] - box[0]) * (box[3] - box[1]) / (w * h)) if box else 0.0
+    warnings = []
+    if not uniform:
+        kind = "busy"
+        warnings.append("Fon bir xil emas (xona, stol yoki boshqa narsalar ko'rinmoqda) — mahsulotni oq yoki bir xil "
+                        "och rangli fonda suratga oling")
+    elif not light:
+        kind = "color"
+        warnings.append("Fon oq emas — marketplace'lar asosiy rasm uchun oq yoki och fon talab qiladi")
+    else:
+        kind = "white" if white else "light"
+    if uniform and box and fill < 0.3:
+        warnings.append("Mahsulot kadrda juda kichik — yaqinroqdan oling (mahsulot kadrning kamida yarmini egallasin)")
+    return {"bg_ok": uniform and light, "bg": kind, "fill": round(fill, 2), "warnings": warnings}
+
+
 def normalize(raw: bytes, max_side=MAX_SIDE_OUT) -> bytes:
     """JPEG (barcha marketplace'lar qabul qiladi), shaffof fon oq bilan to'ldiriladi."""
     im = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
@@ -105,7 +155,14 @@ def add_image(product: Product, raw: bytes, sample=False, first=False) -> Produc
     if first and n:
         for i, im in enumerate(product.images.order_by("order", "id"), start=1):
             ProductImage.objects.filter(pk=im.pk).update(order=i)
-    img = ProductImage(product=product, order=0 if first else n, is_sample=sample, width=w, height=h)
+    quality = {}
+    if not sample:
+        try:
+            quality = analyze(data)
+        except Exception:  # noqa: BLE001 — tahlil ixtiyoriy
+            quality = {}
+    img = ProductImage(product=product, order=0 if first else n, is_sample=sample, width=w, height=h,
+                       bg_ok=quality.get("bg_ok"), quality=quality)
     img.image.save(f"{product.sku.lower()}-{uuid.uuid4().hex[:6]}.jpg", ContentFile(data), save=False)
     img.save()
     sync_cover(product)

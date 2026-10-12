@@ -23,7 +23,10 @@ export interface AttributeDef {
   id: number; category: string; code: string; name: I18n; hint: I18n; type: AttrType; unit: string;
   required: boolean; multi: boolean; variant: boolean; options: AttrOption[]; order: number;
 }
-export interface GalleryImage { id: number; url: string; order: number; is_sample: boolean; width: number; height: number }
+export interface GalleryImage {
+  id: number; url: string; order: number; is_sample: boolean; width: number; height: number;
+  bg_ok?: boolean | null; quality?: { bg_ok?: boolean; bg?: "white" | "light" | "color" | "busy"; fill?: number; warnings?: string[] };
+}
 export interface PublicVariant {
   id: number; sku: string; attributes: Record<string, string | number>; label: I18n; price: string | null;
   available: number | null; image: number | null; image_url: string | null;

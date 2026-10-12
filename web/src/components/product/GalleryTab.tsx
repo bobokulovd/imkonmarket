@@ -6,7 +6,7 @@ import { SampleBadge, Spinner } from "@/components/ui";
 import { api, API_URL, ApiError, auth } from "@/lib/api";
 import { useApp } from "@/lib/store";
 import type { GalleryImage, SellerProduct } from "@/lib/types";
-import { ErrorBox, type ProductChange, errMsg } from "./shared";
+import { ErrorBox, type ProductChange, errMsg, StepBar } from "./shared";
 
 export const MAX_IMAGES = 15;
 export const MAX_MB = 15;
@@ -31,7 +31,7 @@ export async function checkImage(f: File, t: (k: any, v?: any) => string): Promi
   return null;
 }
 
-export default function GalleryTab({ product, onChange }: { product: SellerProduct; onChange: ProductChange }) {
+export default function GalleryTab({ product, onChange, onNext }: { product: SellerProduct; onChange: ProductChange; onNext?: () => void }) {
   const { t } = useApp();
   const [busy, setBusy] = useState<string | null>(null); // "upload" | `img:<id>`
   const [drag, setDrag] = useState(false);
@@ -127,6 +127,15 @@ export default function GalleryTab({ product, onChange }: { product: SellerProdu
                 {img.is_sample && <SampleBadge label="AI" hint={t("sample_image_hint")} />}
               </div>
               {busy === `img:${img.id}` && <div className="absolute inset-0 bg-white/60 grid place-items-center"><Spinner /></div>}
+              {!img.is_sample && img.bg_ok === false && (
+                <div className={clsx("absolute inset-x-1.5 top-8 rounded-md text-[10px] font-semibold px-1.5 py-0.5", idx === 0 ? "bg-red-600 text-white" : "bg-amber-400 text-ink-900")}
+                  title={(img.quality?.warnings || []).join("\n")}>
+                  {img.quality?.bg === "busy" ? t("pe_gal_bg_busy") : t("pe_gal_bg_color")}
+                </div>
+              )}
+              {!img.is_sample && img.bg_ok && (img.quality?.warnings?.length ?? 0) > 0 && (
+                <div className="absolute inset-x-1.5 top-8 rounded-md text-[10px] font-semibold px-1.5 py-0.5 bg-amber-400 text-ink-900" title={img.quality!.warnings!.join("\n")}>{t("pe_gal_small_obj")}</div>
+              )}
               <div className="flex items-center justify-between gap-1 p-1.5 border-t border-ink-100">
                 <div className="flex gap-0.5">
                   <IconBtn title={t("pe_gal_left")} disabled={idx === 0 || !!busy} onClick={() => move(idx, -1)}><ArrowLeft className="w-4 h-4" /></IconBtn>
@@ -140,6 +149,15 @@ export default function GalleryTab({ product, onChange }: { product: SellerProdu
         </div>
       )}
       {real.length > 0 && real.length < 3 && <p className="text-xs text-amber-700">{t("pe_gal_need3", { n: real.length })}</p>}
+      {images[0] && !images[0].is_sample && (images[0].quality?.warnings?.length ?? 0) > 0 && (
+        <div className="rounded-xl bg-red-50 text-red-800 p-3 text-sm">
+          <b>{t("pe_gal_cover_warn")}</b>
+          <ul className="list-disc pl-5 mt-1">{images[0].quality!.warnings!.map((w) => <li key={w}>{w}</li>)}</ul>
+        </div>
+      )}
+      <StepBar onNext={onNext} busy={busy === "upload"}>
+        {real.length === 0 && <span className="text-xs text-amber-700 mr-auto">{t("pe_gal_no_real")}</span>}
+      </StepBar>
     </div>
   );
 }

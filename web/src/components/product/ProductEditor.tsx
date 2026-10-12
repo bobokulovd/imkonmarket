@@ -65,15 +65,15 @@ export default function ProductEditor({ productId, defaultCategory, onSaved, onC
 
       {/* bir marta ochilgan tablar yashirin holda saqlanadi — kiritilgan (saqlanmagan) ma'lumot yo'qolmaydi */}
       <div className={clsx(tab !== "main" && "hidden")}>
-        <MainTab product={product} defaultCategory={defaultCategory} onClose={onClose}
+        <MainTab product={product} defaultCategory={defaultCategory} onClose={onClose} onNext={() => go("gallery")}
           onSaved={(pr, created) => { change(pr); if (created) { onCreated?.(pr.id); go("gallery"); } }} />
       </div>
       {product && (
         <>
-          {visited.has("gallery") && <div className={clsx(tab !== "gallery" && "hidden")}><GalleryTab product={product} onChange={change} /></div>}
-          {visited.has("attrs") && <div className={clsx(tab !== "attrs" && "hidden")}><AttributesTab key={product.category} product={product} defs={defs} onChange={change} /></div>}
-          {visited.has("variants") && <div className={clsx(tab !== "variants" && "hidden")}><VariantsTab key={product.category} product={product} defs={defs} onChange={change} /></div>}
-          {visited.has("market") && <div className={clsx(tab !== "market" && "hidden")}><MarketTab product={product} active={tab === "market"} version={version} /></div>}
+          {visited.has("gallery") && <div className={clsx(tab !== "gallery" && "hidden")}><GalleryTab product={product} onChange={change} onNext={() => go("attrs")} /></div>}
+          {visited.has("attrs") && <div className={clsx(tab !== "attrs" && "hidden")}><AttributesTab key={product.category} product={product} defs={defs} onChange={change} onNext={() => go("variants")} /></div>}
+          {visited.has("variants") && <div className={clsx(tab !== "variants" && "hidden")}><VariantsTab key={product.category} product={product} defs={defs} onChange={change} onNext={() => go("market")} /></div>}
+          {visited.has("market") && <div className={clsx(tab !== "market" && "hidden")}><MarketTab product={product} active={tab === "market"} version={version} onFinish={onClose} /></div>}
         </>
       )}
     </div>

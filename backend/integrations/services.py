@@ -268,7 +268,11 @@ def card_checks(p) -> list:
         no_bc = [] if p.barcode else [p.sku]
     no_price = [v.sku for v in variants if v.effective_price is None] if variants else ([] if p.price is not None else [p.sku])
     desc = pick(p.description, "ru") or pick(p.description, "uz")
+    cover = imgs[0] if imgs else None
+    cover_warn = "; ".join((cover.quality or {}).get("warnings") or []) if cover is not None and not cover.is_sample else ""
     return [
+        {"key": "cover_bg", "ok": bool(cover is not None and not cover.is_sample and cover.bg_ok is not False), "weight": 2,
+         "label": "Asosiy rasm oq yoki toza bir xil fonda" + (f" — {cover_warn}" if cover_warn else "")},
         {"key": "images", "ok": len(real) >= 1, "weight": 3,
          "label": f"Haqiqiy suratlar: {len(real)} ta" + (" (tavsiya: 3+)" if len(real) < 3 else "")
          + (" — namunaviy (AI) rasm marketpleysga yuborilmaydi" if imgs and not real else "")},
