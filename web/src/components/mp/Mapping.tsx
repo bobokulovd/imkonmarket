@@ -1,12 +1,20 @@
 "use client";
 import clsx from "clsx";
-import { Check, RefreshCw, Search } from "lucide-react";
+import { Check, RefreshCw, Search, Wand2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Badge, Button, CatIcon, Field, Input, Modal, Select, Spinner } from "@/components/ui";
 import { api, errText, qs } from "@/lib/api";
 import { useApp } from "@/lib/store";
-import type { I18n, Paged } from "@/lib/types";
-import { type MpCode, type MpMeta, MpBadge, waitJob } from "./common";
+import type { AttributeDef, I18n, Paged } from "@/lib/types";
+import { type MpCode, type MpMeta, MpBadge, type TKey, waitJob } from "./common";
+
+/** Mahsulot maydonlari uchun tushunarli nomlar (meta.attribute_fields) */
+const FIELD_LABEL: Record<string, TKey> = {
+  name: "name", spec: "specs", description: "sv_f_description", unit: "unit", sku: "sku", group: "sv_f_group",
+  brand: "mp_brand", country: "mp_country", barcode: "mp_barcode", weight_kg: "mp_weight", length_cm: "sv_f_length",
+  width_cm: "sv_f_width", height_cm: "sv_f_height", ikpu: "sv_ikpu",
+};
+type AutoRes = { fields: number; attrs: number; values: number };
 
 type Overview = { slug: string; name: I18n; icon: string; maps: Record<MpCode, { id: number; external_name: string; missing: number } | null> }[];
 type Attr = { id: number; external_id: string; name: string; required: boolean; is_dictionary: boolean; multi: boolean; value_type: string; unit: string;
@@ -35,14 +43,14 @@ function ValuePicker({ attr, onPick }: { attr: Attr; onPick: (id: string, value:
         {!local && <Button variant="outline" onClick={search} loading={busy}><Search className="w-4 h-4" /></Button>}
       </div>
       {list && <div className="max-h-48 overflow-y-auto divide-y divide-ink-100 border border-ink-100 rounded-lg">
-        {list.map((v) => <button key={v.id} type="button" onClick={() => onPick(v.id, v.value)} className="block w-full text-left px-3 py-1.5 text-sm hover:bg-brand-50">{v.value} <span className="text-ink-400 text-xs">#{v.id}</span></button>)}
+        {list.map((v) => <button key={v.id} type="button" onClick={() => onPick(v.id, v.value)} className="block w-full text-left px-3 py-1.5 text-sm hover:bg-brand-50">{v.value} <span className="text-ink-500 text-xs">#{v.id}</span></button>)}
       </div>}
     </div>
   );
 }
 
-function AttrRow({ a, fields, onSaved }: { a: Attr; fields: string[]; onSaved: () => void }) {
-  const { t } = useApp();
+function AttrRow({ a, fields, defs, onSaved }: { a: Attr; fields: string[]; defs: AttributeDef[]; onSaved: () => void }) {
+  const { t, p } = useApp();
   const [f, setF] = useState(a);
   const [pick, setPick] = useState(false);
   const [our, setOur] = useState("");
@@ -59,19 +67,31 @@ function AttrRow({ a, fields, onSaved }: { a: Attr; fields: string[]; onSaved: (
     setOur(""); onSaved();
   };
   const needsValue = a.required && f.source === "const" && !f.value && !f.value_id;
+  const def = f.source === "attr" ? defs.find((d) => d.code === f.field) : undefined;
+  const opts = def?.type === "enum" ? def.options : null;
+  const optName = (v: string) => { const o = opts?.find((x) => x.v === v); return o ? p(o.name) || v : v; };
+  const flabel = (x: string) => (FIELD_LABEL[x] ? t(FIELD_LABEL[x]) : x);
   return (
     <div className={clsx("p-3 space-y-2", needsValue && "bg-amber-50/60")}>
       <div className="flex flex-wrap items-center gap-2">
         <span className="font-medium text-sm">{a.name}{a.required && <span className="text-red-600"> *</span>}</span>
-        <span className="text-xs text-ink-400">#{a.external_id} {a.value_type} {a.unit}</span>
+        <span className="text-xs text-ink-500">#{a.external_id} {a.value_type} {a.unit}</span>
         {a.is_dictionary && <Badge tone="violet">{t("mp_value_map")}</Badge>}
       </div>
       <div className="grid sm:grid-cols-[180px_1fr_auto] gap-2 items-start">
         <Select value={f.source} onChange={(e) => setF({ ...f, source: e.target.value })}>
-          <option value="const">{t("mp_src_const")}</option><option value="field">{t("mp_src_field")}</option><option value="product">{t("mp_src_product")}</option>
+          <option value="const">{t("mp_src_const")}</option><option value="field">{t("mp_src_field")}</option>
+          <option value="attr">{t("sv_src_attr")}</option><option value="product">{t("mp_src_product")}</option>
         </Select>
         {f.source === "field" ? (
-          <Select value={f.field} onChange={(e) => setF({ ...f, field: e.target.value })}><option value="">—</option>{fields.map((x) => <option key={x} value={x}>{x}</option>)}</Select>
+          <Select value={f.field} onChange={(e) => setF({ ...f, field: e.target.value })}><option value="">—</option>{fields.map((x) => <option key={x} value={x}>{flabel(x)}</option>)}</Select>
+        ) : f.source === "attr" ? (
+          defs.length ? (
+            <Select value={defs.some((d) => d.code === f.field) ? f.field : ""} onChange={(e) => setF({ ...f, field: e.target.value })} aria-label={t("sv_src_attr")}>
+              <option value="">—</option>
+              {defs.map((d) => <option key={d.code} value={d.code}>{p(d.name)}{d.unit ? `, ${d.unit}` : ""}{d.variant ? ` · ${t("sv_flag_variant")}` : ""}</option>)}
+            </Select>
+          ) : <div className="text-xs text-ink-500 pt-3">{t("sv_no_defs")}</div>
         ) : f.source === "const" ? (
           <div className="space-y-2">
             <div className="flex gap-2">
@@ -86,8 +106,16 @@ function AttrRow({ a, fields, onSaved }: { a: Attr; fields: string[]; onSaved: (
       </div>
       {a.is_dictionary && f.source !== "const" && (
         <div className="rounded-lg border border-ink-100 p-2 space-y-2">
-          {a.value_map.map((m) => <div key={m.id} className="text-xs">{m.our_value} → <b>{m.external_value}</b> <span className="text-ink-400">#{m.external_value_id}</span></div>)}
-          <Input value={our} onChange={(e) => setOur(e.target.value)} placeholder="ImkonMarket → …" />
+          {a.value_map.map((m) => <div key={m.id} className="text-xs">{optName(m.our_value)} → <b>{m.external_value}</b> <span className="text-ink-500">#{m.external_value_id}</span></div>)}
+          {opts ? (
+            <Select value={our} onChange={(e) => setOur(e.target.value)} aria-label={t("sv_our_value")}>
+              <option value="">{t("sv_our_value")} → …</option>
+              {opts.map((o) => {
+                const done = a.value_map.some((m) => m.our_value === o.v);
+                return <option key={o.v} value={o.v}>{done ? "✓ " : ""}{p(o.name) || o.v}</option>;
+              })}
+            </Select>
+          ) : <Input value={our} onChange={(e) => setOur(e.target.value)} placeholder="ImkonMarket → …" />}
           {our && <ValuePicker attr={a} onPick={addMap} />}
         </div>
       )}
@@ -102,6 +130,20 @@ function Editor({ slug, mp, mappingId, meta, onChanged }: { slug: string; mp: Mp
   const [cats, setCats] = useState<Paged<any> | null>(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  const [defs, setDefs] = useState<AttributeDef[]>([]);
+  const [auto, setAuto] = useState<AutoRes | null>(null);
+  const [autoBusy, setAutoBusy] = useState(false);
+  useEffect(() => {
+    api<AttributeDef[]>(`/attributes/${qs({ category: slug })}`).then((x) => setDefs(x.slice().sort((a, b) => a.order - b.order))).catch(() => setDefs([]));
+  }, [slug]);
+  const autoMap = async () => {
+    if (!mapping) return;
+    setAutoBusy(true); setErr(""); setAuto(null);
+    try {
+      const r = await api<AutoRes & { mapping: Mapping }>(`/mp/mappings/${mapping.id}/auto-map/`, { method: "POST", authed: true });
+      setMapping(r.mapping); setAuto({ fields: r.fields, attrs: r.attrs, values: r.values }); onChanged();
+    } catch (e) { setErr(errText(e)); } finally { setAutoBusy(false); }
+  };
   const loadMapping = useCallback(async (id: number | null) => { if (id) setMapping(await api<Mapping>(`/mp/mappings/${id}/`, { authed: true })); }, []);
   useEffect(() => { loadMapping(mappingId); }, [mappingId, loadMapping]);
   const search = useCallback(() => api<Paged<any>>(`/mp/categories/${qs({ marketplace: mp, q, page_size: 50 })}`, { authed: true }).then(setCats), [mp, q]);
@@ -133,16 +175,26 @@ function Editor({ slug, mp, mappingId, meta, onChanged }: { slug: string; mp: Mp
       </div>
       {cats && cats.results.length > 0 && (
         <div className="max-h-56 overflow-y-auto border border-ink-100 rounded-xl divide-y divide-ink-100">
-          {cats.results.map((c) => <button key={c.id} onClick={() => choose(c)} className="block w-full text-left px-3 py-2 text-sm hover:bg-brand-50">{c.path || c.name} <span className="text-xs text-ink-400">#{c.external_id}{c.type_id && `/${c.type_id}`}</span></button>)}
+          {cats.results.map((c) => <button key={c.id} onClick={() => choose(c)} className="block w-full text-left px-3 py-2 text-sm hover:bg-brand-50">{c.path || c.name} <span className="text-xs text-ink-500">#{c.external_id}{c.type_id && `/${c.type_id}`}</span></button>)}
         </div>
       )}
       {cats && cats.count === 0 && <div className="text-sm text-ink-500">{t("mp_refresh_cats")} ↻</div>}
       {err && <div className="text-sm text-red-600">{err}</div>}
       {mapping && mapping.attributes.length > 0 && (
         <div>
-          <div className="font-semibold mb-2">{t("mp_attrs")} ({mapping.attributes.length})</div>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <div className="font-semibold">{t("mp_attrs")} ({mapping.attributes.length})</div>
+            <Button size="sm" variant="soft" className="ml-auto" onClick={autoMap} loading={autoBusy} title={t("sv_automap_hint")}>
+              <Wand2 className="w-4 h-4" /> {t("sv_automap")}
+            </Button>
+          </div>
+          {auto && (
+            <div className="mb-2 rounded-lg bg-emerald-50 text-emerald-800 text-sm px-3 py-2" role="status">
+              {t("sv_automap_done", { fields: auto.fields, attrs: auto.attrs, values: auto.values })}
+            </div>
+          )}
           <div className="border border-ink-100 rounded-xl divide-y divide-ink-100 max-h-[50vh] overflow-y-auto">
-            {mapping.attributes.map((a) => <AttrRow key={a.id + a.source + a.value} a={a} fields={meta.attribute_fields} onSaved={() => { loadMapping(mapping.id); onChanged(); }} />)}
+            {mapping.attributes.map((a) => <AttrRow key={`${a.id}:${a.source}:${a.field}:${a.value}:${a.value_map.length}`} a={a} fields={meta.attribute_fields} defs={defs} onSaved={() => { loadMapping(mapping.id); onChanged(); }} />)}
           </div>
         </div>
       )}

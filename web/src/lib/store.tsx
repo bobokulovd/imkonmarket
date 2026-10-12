@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { api } from "./api";
 import { en, kaa, ru, uz, type Dict } from "./dict";
 import { toCyrl, toNew } from "./translit";
-import type { I18n, Lang, Meta, Product } from "./types";
+import type { I18n, Lang, Meta, Product, PublicVariant } from "./types";
 
 // ---------------- i18n
 const cache: Partial<Record<Lang, Dict>> = { uz, ru, en, kaa };
@@ -82,17 +82,26 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 export const useApp = () => useContext(I18nCtx);
 
 // ---------------- cart
-export type CartLine = { product: Product; qty: number };
+// Variantli mahsulot: savat qatori = mahsulot + variant (narx/qoldiq/rasm/SKU variantdan olinadi)
+export type CartVariant = { id: number; sku: string; label: I18n };
+export type CartLine = { product: Product; qty: number; variant?: CartVariant };
+export const lineKey = (l: { product: { id: number }; variant?: { id: number } | null }) => `${l.product.id}:${l.variant?.id ?? 0}`;
 type CartCtx = {
   lines: CartLine[];
-  add: (p: Product, qty?: number) => void;
-  setQty: (id: number, qty: number) => void;
-  remove: (id: number) => void;
-  clear: (ids?: number[]) => void;
+  add: (p: Product, qty?: number, v?: PublicVariant | null) => void;
+  setQty: (key: string, qty: number) => void;
+  remove: (key: string) => void;
+  clear: (productIds?: number[]) => void;
   count: number;
-  has: (id: number) => boolean;
+  has: (id: number, variantId?: number | null) => boolean;
 };
 const CartC = createContext<CartCtx>(null as any);
+
+/** Variant tanlanganda savatga yoziladigan "mahsulot" ko'rinishi */
+export function withVariant(p: Product, v?: PublicVariant | null): Product {
+  if (!v) return p;
+  return { ...p, sku: v.sku, price: v.price, available: v.available, image: v.image_url || p.image };
+}
 
 function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
@@ -117,15 +126,18 @@ function CartProvider({ children }: { children: React.ReactNode }) {
   const value: CartCtx = {
     lines,
     count: lines.length,
-    has: (id) => lines.some((l) => l.product.id === id),
-    add: (p, qty = 1) =>
+    has: (id, variantId) => lines.some((l) => l.product.id === id && (variantId === undefined || (l.variant?.id ?? null) === (variantId ?? null))),
+    add: (p, qty = 1, v) =>
       setLines((ls) => {
-        const ex = ls.find((l) => l.product.id === p.id);
-        if (ex) return ls.map((l) => (l.product.id === p.id ? { product: p, qty: clampQty(p, l.qty + qty) } : l));
-        return [...ls, { product: p, qty: clampQty(p, qty) }];
+        const prod = withVariant(p, v);
+        const variant = v ? { id: v.id, sku: v.sku, label: v.label } : undefined;
+        const key = lineKey({ product: p, variant });
+        const ex = ls.find((l) => lineKey(l) === key);
+        if (ex) return ls.map((l) => (lineKey(l) === key ? { product: prod, variant, qty: clampQty(prod, l.qty + qty) } : l));
+        return [...ls, { product: prod, variant, qty: clampQty(prod, qty) }];
       }),
-    setQty: (id, qty) => setLines((ls) => ls.map((l) => (l.product.id === id ? { ...l, qty: clampQty(l.product, qty) } : l))),
-    remove: (id) => setLines((ls) => ls.filter((l) => l.product.id !== id)),
+    setQty: (key, qty) => setLines((ls) => ls.map((l) => (lineKey(l) === key ? { ...l, qty: clampQty(l.product, qty) } : l))),
+    remove: (key) => setLines((ls) => ls.filter((l) => lineKey(l) !== key)),
     clear: (ids) => setLines((ls) => (ids ? ls.filter((l) => !ids.includes(l.product.id)) : [])),
   };
   return <CartC.Provider value={value}>{children}</CartC.Provider>;

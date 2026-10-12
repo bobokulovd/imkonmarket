@@ -106,7 +106,8 @@ class ListingSerializer(serializers.ModelSerializer):
         v = o.variant
         if v is None:
             return None
-        return {"id": v.id, "sku": v.sku, "attributes": v.attributes, "price": v.effective_price, "stock": v.stock,
+        from market.catalog import variant_label
+        return {"id": v.id, "sku": v.sku, "attributes": v.attributes, "label": variant_label(v), "price": v.effective_price, "stock": v.stock,
                 "reserved": v.reserved, "available": v.available}
 
     def get_product(self, o):

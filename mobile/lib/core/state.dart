@@ -37,7 +37,10 @@ class AppState extends ChangeNotifier {
     if (saved != null) {
       try {
         for (final e in jsonDecode(saved) as List) {
-          cart.add(CartLine(Map<String, dynamic>.from(e['product']), e['qty'] as int));
+          // eski format: {product, qty} — variant yo'q; yangi: {product, variant?, qty}
+          final v = e['variant'];
+          cart.add(CartLine(Map<String, dynamic>.from(e['product']), (e['qty'] as num).toInt(),
+              v is Map ? Map<String, dynamic>.from(v) : null));
         }
       } catch (_) {}
     }
@@ -110,37 +113,44 @@ class AppState extends ChangeNotifier {
   J? category(String slug) => categories.where((c) => c['slug'] == slug).firstOrNull;
   bool demo(String method) => (((meta?['payments'] as Map?)?[method] as Map?)?['demo'] as bool?) ?? true;
 
-  // -------- savat
+  // -------- savat (qator kaliti: mahsulot id + variant id)
   int get cartCount => cart.length;
-  bool inCart(int id) => cart.any((l) => l.product['id'] == id);
 
-  int _clamp(J p, int q) {
-    final min = (p['min_order'] as int?) ?? 1;
+  /// Mahsulotning (istalgan varianti) savatda bormi.
+  bool inCart(int id) => cart.any((l) => l.productId == id);
+
+  /// Aniq mahsulot + variant savatda bormi.
+  bool inCartLine(int id, int? variantId) => cart.any((l) => l.productId == id && l.variantId == variantId);
+
+  int _clamp(CartLine l, int q) {
+    final min = l.minOrder;
     var v = q < min ? min : q;
-    final av = p['available'] as int?;
+    final av = l.available;
     if (av != null && v > av) v = av;
     return v;
   }
 
-  void addToCart(J p, [int qty = 1]) {
-    final ex = cart.where((l) => l.product['id'] == p['id']).firstOrNull;
+  /// [variant] — mahsulot tafsilotidagi `variants` elementi (has_variants bo'lsa majburiy).
+  void addToCart(J p, [int qty = 1, J? variant]) {
+    final vid = variant?['id'] as int?;
+    final ex = cart.where((l) => l.productId == p['id'] && l.variantId == vid).firstOrNull;
     if (ex != null) {
-      ex.qty = _clamp(p, ex.qty + qty);
+      ex.qty = _clamp(ex, ex.qty + qty);
     } else {
-      cart.add(CartLine(p, _clamp(p, qty)));
+      final l = CartLine(CartLine.slimProduct(p), qty, variant == null ? null : CartLine.slimVariant(variant));
+      l.qty = _clamp(l, qty);
+      cart.add(l);
     }
     _saveCart();
   }
 
-  void setQty(int id, int qty) {
-    for (final l in cart) {
-      if (l.product['id'] == id) l.qty = _clamp(l.product, qty);
-    }
+  void setQty(CartLine line, int qty) {
+    if (cart.contains(line)) line.qty = _clamp(line, qty);
     _saveCart();
   }
 
-  void removeFromCart(int id) {
-    cart.removeWhere((l) => l.product['id'] == id);
+  void removeFromCart(CartLine line) {
+    cart.remove(line);
     _saveCart();
   }
 
@@ -149,7 +159,10 @@ class AppState extends ChangeNotifier {
     _saveCart();
   }
 
-  double get cartTotal => cart.fold<double>(0.0, (s, l) => s + (double.tryParse('${l.product['price']}') ?? 0) * l.qty);
+  double get cartTotal => cart.fold<double>(0.0, (s, l) => s + (double.tryParse('${l.price}') ?? 0) * l.qty);
+
+  /// Variant tanlanmagan variantli mahsulot qatorlari (eski savatdan qolgan bo'lishi mumkin).
+  bool get cartNeedsVariant => cart.any((l) => l.needsVariant);
 
   Map<String, List<CartLine>> get cartBySeller {
     final m = <String, List<CartLine>>{};
@@ -162,14 +175,47 @@ class AppState extends ChangeNotifier {
   Future<void> _saveCart() async {
     notifyListeners();
     final p = await SharedPreferences.getInstance();
-    await p.setString('cart', jsonEncode(cart.map((l) => {'product': l.product, 'qty': l.qty}).toList()));
+    await p.setString('cart', jsonEncode(cart.map((l) => l.toJson()).toList()));
   }
 }
 
 class CartLine {
   J product;
   int qty;
-  CartLine(this.product, this.qty);
+
+  /// Tanlangan variant: {id, sku, label, price, available, image_url, attributes}
+  J? variant;
+  CartLine(this.product, this.qty, [this.variant]);
+
+  int get productId => product['id'] as int;
+  int? get variantId => variant?['id'] as int?;
+  String get key => '$productId:${variantId ?? ''}';
+
+  /// Variantning narxi (variant narxi backendda mahsulot narxiga tushib qoladi).
+  dynamic get price => variant != null ? variant!['price'] : product['price'];
+  int? get available => variant != null ? variant!['available'] as int? : product['available'] as int?;
+  String get sku => (variant?['sku'] ?? product['sku'] ?? '').toString();
+  String? get image {
+    final u = variant?['image_url'];
+    if (u is String && u.isNotEmpty) return u;
+    return product['image'] as String?;
+  }
+
+  int get minOrder => (product['min_order'] as int?) ?? 1;
+  bool get needsVariant => variant == null && product['has_variants'] == true;
+
+  /// Savatda saqlanadigan qisqa mahsulot ma'lumoti (tafsilotdagi og'ir ro'yxatlarsiz).
+  static J slimProduct(J p) {
+    const drop = {'similar', 'same_seller', 'seller_full', 'description', 'images', 'variants', 'variant_axes', 'characteristics'};
+    return {for (final e in p.entries) if (!drop.contains(e.key)) e.key: e.value};
+  }
+
+  static J slimVariant(J v) => {
+        for (final k in const ['id', 'sku', 'label', 'price', 'available', 'image_url', 'attributes'])
+          if (v.containsKey(k)) k: v[k],
+      };
+
+  J toJson() => {'product': product, if (variant != null) 'variant': variant, 'qty': qty};
 }
 
 String fmtDate(String? s, {bool time = false}) {

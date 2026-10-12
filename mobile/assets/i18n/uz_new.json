@@ -381,5 +381,14 @@
  "img_filter": "Rasm",
  "img_none": "Rasmsiz",
  "img_sample": "Namunaviy (AI)",
- "img_real": "Haqiqiy surat"
+ "img_real": "Haqiqiy surat",
+ "from_price": "{p} dan",
+ "characteristics": "Xususiyatlar",
+ "variant": "Variant",
+ "choose_variant": "Variantni tanlang",
+ "variant_required": "Ayrim mahsulotlar uchun variant (rang, ólcham) tanlanmagan. Mahsulotni ochib variantni tanlang.",
+ "stock_limit": "Yetarli qoldiq yóq: mavjud {n}",
+ "variants_n": "{n} ta variant",
+ "variants_web_hint": "Variantlar, ularning narxi va qoldiǵi hamda xususiyatlar veb-kabinetda tahrirlanadi.",
+ "stock_by_variants": "Qoldiq variantlar bóyicha"
 }

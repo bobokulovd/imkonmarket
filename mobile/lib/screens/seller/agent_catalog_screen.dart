@@ -9,9 +9,15 @@ import 'contracts_screen.dart';
 
 class _Line {
   final J product;
+  final J? variant; // variantli mahsulotda tanlangan variant
   int qty;
   final TextEditingController price;
-  _Line(this.product, this.qty, String p) : price = TextEditingController(text: p);
+  _Line(this.product, this.variant, this.qty, String p) : price = TextEditingController(text: p);
+
+  /// Belgilangan narx (variantniki yoki mahsulotniki); null — narx kelishiladi.
+  dynamic get basePrice => variant != null ? variant!['price'] : product['price'];
+  int? get available => variant != null ? variant!['available'] as int? : product['available'] as int?;
+  bool same(J p, J? v) => product['id'] == p['id'] && variant?['id'] == v?['id'];
 }
 
 /// Umumiy katalog: barcha muassasalar mahsulotlari va qoldig'i.
@@ -46,13 +52,61 @@ class _AgentCatalogScreenState extends State<AgentCatalogScreen> {
     }
   }
 
-  void _add(J p) {
-    if (deal.any((l) => l.product['id'] == p['id'])) return;
-    setState(() => deal.add(_Line(p, (p['min_order'] as int?) ?? 1, p['price'] == null ? '' : '${num.parse(p['price'].toString()).round()}')));
+  void _add(J p, [J? v]) {
+    if (deal.any((l) => l.same(p, v))) return;
+    final base = v != null ? v['price'] : p['price'];
+    final min = (p['min_order'] as int?) ?? 1;
+    setState(() => deal.add(_Line(p, v, min, base == null ? '' : '${num.parse(base.toString()).round()}')));
+  }
+
+  List<J> _variants(J p) => ((p['variants'] as List?) ?? []).cast<J>();
+
+  /// Variantli mahsulot: variantni tanlash oynasi.
+  Future<void> _pickVariant(J p) async {
+    final app = context.read<AppState>();
+    final vs = _variants(p);
+    final picked = await showModalBottomSheet<J>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (ctx) => SafeArea(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.of(ctx).size.height * 0.7),
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text('${app.t('choose_variant')} · ${app.p(p['name'])}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+            ),
+            Flexible(
+              child: ListView(shrinkWrap: true, children: [
+                for (final v in vs)
+                  Builder(builder: (_) {
+                    final av = v['available'] as int?;
+                    final inDeal = deal.any((l) => l.same(p, v));
+                    final disabled = (av != null && av <= 0) || inDeal;
+                    return ListTile(
+                      enabled: !disabled,
+                      title: Text(app.p(v['label']).isEmpty ? '${v['sku']}' : app.p(v['label'])),
+                      subtitle: Text('${v['sku']} · ${app.t('available')}: ${av ?? '∞'}'),
+                      trailing: inDeal
+                          ? const Icon(Icons.check)
+                          : Text(v['price'] != null ? app.money(v['price']) : app.t('price_on_request'),
+                              style: const TextStyle(fontWeight: FontWeight.w700)),
+                      onTap: disabled ? null : () => Navigator.pop(ctx, v),
+                    );
+                  }),
+              ]),
+            ),
+          ]),
+        ),
+      ),
+    );
+    if (picked != null && mounted) _add(p, picked);
   }
 
   Future<void> _checkout() async {
     final res = await Navigator.push<List<J>>(context, MaterialPageRoute(builder: (_) => _DealForm(lines: deal)));
+    if (mounted) setState(() {}); // formada qatorlar olib tashlangan bo'lishi mumkin
     if (res != null && mounted) {
       setState(deal.clear);
       _load();
@@ -127,7 +181,10 @@ class _AgentCatalogScreenState extends State<AgentCatalogScreen> {
               separatorBuilder: (_, __) => const SizedBox(height: 8),
               itemBuilder: (_, i) {
                 final p = items![i];
-                final inDeal = deal.any((l) => l.product['id'] == p['id']);
+                final hasVariants = p['has_variants'] == true;
+                final nVariants = _variants(p).length;
+                final inDeal = !hasVariants && deal.any((l) => l.same(p, null));
+                final variantsInDeal = hasVariants ? deal.where((l) => l.product['id'] == p['id']).length : 0;
                 return Card(
                   child: Padding(
                     padding: const EdgeInsets.all(12),
@@ -139,11 +196,17 @@ class _AgentCatalogScreenState extends State<AgentCatalogScreen> {
                           Text('${app.t('owner')}: ${app.p(p['seller']['name'])}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                           const SizedBox(height: 4),
                           PriceText(p),
+                          if (hasVariants)
+                            Text('${app.t('variants_n', {'n': nVariants})}${variantsInDeal > 0 ? ' · ${app.t('deal')}: $variantsInDeal' : ''}',
+                                style: const TextStyle(fontSize: 12, color: brandDark, fontWeight: FontWeight.w600)),
                           Text('${app.t('stock')}: ${p['stock'] ?? '∞'} · ${app.t('reserved')}: ${p['reserved'] ?? 0} · ${app.t('available')}: ${p['available'] ?? '∞'}',
                               style: const TextStyle(fontSize: 12, color: Color(0xFF047857), fontWeight: FontWeight.w600)),
                         ]),
                       ),
-                      IconButton.filled(onPressed: inDeal ? null : () => _add(p), icon: Icon(inDeal ? Icons.check : Icons.add)),
+                      IconButton.filled(
+                        onPressed: inDeal || (hasVariants && nVariants == 0) ? null : (hasVariants ? () => _pickVariant(p) : () => _add(p)),
+                        icon: Icon(inDeal ? Icons.check : hasVariants ? Icons.tune : Icons.add),
+                      ),
                     ]),
                   ),
                 );
@@ -195,7 +258,10 @@ class _DealFormState extends State<_DealForm> {
     try {
       final r = await Api.i.post('/seller/agent-order/', auth: true, body: {
         ...data.toJson(),
-        'items': [for (final l in widget.lines) {'product': l.product['id'], 'qty': l.qty, 'price': l.price.text.trim()}],
+        'items': [
+          for (final l in widget.lines)
+            {'product': l.product['id'], if (l.variant != null) 'variant': l.variant!['id'], 'qty': l.qty, 'price': l.price.text.trim()},
+        ],
       });
       if (mounted) Navigator.pop(context, (r as List).cast<J>());
     } on ApiException catch (e) {
@@ -219,21 +285,31 @@ class _DealFormState extends State<_DealForm> {
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(app.p(l.product['name']), style: const TextStyle(fontWeight: FontWeight.w700)),
+                Row(children: [
+                  Expanded(child: Text(app.p(l.product['name']), style: const TextStyle(fontWeight: FontWeight.w700))),
+                  IconButton(
+                    visualDensity: VisualDensity.compact,
+                    onPressed: () => setState(() => widget.lines.remove(l)),
+                    icon: const Icon(Icons.close, size: 18),
+                  ),
+                ]),
+                if (l.variant != null)
+                  Text('${app.p(l.variant!['label'])} · ${l.variant!['sku']}',
+                      style: const TextStyle(color: brandDark, fontSize: 13, fontWeight: FontWeight.w600)),
                 Text('${app.t('owner')}: ${app.p(l.product['seller']['name'])}', style: const TextStyle(color: ink500, fontSize: 12)),
                 const SizedBox(height: 8),
                 Row(children: [
                   QtyStepper(
                     value: l.qty,
                     min: (l.product['min_order'] as int?) ?? 1,
-                    max: l.product['available'] as int?,
+                    max: l.available,
                     onChanged: (v) => setState(() => l.qty = v),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: TextField(
                       controller: l.price,
-                      enabled: l.product['price'] == null,
+                      enabled: l.basePrice == null,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(labelText: app.t('price_per')),
                     ),
@@ -250,7 +326,7 @@ class _DealFormState extends State<_DealForm> {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: FilledButton(onPressed: busy ? null : submit, child: Text(app.t('create_deal'))),
+          child: FilledButton(onPressed: busy || widget.lines.isEmpty ? null : submit, child: Text(app.t('create_deal'))),
         ),
       ),
     );

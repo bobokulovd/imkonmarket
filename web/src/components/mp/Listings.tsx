@@ -5,9 +5,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Badge, Button, Empty, Field, Input, Modal, ProductImage, Select, Spinner } from "@/components/ui";
 import { api, errText, qs } from "@/lib/api";
 import { useApp } from "@/lib/store";
-import type { Paged, SellerProduct } from "@/lib/types";
+import type { I18n, Paged, SellerProduct } from "@/lib/types";
 import { fmtDate } from "@/lib/util";
 import { type Account, LISTING_TONE, type Listing, money2, MpBadge, type TKey } from "./common";
+
+/** Variantli e'lon: har bir variant marketplace'da alohida SKU bo'lib chiqadi */
+type ListingVariant = { id: number; sku: string; attributes: Record<string, string | number>; label?: I18n; price: string | null; stock: number | null; reserved: number; available: number | null };
+type VListing = Listing & { variant?: ListingVariant | null };
+const firstOf = (ls?: VListing[]) => ls?.find((l) => !l.variant) || ls?.[0];
 
 const L_KEY: Record<string, TKey> = { draft: "mp_l_draft", pending: "mp_l_pending", active: "mp_l_active", rejected: "mp_l_rejected", error: "mp_l_error" };
 
@@ -64,7 +69,7 @@ function InfoEditor({ productId, onClose, notify }: { productId: number; onClose
   );
 }
 
-function LinkModal({ acc, product, listing, onDone }: { acc: Account; product: SellerProduct; listing?: Listing; onDone: () => void }) {
+function LinkModal({ acc, product, listing, onDone }: { acc: Account; product: SellerProduct; listing?: VListing; onDone: () => void }) {
   const { t } = useApp();
   const [q, setQ] = useState(product.sku);
   const [data, setData] = useState<{ fetched_at: string | null; items: any[] } | null>(null);
@@ -114,7 +119,7 @@ export default function Listings({ accounts, accountId, setAccountId, notify }:
   const { t, p, money, unit } = useApp();
   const acc = accounts.find((a) => a.id === accountId) || null;
   const [products, setProducts] = useState<SellerProduct[] | null>(null);
-  const [listings, setListings] = useState<Record<number, Listing>>({});
+  const [listings, setListings] = useState<Record<number, VListing[]>>({});
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState("");
   const [sel, setSel] = useState<Set<number>>(new Set());
@@ -128,18 +133,21 @@ export default function Listings({ accounts, accountId, setAccountId, notify }:
     if (!acc) return;
     const [pr, ls] = await Promise.all([
       api<Paged<SellerProduct>>(`/seller/products/${qs({ q, page_size: 500, seller: acc.seller.code })}`, { authed: true }),
-      api<Paged<Listing>>(`/mp/listings/${qs({ account: acc.id, page_size: 500 })}`, { authed: true }),
+      api<Paged<VListing>>(`/mp/listings/${qs({ account: acc.id, page_size: 500 })}`, { authed: true }),
     ]);
     setProducts(pr.results.filter((x) => x.seller?.code === acc.seller.code));
-    setListings(Object.fromEntries(ls.results.map((l) => [l.product.id, l])));
+    const by: Record<number, VListing[]> = {};
+    ls.results.forEach((l) => { (by[l.product.id] ||= []).push(l); });
+    Object.values(by).forEach((arr) => arr.sort((a, b) => (a.variant ? 1 : 0) - (b.variant ? 1 : 0) || (a.variant?.sku || "").localeCompare(b.variant?.sku || "")));
+    setListings(by);
   }, [acc, q]);
   useEffect(() => { setProducts(null); setSel(new Set()); load().catch((e) => notify(errText(e))); }, [accountId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const rows = useMemo(() => (products || []).filter((x) => {
-    const l = listings[x.id];
+    const ls = listings[x.id] || [];
     if (!filter) return true;
-    if (filter === "none") return !l;
-    return l?.status === filter || (filter === "error" && l?.status === "rejected");
+    if (filter === "none") return !ls.length;
+    return ls.some((l) => l.status === filter || (filter === "error" && l.status === "rejected"));
   }), [products, listings, filter]);
 
   const publish = async (ids: number[]) => {
@@ -152,13 +160,13 @@ export default function Listings({ accounts, accountId, setAccountId, notify }:
   };
   const doCheck = async (pr: SellerProduct) => {
     try {
-      let l = listings[pr.id];
+      let l: Listing | undefined = firstOf(listings[pr.id]);
       if (!l) {
         const r = await api<any>("/mp/listings/", { method: "POST", json: { account: acc!.id, product_ids: [pr.id], publish: false }, authed: true });
         l = r.listings[0];
         await load();
       }
-      setCheck({ p: pr, res: await api(`/mp/listings/${l.id}/check/`, { authed: true }) });
+      setCheck({ p: pr, res: await api(`/mp/listings/${l!.id}/check/`, { authed: true }) });
     } catch (e) { notify(errText(e)); }
   };
   const refresh = async (l: Listing) => { await api(`/mp/listings/${l.id}/refresh/`, { method: "POST", authed: true }); notify(t("mp_queued")); setTimeout(load, 4000); };
@@ -193,7 +201,8 @@ export default function Listings({ accounts, accountId, setAccountId, notify }:
           {!products ? <Spinner /> : rows.length === 0 ? <Empty title={t("nothing_found")} /> : (
             <div className="card divide-y divide-ink-100">
               {rows.map((pr) => {
-                const l = listings[pr.id];
+                const ls = listings[pr.id] || [];
+                const l = firstOf(ls);
                 return (
                   <div key={pr.id} className="p-3 flex gap-3 items-start">
                     {canCreate && <input type="checkbox" className="mt-4" checked={sel.has(pr.id)} onChange={(e) => { const s = new Set(sel); if (e.target.checked) s.add(pr.id); else s.delete(pr.id); setSel(s); }} />}
@@ -201,15 +210,27 @@ export default function Listings({ accounts, accountId, setAccountId, notify }:
                     <div className="flex-1 min-w-0">
                       <div className="font-semibold text-ink-900 truncate">{p(pr.name)}</div>
                       <div className="text-xs text-ink-500">{pr.sku} · {pr.price ? money(pr.price) : "—"} · {t("available")}: {pr.available ?? "∞"} {unit(pr.unit)}</div>
-                      {l && (
-                        <div className="text-xs mt-1 flex flex-wrap gap-x-3 gap-y-1 items-center">
-                          <Badge tone={LISTING_TONE[l.status]}>{t(L_KEY[l.status])}</Badge>
-                          {l.external_id && <span className="text-ink-500">ID {l.external_id}{l.external_sku ? ` / ${l.external_sku}` : ""}</span>}
-                          {l.pushed_price && <span className="text-ink-500">{t("mp_pushed")}: {money2(l.pushed_price, l.pushed_currency)} · {l.pushed_stock ?? "—"}</span>}
-                          {l.last_synced_at && <span className="text-ink-400">{fmtDate(l.last_synced_at, true)}</span>}
+                      {ls.map((x) => (
+                        <div key={x.id} className={clsx("mt-1", x.variant && "pl-2.5 border-l-2 border-ink-100")}>
+                          {x.variant && (
+                            <div className="text-xs text-ink-700 flex flex-wrap gap-x-2">
+                              <span className="font-mono font-semibold">{x.variant.sku}</span>
+                              <span className="text-ink-500">{x.variant.label ? p(x.variant.label) : Object.values(x.variant.attributes || {}).join(" · ")}</span>
+                              <span className="text-ink-500">{x.variant.price ? money(x.variant.price) : "—"} · {t("available")}: {x.variant.available ?? "∞"}</span>
+                            </div>
+                          )}
+                          <div className="text-xs mt-0.5 flex flex-wrap gap-x-3 gap-y-1 items-center">
+                            <Badge tone={LISTING_TONE[x.status]}>{t(L_KEY[x.status])}</Badge>
+                            {x.external_id && <span className="text-ink-500">ID {x.external_id}{x.external_sku ? ` / ${x.external_sku}` : ""}</span>}
+                            {x.pushed_price && <span className="text-ink-500">{t("mp_pushed")}: {money2(x.pushed_price, x.pushed_currency)} · {x.pushed_stock ?? "—"}</span>}
+                            {x.last_synced_at && <span className="text-ink-500">{fmtDate(x.last_synced_at, true)}</span>}
+                            {["pending", "active"].includes(x.status) && x !== l && (
+                              <button type="button" onClick={() => refresh(x)} className="text-ink-500 hover:text-brand-700" aria-label="refresh"><RefreshCw className="w-3.5 h-3.5" /></button>
+                            )}
+                          </div>
+                          {x.last_error && <div className="text-xs text-red-600 mt-1 line-clamp-3">{x.last_error}</div>}
                         </div>
-                      )}
-                      {l?.last_error && <div className="text-xs text-red-600 mt-1 line-clamp-3">{l.last_error}</div>}
+                      ))}
                     </div>
                     <div className="flex flex-wrap gap-1 justify-end shrink-0">
                       <Button size="sm" variant="ghost" title={t("mp_market_info")} onClick={() => setInfo(pr.id)}><Info className="w-4 h-4" /></Button>
@@ -229,7 +250,7 @@ export default function Listings({ accounts, accountId, setAccountId, notify }:
         {info !== null && <InfoEditor productId={info} onClose={() => { setInfo(null); load(); }} notify={notify} />}
       </Modal>
       <Modal open={!!linkFor} onClose={() => setLinkFor(null)} title={t("mp_link")} wide>
-        {linkFor && acc && <LinkModal acc={acc} product={linkFor} listing={listings[linkFor.id]} onDone={() => { setLinkFor(null); notify(t("saved")); load(); }} />}
+        {linkFor && acc && <LinkModal acc={acc} product={linkFor} listing={firstOf(listings[linkFor.id])} onDone={() => { setLinkFor(null); notify(t("saved")); load(); }} />}
       </Modal>
       <Modal open={!!check} onClose={() => setCheck(null)} title={t("mp_check_ready")}>
         {check && (

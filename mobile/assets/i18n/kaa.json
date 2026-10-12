@@ -381,5 +381,14 @@
  "img_filter": "Súwret",
  "img_none": "Súwretsiz",
  "img_sample": "Úlgi (AI)",
- "img_real": "Haqıyqıy súwret"
+ "img_real": "Haqıyqıy súwret",
+ "from_price": "{p} den",
+ "characteristics": "Ózgeshelikler",
+ "variant": "Variant",
+ "choose_variant": "Variantti saylań",
+ "variant_required": "Ayırım ónimler ushın variant (reń, ólshem) saylanbaǵan. Ónimdi ashıp variantti saylań.",
+ "stock_limit": "Jeterli qaldıq joq: bar {n}",
+ "variants_n": "{n} variant",
+ "variants_web_hint": "Variantlar, olardıń bahası hám qaldıǵı, ózgeshelikler veb-kabinette ózgertiledi.",
+ "stock_by_variants": "Qaldıq variantlar boyınsha"
 }

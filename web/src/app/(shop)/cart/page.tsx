@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { StockLine } from "@/components/ProductCard";
 import { Button, Empty, ProductImage, Qty } from "@/components/ui";
-import { useApp, useCart } from "@/lib/store";
+import { lineKey, useApp, useCart } from "@/lib/store";
 import { groupBySeller } from "@/lib/util";
 
 export default function CartPage() {
@@ -35,24 +35,36 @@ export default function CartPage() {
                   <span className="text-sm font-semibold tabular-nums">{money(sub)}</span>
                 </div>
                 <div className="divide-y divide-ink-100">
-                  {g.map(({ product: pr, qty }) => {
+                  {g.map((line) => {
+                    const { product: pr, qty, variant } = line;
+                    const key = lineKey(line);
+                    const href = variant ? `/product/${pr.id}?variant=${variant.id}` : `/product/${pr.id}`;
                     const icon = meta?.categories.find((c) => c.slug === pr.category)?.icon;
                     return (
-                      <div key={pr.id} className="p-4 flex gap-4">
-                        <Link href={`/product/${pr.id}`} className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0">
+                      <div key={key} className="p-4 flex gap-4">
+                        <Link href={href} className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden shrink-0">
                           <ProductImage src={pr.image} category={pr.category} icon={icon} />
                         </Link>
                         <div className="flex-1 min-w-0">
-                          <Link href={`/product/${pr.id}`} className="font-semibold leading-snug hover:text-brand-700 line-clamp-2">{p(pr.name)}</Link>
-                          <div className="text-sm text-ink-500">{p(pr.spec)}</div>
+                          <Link href={href} className="font-semibold leading-snug hover:text-brand-700 line-clamp-2">{p(pr.name)}</Link>
+                          {variant && (
+                            <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                              <span className="inline-flex items-center rounded-lg bg-ink-100 px-2 py-0.5 font-medium text-ink-700">{p(variant.label) || variant.sku}</span>
+                              <span className="text-xs text-ink-500 font-mono">{variant.sku}</span>
+                            </div>
+                          )}
+                          {!variant && pr.has_variants && (
+                            <Link href={href} className="mt-1 inline-flex text-xs font-semibold text-amber-700 bg-amber-50 rounded-lg px-2 py-1 hover:underline">{t("sv_pick_variant_hint")}</Link>
+                          )}
+                          {p(pr.spec) && <div className="text-sm text-ink-500">{p(pr.spec)}</div>}
                           <StockLine p={pr} className="text-xs font-semibold" />
                           <div className="mt-2 flex items-center gap-3 flex-wrap">
-                            <Qty size="sm" value={qty} onChange={(v) => cart.setQty(pr.id, v)} min={pr.min_order || 1} max={pr.available} />
+                            <Qty size="sm" value={qty} onChange={(v) => cart.setQty(key, v)} min={pr.min_order || 1} max={pr.available} />
                             <span className="text-sm text-ink-500">× {pr.price ? money(pr.price) : t("price_on_request")} / {unit(pr.unit)}</span>
                           </div>
                         </div>
                         <div className="flex flex-col items-end justify-between">
-                          <button onClick={() => cart.remove(pr.id)} className="p-2 rounded-lg text-ink-500 hover:text-red-600 hover:bg-red-50" aria-label={t("remove")}><Trash2 className="w-4 h-4" /></button>
+                          <button onClick={() => cart.remove(key)} className="p-2 rounded-lg text-ink-500 hover:text-red-600 hover:bg-red-50" aria-label={t("remove")}><Trash2 className="w-4 h-4" /></button>
                           <div className="font-bold tabular-nums">{pr.price ? money(Number(pr.price) * qty) : "—"}</div>
                         </div>
                       </div>

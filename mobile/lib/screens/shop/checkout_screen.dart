@@ -38,7 +38,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     try {
       final res = await Api.i.post('/applications/', body: {
         ...data.toJson(),
-        'items': app.cart.map((l) => {'product': l.product['id'], 'qty': l.qty}).toList(),
+        'items': app.cart.map((l) => {'product': l.productId, if (l.variantId != null) 'variant': l.variantId, 'qty': l.qty}).toList(),
       });
       final list = (res as List).cast<J>();
       final p = await SharedPreferences.getInstance();
@@ -47,12 +47,27 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       app.clearCart();
       setState(() => created = list);
     } on ApiException catch (e) {
-      setState(() => error = e.message);
+      setState(() => error = _apiError(app, e));
     } catch (e) {
       setState(() => error = e.toString());
     } finally {
       if (mounted) setState(() => busy = false);
     }
+  }
+
+  /// Backend xatolari: {"code": "variant"} — variant tanlanmagan, {"code": "stock", "available": N} — qoldiq yetarli emas.
+  String _apiError(AppState app, ApiException e) {
+    final d = e.data;
+    if (d is Map) {
+      String? f(dynamic x) => x is List ? (x.isEmpty ? null : '${x.first}') : x?.toString();
+      final code = f(d['code']);
+      if (code == 'variant') return app.t('variant_required');
+      if (code == 'stock') {
+        final sku = f(d['sku']);
+        return '${app.t('stock_limit', {'n': f(d['available']) ?? 0})}${sku != null ? ' ($sku)' : ''}';
+      }
+    }
+    return e.message;
   }
 
   @override
@@ -93,8 +108,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   child: Row(children: [
-                    Expanded(child: Text('${app.p(l.product['name'])} × ${l.qty}', style: const TextStyle(fontSize: 13))),
-                    Text(l.product['price'] != null ? app.money((double.tryParse('${l.product['price']}') ?? 0) * l.qty) : '—',
+                    Expanded(
+                        child: Text(
+                            '${app.p(l.product['name'])}${l.variant != null && app.p(l.variant!['label']).isNotEmpty ? ' (${app.p(l.variant!['label'])})' : ''} × ${l.qty}',
+                            style: const TextStyle(fontSize: 13))),
+                    Text(l.price != null ? app.money((double.tryParse('${l.price}') ?? 0) * l.qty) : '—',
                         style: const TextStyle(fontSize: 13)),
                   ]),
                 ),
@@ -107,6 +125,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ]),
           ),
         ),
+        if (app.cartNeedsVariant)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Text(app.t('variant_required'), style: const TextStyle(color: Color(0xFFB45309), fontWeight: FontWeight.w600)),
+          ),
         const SizedBox(height: 16),
         BuyerForm(data: data, errors: errors),
         if (error != null) Padding(padding: const EdgeInsets.only(top: 12), child: Text(error!, style: const TextStyle(color: Colors.red))),
@@ -119,7 +142,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           padding: const EdgeInsets.all(12),
           child: FilledButton(
             style: FilledButton.styleFrom(backgroundColor: accent),
-            onPressed: busy || app.cart.isEmpty ? null : submit,
+            onPressed: busy || app.cart.isEmpty || app.cartNeedsVariant ? null : submit,
             child: busy ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)) : Text(app.t('submit')),
           ),
         ),

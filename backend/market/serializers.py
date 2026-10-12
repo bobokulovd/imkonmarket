@@ -231,12 +231,20 @@ class SellerProductSerializer(serializers.ModelSerializer):
         return v
 
     def validate_barcode(self, v):
+        from rest_framework.exceptions import ValidationError as VE
         from .catalog import clean_barcode
-        return clean_barcode(v)
+        try:
+            return clean_barcode(v)
+        except VE as e:
+            raise serializers.ValidationError(e.detail["barcode"])
 
     def validate_ikpu(self, v):
+        from rest_framework.exceptions import ValidationError as VE
         from .catalog import clean_ikpu
-        return clean_ikpu(v)
+        try:
+            return clean_ikpu(v)
+        except VE as e:
+            raise serializers.ValidationError(e.detail["ikpu"])
 
     def validate(self, attrs):
         from .catalog import clean_attributes

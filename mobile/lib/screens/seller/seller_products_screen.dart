@@ -77,9 +77,16 @@ class _SellerProductsScreenState extends State<SellerProductsScreen> {
                           borderRadius: BorderRadius.circular(8),
                           child: SizedBox(width: 48, height: 48, child: ProductImage(src: p['image_url'], category: p['category'], iconSize: 22)),
                         ),
-                        title: Text(app.p(p['name']), maxLines: 1, overflow: TextOverflow.ellipsis),
+                        title: Row(children: [
+                          Expanded(child: Text(app.p(p['name']), maxLines: 1, overflow: TextOverflow.ellipsis)),
+                          if (p['has_variants'] == true) ...[
+                            const SizedBox(width: 6),
+                            _VariantsBadge(((p['variants'] as List?) ?? []).length),
+                          ],
+                        ]),
                         subtitle: Text(
-                            '${p['price'] != null ? app.money(p['price']) : app.t('price_on_request')} / ${app.unit(p['unit'])}\n'
+                            '${p['price'] != null ? (p['has_variants'] == true ? app.t('from_price', {'p': app.money(p['price'])}) : app.money(p['price'])) : app.t('price_on_request')} / ${app.unit(p['unit'])}\n'
+                            '${p['has_variants'] == true ? '${app.t('stock_by_variants')} · ' : ''}'
                             '${app.t('stock')}: ${p['stock'] ?? '∞'} · ${app.t('reserved')}: ${p['reserved']} · ${app.t('available')}: ${p['available'] ?? '∞'}'),
                         isThreeLine: true,
                         trailing: const Icon(Icons.edit_outlined),
@@ -92,6 +99,18 @@ class _SellerProductsScreenState extends State<SellerProductsScreen> {
             ),
     );
   }
+}
+
+class _VariantsBadge extends StatelessWidget {
+  final int n;
+  const _VariantsBadge(this.n);
+  @override
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+        decoration: BoxDecoration(color: const Color(0xFFEEF2FF), borderRadius: BorderRadius.circular(99)),
+        child: Text(context.read<AppState>().t('variants_n', {'n': n}),
+            style: const TextStyle(color: Color(0xFF4338CA), fontSize: 11, fontWeight: FontWeight.w700)),
+      );
 }
 
 class _Editor extends StatefulWidget {
@@ -114,6 +133,8 @@ class _EditorState extends State<_Editor> {
   late String unit = p?['unit'] ?? 'dona';
   late bool active = p?['is_active'] ?? true;
   late bool delivery = p?['delivery'] ?? true;
+  // variantli mahsulotda narx va qoldiq variantlardan hisoblanadi (backend ularni qabul qilmaydi)
+  late final bool hasVariants = p?['has_variants'] == true;
   bool busy = false;
   String? error;
 
@@ -136,8 +157,8 @@ class _EditorState extends State<_Editor> {
       'spec': {'uz': spec.text.trim()},
       'category': category,
       'unit': unit,
-      'price': price.text.trim().isEmpty ? null : price.text.trim(),
-      'stock': stock.text.trim().isEmpty ? null : stock.text.trim(),
+      if (!hasVariants) 'price': price.text.trim().isEmpty ? null : price.text.trim(),
+      if (!hasVariants) 'stock': stock.text.trim().isEmpty ? null : stock.text.trim(),
       'is_active': active,
       'delivery': delivery,
     };
@@ -195,10 +216,39 @@ class _EditorState extends State<_Editor> {
               ),
             ),
             const SizedBox(width: 8),
-            Expanded(child: TextField(controller: price, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: '${app.t('price')}, ${app.t('sum')}'))),
+            Expanded(
+              child: TextField(
+                controller: price,
+                readOnly: hasVariants,
+                enabled: !hasVariants,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: '${app.t('price')}, ${app.t('sum')}'),
+              ),
+            ),
           ]),
           const SizedBox(height: 8),
-          TextField(controller: stock, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: app.t('stock'), helperText: app.t('stock_hint'))),
+          if (hasVariants) ...[
+            TextField(
+              controller: stock,
+              readOnly: true,
+              enabled: false,
+              decoration: InputDecoration(labelText: app.t('stock'), helperText: app.t('stock_by_variants')),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(color: const Color(0xFFEEF5FF), borderRadius: BorderRadius.circular(12)),
+              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                const Icon(Icons.info_outline, size: 18, color: brandDark),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text('${app.t('variants_n', {'n': ((p?['variants'] as List?) ?? []).length})}. ${app.t('variants_web_hint')}',
+                      style: const TextStyle(color: brandDark, fontSize: 13)),
+                ),
+              ]),
+            ),
+          ] else
+            TextField(controller: stock, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: app.t('stock'), helperText: app.t('stock_hint'))),
           SwitchListTile(contentPadding: EdgeInsets.zero, title: Text(app.t('delivery_yes')), value: delivery, onChanged: (v) => setState(() => delivery = v)),
           SwitchListTile(contentPadding: EdgeInsets.zero, title: Text(app.t('published')), value: active, onChanged: (v) => setState(() => active = v)),
           if (error != null) Text(error!, style: const TextStyle(color: Colors.red)),

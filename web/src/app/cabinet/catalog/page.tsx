@@ -8,14 +8,19 @@ import { useMe } from "@/components/CabinetShell";
 import { Badge, Button, Empty, Input, Modal, Qty, Select, Spinner } from "@/components/ui";
 import { api, errText, qs } from "@/lib/api";
 import { useApp } from "@/lib/store";
-import type { Paged, Product, SellerApplication } from "@/lib/types";
+import type { Paged, Product, PublicVariant, SellerApplication } from "@/lib/types";
 
-type Line = { product: Product; qty: number; price: string };
+type CatProduct = Product & { variants?: PublicVariant[] };
+type Line = { product: CatProduct; variant?: PublicVariant; qty: number; price: string };
+const keyOf = (pid: number, vid?: number | null) => `${pid}:${vid ?? 0}`;
+const lkey = (l: Line) => keyOf(l.product.id, l.variant?.id);
+const avail = (l: Line) => (l.variant ? l.variant.available : l.product.available);
 
 export default function AgentCatalogPage() {
   const { t, p, money, unit, meta, lang } = useApp();
   const { me } = useMe();
-  const [data, setData] = useState<Paged<Product> | null>(null);
+  const [data, setData] = useState<Paged<CatProduct> | null>(null);
+  const [vsel, setVsel] = useState<Record<number, number>>({}); // mahsulot → tanlangan variant
   const [f, setF] = useState({ q: "", category: "", seller: "", region: "", in_stock: "", page: 1 });
   const [deal, setDeal] = useState<Line[]>([]);
   const [open, setOpen] = useState(false);
@@ -26,11 +31,21 @@ export default function AgentCatalogPage() {
   const [result, setResult] = useState<SellerApplication[] | null>(null);
 
   const load = useCallback(() => {
-    api<Paged<Product>>(`/seller/catalog/${qs({ ...f, page_size: 30, ordering: "name" })}`, { authed: true }).then(setData).catch(() => {});
+    api<Paged<CatProduct>>(`/seller/catalog/${qs({ ...f, page_size: 30, ordering: "name" })}`, { authed: true }).then(setData).catch(() => {});
   }, [f]);
   useEffect(() => { const id = setTimeout(load, 250); return () => clearTimeout(id); }, [load]);
 
-  const add = (pr: Product) => setDeal((d) => (d.some((l) => l.product.id === pr.id) ? d : [...d, { product: pr, qty: pr.min_order || 1, price: pr.price ? String(Number(pr.price)) : "" }]));
+  const variantOf = (pr: CatProduct): PublicVariant | undefined => {
+    const vs = pr.variants || [];
+    if (!vs.length) return undefined;
+    return vs.find((v) => v.id === vsel[pr.id]) || vs.find((v) => v.available === null || v.available > 0) || vs[0];
+  };
+  const add = (pr: CatProduct, v?: PublicVariant) => setDeal((d) => {
+    if (d.some((l) => lkey(l) === keyOf(pr.id, v?.id))) return d;
+    const price = v ? v.price : pr.price;
+    return [...d, { product: pr, variant: v, qty: pr.min_order || 1, price: price ? String(Number(price)) : "" }];
+  });
+  const setLine = (k: string, patch: Partial<Line>) => setDeal((d) => d.map((x) => (lkey(x) === k ? { ...x, ...patch } : x)));
   const total = deal.reduce((s, l) => s + Number(l.price || 0) * l.qty, 0);
   const owners = Array.from(new Set(deal.map((l) => l.product.seller.code)));
 
@@ -42,7 +57,7 @@ export default function AgentCatalogPage() {
     try {
       const r = await api<SellerApplication[]>("/seller/agent-order/", {
         method: "POST", authed: true,
-        json: { ...b, items: deal.map((l) => ({ product: l.product.id, qty: l.qty, price: l.price || null })) },
+        json: { ...b, items: deal.map((l) => ({ product: l.product.id, variant: l.variant?.id, qty: l.qty, price: l.price || null })) },
       });
       setResult(r); setDeal([]); load();
     } catch (x) { setErr(errText(x)); } finally { setBusy(false); }
@@ -77,18 +92,33 @@ export default function AgentCatalogPage() {
                 </thead>
                 <tbody className="divide-y divide-ink-100">
                   {data.results.map((pr) => {
-                    const inDeal = deal.some((l) => l.product.id === pr.id);
-                    const soldOut = pr.available !== null && pr.available <= 0;
+                    const v = variantOf(pr);
+                    const inDeal = deal.some((l) => lkey(l) === keyOf(pr.id, v?.id));
+                    const av = v ? v.available : pr.available;
+                    const price = v ? v.price : pr.price;
+                    const soldOut = av !== null && av <= 0;
                     return (
                       <tr key={pr.id} className={clsx(pr.seller.code === me.seller.code && "bg-brand-50/30")}>
-                        <td className="px-4 py-2.5"><div className="font-medium">{p(pr.name)}</div><div className="text-xs text-ink-500">{p(pr.spec)} · {pr.sku}</div></td>
+                        <td className="px-4 py-2.5">
+                          <div className="font-medium">{p(pr.name)}</div><div className="text-xs text-ink-500">{p(pr.spec)} · {v ? v.sku : pr.sku}</div>
+                          {pr.variants && pr.variants.length > 0 && (
+                            <Select aria-label={t("sv_variant")} className="!h-9 mt-1.5 text-sm max-w-[260px]" value={v?.id ?? ""}
+                              onChange={(e) => setVsel({ ...vsel, [pr.id]: Number(e.target.value) })}>
+                              {pr.variants.map((x) => (
+                                <option key={x.id} value={x.id}>
+                                  {p(x.label) || x.sku} · {x.available === null ? "∞" : x.available > 0 ? x.available : t("out_of_stock")}
+                                </option>
+                              ))}
+                            </Select>
+                          )}
+                        </td>
                         <td className="px-4 py-2.5"><div className="font-medium">{p(pr.seller.name)}</div><div className="text-xs text-ink-500">{p(pr.seller.region_i18n)}</div></td>
-                        <td className="px-4 py-2.5 text-right tabular-nums whitespace-nowrap">{pr.price ? money(pr.price) : <Badge tone="amber">{t("price_on_request")}</Badge>}<div className="text-xs text-ink-500">/ {unit(pr.unit)}</div></td>
+                        <td className="px-4 py-2.5 text-right tabular-nums whitespace-nowrap">{price ? money(price) : <Badge tone="amber">{t("price_on_request")}</Badge>}<div className="text-xs text-ink-500">/ {unit(pr.unit)}</div></td>
                         <td className="px-4 py-2.5 text-right tabular-nums">{pr.stock ?? "∞"}</td>
                         <td className="px-4 py-2.5 text-right tabular-nums text-ink-500">{pr.reserved ?? 0}</td>
-                        <td className={clsx("px-4 py-2.5 text-right tabular-nums font-bold", soldOut ? "text-red-600" : "text-emerald-700")}>{pr.available ?? "∞"}</td>
+                        <td className={clsx("px-4 py-2.5 text-right tabular-nums font-bold", soldOut ? "text-red-600" : "text-emerald-700")}>{av ?? "∞"}</td>
                         <td className="px-4 py-2.5 text-right">
-                          <Button size="sm" variant={inDeal ? "soft" : "primary"} disabled={soldOut || inDeal} onClick={() => add(pr)}><Plus className="w-4 h-4" /> {t("add_to_deal")}</Button>
+                          <Button size="sm" variant={inDeal ? "soft" : "primary"} disabled={soldOut || inDeal} onClick={() => add(pr, v)}><Plus className="w-4 h-4" /> {t("add_to_deal")}</Button>
                         </td>
                       </tr>
                     );
@@ -113,20 +143,29 @@ export default function AgentCatalogPage() {
           <p className="text-xs text-ink-500 mt-1">{t("deal_note")}</p>
           {deal.length === 0 ? <div className="text-sm text-ink-500 py-8 text-center">{t("no_data")}</div> : (
             <div className="mt-4 space-y-3 max-h-[50vh] overflow-y-auto pr-1">
-              {deal.map((l) => (
-                <div key={l.product.id} className="rounded-xl border border-ink-100 p-3">
-                  <div className="flex justify-between gap-2">
-                    <div className="min-w-0"><div className="font-medium text-sm truncate">{p(l.product.name)}</div><div className="text-xs text-ink-500">{t("owner")}: {p(l.product.seller.name)}</div></div>
-                    <button onClick={() => setDeal(deal.filter((x) => x.product.id !== l.product.id))} className="p-1 text-ink-500 hover:text-red-600"><Trash2 className="w-4 h-4" /></button>
+              {deal.map((l) => {
+                const k = lkey(l);
+                const a = avail(l);
+                const fixed = !!(l.variant ? l.variant.price : l.product.price);
+                return (
+                  <div key={k} className="rounded-xl border border-ink-100 p-3">
+                    <div className="flex justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="font-medium text-sm truncate">{p(l.product.name)}</div>
+                        {l.variant && <div className="text-xs text-ink-700">{p(l.variant.label) || l.variant.sku} · <span className="font-mono text-ink-500">{l.variant.sku}</span></div>}
+                        <div className="text-xs text-ink-500">{t("owner")}: {p(l.product.seller.name)}</div>
+                      </div>
+                      <button onClick={() => setDeal(deal.filter((x) => lkey(x) !== k))} className="p-1 text-ink-500 hover:text-red-600" aria-label={t("remove")}><Trash2 className="w-4 h-4" /></button>
+                    </div>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Qty size="sm" value={l.qty} min={l.product.min_order || 1} max={a}
+                        onChange={(v) => setLine(k, { qty: Math.max(1, a != null ? Math.min(v, a) : v) })} />
+                      <Input className="h-9 text-right" inputMode="decimal" placeholder={t("set_price")} value={l.price} disabled={fixed}
+                        onChange={(e) => setLine(k, { price: e.target.value.replace(/[^\d.]/g, "") })} />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 mt-2">
-                    <Qty size="sm" value={l.qty} min={l.product.min_order || 1} max={l.product.available}
-                      onChange={(v) => setDeal(deal.map((x) => (x.product.id === l.product.id ? { ...x, qty: Math.max(1, l.product.available != null ? Math.min(v, l.product.available) : v) } : x)))} />
-                    <Input className="h-9 text-right" inputMode="decimal" placeholder={t("set_price")} value={l.price} disabled={!!l.product.price}
-                      onChange={(e) => setDeal(deal.map((x) => (x.product.id === l.product.id ? { ...x, price: e.target.value.replace(/[^\d.]/g, "") } : x)))} />
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
           <div className="flex justify-between items-baseline mt-4 pt-4 border-t border-ink-100">

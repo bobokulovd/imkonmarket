@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import BuyerForm, { emptyBuyer, validateBuyer, type Buyer } from "@/components/BuyerForm";
 import { Button, Empty } from "@/components/ui";
-import { api, errText } from "@/lib/api";
-import { useApp, useCart } from "@/lib/store";
+import { ApiError, api, errText } from "@/lib/api";
+import { lineKey, useApp, useCart } from "@/lib/store";
 import type { I18n } from "@/lib/types";
 import { groupBySeller } from "@/lib/util";
 
@@ -18,6 +18,7 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<Partial<Record<keyof Buyer, boolean>>>({});
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  const [errFix, setErrFix] = useState(false); // savatda tuzatish kerak (variant / qoldiq)
   const [done, setDone] = useState<Created[] | null>(null);
 
   useEffect(() => {
@@ -62,11 +63,11 @@ export default function CheckoutPage() {
     const e = validateBuyer(b);
     setErrors(e);
     if (Object.keys(e).length) { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-    setBusy(true); setErr("");
+    setBusy(true); setErr(""); setErrFix(false);
     try {
       const res = await api<Created[]>("/applications/", {
         method: "POST",
-        json: { ...b, buyer_phone: b.buyer_phone.replace(/[^\d+]/g, ""), items: cart.lines.map((l) => ({ product: l.product.id, qty: l.qty })) },
+        json: { ...b, buyer_phone: b.buyer_phone.replace(/[^\d+]/g, ""), items: cart.lines.map((l) => ({ product: l.product.id, variant: l.variant?.id, qty: l.qty })) },
       });
       try {
         const { comment, ...keep } = b;
@@ -78,7 +79,13 @@ export default function CheckoutPage() {
       setDone(res);
       window.scrollTo({ top: 0 });
     } catch (e) {
-      setErr(errText(e));
+      // variant tanlanmagan / qoldiq yetmaydi — tushunarli xabar
+      const code = e instanceof ApiError && e.data && typeof e.data === "object" ? e.data.code : "";
+      const detail = e instanceof ApiError && e.data?.items ? String(Array.isArray(e.data.items) ? e.data.items.join(", ") : e.data.items) : "";
+      setErrFix(code === "variant" || code === "stock");
+      if (code === "variant") setErr(`${t("sv_err_variant")}${detail ? ` (${detail})` : ""}`);
+      else if (code === "stock") setErr(`${t("sv_err_stock")}${detail ? ` ${detail}` : ""}`);
+      else setErr(errText(e));
     } finally { setBusy(false); }
   };
 
@@ -98,8 +105,11 @@ export default function CheckoutPage() {
                 <div key={g[0].product.seller.code}>
                   <div className="text-sm font-semibold flex items-center gap-1.5 text-ink-700"><Factory className="w-4 h-4" /> {p(g[0].product.seller.name)}</div>
                   {g.map((l) => (
-                    <div key={l.product.id} className="flex justify-between gap-3 text-sm mt-1.5">
-                      <span className="text-ink-700 line-clamp-2">{p(l.product.name)} <span className="text-ink-500">× {l.qty} {unit(l.product.unit)}</span></span>
+                    <div key={lineKey(l)} className="flex justify-between gap-3 text-sm mt-1.5">
+                      <span className="text-ink-700 min-w-0">
+                        <span className="line-clamp-2">{p(l.product.name)} <span className="text-ink-500">× {l.qty} {unit(l.product.unit)}</span></span>
+                        {l.variant && <span className="block text-xs text-ink-500">{p(l.variant.label) || l.variant.sku} · <span className="font-mono">{l.variant.sku}</span></span>}
+                      </span>
                       <span className="tabular-nums shrink-0">{l.product.price ? money(Number(l.product.price) * l.qty) : "—"}</span>
                     </div>
                   ))}
@@ -110,7 +120,12 @@ export default function CheckoutPage() {
               <span className="font-semibold">{t("total")}</span>
               <span className="text-2xl font-extrabold tabular-nums">{money(total)}</span>
             </div>
-            {err && <div className="mt-3 text-sm text-red-700 bg-red-50 rounded-lg p-3">{err}</div>}
+            {err && (
+              <div className="mt-3 text-sm text-red-700 bg-red-50 rounded-lg p-3" role="alert">
+                {err}
+                {errFix && <Link href="/cart" className="block mt-1.5 font-semibold underline">{t("go_to_cart")}</Link>}
+              </div>
+            )}
             <Button size="lg" variant="accent" className="w-full mt-4" loading={busy} onClick={submit}>{t("submit")}</Button>
             <p className="text-xs text-ink-500 mt-3 leading-relaxed">{t("agree")}</p>
           </div>

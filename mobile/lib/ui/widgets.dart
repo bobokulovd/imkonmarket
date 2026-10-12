@@ -125,8 +125,10 @@ class PriceText extends StatelessWidget {
     if (p['price'] == null) {
       return Text(app.t('price_on_request'), style: TextStyle(fontWeight: FontWeight.w700, fontSize: big ? 22 : 14, color: const Color(0xFF334155)));
     }
+    // variantli mahsulot ro'yxatda eng arzon variant narxi bilan keladi — "...dan"
+    final money = app.money(p['price']);
     return Text.rich(TextSpan(children: [
-      TextSpan(text: app.money(p['price']), style: TextStyle(fontWeight: FontWeight.w800, fontSize: big ? 26 : 16, color: ink)),
+      TextSpan(text: p['has_variants'] == true ? app.t('from_price', {'p': money}) : money, style: TextStyle(fontWeight: FontWeight.w800, fontSize: big ? 26 : 16, color: ink)),
       TextSpan(text: ' / ${app.unit(p['unit'])}', style: TextStyle(fontSize: big ? 14 : 11, color: ink500)),
     ]));
   }
@@ -139,13 +141,15 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = context.watch<AppState>();
-    final inCart = app.inCart(p['id'] as int);
+    final hasVariants = p['has_variants'] == true;
+    final inCart = !hasVariants && app.inCartLine(p['id'] as int, null);
     final av = p['available'] as int?;
     final soldOut = av != null && av <= 0;
+    void open() => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductScreen(id: p['id'] as int)));
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductScreen(id: p['id'] as int))),
+        onTap: open,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           AspectRatio(aspectRatio: 4 / 3, child: Stack(fit: StackFit.expand, children: [
             ProductImage(src: p['image'], category: p['category']),
@@ -174,9 +178,11 @@ class ProductCard extends StatelessWidget {
               child: FilledButton.icon(
                 style: FilledButton.styleFrom(minimumSize: const Size(0, 38), padding: EdgeInsets.zero,
                     backgroundColor: inCart ? const Color(0xFFECFDF5) : brand, foregroundColor: inCart ? const Color(0xFF047857) : Colors.white),
-                onPressed: soldOut || inCart ? null : () => app.addToCart(p, (p['min_order'] as int?) ?? 1),
-                icon: Icon(inCart ? Icons.check : Icons.add_shopping_cart, size: 18),
-                label: Text(inCart ? app.t('in_cart') : app.t('add_to_cart'), style: const TextStyle(fontSize: 13)),
+                // variantli mahsulot: avval variant tanlanadi — mahsulot sahifasi ochiladi
+                onPressed: soldOut || inCart ? null : (hasVariants ? open : () => app.addToCart(p, (p['min_order'] as int?) ?? 1)),
+                icon: Icon(inCart ? Icons.check : hasVariants ? Icons.tune : Icons.add_shopping_cart, size: 18),
+                label: Text(inCart ? app.t('in_cart') : hasVariants ? app.t('choose_variant') : app.t('add_to_cart'),
+                    maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13)),
               ),
             ),
           ),

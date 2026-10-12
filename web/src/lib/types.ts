@@ -1,7 +1,7 @@
 export type Lang = "uz" | "uz_cyrl" | "uz_new" | "ru" | "kaa" | "en";
 export type I18n = Partial<Record<Lang, string>>;
 
-export interface Category { id: number; slug: string; icon: string; name: I18n; count: number }
+export interface Category { id: number; slug: string; icon: string; name: I18n; count: number; ikpu_default?: string; ikpu_name?: string }
 export interface SellerShort { id: number; code: string; name: I18n; region: string; region_i18n: I18n; district_i18n: I18n }
 export interface Seller extends SellerShort {
   description: I18n; phone: string; email: string; logo: string | null; product_count: number; inn: string;
@@ -12,9 +12,32 @@ export interface Product {
   lead_days: number; sold: number; address: I18n;
   description?: I18n; daily_capacity?: number | null; views?: number;
   stock?: number | null; reserved?: number;
+  has_variants?: boolean; brand?: string;
 }
+
+// ---- Katalog v2: galereya, variantlar, xususiyatlar
+export type AttrType = "text" | "number" | "enum" | "bool";
+export type AttrValue = string | number | boolean | (string | number)[];
+export interface AttrOption { v: string; name: I18n }
+export interface AttributeDef {
+  id: number; category: string; code: string; name: I18n; hint: I18n; type: AttrType; unit: string;
+  required: boolean; multi: boolean; variant: boolean; options: AttrOption[]; order: number;
+}
+export interface GalleryImage { id: number; url: string; order: number; is_sample: boolean; width: number; height: number }
+export interface PublicVariant {
+  id: number; sku: string; attributes: Record<string, string | number>; label: I18n; price: string | null;
+  available: number | null; image: number | null; image_url: string | null;
+}
+export interface SellerVariant extends PublicVariant {
+  barcode: string; own_price: string | null; stock: number | null; reserved: number; sold: number; is_active: boolean; order: number;
+}
+export interface VariantAxis { code: string; name: I18n; options: AttrOption[] }
+export interface Characteristic { code: string; name: I18n; value: I18n }
+
 export interface ProductDetail extends Product {
   similar: Product[]; same_seller: Product[]; seller_full: Seller;
+  images: GalleryImage[]; variants: PublicVariant[]; variant_axes: VariantAxis[]; characteristics: Characteristic[];
+  country: string; ikpu: string; weight_kg: string | null; length_cm: string | null; width_cm: string | null; height_cm: string | null;
 }
 export interface Meta {
   brand: string;
@@ -30,7 +53,7 @@ export interface Paged<T> { count: number; next: string | null; previous: string
 export interface Facets { categories: Record<string, number>; regions: Record<string, number>; sellers: Record<string, number> }
 
 export interface Item {
-  id: number; product_id: number; sku: string; name: I18n; spec: I18n; unit: string; qty: number;
+  id: number; product_id: number; variant_id?: number | null; sku: string; name: I18n; spec: I18n; unit: string; qty: number;
   price: string | null; amount: string; available: number | null;
 }
 export interface Payment { id: number; method: string; amount: string; status: string; is_demo: boolean; document_no: string; note: string; created_at: string; paid_at: string | null }
@@ -65,4 +88,14 @@ export interface SellerProfile {
 export interface SellerProduct extends Product {
   stock: number | null; reserved: number; daily_capacity: number | null; note: string; is_active: boolean;
   image_url: string | null; description: I18n; views: number; updated_at: string;
+  brand: string; country: string; ikpu: string; ikpu_name: string; ikpu_confirmed: boolean; barcode: string;
+  weight_kg: string | null; length_cm: string | null; width_cm: string | null; height_cm: string | null;
+  attributes: Record<string, AttrValue>; has_variants: boolean; images: GalleryImage[]; variants: SellerVariant[];
+}
+export interface IkpuItem { code: string; name: string; group: string; class: string; position: string; subposition: string; brand: string }
+export interface Readiness {
+  score: number;
+  checks: { key: string; ok: boolean; label: string; weight: number }[];
+  marketplaces: { account: number; marketplace: "uzum" | "ozon" | "yandex" | "wb"; name: string; status: string; can_create: boolean;
+    ok: boolean; errors: string[]; listings: { id: number; offer_id: string; status: string; error: string }[] }[];
 }

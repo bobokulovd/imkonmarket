@@ -381,5 +381,14 @@
  "img_filter": "Photo",
  "img_none": "No photo",
  "img_sample": "Sample (AI)",
- "img_real": "Real photo"
+ "img_real": "Real photo",
+ "from_price": "from {p}",
+ "characteristics": "Characteristics",
+ "variant": "Option",
+ "choose_variant": "Choose an option",
+ "variant_required": "An option (colour, size) is not selected for some products. Open the product and choose one.",
+ "stock_limit": "Not enough stock: {n} available",
+ "variants_n": "{n} options",
+ "variants_web_hint": "Options, their prices and stock, and characteristics are edited in the web cabinet.",
+ "stock_by_variants": "Stock is per option"
 }

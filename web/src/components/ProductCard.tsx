@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import { Check, MapPin, ShoppingCart, Truck } from "lucide-react";
+import { Check, Layers, MapPin, ShoppingCart, Truck } from "lucide-react";
 import Link from "next/link";
 import { useApp, useCart } from "@/lib/store";
 import type { Product } from "@/lib/types";
@@ -18,12 +18,18 @@ export function StockLine({ p, className }: { p: Product; className?: string }) 
   );
 }
 
-export function Price({ p, big }: { p: Product; big?: boolean }) {
+/** `from` — variantli mahsulotda eng arzon variant narxi ("… dan" / "от …") */
+export function Price({ p, big, from }: { p: Product; big?: boolean; from?: boolean }) {
   const { t, money, unit } = useApp();
   if (!p.price) return <div className={clsx("font-bold text-ink-700", big ? "text-2xl" : "text-[15px]")}>{t("price_on_request")}</div>;
+  const showFrom = from ?? !!p.has_variants;
+  const [pre, post] = showFrom ? t("sv_price_from").split("{price}") : ["", ""];
+  const small = clsx("text-ink-500 font-semibold", big ? "text-lg" : "text-xs");
   return (
     <div className="flex items-baseline gap-1 flex-wrap">
+      {pre?.trim() && <span className={small}>{pre.trim()}</span>}
       <span className={clsx("font-extrabold text-ink-900 tabular-nums", big ? "text-3xl" : "text-lg")}>{money(p.price)}</span>
+      {post?.trim() && <span className={small}>{post.trim()}</span>}
       <span className={clsx("text-ink-500", big ? "text-base" : "text-xs")}>{t("per_unit", { unit: unit(p.unit) })}</span>
     </div>
   );
@@ -34,6 +40,7 @@ export default function ProductCard({ p }: { p: Product }) {
   const cart = useCart();
   const icon = meta?.categories.find((c) => c.slug === p.category)?.icon;
   const inCart = cart.has(p.id);
+  const pickVariant = !!p.has_variants; // variant tanlash kerak — mahsulot sahifasiga o'tamiz
   const soldOut = p.available !== null && p.available !== undefined && p.available <= 0;
   const spec = pick(p.spec);
   return (
@@ -49,6 +56,7 @@ export default function ProductCard({ p }: { p: Product }) {
       </Link>
       <div className="p-3.5 flex flex-col flex-1">
         <Price p={p} />
+        {p.brand && <div className="text-xs font-semibold text-ink-500 mt-0.5 truncate">{p.brand}</div>}
         <Link href={`/product/${p.id}`} className="mt-1 font-semibold text-ink-900 leading-snug line-clamp-2 hover:text-brand-700">
           {pick(p.name)}
         </Link>
@@ -59,17 +67,28 @@ export default function ProductCard({ p }: { p: Product }) {
         </div>
         <StockLine p={p} className="text-xs font-semibold mt-1" />
         <div className="mt-auto pt-3">
-          <button
-            disabled={soldOut}
-            onClick={() => (inCart ? null : cart.add(p, p.min_order || 1))}
-            className={clsx(
-              "w-full h-10 rounded-xl text-sm font-semibold inline-flex items-center justify-center gap-2 transition",
-              inCart ? "bg-emerald-50 text-emerald-700" : "bg-brand-600 text-white hover:bg-brand-700",
-              soldOut && "opacity-40 pointer-events-none",
-            )}
-          >
-            {inCart ? <><Check className="w-4 h-4" /> {t("in_cart")}</> : <><ShoppingCart className="w-4 h-4" /> {t("add_to_cart")}</>}
-          </button>
+          {pickVariant ? (
+            <Link href={`/product/${p.id}`}
+              className={clsx(
+                "w-full h-10 rounded-xl text-sm font-semibold inline-flex items-center justify-center gap-2 transition",
+                inCart ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100" : "bg-brand-50 text-brand-700 hover:bg-brand-100",
+                soldOut && "opacity-40 pointer-events-none",
+              )}>
+              {inCart ? <Check className="w-4 h-4" /> : <Layers className="w-4 h-4" />} {t("sv_choose_variant")}
+            </Link>
+          ) : (
+            <button
+              disabled={soldOut}
+              onClick={() => (inCart ? null : cart.add(p, p.min_order || 1))}
+              className={clsx(
+                "w-full h-10 rounded-xl text-sm font-semibold inline-flex items-center justify-center gap-2 transition",
+                inCart ? "bg-emerald-50 text-emerald-700" : "bg-brand-600 text-white hover:bg-brand-700",
+                soldOut && "opacity-40 pointer-events-none",
+              )}
+            >
+              {inCart ? <><Check className="w-4 h-4" /> {t("in_cart")}</> : <><ShoppingCart className="w-4 h-4" /> {t("add_to_cart")}</>}
+            </button>
+          )}
         </div>
       </div>
     </div>
