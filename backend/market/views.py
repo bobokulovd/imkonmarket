@@ -312,7 +312,7 @@ class DashboardView(APIView):
         op = s.role == Seller.ROLE_OPERATOR
         apps = Application.objects.all() if op else Application.objects.filter(Q(seller=s) | Q(agent=s))
         contracts = Contract.objects.all() if op else Contract.objects.filter(Q(seller=s) | Q(agent=s))
-        products = Product.objects.all() if op else Product.objects.filter(seller=s)
+        products = (Product.objects.all() if op else Product.objects.filter(seller=s)).filter(deleted_at__isnull=True)
         month = timezone.localdate().replace(day=1)
         own = contracts if op else contracts.filter(seller=s)
         data = {
@@ -340,6 +340,7 @@ class SellerProductViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         s = seller_of(self.request.user)
         base = Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)
+        base = base.filter(deleted_at__isnull=True)
         params = self.request.query_params.copy()
         qs = product_queryset(params, base=base)
         if params.get("active") == "0":
@@ -360,12 +361,30 @@ class SellerProductViewSet(viewsets.ModelViewSet):
         addr = ser.validated_data.get("address") or s.district_i18n
         ser.save(seller=s, address=addr)
 
+    def destroy(self, request, *a, **kw):
+        res = services.delete_products([self.get_object()])
+        if res["blocked"]:
+            raise ValidationError({"detail": f"{res['blocked'][0]['sku']}: {res['blocked'][0]['reason']}"})
+        return Response(res)
+
+    @action(detail=False, methods=["post"], url_path="bulk-delete")
+    def bulk_delete(self, request):
+        """{ids: [..]} — tanlangan mahsulotlarni o'chirish (ishlatilganlari arxivlanadi)."""
+        ids = request.data.get("ids") or []
+        if not isinstance(ids, list) or not ids or not all(str(i).isdigit() for i in ids) or len(ids) > 500:
+            raise ValidationError({"ids": "1..500 ta id"})
+        s = seller_of(request.user)
+        qs = Product.objects.filter(pk__in=ids, deleted_at__isnull=True).prefetch_related("variants", "images")
+        if s.role != Seller.ROLE_OPERATOR:
+            qs = qs.filter(seller=s)
+        return Response(services.delete_products(list(qs)))
+
     @action(detail=False, methods=["post"], url_path="bulk-images", parser_classes=[MultiPartParser])
     def bulk_images(self, request):
         """Ko'p rasmni bir yo'la yuklash (yoki ZIP). Fayl nomi = SKU, masalan MK-49-001.jpg."""
         from .images import import_files
         s = seller_of(request.user)
-        qs = Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)
+        qs = (Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)).filter(deleted_at__isnull=True)
         files = request.FILES.getlist("files")
         if not files:
             return Response({"files": "required"}, status=400)
@@ -654,7 +673,7 @@ def _seller_products(request):
     if not (request.user and request.user.is_authenticated and hasattr(request.user, "profile")):
         raise PermissionDenied("seller account required")
     s = seller_of(request.user)
-    return Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)
+    return (Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)).filter(deleted_at__isnull=True)
 
 
 @api_view(["GET"])

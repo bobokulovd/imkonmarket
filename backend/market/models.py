@@ -130,6 +130,8 @@ class Product(models.Model):
     attributes = models.JSONField(default=dict, blank=True)
     has_variants = models.BooleanField(default=False, editable=False)
     is_active = models.BooleanField(default=True)
+    # o'chirilgan, lekin shartnoma/buyurtmalarda ishlatilgani uchun bazada qoldirilgan (kabinetda ko'rinmaydi)
+    deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
     search = models.TextField(blank=True, editable=False)
     views = models.PositiveIntegerField(default=0)
     sold = models.PositiveIntegerField(default=0)

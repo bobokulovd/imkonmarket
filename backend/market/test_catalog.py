@@ -229,3 +229,40 @@ class CatalogTest(TestCase):
             call_command("suggest_ikpu", verbosity=0, stdout=io.StringIO())
         p.refresh_from_db()
         self.assertEqual((p.ikpu, p.ikpu_confirmed), ("09403001001000000", False))
+
+
+@override_settings(MEDIA_ROOT=MEDIA)
+class DeleteTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        call_command("seed", credentials=f"{tempfile.mkdtemp()}/c.xlsx", verbosity=0)
+
+    def test_delete_and_archive(self):
+        u = get_user_model().objects.get(username="mk49")
+        u.set_password("test-pass-123")
+        u.save()
+        c = APIClient()
+        tok = c.post("/api/auth/login/", {"username": "mk49", "password": "test-pass-123"}, format="json").data["access"]
+        c.credentials(HTTP_AUTHORIZATION="Bearer " + tok)
+        mine = list(Product.objects.filter(seller__code="mk-49").order_by("id")[:3])
+        other = Product.objects.exclude(seller__code="mk-49").first()
+        # birinchisiga ariza tushgan — arxivlanadi
+        body = {"buyer_type": "b2c", "buyer_name": "Ali", "buyer_pinfl": "31234567890123", "buyer_phone": "+998901112233",
+                "payment_method": "bank", "items": [{"product": mine[0].id, "qty": max(mine[0].min_order, 1)}]}
+        if mine[0].price is None:
+            Product.objects.filter(pk=mine[0].pk).update(price=1000)
+        self.assertEqual(APIClient().post("/api/applications/", body, format="json").status_code, 201)
+        r = c.post("/api/seller/products/bulk-delete/", {"ids": [p.id for p in mine] + [other.id]}, format="json").json()
+        self.assertEqual([x["id"] for x in r["archived"]], [mine[0].id])
+        self.assertEqual(sorted(x["id"] for x in r["deleted"]), sorted([mine[1].id, mine[2].id]))
+        self.assertTrue(Product.objects.filter(pk=other.id).exists())  # boshqa muassasaniki — tegilmaydi
+        self.assertFalse(Product.objects.filter(pk=mine[1].id).exists())
+        a = Product.objects.get(pk=mine[0].id)
+        self.assertTrue(a.deleted_at and not a.is_active)
+        ids = [x["id"] for x in c.get("/api/seller/products/?page_size=500").json()["results"]]
+        self.assertNotIn(a.id, ids)
+        self.assertEqual(APIClient().get(f"/api/products/{a.id}/").status_code, 404)
+        # band qilingan qoldiq — o'chirilmaydi
+        p = Product.objects.filter(seller__code="mk-49", deleted_at__isnull=True).first()
+        Product.objects.filter(pk=p.pk).update(stock=10, reserved=2)
+        self.assertEqual(c.delete(f"/api/seller/products/{p.id}/").status_code, 400)

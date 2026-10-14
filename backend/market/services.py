@@ -302,3 +302,49 @@ def cancel_contract(contract: Contract, reason="", user=None):
     app.status = Application.ST_CANCELLED
     app.save()
     log(app, "cancelled", reason, user)
+
+
+def delete_products(products) -> dict:
+    """Mahsulotlarni o'chirish. Ariza/shartnomada yoki marketplace buyurtmasida ishlatilgani — arxivlanadi
+    (sotuvdan olinadi, kabinetda ko'rinmaydi, tarix saqlanadi), qolganlari butunlay o'chiriladi (rasmlari bilan).
+    Faol band (reserved) qoldig'i bor mahsulot o'chirilmaydi — avval shartnomani yakunlang yoki bekor qiling."""
+    from integrations.models import MarketplaceListing
+    from integrations.jobs import enqueue
+    deleted, archived, blocked = [], [], []
+    for p in products:
+        if p.reserved or any(v.reserved for v in p.variants.all()):
+            blocked.append({"id": p.id, "sku": p.sku, "reason": "band qilingan qoldiq bor (ochiq shartnoma yoki buyurtma)"})
+            continue
+        # marketplace'larda sotuvda qolib ketmasin — qoldiq 0 qilinadi (kartochka marketplace'da qoladi)
+        for li in MarketplaceListing.objects.filter(product=p).select_related("account"):
+            if li.status == MarketplaceListing.ST_ACTIVE and li.account.is_usable:
+                enqueue("zero_stock", account=li.account, payload={"refs": [{
+                    "offer_id": li.offer_id, "external_id": li.external_id, "external_sku": li.external_sku,
+                    "external_meta": li.external_meta}]})
+        used = ApplicationItem.objects.filter(product=p).exists() or _in_mp_orders(p.id)
+        with transaction.atomic():
+            if used:
+                MarketplaceListing.objects.filter(product=p).delete()
+                Product.objects.filter(pk=p.pk).update(is_active=False, deleted_at=timezone.now())
+                archived.append({"id": p.id, "sku": p.sku})
+            else:
+                for im in p.images.all():
+                    im.image.delete(save=False)
+                MarketplaceListing.objects.filter(product=p).delete()
+                pid, sku = p.id, p.sku
+                p.delete()
+                deleted.append({"id": pid, "sku": sku})
+    return {"deleted": deleted, "archived": archived, "blocked": blocked}
+
+
+def _in_mp_orders(pid) -> bool:
+    from integrations.models import MarketplaceOrder
+    if _json_contains():
+        return MarketplaceOrder.objects.filter(items__contains=[{"product_id": pid}]).exists()
+    return any(it.get("product_id") == pid for items in MarketplaceOrder.objects.values_list("items", flat=True)
+               for it in (items or []))
+
+
+def _json_contains():
+    from django.db import connection
+    return connection.vendor == "postgresql"

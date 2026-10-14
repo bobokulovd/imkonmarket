@@ -1,13 +1,13 @@
 "use client";
 import clsx from "clsx";
-import { Eye, EyeOff, ImagePlus, Pencil, Plus, Search, Receipt } from "lucide-react";
+import { Eye, EyeOff, ImagePlus, Pencil, Plus, Search, Receipt, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useMe } from "@/components/CabinetShell";
 import BulkImages from "@/components/BulkImages";
 import IkpuBulk from "@/components/product/IkpuBulk";
 import ProductEditor from "@/components/product/ProductEditor";
 import { Badge, Button, Empty, Input, Modal, ProductImage, Select, Spinner, Toast } from "@/components/ui";
-import { api, qs } from "@/lib/api";
+import { api, errText, qs } from "@/lib/api";
 import { useApp } from "@/lib/store";
 import type { Paged, SellerProduct } from "@/lib/types";
 
@@ -47,6 +47,27 @@ export default function ProductsPage() {
   const [page, setPage] = useState(1);
   const [edit, setEdit] = useState<EditState | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [sel, setSel] = useState<Set<number>>(new Set());
+  const [del, setDel] = useState<SellerProduct[] | null>(null);
+  const [delBusy, setDelBusy] = useState(false);
+  const [delErr, setDelErr] = useState("");
+  const pageIds = data?.results.map((x) => x.id) || [];
+  const allSel = pageIds.length > 0 && pageIds.every((i) => sel.has(i));
+  const toggleSel = (id: number) => setSel((s0) => { const s1 = new Set(s0); s1.has(id) ? s1.delete(id) : s1.add(id); return s1; });
+  const toggleAll = () => setSel((s0) => { const s1 = new Set(s0); pageIds.forEach((i) => (allSel ? s1.delete(i) : s1.add(i))); return s1; });
+  const doDelete = async () => {
+    if (!del) return;
+    setDelBusy(true); setDelErr("");
+    try {
+      const r = await api<{ deleted: unknown[]; archived: unknown[]; blocked: { sku: string; reason: string }[] }>(
+        "/seller/products/bulk-delete/", { method: "POST", json: { ids: del.map((x) => x.id) }, authed: true });
+      setSel(new Set());
+      load();
+      if (r.blocked.length) { setDelErr(r.blocked.map((b) => `${b.sku}: ${b.reason}`).join("\n")); setDel(del.filter((x) => r.blocked.some((b) => b.sku === x.sku))); }
+      else setDel(null);
+      setToast(t("del_done", { d: r.deleted.length, a: r.archived.length }));
+    } catch (e) { setDelErr(errText(e)); } finally { setDelBusy(false); }
+  };
 
   const load = useCallback(() => {
     api<Paged<SellerProduct>>(`/seller/products/${qs({ q, category: cat, image: img, page, page_size: 50 })}`, { authed: true }).then(setData).catch(() => {});
@@ -83,16 +104,26 @@ export default function ProductsPage() {
           <option value="none">{t("img_none")}</option><option value="sample">{t("img_sample")}</option><option value="real">{t("img_real")}</option>
         </Select>
       </div>
+      {sel.size > 0 && (
+        <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl bg-brand-50 border border-brand-100 px-4 py-2.5 text-sm">
+          <b>{t("del_selected", { n: sel.size })}</b>
+          <button className="text-brand-700 hover:underline" onClick={() => setSel(new Set())}>{t("del_clear")}</button>
+          <Button size="sm" variant="outline" className="ml-auto !text-red-600 !border-red-200" onClick={() => {
+            setDelErr(""); setDel(data?.results.filter((x) => sel.has(x.id)) || []);
+          }}><Trash2 className="w-4 h-4" /> {t("del_btn", { n: sel.size })}</Button>
+        </div>
+      )}
       <div className="card mt-4 overflow-hidden">
         {!data ? <div className="py-16 grid place-items-center"><Spinner /></div> : data.results.length === 0 ? <Empty title={t("no_data")} /> : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm min-w-[860px]">
               <thead className="bg-ink-100/60 text-ink-500 text-left">
-                <tr><th className="px-4 py-3">{t("name")}</th><th className="px-4 py-3">{t("category")}</th><th className="px-4 py-3 text-right">{t("price")}</th><th className="px-4 py-3">{t("stock")}</th><th className="px-4 py-3 text-right">{t("reserved")}</th><th className="px-4 py-3 text-right">{t("available")}</th><th className="px-4 py-3" /></tr>
+                <tr><th className="pl-4 py-3 w-8"><input type="checkbox" aria-label={t("del_select_all")} className="w-4 h-4 accent-brand-600" checked={allSel} onChange={toggleAll} /></th><th className="px-4 py-3">{t("name")}</th><th className="px-4 py-3">{t("category")}</th><th className="px-4 py-3 text-right">{t("price")}</th><th className="px-4 py-3">{t("stock")}</th><th className="px-4 py-3 text-right">{t("reserved")}</th><th className="px-4 py-3 text-right">{t("available")}</th><th className="px-4 py-3" /></tr>
               </thead>
               <tbody className="divide-y divide-ink-100">
                 {data.results.map((pr) => (
-                  <tr key={pr.id} className={clsx(!pr.is_active && "opacity-50")}>
+                  <tr key={pr.id} className={clsx(!pr.is_active && "opacity-50", sel.has(pr.id) && "bg-brand-50/60")}>
+                    <td className="pl-4 py-2.5"><input type="checkbox" aria-label={pr.sku} className="w-4 h-4 accent-brand-600" checked={sel.has(pr.id)} onChange={() => toggleSel(pr.id)} /></td>
                     <td className="px-4 py-2.5">
                       <div className="flex items-center gap-3">
                         <div className="w-11 h-11 rounded-lg overflow-hidden shrink-0 relative"><ProductImage src={pr.image_url} category={pr.category} icon={meta?.categories.find((c) => c.slug === pr.category)?.icon} />
@@ -115,6 +146,7 @@ export default function ProductsPage() {
                     <td className="px-4 py-2.5 text-right whitespace-nowrap">
                       <button onClick={() => toggle(pr)} className="p-2 rounded-lg hover:bg-ink-100" title={pr.is_active ? t("active") : t("hidden")}>{pr.is_active ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}</button>
                       <button onClick={() => openEdit(pr)} className="p-2 rounded-lg hover:bg-ink-100" title={t("edit")}><Pencil className="w-4 h-4" /></button>
+                      <button onClick={() => { setDelErr(""); setDel([pr]); }} className="p-2 rounded-lg text-red-600 hover:bg-red-50" title={t("del_one")}><Trash2 className="w-4 h-4" /></button>
                     </td>
                   </tr>
                 ))}
@@ -139,6 +171,25 @@ export default function ProductsPage() {
       </Modal>
       <Modal open={bulk} onClose={() => setBulk(false)} title={t("bulk_images")}>
         <BulkImages onDone={() => load()} />
+      </Modal>
+      <Modal open={!!del} onClose={() => !delBusy && setDel(null)} title={t("del_title", { n: del?.length || 0 })}>
+        {del && (
+          <div className="space-y-4">
+            <ul className="max-h-48 overflow-y-auto text-sm divide-y divide-ink-100 rounded-xl border border-ink-100">
+              {del.map((x) => <li key={x.id} className="px-3 py-2 flex justify-between gap-3"><span className="truncate">{p(x.name)}</span><span className="text-ink-500 font-mono text-xs shrink-0">{x.sku}</span></li>)}
+            </ul>
+            <div className="text-sm text-ink-700 bg-amber-50 rounded-xl p-3 space-y-1">
+              <p>{t("del_warn1")}</p>
+              <p>{t("del_warn2")}</p>
+              <p>{t("del_warn3")}</p>
+            </div>
+            {delErr && <div className="text-sm text-red-700 bg-red-50 rounded-lg p-3 whitespace-pre-line">{delErr}</div>}
+            <div className="flex justify-end gap-2">
+              <Button variant="ghost" disabled={delBusy} onClick={() => setDel(null)}>{t("cancel")}</Button>
+              <Button loading={delBusy} className="!bg-red-600 hover:!bg-red-700" onClick={doDelete}><Trash2 className="w-4 h-4" /> {t("del_confirm")}</Button>
+            </div>
+          </div>
+        )}
       </Modal>
       <Toast text={toast} onDone={() => setToast(null)} />
     </div>

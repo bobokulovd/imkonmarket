@@ -155,7 +155,7 @@ class ListingViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.De
         ids = request.data.get("product_ids") or []
         if not isinstance(ids, list) or not ids or not all(str(i).isdigit() for i in ids):
             raise ValidationError({"product_ids": "list of ids required"})
-        products = Product.objects.filter(pk__in=ids, seller=acc.seller)
+        products = Product.objects.filter(pk__in=ids, seller=acc.seller, deleted_at__isnull=True)
         created = []
         with transaction.atomic():
             for p in products:
@@ -289,7 +289,7 @@ class ProductInfoView(viewsets.ViewSet):
 
     def _product(self, request, pk):
         s = seller_of(request.user)
-        qs = Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)
+        qs = (Product.objects.all() if s.role == Seller.ROLE_OPERATOR else Product.objects.filter(seller=s)).filter(deleted_at__isnull=True)
         return get_object_or_404(qs.prefetch_related("images"), pk=pk)
 
     def _data(self, request, p, info):
