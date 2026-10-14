@@ -179,12 +179,22 @@ class OzonClient(MarketplaceClient):
                     status = "pending"
                 sku = p.get("sku") or next((s.get("sku") for s in p.get("sources") or [] if s.get("sku")), "")
                 out[p.get("offer_id")] = {
+                    "barcode": str((p.get("barcodes") or [p.get("barcode") or ""])[0] or ""),
                     "status": status,
                     "error": _errs(p.get("errors")) or st.get("status_description") or failed,
                     "external_id": str(p.get("id") or ""), "external_sku": str(sku or ""),
                     "external_meta": {"status": st.get("status"), "moderate_status": st.get("moderate_status")},
                 }
         return out
+
+    def generate_barcodes(self, product_ids):
+        """Shtrix-kodi yo'q mahsulotlarga Ozon o'zi shtrix-kod beradi (keyingi status so'rovida qaytadi)."""
+        errors = {}
+        for part in chunks([str(x) for x in product_ids if x], 100):
+            d = self.post("/v1/barcode/generate", {"product_ids": part}, op="generate_barcodes")
+            for e in d.get("errors") or []:
+                errors[str(e.get("product_id"))] = e.get("error") or e.get("code") or "error"
+        return errors
 
     def update_prices(self, refs):
         out = {}

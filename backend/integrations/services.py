@@ -283,7 +283,8 @@ def card_checks(p) -> list:
          "label": "IKPU (MXIK) kodi" + (" — tavsiya, tasdiqlang" if p.ikpu and not p.ikpu_confirmed else "")},
         # ixtiyoriy: shtrix-kod bo'lmasa Wildberries/Ozon/Uzum o'zi beradi — tayyorlikni to'xtatmaydi
         {"key": "barcode", "ok": True, "optional": bool(no_bc), "weight": 1,
-         "label": "Shtrix-kod (EAN-13)" + (" — ixtiyoriy: kiritilmasa, marketplace o'zi beradi" if no_bc else "")},
+         "label": "Shtrix-kod (EAN-13)" + (" — sayt uchun shart emas; joylashda Wildberries/Ozon/Uzum o'zi beradi va "
+                                            "kartochkaga avtomatik yoziladi" if no_bc else "")},
         {"key": "dims", "ok": None not in (p.weight_kg, p.length_cm, p.width_cm, p.height_cm), "weight": 2,
          "label": "Qadoq og'irligi va o'lchamlari"},
         {"key": "attributes", "ok": not missing, "weight": 3,
@@ -462,6 +463,8 @@ def link_listing(li: L, it: dict):
     li.external_id = it.get("external_id") or ""
     li.external_sku = it.get("external_sku") or ""
     li.external_meta = {**(li.external_meta or {}), **(it.get("meta") or {})}
+    if it.get("barcode"):
+        _save_barcode(li, str(it["barcode"]))
     li.status, li.last_error, li.last_synced_at = L.ST_ACTIVE, "", timezone.now()
     li.save()
     if li.account.auto_sync:
@@ -500,10 +503,7 @@ def h_publish(job):
         if not li:
             continue
         if r.get("barcode"):
-            li.external_meta = {**(li.external_meta or {}), "barcode": r["barcode"]}
-            h = li.holder
-            if not h.barcode:
-                type(h).objects.filter(pk=h.pk).update(barcode=r["barcode"])
+            _save_barcode(li, r["barcode"])
         if r.get("status") == "retry":
             retry.append(li.pk)
             li.last_error = r.get("error", "")
@@ -540,6 +540,7 @@ def h_poll_status(job):
     client = get_client(acc, job=job)
     res = client.get_product_status([ref(li) for li in listings])
     activated = []
+    pending_barcode = False
     for li in listings:
         r = res.get(li.offer_id)
         if not r:
@@ -550,6 +551,17 @@ def h_poll_status(job):
             li.external_sku = r["external_sku"]
         if r.get("external_meta"):
             li.external_meta = {**(li.external_meta or {}), **r["external_meta"]}
+        if r.get("barcode"):
+            _save_barcode(li, r["barcode"])
+        elif acc.marketplace == "ozon" and li.external_id and not (li.external_meta or {}).get("barcode_requested") \
+                and not li.holder.barcode and hasattr(client, "generate_barcodes"):
+            # shtrix-kod kiritilmagan — Ozon'ning o'zidan so'raymiz
+            try:
+                client.generate_barcodes([li.external_id])
+                li.external_meta = {**(li.external_meta or {}), "barcode_requested": True}
+                pending_barcode = True
+            except MarketplaceError as e:
+                li.last_error = f"Shtrix-kod yaratilmadi: {e}"[:2000]
         status = r.get("status")
         if status in ("error", "rejected"):
             li.set_error(r.get("error") or status, status=L.ST_REJECTED if status == "rejected" else L.ST_ERROR)
@@ -575,7 +587,18 @@ def h_poll_status(job):
         enqueue("sync_listings", account=acc, payload={"ids": activated, "force": True}, dedupe=f"sync:{acc.pk}")
     if L.objects.filter(account=acc, status=L.ST_PENDING).exists():
         enqueue("poll_status", account=acc, delay=settings.MP_STATUS_INTERVAL, dedupe=f"poll:{acc.pk}")
+    elif pending_barcode:  # yaratilgan shtrix-kodni olib, kartochkaga yozish
+        enqueue("poll_status", account=acc, payload={"ids": [li.pk for li in listings]}, delay=60, dedupe=f"poll:{acc.pk}")
     return {"checked": len(listings), "activated": len(activated)}
+
+
+def _save_barcode(li, code):
+    """Marketplace bergan shtrix-kod: listingga va (bo'sh bo'lsa) mahsulot/variant kartochkasiga yoziladi."""
+    li.external_meta = {**(li.external_meta or {}), "barcode": code}
+    h = li.holder
+    if not h.barcode:
+        type(h).objects.filter(pk=h.pk).update(barcode=code)
+        h.barcode = code
 
 
 @handler("sync_listings")
