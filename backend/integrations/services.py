@@ -281,8 +281,9 @@ def card_checks(p) -> list:
         {"key": "brand", "ok": bool(p.brand), "weight": 1, "label": "Brend / ishlab chiqaruvchi"},
         {"key": "ikpu", "ok": bool(p.ikpu) and p.ikpu_confirmed, "weight": 2,
          "label": "IKPU (MXIK) kodi" + (" — tavsiya, tasdiqlang" if p.ikpu and not p.ikpu_confirmed else "")},
-        {"key": "barcode", "ok": not no_bc, "weight": 1,
-         "label": "Shtrix-kod (EAN-13)" + (f": yo'q — {', '.join(no_bc[:5])}" if no_bc else "")},
+        # ixtiyoriy: shtrix-kod bo'lmasa Wildberries/Ozon/Uzum o'zi beradi — tayyorlikni to'xtatmaydi
+        {"key": "barcode", "ok": True, "optional": bool(no_bc), "weight": 1,
+         "label": "Shtrix-kod (EAN-13)" + (" — ixtiyoriy: kiritilmasa, marketplace o'zi beradi" if no_bc else "")},
         {"key": "dims", "ok": None not in (p.weight_kg, p.length_cm, p.width_cm, p.height_cm), "weight": 2,
          "label": "Qadoq og'irligi va o'lchamlari"},
         {"key": "attributes", "ok": not missing, "weight": 3,

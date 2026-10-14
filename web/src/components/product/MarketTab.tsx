@@ -88,8 +88,9 @@ export default function MarketTab({ product, active, version, onFinish }: { prod
         <ul className="flex-1 grid sm:grid-cols-2 gap-x-4 gap-y-1.5 text-sm w-full">
           {r.checks.map((c) => (
             <li key={c.key} className="flex gap-2 items-start">
-              {c.ok ? <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" /> : <XCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />}
-              <span className={c.ok ? "text-ink-700" : "text-ink-900 font-medium"}>{c.label}</span>
+              {c.optional ? <Info className="w-4 h-4 text-ink-400 shrink-0 mt-0.5" />
+                : c.ok ? <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" /> : <XCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />}
+              <span className={c.optional ? "text-ink-500" : c.ok ? "text-ink-700" : "text-ink-900 font-medium"}>{c.label}</span>
             </li>
           ))}
         </ul>
@@ -107,7 +108,11 @@ export default function MarketTab({ product, active, version, onFinish }: { prod
         {msg && <div className="text-sm text-emerald-700">{msg}</div>}
         <ErrorBox text={err} />
         {r.marketplaces.length === 0 ? (
-          <div className="text-sm text-ink-500 rounded-xl border border-dashed border-ink-300 p-4 text-center">{t("pe_mp_no_accounts")}</div>
+          <div className="text-sm text-ink-600 rounded-xl border border-dashed border-ink-300 p-4 text-center space-y-3">
+            <div>{t("pe_mp_no_accounts")}</div>
+            <div className="text-xs text-ink-500">{t("pe_mp_no_accounts_hint")}</div>
+            <a href="/cabinet/marketplaces" className="inline-flex items-center gap-1.5 rounded-xl bg-brand-600 text-white px-4 py-2 font-semibold hover:bg-brand-700">{t("pe_mp_connect")}</a>
+          </div>
         ) : (
           <div className="grid sm:grid-cols-2 gap-3">
             {r.marketplaces.map((m) => (

@@ -493,6 +493,8 @@ export const uz = {
   pe_gal_bg_color: "Fon oq emas",
   pe_gal_small_obj: "Mahsulot kichik",
   pe_gal_cover_warn: "Asosiy rasm (muqova) marketplace talablariga mos emas:",
+  pe_mp_no_accounts_hint: "Kartochka tayyor. Joylash uchun muassasangizning Uzum, Ozon, Yandex Market yoki Wildberries kabinetini (o'z STIRingiz bilan) ulang — kabinet ochilgach, API kalitni «Marketplace'lar» bo'limiga kiritasiz.",
+  pe_mp_connect: "Kabinet ulash",
   // --- katalog v2: kabinet (W1) [uz]
   sv_price_from: "{price} dan",
   sv_choose_variant: "Variantni tanlash",
@@ -1063,6 +1065,8 @@ export const ru: Partial = {
   pe_gal_bg_color: "Фон не белый",
   pe_gal_small_obj: "Товар мелко",
   pe_gal_cover_warn: "Главное фото (обложка) не соответствует требованиям маркетплейсов:",
+  pe_mp_no_accounts_hint: "Карточка готова. Чтобы выставить товар, подключите кабинет вашего учреждения на Uzum, Ozon, Яндекс Маркете или Wildberries (на свой ИНН) — после открытия кабинета введите API-ключ в разделе «Маркетплейсы».",
+  pe_mp_connect: "Подключить кабинет",
   // --- katalog v2: kabinet (W1) [ru]
   sv_price_from: "от {price}",
   sv_choose_variant: "Выбрать вариант",
@@ -1630,6 +1634,8 @@ export const en: Partial = {
   pe_gal_bg_color: "Not a white background",
   pe_gal_small_obj: "Product too small",
   pe_gal_cover_warn: "The main photo (cover) doesn't meet marketplace requirements:",
+  pe_mp_no_accounts_hint: "The card is ready. To list it, connect your institution's own Uzum, Ozon, Yandex Market or Wildberries account (under your own TIN) — once the account is open, enter its API key in «Marketplaces».",
+  pe_mp_connect: "Connect an account",
   // --- katalog v2: kabinet (W1) [en]
   sv_price_from: "from {price}",
   sv_choose_variant: "Choose option",
@@ -2197,6 +2203,8 @@ export const kaa: Partial = {
   pe_gal_bg_color: "Fon aq emes",
   pe_gal_small_obj: "Ónim kishi",
   pe_gal_cover_warn: "Tiykarǵı súwret (muqaba) marketplace talaplarına sáykes emes:",
+  pe_mp_no_accounts_hint: "Kartochka tayın. Jaylastırıw ushın mákemeńizdiń Uzum, Ozon, Yandex Market yamasa Wildberries kabinetin (óz STIRińiz benen) jalǵań — kabinet ashılǵannan keyin API giltti «Marketplace'ler» bóliminе kiritesiz.",
+  pe_mp_connect: "Kabinet jalǵaw",
   // --- katalog v2: kabinet (W1) [kaa]
   sv_price_from: "{price} dan",
   sv_choose_variant: "Variantti tańlaw",

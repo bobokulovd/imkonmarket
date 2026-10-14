@@ -98,7 +98,7 @@ export interface SellerProduct extends Product {
 export interface IkpuItem { code: string; name: string; group: string; class: string; position: string; subposition: string; brand: string }
 export interface Readiness {
   score: number;
-  checks: { key: string; ok: boolean; label: string; weight: number }[];
+  checks: { key: string; ok: boolean; label: string; weight: number; optional?: boolean }[];
   marketplaces: { account: number; marketplace: "uzum" | "ozon" | "yandex" | "wb"; name: string; status: string; can_create: boolean;
     ok: boolean; errors: string[]; listings: { id: number; offer_id: string; status: string; error: string }[] }[];
 }
